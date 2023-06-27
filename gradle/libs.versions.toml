@@ -62,6 +62,7 @@ ktlint = "11.4.0"
 sentry = "3.11.1"
 sentry-android = "6.23.0"
 process-pheonix = "2.1.2"
+dot-indicator = "5.0"
 
 [libraries]
 # kotlin
@@ -132,6 +133,8 @@ timber = { module = "com.jakewharton.timber:timber", version.ref = "timber" }
 
 coil-core = { module = "io.coil-kt:coil", version.ref = "coil" }
 coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
+
+dot-indicator = { module = "com.tbuonomo:dotsindicator", version.ref = "dot-indicator" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
