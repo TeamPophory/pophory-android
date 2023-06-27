@@ -62,7 +62,11 @@ ktlint = "11.4.0"
 sentry = "3.11.1"
 sentry-android = "6.23.0"
 process-pheonix = "2.1.2"
+constraintlayout = "2.1.4"
 dot-indicator = "5.0"
+
+# google
+admob = "22.1.0"
 
 [libraries]
 # kotlin
@@ -98,6 +102,7 @@ hilt-testing-compiler = { module = "com.google.dagger:hilt-android-compiler", ve
 #firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics-ktx" }
 #firebase-messaging = { module = "com.google.firebase:firebase-messaging-ktx" }
 #accompanist-systemuicontroller = { module = "com.google.accompanist:accompanist-systemuicontroller", version.ref = "accompanist" }
+google-android-gms = {group = "com.google.android.gms", name = "play-services-ads", version.ref = "admob"}
 
 # test
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -133,6 +138,7 @@ timber = { module = "com.jakewharton.timber:timber", version.ref = "timber" }
 
 coil-core = { module = "io.coil-kt:coil", version.ref = "coil" }
 coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
+constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
 
 dot-indicator = { module = "com.tbuonomo:dotsindicator", version.ref = "dot-indicator" }
 
