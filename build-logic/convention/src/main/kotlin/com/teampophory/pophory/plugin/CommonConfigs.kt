@@ -9,6 +9,10 @@ import org.gradle.kotlin.dsl.getByType
 import java.util.Properties
 
 internal fun Project.configureAndroidCommonPlugin() {
+    val properties = Properties().apply {
+        load(rootProject.file("local.properties").inputStream())
+    }
+
     apply<AndroidKotlinPlugin>()
     apply<KotlinSerializationPlugin>()
     with(plugins) {
@@ -23,15 +27,7 @@ internal fun Project.configureAndroidCommonPlugin() {
 //            val dataStoreKey = properties["dataStoreKey"] as? String ?: ""
 //            val devUrl = properties["devApi"] as? String ?: ""
 //            val baseUrl = properties["newApi"] as? String ?: ""
-//            val devOperationUrl = properties["devOperationApi"] as? String ?: ""
-//            val operationUrl = properties["operationApi"] as? String ?: ""
-//            manifestPlaceholders["sentryDsn"] = properties["sentryDsn"] as String
-//            buildConfigField("String", "SOPTAMP_API_KEY", apiKey)
-//            buildConfigField("String", "SOPTAMP_DATA_STORE_KEY", dataStoreKey)
-//            buildConfigField("String", "SOPT_DEV_BASE_URL", devUrl)
-//            buildConfigField("String", "SOPT_BASE_URL", baseUrl)
-//            buildConfigField("String", "SOPT_DEV_OPERATION_BASE_URL", devOperationUrl)
-//            buildConfigField("String", "SOPT_OPERATION_BASE_URL", operationUrl)
+            manifestPlaceholders["sentryDsn"] = properties["sentryDsn"] as String
         }
         buildFeatures.apply {
             viewBinding = true
