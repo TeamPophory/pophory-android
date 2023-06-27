@@ -1,4 +1,4 @@
-name: Makers PR Builder
+name: Pophory PR Builder
 
 on:
   pull_request:
@@ -35,6 +35,12 @@ jobs:
 
       - name: Change gradlew permissions
         run: chmod +x ./gradlew
+
+      - name: Add Local Properties
+        env:
+          SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
+        run: |
+          echo sentryDsn=\"$SENTRY_DSN\" >> ./local.properties
 
       - name: Build debug APK
         run: ./gradlew assembleDebug --stacktrace
