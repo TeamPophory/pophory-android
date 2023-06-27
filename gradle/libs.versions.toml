@@ -60,7 +60,7 @@ coil = "2.4.0"
 lottie = "6.0.1"
 ktlint = "11.4.0"
 sentry = "3.11.1"
-sentry-android = "6.23.0"
+sentry-android = "6.24.0"
 process-pheonix = "2.1.2"
 dot-indicator = "5.0"
 
