@@ -1,10 +1,8 @@
 package com.teampophory.pophory.util.ads
 
 import android.content.Context
-import android.net.Uri
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.widget.Button
 import android.widget.FrameLayout
 import android.widget.ImageView
@@ -17,16 +15,23 @@ import com.google.android.gms.ads.LoadAdError
 import com.google.android.gms.ads.nativead.NativeAd
 import com.google.android.gms.ads.nativead.NativeAdView
 import com.teampophory.pophory.R
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedFactory
+import dagger.assisted.AssistedInject
+import dagger.hilt.android.qualifiers.ActivityContext
 
 
-class AdmobService {
-    fun getNativeAd(context: Context, frameLayout: FrameLayout) {
+class AdmobService @AssistedInject constructor(
+    @ActivityContext private val context: Context,
+    @Assisted private val frameLayout: FrameLayout
+) {
+    fun getNativeAd() {
         val adLoader = AdLoader.Builder(context, "ca-app-pub-3940256099942544/2247696110")
             .forNativeAd { ad: NativeAd? ->
                 ad?.let { nativeAd ->
                     frameLayout.apply {
                         removeAllViews()
-                        addView(nativeAd.toNativeAdView(context))
+                        addView(nativeAd.toNativeAdView())
                     }
                 }
             }.withAdListener(object : AdListener() {
@@ -38,7 +43,7 @@ class AdmobService {
         adLoader.loadAd(AdRequest.Builder().build())
     }
 
-    private fun NativeAd.toNativeAdView(context: Context): NativeAdView? {
+    private fun NativeAd.toNativeAdView(): NativeAdView? {
         return try {
             LayoutInflater.from(context)
                 .inflate(R.layout.admob_native_default, null)
@@ -66,4 +71,9 @@ class AdmobService {
             (iconView as? ImageView)?.load(nativeAd.icon?.uri)
         }
     }
+}
+
+@AssistedFactory
+interface AdmobServiceFactory {
+    fun create(frameLayout: FrameLayout): AdmobService
 }
