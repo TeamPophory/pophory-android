@@ -27,4 +27,7 @@ android {
 
 dependencies {
     implementation(libs.dot.indicator)
+    implementation(libs.google.android.gms)
+    implementation(libs.constraintlayout)
+    implementation(libs.coil.core)
 }
