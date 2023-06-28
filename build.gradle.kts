@@ -24,6 +24,7 @@ plugins {
     alias(libs.plugins.kotlinx.serialization) apply false
     alias(libs.plugins.sentry) apply false
     alias(libs.plugins.junit5) apply false
+    alias(libs.plugins.google.services) apply false
 }
 
 tasks.register("clean", Delete::class) {

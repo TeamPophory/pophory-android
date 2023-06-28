@@ -96,13 +96,13 @@ hilt-testing = { module = "com.google.dagger:hilt-android-testing", version.ref 
 hilt-testing-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "dagger-hilt" }
 
 # google
-#google-services = { module = "com.google.gms:google-services", version.ref = "google-services" }
-#crashlytics-plugin = { module = "com.google.firebase:firebase-crashlytics-gradle", version.ref = "crashlytics" }
-#firebase = { module = "com.google.firebase:firebase-bom", version.ref = "firebase" }
-#firebase-analytics = { module = "com.google.firebase:firebase-analytics-ktx" }
-#firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics-ktx" }
-#firebase-messaging = { module = "com.google.firebase:firebase-messaging-ktx" }
-#accompanist-systemuicontroller = { module = "com.google.accompanist:accompanist-systemuicontroller", version.ref = "accompanist" }
+google-services = { module = "com.google.gms:google-services", version.ref = "google-services" }
+crashlytics-plugin = { module = "com.google.firebase:firebase-crashlytics-gradle", version.ref = "crashlytics" }
+firebase = { module = "com.google.firebase:firebase-bom", version.ref = "firebase" }
+firebase-analytics = { module = "com.google.firebase:firebase-analytics-ktx" }
+firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics-ktx" }
+firebase-messaging = { module = "com.google.firebase:firebase-messaging-ktx" }
+accompanist-systemuicontroller = { module = "com.google.accompanist:accompanist-systemuicontroller", version.ref = "accompanist" }
 google-android-gms = { group = "com.google.android.gms", name = "play-services-ads", version.ref = "admob" }
 
 # test
@@ -158,4 +158,5 @@ sentry = { id = "io.sentry.android.gradle", version.ref = "sentry" }
 junit5 = { id = "de.mannodermaus.android-junit5", version.ref = "junit5-plugin" }
 
 [bundles]
+firebase = ["firebase-analytics", "firebase-crashlytics"]
 
