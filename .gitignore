@@ -8,6 +8,7 @@ build/
 
 # Local configuration file (sdk path, etc)
 local.properties
+google-services.json
 
 # Log/OS Files
 *.log
