@@ -34,6 +34,8 @@ secret-gradle-plugin = "2.0.1"
 google-services = "4.3.15"
 crashlytics = "2.9.6"
 firebase = "32.1.1"
+app-distribution = "4.0.0"
+admob = "22.1.0"
 
 # test
 junit = "4.13.2"
@@ -65,9 +67,6 @@ process-pheonix = "2.1.2"
 constraintlayout = "2.1.4"
 dot-indicator = "5.0"
 
-# google
-admob = "22.1.0"
-
 [libraries]
 # kotlin
 agp = { module = "com.android.tools.build:gradle", version.ref = "agp" }
@@ -96,13 +95,13 @@ hilt-testing = { module = "com.google.dagger:hilt-android-testing", version.ref 
 hilt-testing-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "dagger-hilt" }
 
 # google
-#google-services = { module = "com.google.gms:google-services", version.ref = "google-services" }
-#crashlytics-plugin = { module = "com.google.firebase:firebase-crashlytics-gradle", version.ref = "crashlytics" }
-#firebase = { module = "com.google.firebase:firebase-bom", version.ref = "firebase" }
-#firebase-analytics = { module = "com.google.firebase:firebase-analytics-ktx" }
-#firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics-ktx" }
-#firebase-messaging = { module = "com.google.firebase:firebase-messaging-ktx" }
-#accompanist-systemuicontroller = { module = "com.google.accompanist:accompanist-systemuicontroller", version.ref = "accompanist" }
+google-services = { module = "com.google.gms:google-services", version.ref = "google-services" }
+crashlytics-plugin = { module = "com.google.firebase:firebase-crashlytics-gradle", version.ref = "crashlytics" }
+firebase = { module = "com.google.firebase:firebase-bom", version.ref = "firebase" }
+firebase-analytics = { module = "com.google.firebase:firebase-analytics-ktx" }
+firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics-ktx" }
+firebase-messaging = { module = "com.google.firebase:firebase-messaging-ktx" }
+accompanist-systemuicontroller = { module = "com.google.accompanist:accompanist-systemuicontroller", version.ref = "accompanist" }
 google-android-gms = { group = "com.google.android.gms", name = "play-services-ads", version.ref = "admob" }
 
 # test
@@ -156,6 +155,8 @@ secret = { id = "com.google.android.libraries.mapsplatform.secrets-gradle-plugin
 kotlinx-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 sentry = { id = "io.sentry.android.gradle", version.ref = "sentry" }
 junit5 = { id = "de.mannodermaus.android-junit5", version.ref = "junit5-plugin" }
+app-distribution = { id = "com.google.firebase.appdistribution", version.ref = "app-distribution" }
 
 [bundles]
+firebase = ["firebase-analytics", "firebase-crashlytics"]
 

@@ -2,6 +2,8 @@
 plugins {
     id("com.teampophory.pophory.application")
     alias(libs.plugins.sentry)
+    alias(libs.plugins.google.services)
+    alias(libs.plugins.app.distribution)
 }
 
 android {
@@ -9,11 +11,18 @@ android {
 
     defaultConfig {
         applicationId = "com.teampophory.pophory"
-        versionCode = 1
-        versionName = "1.0"
+        versionCode = libs.versions.versionCode.get().toInt()
+        versionName = libs.versions.appVersion.get()
     }
 
     buildTypes {
+        debug {
+            firebaseAppDistribution {
+                artifactType = "APK"
+                releaseNotesFile = "firebase/releaseNote.txt"
+                groupsFile = "firebase/testers.txt"
+            }
+        }
         release {
             isMinifyEnabled = true
             isShrinkResources = true
@@ -31,4 +40,7 @@ dependencies {
     implementation(libs.google.android.gms)
     implementation(libs.constraintlayout)
     implementation(libs.coil.core)
+
+    implementation(platform(libs.firebase))
+    implementation(libs.bundles.firebase)
 }
