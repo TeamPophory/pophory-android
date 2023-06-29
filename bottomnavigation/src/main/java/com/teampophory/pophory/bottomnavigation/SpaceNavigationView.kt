@@ -20,8 +20,6 @@ import androidx.core.content.ContextCompat
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.teampophory.pophory.bottomnavigation.util.Utils
 import com.teampophory.pophory.bottomnavigation.util.setColorFilter
-import java.util.ArrayList
-import java.util.HashMap
 
 class SpaceNavigationView @JvmOverloads constructor(
     context: Context,
@@ -35,6 +33,7 @@ class SpaceNavigationView @JvmOverloads constructor(
     private val itemContentWight = resources.getDimension(R.dimen.item_content_width).toInt()
     private val centreButtonSize =
         resources.getDimension(R.dimen.space_centre_button_default_size).toInt()
+    private var spaceNavigationWidth = 0
     private val spaceItems = ArrayList<SpaceItem>()
     private val spaceItemList = ArrayList<View>()
     private val badgeList = ArrayList<RelativeLayout>()
@@ -48,6 +47,7 @@ class SpaceNavigationView @JvmOverloads constructor(
     private var leftContent: LinearLayout? = null
     private var rightContent: LinearLayout? = null
     private var centreContent: BezierView? = null
+    private var navigationViewBorderLine: NavigationShadow? = null
     private var customFont: Typeface? = null
     private var spaceItemIconSize = NOT_DEFINED
 
@@ -210,13 +210,14 @@ class SpaceNavigationView @JvmOverloads constructor(
          */
         val params = layoutParams
         params.width = ViewGroup.LayoutParams.MATCH_PARENT
-        params.height = spaceNavigationHeight
+        params.height = spaceNavigationHeight + SHADOW_HEIGHT
         setBackgroundColor(ContextCompat.getColor(context, R.color.space_transparent))
         layoutParams = params
     }
 
     override fun onSizeChanged(width: Int, height: Int, oldWidth: Int, oldHeight: Int) {
         super.onSizeChanged(width, height, oldWidth, oldHeight)
+        spaceNavigationWidth = width
 
         /**
          * Restore current item index from savedInstance
@@ -281,6 +282,7 @@ class SpaceNavigationView @JvmOverloads constructor(
         rightContent = LinearLayout(context)
 
         centreContent = buildBezierView()
+        navigationViewBorderLine = buildBezierBorderline()
 
         centerButton = CenterButton(context)
 
@@ -326,6 +328,17 @@ class SpaceNavigationView @JvmOverloads constructor(
         mainContentParams.addRule(ALIGN_PARENT_BOTTOM)
 
         /**
+         * Borderline params
+         */
+        /**
+         * Borderline params
+         */
+        val borderLineParams =
+            LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, spaceNavigationHeight)
+        borderLineParams.addRule(CENTER_HORIZONTAL)
+        borderLineParams.addRule(ALIGN_PARENT_TOP)
+
+        /**
          * Centre content size
          */
         val centreContentParams =
@@ -361,6 +374,11 @@ class SpaceNavigationView @JvmOverloads constructor(
          * Adding views background colors
          */
         setBackgroundColors()
+
+        /**
+         * Adding shadow first, so it appears under all views
+         */
+        addView(navigationViewBorderLine, borderLineParams)
 
         /**
          * Adding view to centreContent
@@ -725,6 +743,22 @@ class SpaceNavigationView @JvmOverloads constructor(
             "Your item index can't be 0 or greater than space item size," +
                     " your items size is " + spaceItems.size + ", your current index is :" + itemIndex
         )
+    }
+
+    /**
+     * Creating borderline with params
+     *
+     * @return created borderline view
+     */
+    private fun buildBezierBorderline(): NavigationShadow {
+        val borderline = NavigationShadow(context)
+        borderline.build(
+            spaceNavigationWidth,
+            centreContentWight,
+            spaceNavigationHeight - mainContentHeight,
+            isCentrePartLinear
+        )
+        return borderline
     }
 
     //public methods
@@ -1170,6 +1204,8 @@ class SpaceNavigationView @JvmOverloads constructor(
         private const val MAX_SPACE_ITEM_SIZE = 4
 
         private const val MIN_SPACE_ITEM_SIZE = 2
+
+        private const val SHADOW_HEIGHT = 8
     }
 }
 /**
