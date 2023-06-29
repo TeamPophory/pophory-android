@@ -21,7 +21,13 @@
 - [Material 3](https://m3.material.io/)
 - [Gradle Version Catalog](https://docs.gradle.org/current/userguide/platforms.html) and [Custom Convention Plugins](https://docs.gradle.org/current/samples/sample_convention_plugins.html)
 
+<h2>Activity Graph</h2>
+
+![Alt](https://repobeats.axiom.co/api/embed/8aafd7e55d7655ad9ec829f95a445ba7f7758e58.svg "Repobeats analytics image")
+
 ## Contributors ✨
+
+Thanks goes to these wonderful people:
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->
@@ -48,3 +54,5 @@
 <!-- prettier-ignore-end -->
 
 <!-- ALL-CONTRIBUTORS-LIST:END -->
+
+This project follows the all-contributors specification. Contributions of any kind welcome!
