@@ -6,7 +6,7 @@
   <p align="center">
     <img src="https://img.shields.io/badge/Kotlin-1.8.22-7F52FF?style=for-the-badge&logo=Kotlin&logoColor=white"/>
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-<img src="https://img.shields.io/badge/all_contributors-4-orange.svg?style=for-the-badge"/>
+[![All Contributors](https://img.shields.io/badge/all_contributors-4-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
   </p>
   <br />
@@ -32,6 +32,7 @@
       <td align="center" valign="top" width="14.28%"><a href="http://velog.io/@l2hyunwoo"><img src="https://avatars.githubusercontent.com/u/54518925?v=4?s=100" width="100px;" alt="Hyun-Woo Lee"/><br /><sub><b>Hyun-Woo Lee</b></sub></a><br /><a href="https://github.com/TeamPophory/pophory-android/commits?author=l2hyunwoo" title="Code">💻</a> <a href="#infra-l2hyunwoo" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/KwakEuiJin"><img src="https://avatars.githubusercontent.com/u/93872496?v=4?s=100" width="100px;" alt="KwakEuiJin"/><br /><sub><b>KwakEuiJin</b></sub></a><br /><a href="https://github.com/TeamPophory/pophory-android/commits?author=KwakEuiJin" title="Code">💻</a> <a href="#infra-KwakEuiJin" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/jihyeonAnAn"><img src="https://avatars.githubusercontent.com/u/84323575?v=4?s=100" width="100px;" alt="Jihyeon An"/><br /><sub><b>Jihyeon An</b></sub></a><br /><a href="https://github.com/TeamPophory/pophory-android/commits?author=jihyeonAnAn" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/librarywon"><img src="https://avatars.githubusercontent.com/u/52442547?v=4?s=100" width="100px;" alt="JaewonSeo"/><br /><sub><b>JaewonSeo</b></sub></a><br /><a href="https://github.com/TeamPophory/pophory-android/commits?author=librarywon" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>
