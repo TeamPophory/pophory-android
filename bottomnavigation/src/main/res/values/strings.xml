@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Space Navigation</string>
+    <string name="space_scrolling_view_behavior">SpaceNavigationViewBehavior</string>
+</resources>

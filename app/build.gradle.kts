@@ -26,6 +26,7 @@ android {
 }
 
 dependencies {
+    implementation(project(":bottomnavigation"))
     implementation(libs.dot.indicator)
     implementation(libs.google.android.gms)
     implementation(libs.constraintlayout)
