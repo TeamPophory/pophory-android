@@ -3,6 +3,7 @@ plugins {
     id("com.teampophory.pophory.application")
     alias(libs.plugins.sentry)
     alias(libs.plugins.google.services)
+    alias(libs.plugins.app.distribution)
 }
 
 android {
