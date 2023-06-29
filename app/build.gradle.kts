@@ -16,6 +16,13 @@ android {
     }
 
     buildTypes {
+        debug {
+            firebaseAppDistribution {
+                artifactType = "APK"
+                releaseNotesFile = "firebase/releaseNote.txt"
+                groupsFile = "firebase/testers.txt"
+            }
+        }
         release {
             isMinifyEnabled = true
             isShrinkResources = true
