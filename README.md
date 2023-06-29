@@ -4,10 +4,10 @@
   **짱 쉽게 공유하고 짱 쉽게 보관하는 We are 포포리**
   
   <p align="center">
-      <img src="https://img.shields.io/badge/Kotlin-1.8.22-7F52FF?style=for-the-badge&logo=Kotlin&logoColor=white"/>
-      <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-      <img src="https://img.shields.io/badge/all_contributors-4-orange.svg?style=for-the-badge"/>
-      <!-- ALL-CONTRIBUTORS-BADGE:END -->
+    <img src="https://img.shields.io/badge/Kotlin-1.8.22-7F52FF?style=for-the-badge&logo=Kotlin&logoColor=white"/>
+<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+<img src="https://img.shields.io/badge/all_contributors-4-orange.svg?style=for-the-badge"/>
+<!-- ALL-CONTRIBUTORS-BADGE:END -->
   </p>
   <br />
 </div>
@@ -24,6 +24,20 @@
 ## Contributors ✨
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tbody>
+    <tr>
+      <td align="center" valign="top" width="14.28%"><a href="http://velog.io/@l2hyunwoo"><img src="https://avatars.githubusercontent.com/u/54518925?v=4?s=100" width="100px;" alt="Hyun-Woo Lee"/><br /><sub><b>Hyun-Woo Lee</b></sub></a><br /><a href="https://github.com/TeamPophory/pophory-android/commits?author=l2hyunwoo" title="Code">💻</a> <a href="#infra-l2hyunwoo" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
 <!-- prettier-ignore-start -->
 <!-- markdownlint-disable -->
 
