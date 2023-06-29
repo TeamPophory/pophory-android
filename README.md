@@ -1,16 +1,13 @@
 <div align="center">
-<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
-<!-- ALL-CONTRIBUTORS-BADGE:END -->
   <h1>Pophory</h1> 
   
   **짱 쉽게 공유하고 짱 쉽게 보관하는 We are 포포리**
   
   <p align="center">
-      <img src="https://img.shields.io/badge/Kotlin-1.8.22-7F52FF?style=for-the-badge&logo=Kotlin&logoColor=white"/>
-      <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-      <img src="https://img.shields.io/badge/all_contributors-4-orange.svg?style=for-the-badge"/>
-      <!-- ALL-CONTRIBUTORS-BADGE:END -->
+    <img src="https://img.shields.io/badge/Kotlin-1.8.22-7F52FF?style=for-the-badge&logo=Kotlin&logoColor=white"/>
+<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+<img src="https://img.shields.io/badge/all_contributors-4-orange.svg?style=for-the-badge"/>
+<!-- ALL-CONTRIBUTORS-BADGE:END -->
   </p>
   <br />
 </div>
