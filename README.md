@@ -30,6 +30,7 @@
   <tbody>
     <tr>
       <td align="center" valign="top" width="14.28%"><a href="http://velog.io/@l2hyunwoo"><img src="https://avatars.githubusercontent.com/u/54518925?v=4?s=100" width="100px;" alt="Hyun-Woo Lee"/><br /><sub><b>Hyun-Woo Lee</b></sub></a><br /><a href="https://github.com/TeamPophory/pophory-android/commits?author=l2hyunwoo" title="Code">💻</a> <a href="#infra-l2hyunwoo" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/KwakEuiJin"><img src="https://avatars.githubusercontent.com/u/93872496?v=4?s=100" width="100px;" alt="KwakEuiJin"/><br /><sub><b>KwakEuiJin</b></sub></a><br /><a href="https://github.com/TeamPophory/pophory-android/commits?author=KwakEuiJin" title="Code">💻</a> <a href="#infra-KwakEuiJin" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a></td>
     </tr>
   </tbody>
 </table>
