@@ -13,7 +13,7 @@ class NavigationShadow(
     private val context: Context
 ) : RelativeLayout(context) {
     private val paint: Paint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-        strokeWidth = 2f
+        strokeWidth = 8f
         isAntiAlias = true
         style = Paint.Style.STROKE
     }
@@ -40,7 +40,7 @@ class NavigationShadow(
     }
 
     private fun drawPathWithOffset(alpha: Int, offset: Int): Path {
-        val offsettBeizerHeight = bezierHeight - offset
+        val offsetBeizerHeight = bezierHeight - offset
         val path = Path()
         /**
          * Reset path before drawing
@@ -57,18 +57,18 @@ class NavigationShadow(
         /**
          * Start point for drawing
          */
-        path.moveTo(0f, offsettBeizerHeight)
+        path.moveTo(0f, offsetBeizerHeight)
         /**
          * Draw line over left main-content
          */
-        path.lineTo((navigationWidth - bezierWidth) / 2, offsettBeizerHeight)
+        path.lineTo((navigationWidth - bezierWidth) / 2, offsetBeizerHeight)
         if (!isLinear) {
             /**
              * Seth half path of bezier view
              */
             path.cubicTo(
                 bezierWidth / 4 + (navigationWidth - bezierWidth) / 2,
-                offsettBeizerHeight,
+                offsetBeizerHeight,
                 bezierWidth / 4 + (navigationWidth - bezierWidth) / 2,
                 -offset.toFloat(),
                 bezierWidth / 2 + (navigationWidth - bezierWidth) / 2,
@@ -81,15 +81,15 @@ class NavigationShadow(
                 bezierWidth / 4 * 3 + (navigationWidth - bezierWidth) / 2,
                 -offset.toFloat(),
                 bezierWidth / 4 * 3 + (navigationWidth - bezierWidth) / 2,
-                offsettBeizerHeight,
+                offsetBeizerHeight,
                 bezierWidth + (navigationWidth - bezierWidth) / 2,
-                offsettBeizerHeight
+                offsetBeizerHeight
             )
         }
         /**
          * Draw line over right main-content
          */
-        path.lineTo(navigationWidth, offsettBeizerHeight)
+        path.lineTo(navigationWidth, offsetBeizerHeight)
         return path
     }
 

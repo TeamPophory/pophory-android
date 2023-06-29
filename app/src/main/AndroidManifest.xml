@@ -38,6 +38,9 @@
 
         <activity
             android:name=".AdmobSampleActivity"
+            android:exported="true" />
+        <activity
+            android:name=".SampleActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
