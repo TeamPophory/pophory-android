@@ -9,7 +9,7 @@ versionCode = "10000"
 kotlin = "1.8.21"
 kotlinx-serialization-json = "1.5.1"
 kotlinx-serialization-converter = "1.0.0"
-kotlinx-coroutines = "1.7.1"
+kotlinx-coroutines = "1.7.2"
 kotlinx-datetime = "0.4.0"
 
 # android
