@@ -19,3 +19,4 @@ dependencyResolutionManagement {
 rootProject.name = "pophory"
 include(":app")
 include(":bottomnavigation")
+include(":core:common")

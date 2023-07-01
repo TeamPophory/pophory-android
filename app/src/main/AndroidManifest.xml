@@ -46,13 +46,16 @@
             <meta-data
                 android:name="com.teampophory.pophory.config.initializer.AdInitializer"
                 android:value="androidx.startup" />
+            <meta-data
+                android:name="com.teampophory.pophory.config.initializer.CrashlyticsInitializer"
+                android:value="androidx.startup" />
+            <meta-data
+                android:name="com.teampophory.pophory.config.initializer.TimberInitializer"
+                android:value="androidx.startup" />
         </provider>
 
         <activity
-            android:name=".AdmobSampleActivity"
-            android:exported="true" />
-        <activity
-            android:name=".SampleActivity"
+            android:name=".feature.sample.AdmobSampleActivity"
             android:exported="true" />
         <activity
             android:name=".feature.HomeActivity"

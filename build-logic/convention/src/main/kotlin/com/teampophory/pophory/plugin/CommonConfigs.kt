@@ -38,7 +38,7 @@ internal fun Project.configureAndroidCommonPlugin() {
     dependencies {
         "implementation"(libs.findLibrary("core.ktx").get())
         "implementation"(libs.findLibrary("appcompat").get())
-        "implementation"(libs.findLibrary("lifecycle.viewmodel").get())
+        "implementation"(libs.findBundle("lifecycle").get())
         "implementation"(libs.findLibrary("material").get())
         "implementation"(libs.findLibrary("timber").get())
     }

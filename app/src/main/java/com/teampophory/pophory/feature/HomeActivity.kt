@@ -5,17 +5,16 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import com.teampophory.pophory.R
+import com.teampophory.pophory.common.view.viewBinding
 import com.teampophory.pophory.databinding.ActivityHomeBinding
 import com.teampophory.pophory.feature.my_page.MyPageFragment
 import com.teampophory.pophory.feature.store.StoreFragment
 
 class HomeActivity : AppCompatActivity() {
-
-    private lateinit var binding: ActivityHomeBinding
+    private val binding: ActivityHomeBinding by viewBinding(ActivityHomeBinding::inflate)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         setupBottomNavigationBar()

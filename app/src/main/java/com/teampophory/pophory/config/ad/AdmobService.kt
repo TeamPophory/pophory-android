@@ -1,7 +1,6 @@
-package com.teampophory.pophory.util.ads
+package com.teampophory.pophory.config.ad
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.widget.Button
 import android.widget.FrameLayout
@@ -19,6 +18,7 @@ import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
 import dagger.hilt.android.qualifiers.ActivityContext
+import timber.log.Timber
 
 class AdmobService @AssistedInject constructor(
     @ActivityContext private val context: Context,
@@ -36,7 +36,7 @@ class AdmobService @AssistedInject constructor(
                 }
             }.withAdListener(object : AdListener() {
                 override fun onAdFailedToLoad(adError: LoadAdError) {
-                    Log.e("ADS_ERROR", adError.toString())
+                    Timber.e(adError.toString())
                 }
             }).build()
 
@@ -54,7 +54,7 @@ class AdmobService @AssistedInject constructor(
                     setNativeAd(this@toNativeAdView)
                 }
         } catch (e: Exception) {
-            Log.e("ADS_ERROR", e.toString())
+            Timber.e(e)
             null
         }
     }
