@@ -1,13 +1,14 @@
-package com.teampophory.pophory
+package com.teampophory.pophory.feature.sample
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.teampophory.pophory.databinding.ActivityAdmobSampleBinding
-import com.teampophory.pophory.util.ads.AdmobServiceFactory
+import com.teampophory.pophory.config.ad.AdmobServiceFactory
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
+@Deprecated("This is a sample activity for AdmobService. It will be removed soon.")
 class AdmobSampleActivity : AppCompatActivity() {
     private val binding by lazy {
         ActivityAdmobSampleBinding.inflate(layoutInflater)

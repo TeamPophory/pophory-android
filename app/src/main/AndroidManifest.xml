@@ -55,10 +55,7 @@
         </provider>
 
         <activity
-            android:name=".AdmobSampleActivity"
-            android:exported="true" />
-        <activity
-            android:name=".SampleActivity"
+            android:name=".feature.sample.AdmobSampleActivity"
             android:exported="true" />
         <activity
             android:name=".feature.HomeActivity"
