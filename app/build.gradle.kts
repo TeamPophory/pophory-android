@@ -16,6 +16,15 @@ android {
         versionName = libs.versions.appVersion.get()
     }
 
+    signingConfigs {
+        getByName("debug") {
+            keyAlias = "androiddebugkey"
+            keyPassword = "android"
+            storeFile = File("${project.rootDir.absolutePath}/keystore/debug.keystore")
+            storePassword = "android"
+        }
+    }
+
     buildTypes {
         debug {
             firebaseAppDistribution {
@@ -42,6 +51,8 @@ dependencies {
     implementation(libs.constraintlayout)
     implementation(libs.coil.core)
     debugImplementation(libs.bundles.flipper)
+    implementation(libs.kakao.login)
+    implementation(libs.startup)
 
     implementation(platform(libs.firebase))
     implementation(libs.bundles.firebase)

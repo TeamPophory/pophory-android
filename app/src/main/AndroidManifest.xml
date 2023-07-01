@@ -36,6 +36,19 @@
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="ca-app-pub-3940256099942544~3347511713" />
 
+        <provider
+            android:name="androidx.startup.InitializationProvider"
+            android:authorities="${applicationId}.androidx-startup"
+            android:exported="false"
+            tools:node="merge">
+            <meta-data
+                android:name="com.teampophory.pophory.config.initializer.KakaoSDKInitializer"
+                android:value="androidx.startup" />
+            <meta-data
+                android:name="com.teampophory.pophory.config.initializer.AdInitializer"
+                android:value="androidx.startup" />
+        </provider>
+
         <activity
             android:name=".AdmobSampleActivity"
             android:exported="true" />
@@ -45,6 +58,19 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:host="oauth"
+                    android:scheme="kakao${kakaoApiKey}" />
             </intent-filter>
         </activity>
     </application>
