@@ -58,7 +58,7 @@
             android:name=".feature.sample.AdmobSampleActivity"
             android:exported="true" />
         <activity
-            android:name=".feature.HomeActivity"
+            android:name=".feature.home.HomeActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
