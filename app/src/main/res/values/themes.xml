@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.Pophory" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="Theme.Pophory" parent="Theme.Material3.Light.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/purple_500</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
@@ -12,5 +12,21 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+        <!-- Bottom nav bar active indicator color set -->
+        <item name="colorSecondaryContainer">@color/white</item>
+        <!-- FAB shape custom -->
+        <item name="floatingActionButtonStyle">@style/Widget.Pophory.FloatingActionButton</item>
     </style>
+
+    <style name="Widget.Pophory.FloatingActionButton" parent="Widget.MaterialComponents.FloatingActionButton">
+        <item name="backgroundTint">@color/primary_blue</item> <!-- FAB 배경색 -->
+        <item name="tint">@color/white</item> <!-- FAB 아이콘 색상 -->
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearanceOverlay.Pophory.FAB</item>
+    </style>
+
+    <style name="ShapeAppearanceOverlay.Pophory.FAB" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+
 </resources>

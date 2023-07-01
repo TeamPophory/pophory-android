@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Pophory</string>
+
+    <!-- home_bottomAppBar -->
+    <string name="menu_bottom_my_drawer">내서랍</string>
+    <string name="menu_bottom_my">마이</string>
 </resources>

@@ -31,7 +31,6 @@
         <meta-data
             android:name="io.sentry.breadcrumbs.user-interaction"
             android:value="true" />
-        <!-- Sample AdMob App ID: ca-app-pub-3940256099942544~3347511713 -->
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="ca-app-pub-3940256099942544~3347511713" />
@@ -54,9 +53,13 @@
             android:exported="true" />
         <activity
             android:name=".SampleActivity"
+            android:exported="true" />
+        <activity
+            android:name=".feature.HomeActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -74,4 +77,5 @@
             </intent-filter>
         </activity>
     </application>
+
 </manifest>
