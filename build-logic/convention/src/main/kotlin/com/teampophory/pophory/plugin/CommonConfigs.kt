@@ -23,12 +23,10 @@ internal fun Project.configureAndroidCommonPlugin() {
 
     extensions.getByType<BaseExtension>().apply {
         defaultConfig {
-//            val apiKey = properties["apiKey"] as? String ?: ""
-//            val dataStoreKey = properties["dataStoreKey"] as? String ?: ""
-//            val devUrl = properties["devApi"] as? String ?: ""
-//            val baseUrl = properties["newApi"] as? String ?: ""
+            val kakaoApiKey = properties["kakaoApiKey"] as? String ?: ""
             manifestPlaceholders["sentryDsn"] = properties["sentryDsn"] as String
             manifestPlaceholders["kakaoApiKey"] = properties["kakaoApiKey"] as String
+            buildConfigField("String", "KAKAO_API_KEY", "\"${kakaoApiKey}\"")
         }
         buildFeatures.apply {
             viewBinding = true
