@@ -46,6 +46,12 @@
             <meta-data
                 android:name="com.teampophory.pophory.config.initializer.AdInitializer"
                 android:value="androidx.startup" />
+            <meta-data
+                android:name="com.teampophory.pophory.config.initializer.CrashlyticsInitializer"
+                android:value="androidx.startup" />
+            <meta-data
+                android:name="com.teampophory.pophory.config.initializer.TimberInitializer"
+                android:value="androidx.startup" />
         </provider>
 
         <activity
