@@ -52,7 +52,7 @@
             android:layout_height="wrap_content"
             android:clickable="true"
             android:focusable="true"
-            android:icon="@color/primary_blue"
+            android:icon="@color/pophory_purple"
             android:src="@drawable/ic_add"
             android:tint="@color/white"
             app:layout_anchor="@id/home_bottom_app_bar" />

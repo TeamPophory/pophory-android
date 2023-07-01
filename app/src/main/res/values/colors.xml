@@ -8,8 +8,13 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <color name="primary_blue">#6763ED</color>
-    <color name="black_100">#212222</color>
-    <color name="gray_50">#7F8182</color>
+    <!-- Pophory -->
+    <color name="pophory_purple">#725BFF</color>
+    <color name="pophory_red">#FC4646</color>
+    <color name="onSurface100">#212121</color>
+    <color name="onSurface75">#5F6168</color>
+    <color name="onSurface50">#B8B9BE</color>
+    <color name="onSurface25">#E0E1E5</color>
+    <color name="onSurface0">#FFFFFF</color>
     <color name="gray_400">#C6C7C7</color>
 </resources>
