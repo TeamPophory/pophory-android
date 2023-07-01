@@ -83,6 +83,7 @@ kotlin-datetime = { group = "org.jetbrains.kotlinx", name = "kotlinx-datetime", 
 core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "corektx" }
 lifecycle-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycle" }
 lifecycle = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "lifecycle" }
+lifecycle-livedata = { module = "androidx.lifecycle:lifecycle-livedata-ktx", version.ref = "lifecycle" }
 appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 startup = { module = "androidx.startup:startup-runtime", version.ref = "startup" }
@@ -165,4 +166,4 @@ app-distribution = { id = "com.google.firebase.appdistribution", version.ref = "
 [bundles]
 firebase = ["firebase-analytics", "firebase-crashlytics"]
 flipper = ["flipper", "soloader", "flipper-network"]
-lifecycle = ["lifecycle", "lifecycle-viewmodel"]
+lifecycle = ["lifecycle", "lifecycle-viewmodel", "lifecycle-livedata"]
