@@ -70,6 +70,7 @@ process-pheonix = "2.1.2"
 constraintlayout = "2.1.4"
 dot-indicator = "5.0"
 kakao = "2.14.0"
+splash-screen = "1.0.0-beta02"
 
 [libraries]
 # kotlin
@@ -144,6 +145,7 @@ sentry-compose = { module = "io.sentry:sentry-compose-android", version.ref = "s
 process-phoenix = { module = "com.jakewharton:process-phoenix", version.ref = "process-pheonix" }
 
 flipper = { module = "com.facebook.flipper:flipper", version.ref = "flipper" }
+flipper-noop = { module = "com.facebook.flipper:flipper-noop", version.ref = "flipper" }
 soloader = { module = "com.facebook.soloader:soloader", version.ref = "soloader" }
 flipper-network = { module = "com.facebook.flipper:flipper-network-plugin", version.ref = "flipper" }
 
@@ -161,6 +163,8 @@ coil-core = { module = "io.coil-kt:coil", version.ref = "coil" }
 dot-indicator = { module = "com.tbuonomo:dotsindicator", version.ref = "dot-indicator" }
 
 kakao-login = { group = "com.kakao.sdk", name = "v2-user", version.ref = "kakao" }
+
+splash-screen = { module = "androidx.core:core-splashscreen", version.ref = "splash-screen" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

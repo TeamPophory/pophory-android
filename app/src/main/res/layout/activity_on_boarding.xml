@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".OnBoardingActivity">
+
+    <ImageView
+        android:id="@+id/dot_indicator_first"
+        android:layout_width="9dp"
+        android:layout_height="9dp"
+        android:layout_marginTop="46dp"
+        android:layout_marginEnd="9dp"
+        android:background="@drawable/round_dot_indicator"
+        app:layout_constraintEnd_toStartOf="@id/dot_indicator_second"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <ImageView
+        android:id="@+id/dot_indicator_second"
+        android:layout_width="9dp"
+        android:layout_height="9dp"
+        android:background="@drawable/round_dot_indicator"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/dot_indicator_first"/>
+
+    <ImageView
+        android:id="@+id/dot_indicator_third"
+        android:layout_width="9dp"
+        android:layout_height="9dp"
+        android:background="@drawable/round_dot_indicator"
+        android:layout_marginStart="9dp"
+        app:layout_constraintStart_toEndOf="@id/dot_indicator_second"
+        app:layout_constraintTop_toTopOf="@id/dot_indicator_first"/>
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/viewpager_onboarding"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/dot_indicator_first"
+        app:layout_constraintBottom_toTopOf="@id/tv_social_login"
+        android:layout_marginBottom="22dp"
+        android:layout_marginTop="22dp"
+        android:layout_marginHorizontal="20dp"/>
+
+    <TextView
+        android:id="@+id/tv_social_login"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="SNS로 간편 가입하기!"
+        android:textSize="16sp"
+        android:gravity="center"
+        android:layout_marginBottom="22dp"
+        app:layout_constraintBottom_toTopOf="@id/btn_start_social_login"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <TextView
+        android:id="@+id/btn_start_social_login"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="14dp"
+        android:text="카카오톡으로 시작하기"
+        android:background="@drawable/bg_kakao_login_btn"
+        android:gravity="center"
+        android:paddingVertical="14dp"
+        android:layout_marginBottom="22dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

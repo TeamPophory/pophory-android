@@ -70,6 +70,9 @@
         <activity
             android:name=".feature.setting.SettingActivity"
             android:exported="false" />
+        <activity
+            android:name=".OnBoardingActivity"
+            android:exported="true"/>
 
         <activity
             android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"

@@ -52,6 +52,7 @@ dependencies {
     implementation(libs.startup)
     implementation(libs.fragment.ktx)
     implementation(libs.security)
+    implementation(libs.splash.screen)
 
     // Google
     implementation(libs.google.android.gms)
