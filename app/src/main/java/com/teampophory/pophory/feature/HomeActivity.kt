@@ -5,8 +5,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.teampophory.pophory.R
 import com.teampophory.pophory.databinding.ActivityHomeBinding
-import com.teampophory.pophory.feature.my.MyFragment
-import com.teampophory.pophory.feature.myElbum.MyDrawerFragment
+import com.teampophory.pophory.feature.my_page.MyPageFragment
+import com.teampophory.pophory.feature.store.StoreFragment
 
 class HomeActivity : AppCompatActivity() {
 
@@ -24,8 +24,8 @@ class HomeActivity : AppCompatActivity() {
     private fun setupBottomNavigationBar() {
         binding.homeBottomNav.setOnItemSelectedListener { item ->
             val selectedFragment = when (item.itemId) {
-                R.id.menu_my_drawer -> MyDrawerFragment()
-                R.id.menu_my -> MyFragment()
+                R.id.menu_store -> StoreFragment()
+                R.id.menu_my_page -> MyPageFragment()
                 else -> null
             }
             selectedFragment?.let { changeFragment(it) }
@@ -36,7 +36,7 @@ class HomeActivity : AppCompatActivity() {
     private fun initializeDefaultFragment() {
         val currentFragment = supportFragmentManager.findFragmentById(R.id.home_fcv)
         if (currentFragment == null) {
-            val homeFragment = MyDrawerFragment()
+            val homeFragment = StoreFragment()
             changeFragment(homeFragment)
         }
     }

@@ -1,15 +1,15 @@
-package com.teampophory.pophory.feature.my
+package com.teampophory.pophory.feature.store
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.teampophory.pophory.databinding.FragmentMyBinding
+import com.teampophory.pophory.databinding.FragmentStoreBinding
 
-class MyFragment : Fragment() {
-    private var _binding: FragmentMyBinding? = null
-    private val binding: FragmentMyBinding
+class StoreFragment : Fragment() {
+    private var _binding: FragmentStoreBinding? = null
+    private val binding: FragmentStoreBinding
         get() = requireNotNull(_binding) { "binding is null" }
 
     override fun onCreateView(
@@ -17,7 +17,7 @@ class MyFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentMyBinding.inflate(inflater, container, false)
+        _binding = FragmentStoreBinding.inflate(inflater, container, false)
         return binding.root
     }
 

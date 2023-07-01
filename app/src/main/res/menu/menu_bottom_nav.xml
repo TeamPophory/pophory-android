@@ -2,7 +2,7 @@
 <menu xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/menu_my_drawer"
+        android:id="@+id/menu_store"
         android:icon="@drawable/ic_my_drawer"
         android:title="@string/menu_bottom_my_drawer"
         app:showAsAction="always" />
@@ -11,7 +11,7 @@
         android:enabled="false"
         android:title="" />
     <item
-        android:id="@+id/menu_my"
+        android:id="@+id/menu_my_page"
         android:icon="@drawable/ic_my"
         android:title="@string/menu_bottom_my"
         app:showAsAction="always"/>

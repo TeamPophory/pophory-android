@@ -1,15 +1,15 @@
-package com.teampophory.pophory.feature.myElbum
+package com.teampophory.pophory.feature.my_page
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.teampophory.pophory.databinding.FragmentMyDrawerBinding
+import com.teampophory.pophory.databinding.FragmentMyPageBinding
 
-class MyDrawerFragment : Fragment() {
-    private var _binding: FragmentMyDrawerBinding? = null
-    private val binding: FragmentMyDrawerBinding
+class MyPageFragment : Fragment() {
+    private var _binding: FragmentMyPageBinding? = null
+    private val binding: FragmentMyPageBinding
         get() = requireNotNull(_binding) { "binding is null" }
 
     override fun onCreateView(
@@ -17,7 +17,7 @@ class MyDrawerFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentMyDrawerBinding.inflate(inflater, container, false)
+        _binding = FragmentMyPageBinding.inflate(inflater, container, false)
         return binding.root
     }
 
