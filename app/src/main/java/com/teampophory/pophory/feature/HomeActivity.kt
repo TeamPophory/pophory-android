@@ -3,6 +3,7 @@ package com.teampophory.pophory.feature
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.commit
 import com.teampophory.pophory.R
 import com.teampophory.pophory.databinding.ActivityHomeBinding
 import com.teampophory.pophory.feature.my_page.MyPageFragment
@@ -18,7 +19,7 @@ class HomeActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         setupBottomNavigationBar()
-        initializeDefaultFragment()
+        initializeDefaultFragment(savedInstanceState)
     }
 
     private fun setupBottomNavigationBar() {
@@ -33,18 +34,16 @@ class HomeActivity : AppCompatActivity() {
         }
     }
 
-    private fun initializeDefaultFragment() {
-        val currentFragment = supportFragmentManager.findFragmentById(R.id.home_fcv)
-        if (currentFragment == null) {
+    private fun initializeDefaultFragment(savedInstanceState: Bundle?) {
+        if (savedInstanceState == null) {
             val homeFragment = StoreFragment()
             changeFragment(homeFragment)
         }
     }
 
     private fun changeFragment(fragment: Fragment) {
-        supportFragmentManager
-            .beginTransaction()
-            .replace(R.id.home_fcv, fragment)
-            .commit()
+        supportFragmentManager.commit {
+            replace(R.id.home_fcv, fragment)
+        }
     }
 }
