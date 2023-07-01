@@ -52,6 +52,7 @@ dependencies {
     implementation(libs.coil.core)
     debugImplementation(libs.bundles.flipper)
     implementation(libs.kakao.login)
+    implementation(libs.startup)
 
     implementation(platform(libs.firebase))
     implementation(libs.bundles.firebase)
