@@ -25,6 +25,7 @@ compose-bom = "2023.06.01"
 desugarJdk = "2.0.3"
 dagger-hilt = "2.46.1"
 dagger-hilt-navigation-compose = "1.0.0"
+flexbox = "3.0.0"
 fragment-ktx = "1.6.0"
 
 # material + google
@@ -90,6 +91,7 @@ startup = { module = "androidx.startup:startup-runtime", version.ref = "startup"
 security = { module = "androidx.security:security-crypto", version.ref = "security" }
 desugarLibs = { module = "com.android.tools:desugar_jdk_libs", version.ref = "desugarJdk" }
 constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
+flexbox = {group = "com.google.android.flexbox", name = "flexbox", version.ref = "flexbox"}
 fragment-ktx = { module = "androidx.fragment:fragment-ktx", version.ref = "fragment-ktx" }
 
 # dagger-hilt

@@ -79,6 +79,19 @@
                     android:scheme="kakao${kakaoApiKey}" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".feature.album.AlbumListActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".feature.sample.SampleAdmobActivity"
+            android:exported="true" />
+
+        <activity
+            android:name=".feature.sample.SampleActivity"
+            android:exported="true" />
+
     </application>
 
 </manifest>
