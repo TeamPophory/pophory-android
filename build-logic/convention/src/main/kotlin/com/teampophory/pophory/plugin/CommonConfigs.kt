@@ -28,6 +28,7 @@ internal fun Project.configureAndroidCommonPlugin() {
 //            val devUrl = properties["devApi"] as? String ?: ""
 //            val baseUrl = properties["newApi"] as? String ?: ""
             manifestPlaceholders["sentryDsn"] = properties["sentryDsn"] as String
+            manifestPlaceholders["kakaoApiKey"] = properties["kakaoApiKey"] as String
         }
         buildFeatures.apply {
             viewBinding = true
