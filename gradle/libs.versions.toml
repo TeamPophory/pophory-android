@@ -66,6 +66,7 @@ sentry-android = "6.24.0"
 process-pheonix = "2.1.2"
 constraintlayout = "2.1.4"
 dot-indicator = "5.0"
+kakao = "2.14.0"
 
 [libraries]
 # kotlin
@@ -139,6 +140,8 @@ coil-core = { module = "io.coil-kt:coil", version.ref = "coil" }
 coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
 
 dot-indicator = { module = "com.tbuonomo:dotsindicator", version.ref = "dot-indicator" }
+
+kakao-login = { group = "com.kakao.sdk", name = "v2-user", version.ref = "kakao" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
