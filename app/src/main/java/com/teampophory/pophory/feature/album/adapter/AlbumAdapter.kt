@@ -2,7 +2,6 @@ package com.teampophory.pophory.feature.album.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.annotation.DrawableRes
 import androidx.recyclerview.widget.ListAdapter
 import com.teampophory.pophory.databinding.ItemFlexboxLayoutBinding
 import com.teampophory.pophory.feature.album.viewholder.FlexBoxLayoutViewHolder

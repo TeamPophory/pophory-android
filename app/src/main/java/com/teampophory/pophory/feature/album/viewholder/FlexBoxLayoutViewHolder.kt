@@ -1,6 +1,5 @@
 package com.teampophory.pophory.feature.album.viewholder
 
-import androidx.annotation.DrawableRes
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import coil.load
 import com.teampophory.pophory.databinding.ItemFlexboxLayoutBinding
