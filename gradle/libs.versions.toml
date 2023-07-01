@@ -159,4 +159,3 @@ app-distribution = { id = "com.google.firebase.appdistribution", version.ref = "
 [bundles]
 firebase = ["firebase-analytics", "firebase-crashlytics"]
 flipper = ["flipper", "soloader", "flipper-network"]
-
