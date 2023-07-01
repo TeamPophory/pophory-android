@@ -40,5 +40,6 @@ internal fun Project.configureAndroidCommonPlugin() {
         "implementation"(libs.findLibrary("appcompat").get())
         "implementation"(libs.findLibrary("lifecycle.viewmodel").get())
         "implementation"(libs.findLibrary("material").get())
+        "implementation"(libs.findLibrary("timber").get())
     }
 }
