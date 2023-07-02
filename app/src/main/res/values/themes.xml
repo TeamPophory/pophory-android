@@ -1,4 +1,4 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <!-- Base application theme. -->
     <style name="Theme.Pophory" parent="Theme.Material3.Light.NoActionBar">
         <!-- Primary brand color. -->
@@ -20,8 +20,8 @@
     </style>
 
     <style name="Widget.Pophory.FloatingActionButton" parent="Widget.MaterialComponents.FloatingActionButton">
-        <item name="backgroundTint">?colorPrimary</item> <!-- FAB 배경색 -->
-        <item name="tint">?colorOnPrimary</item> <!-- FAB 아이콘 색상 -->
+        <item name="backgroundTint">@color/black</item> <!-- FAB 배경색 -->
+        <item name="tint">@color/white</item> <!-- FAB 아이콘 색상 -->
         <item name="shapeAppearanceOverlay">@style/ShapeAppearanceOverlay.Pophory.FAB</item>
     </style>
 
@@ -29,5 +29,4 @@
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">50%</item>
     </style>
-
 </resources>

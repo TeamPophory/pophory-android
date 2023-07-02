@@ -1,5 +1,6 @@
 package com.teampophory.pophory.feature.home.store
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +10,7 @@ import com.teampophory.pophory.R
 import com.teampophory.pophory.common.view.viewBinding
 import androidx.fragment.app.viewModels
 import com.teampophory.pophory.databinding.FragmentStoreBinding
+import com.teampophory.pophory.feature.album.AlbumListActivity
 import com.teampophory.pophory.feature.home.store.apdater.StoreAdapter
 
 class StoreFragment : Fragment() {
@@ -31,14 +33,16 @@ class StoreFragment : Fragment() {
     }
 
     private fun setupViewPager() {
+
+        //2차 스프린트를 위해 position 값을 받아둠
         adapter = StoreAdapter { position ->
-            //val intent = Intent(context, DetailActivity::class.java)
-            //startActivity(intent)
+            val intent = Intent(context, AlbumListActivity::class.java)
+            requireContext().startActivity(intent)
         }
         binding.viewpagerStore.adapter = adapter
         adapter.submitList(viewModel.mockAlbumList)
 
-        //1차 스프린트용 입력
+        //1차 스프린트용 입력 방지
         binding.viewpagerStore.isUserInputEnabled = false
     }
 }
