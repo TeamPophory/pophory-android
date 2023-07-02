@@ -17,6 +17,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import com.teampophory.pophory.R
 import com.teampophory.pophory.common.compose.DefaultPreview
+import com.teampophory.pophory.common.compose.bottomBorder
 import com.teampophory.pophory.design.PophoryTheme
 
 @OptIn(ExperimentalMaterial3Api::class)

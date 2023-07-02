@@ -13,9 +13,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.drawBehind
-import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -58,18 +55,6 @@ fun SettingItem(
             color = colors.onSurface20,
         )
     }
-}
-
-
-fun Modifier.bottomBorder(borderWidth: Dp, color: Color): Modifier = drawBehind {
-    val strokeWidth = borderWidth.value * density
-    val y = size.height - strokeWidth / 2
-    drawLine(
-        color,
-        Offset(0f, y),
-        Offset(size.width, y),
-        strokeWidth
-    )
 }
 
 @DefaultPreview
