@@ -1,4 +1,4 @@
-package com.teampophory.pophory
+package com.teampophory.pophory.feature.on_boarding.adapter
 
 import android.graphics.Color
 import android.view.LayoutInflater
@@ -8,8 +8,11 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.teampophory.pophory.databinding.ItemOnboardingViewpagerBinding
+import com.teampophory.pophory.feature.on_boarding.OnBoardingData
 
-class OnBoardingViewPagerAdapter : ListAdapter<OnBoardingData, OnBoardingViewPagerAdapter.ViewHolder>(diffUtil) {
+class OnBoardingViewPagerAdapter : ListAdapter<OnBoardingData, OnBoardingViewPagerAdapter.ViewHolder>(
+    diffUtil
+) {
 
     class ViewHolder(private val binding : ItemOnboardingViewpagerBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item : OnBoardingData) {

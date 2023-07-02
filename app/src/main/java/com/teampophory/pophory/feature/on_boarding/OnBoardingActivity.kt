@@ -1,17 +1,20 @@
-package com.teampophory.pophory
+package com.teampophory.pophory.feature.on_boarding
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.viewpager2.widget.ViewPager2
 import com.teampophory.pophory.databinding.ActivityOnBoardingBinding
+import com.teampophory.pophory.feature.on_boarding.adapter.OnBoardingViewPagerAdapter
+import com.teampophory.pophory.feature.sign_up.SignUpActivity
 
 class OnBoardingActivity : AppCompatActivity() {
 
-    private lateinit var binding : ActivityOnBoardingBinding
-    private lateinit var viewPager : ViewPager2
-    private lateinit var adapter : OnBoardingViewPagerAdapter
+    private lateinit var binding: ActivityOnBoardingBinding
+    private lateinit var viewPager: ViewPager2
+    private lateinit var adapter: OnBoardingViewPagerAdapter
 
     private lateinit var splashScreen: SplashScreen
 
@@ -23,6 +26,8 @@ class OnBoardingActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         setViewPager()
+
+        clickKakaoLoginBtn()
     }
 
     private val pageChangeCallback = object : ViewPager2.OnPageChangeCallback() {
@@ -36,23 +41,11 @@ class OnBoardingActivity : AppCompatActivity() {
             positionOffsetPixels: Int
         ) {
             super.onPageScrolled(position, positionOffset, positionOffsetPixels)
-            when(position) {
-                0 -> {
-                    binding.dotIndicatorFirst.isSelected = true
-                    binding.dotIndicatorSecond.isSelected = false
-                    binding.dotIndicatorThird.isSelected = false
-                }
-                1 -> {
-                    binding.dotIndicatorFirst.isSelected = false
-                    binding.dotIndicatorSecond.isSelected = true
-                    binding.dotIndicatorThird.isSelected = false
-                }
-                2 -> {
-                    binding.dotIndicatorFirst.isSelected = false
-                    binding.dotIndicatorSecond.isSelected = false
-                    binding.dotIndicatorThird.isSelected = true
-                }
-            }
+
+            binding.dotIndicatorFirst.isSelected = position == 0
+            binding.dotIndicatorSecond.isSelected = position == 1
+            binding.dotIndicatorThird.isSelected = position == 2
+
         }
 
         override fun onPageSelected(position: Int) {
@@ -61,6 +54,13 @@ class OnBoardingActivity : AppCompatActivity() {
         }
     }
 
+    //todo 카카오 로그인으로 수정 예정
+    private fun clickKakaoLoginBtn() {
+        binding.btnStartSocialLogin.setOnClickListener {
+            val intent = Intent(this, SignUpActivity::class.java)
+            startActivity(intent)
+        }
+    }
 
     private fun setViewPager() {
         viewPager = binding.viewpagerOnboarding
