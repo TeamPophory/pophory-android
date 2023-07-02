@@ -21,13 +21,24 @@ class AlbumListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         initObserver()
-        initRecyclerView()
-        viewModel.getAlbums()
     }
 
     private fun initObserver() {
-        viewModel.albumList.observe(this) {
-            albumAdapter.submitList(it.photos)
+        viewModel.albumList.observe(this) { albumState ->
+            when (albumState) {
+                is AlbumState.Uninitialized -> {
+                    initRecyclerView()
+                    viewModel.getAlbums()
+                }
+
+                is AlbumState.Loading -> {}
+
+                is AlbumState.SuccessAlbums -> {
+                    albumAdapter.submitList(albumState.data.photos)
+                }
+
+                is AlbumState.Error -> {}
+            }
         }
     }
 
