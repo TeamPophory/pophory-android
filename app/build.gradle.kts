@@ -51,11 +51,13 @@ dependencies {
     implementation(libs.google.android.gms)
     implementation(libs.constraintlayout)
     implementation(libs.coil.core)
+    implementation(libs.flexbox)
     debugImplementation(libs.bundles.flipper)
     implementation(libs.kakao.login)
     implementation(libs.startup)
     implementation(libs.fragment.ktx)
 
+    //Firebase
     implementation(platform(libs.firebase))
     implementation(libs.bundles.firebase)
 }

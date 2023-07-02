@@ -79,6 +79,11 @@
                     android:scheme="kakao${kakaoApiKey}" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".feature.album.AlbumListActivity"
+            android:exported="false" />
+
     </application>
 
 </manifest>
