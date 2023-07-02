@@ -61,7 +61,7 @@ fun SettingItem(
 }
 
 
-private fun Modifier.bottomBorder(borderWidth: Dp, color: Color): Modifier = drawBehind {
+fun Modifier.bottomBorder(borderWidth: Dp, color: Color): Modifier = drawBehind {
     val strokeWidth = borderWidth.value * density
     val y = size.height - strokeWidth / 2
     drawLine(
