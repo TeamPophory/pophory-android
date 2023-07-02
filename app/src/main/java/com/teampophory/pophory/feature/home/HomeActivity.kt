@@ -7,7 +7,7 @@ import androidx.fragment.app.commit
 import com.teampophory.pophory.R
 import com.teampophory.pophory.common.view.viewBinding
 import com.teampophory.pophory.databinding.ActivityHomeBinding
-import com.teampophory.pophory.feature.home.my_page.MyPageFragment
+import com.teampophory.pophory.feature.home.mypage.MyPageFragment
 import com.teampophory.pophory.feature.home.store.StoreFragment
 
 class HomeActivity : AppCompatActivity() {

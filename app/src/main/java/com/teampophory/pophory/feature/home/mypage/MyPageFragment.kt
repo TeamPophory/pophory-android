@@ -1,4 +1,4 @@
-package com.teampophory.pophory.feature.home.my_page
+package com.teampophory.pophory.feature.home.mypage
 
 import android.os.Bundle
 import android.view.LayoutInflater
