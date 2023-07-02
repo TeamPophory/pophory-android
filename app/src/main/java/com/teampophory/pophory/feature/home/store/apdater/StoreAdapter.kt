@@ -2,6 +2,7 @@ package com.teampophory.pophory.feature.home.store.apdater
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.annotation.DrawableRes
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -17,7 +18,7 @@ class StoreAdapter(private val onItemClicked: (Int) -> Unit) :
 
     inner class StoreViewHolder(private val binding: ItemStorePagerBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(src: Int) {
+        fun bind(@DrawableRes src: Int) {
             binding.ivStorePager.setImageResource(src)
             itemView.setOnClickListener {
                 onItemClicked(adapterPosition)
