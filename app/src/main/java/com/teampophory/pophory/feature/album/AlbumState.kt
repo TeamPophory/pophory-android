@@ -7,6 +7,4 @@ sealed class AlbumState {
     object Loading : AlbumState()
     data class SuccessAlbums(val data: PhotoList) : AlbumState()
     data class Error(val error: Throwable) : AlbumState()
-
-
 }
