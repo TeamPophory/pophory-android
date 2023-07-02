@@ -20,8 +20,15 @@ class AlbumListActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+        initObserver()
         initRecyclerView()
-        albumAdapter.submitList(viewModel.mockList)
+        viewModel.getAlbums()
+    }
+
+    private fun initObserver() {
+        viewModel.albumList.observe(this) {
+            albumAdapter.submitList(it.photos)
+        }
     }
 
     private fun initRecyclerView() {

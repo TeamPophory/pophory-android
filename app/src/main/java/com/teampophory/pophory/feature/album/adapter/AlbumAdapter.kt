@@ -6,10 +6,11 @@ import androidx.recyclerview.widget.ListAdapter
 import com.teampophory.pophory.common.view.ItemDiffCallback
 import com.teampophory.pophory.databinding.ItemFlexboxLayoutBinding
 import com.teampophory.pophory.feature.album.viewholder.FlexBoxLayoutViewHolder
+import com.teampophory.pophory.network.model.PhotoListResponse
 
-class AlbumAdapter : ListAdapter<Int, FlexBoxLayoutViewHolder>(
-    ItemDiffCallback<Int>(
-        onItemsTheSame = { old, new -> old == new },
+class AlbumAdapter : ListAdapter<PhotoListResponse.Photo, FlexBoxLayoutViewHolder>(
+    ItemDiffCallback<PhotoListResponse.Photo>(
+        onItemsTheSame = { old, new -> old.id == new.id },
         onContentsTheSame = { old, new -> old == new }
     )
 ) {
