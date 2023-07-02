@@ -22,7 +22,7 @@ output.json
 
 # IntelliJ
 *.iml
-.idea/
+.idea/*.xml
 misc.xml
 deploymentTargetDropDown.xml
 render.experimental.xml
