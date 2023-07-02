@@ -48,7 +48,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/shape_bottom_nav"
                 app:itemIconTint="@color/selc_bottom_nav_item"
-                app:itemRippleColor="@android:color/transparent"
+                app:itemActiveIndicatorStyle="@color/white"
                 app:itemTextColor="@color/selc_bottom_nav_item"
                 app:menu="@menu/menu_bottom_nav" />
 
