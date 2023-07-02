@@ -2,9 +2,9 @@
     <!-- Base application theme. -->
     <style name="Theme.Pophory" parent="Theme.Material3.Light.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_500</item>
+        <item name="colorPrimary">@color/pophory_purple</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
-        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorOnPrimary">@color/onSurface0</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
         <item name="colorSecondaryVariant">@color/teal_700</item>
@@ -13,14 +13,15 @@
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
         <!-- Bottom nav bar active indicator color set -->
-        <item name="colorSecondaryContainer">@color/white</item>
+        <item name="colorSecondaryContainer">@color/onSurface100</item>
+        <item name="colorOnSecondaryContainer">@color/onSurface0</item>
         <!-- FAB shape custom -->
         <item name="floatingActionButtonStyle">@style/Widget.Pophory.FloatingActionButton</item>
     </style>
 
     <style name="Widget.Pophory.FloatingActionButton" parent="Widget.MaterialComponents.FloatingActionButton">
-        <item name="backgroundTint">@color/primary_blue</item> <!-- FAB 배경색 -->
-        <item name="tint">@color/white</item> <!-- FAB 아이콘 색상 -->
+        <item name="backgroundTint">?colorPrimary</item> <!-- FAB 배경색 -->
+        <item name="tint">?colorOnPrimary</item> <!-- FAB 아이콘 색상 -->
         <item name="shapeAppearanceOverlay">@style/ShapeAppearanceOverlay.Pophory.FAB</item>
     </style>
 
