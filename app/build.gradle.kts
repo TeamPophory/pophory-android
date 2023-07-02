@@ -8,7 +8,7 @@ plugins {
 }
 
 android {
-    namespace = "com.teampophory.pophory"
+    namespace = "com.teampophory.pophory"   
 
     defaultConfig {
         applicationId = "com.teampophory.pophory"
