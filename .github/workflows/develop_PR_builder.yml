@@ -40,9 +40,11 @@ jobs:
         env:
           SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
           KAKAO_API_KEY: ${{ secrets.KAKAO_API_KEY }}
+          POPHORY_BASE_URL: ${{ secrets.POPHORY_BASE_URL }}
         run: |
           echo sentryDsn=\"$SENTRY_DSN\" >> ./local.properties
           echo kakaoApiKey=$KAKAO_API_KEY >> ./local.properties
+          echo pophoryBaseUrl=$POPHORY_BASE_URL >> ./local.properties
 
       - name: Access Firebase Service
         run: echo '${{ secrets.GOOGLE_SERVICES_JSON }}' > ./app/google-services.json
