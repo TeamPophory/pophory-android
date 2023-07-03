@@ -12,7 +12,7 @@ class SettingActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             PophoryTheme {
-                // TODO 설정화면 Screen 만들기
+                SettingScreen()
             }
         }
     }
