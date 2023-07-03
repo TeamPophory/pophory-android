@@ -10,7 +10,7 @@ data class MyPageInfoResponse(
     @SerialName("realName")
     val realName: String,
     @SerialName("nickName")
-    val nickName: String,
+    val nickname: String,
     @SerialName("profileImage")
     val profileImage: String,
     @SerialName("photoCount")
@@ -34,6 +34,7 @@ data class MyPageInfoResponse(
 fun MyPageInfoResponse.toMyPageInfo(): MyPageInfo {
     return MyPageInfo(
         realName = this.realName,
+        nickname = this.nickname,
         photoCount = this.photoCount,
         photos = this.photos?.map { photo ->
             MyPageInfo.Photo(

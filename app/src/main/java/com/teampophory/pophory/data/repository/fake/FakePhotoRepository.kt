@@ -43,7 +43,4 @@ class FakePhotoRepository : PhotoRepository {
         }
     }
 
-    override suspend fun getMyPageInfo(): Result<MyPageInfoResponse> {
-        TODO("Not yet implemented")
-    }
 }

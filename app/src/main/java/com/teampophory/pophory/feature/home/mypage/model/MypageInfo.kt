@@ -3,11 +3,12 @@ package com.teampophory.pophory.feature.home.mypage.model
 
 data class MyPageInfo(
     val realName: String,
+    val nickname: String,
     val photoCount: Int,
-    val photos: List<Photo>? = null
+    val photos: List<Photo>
 ) {
     data class Photo(
-        val photoId: Long? = null,
-        val photoUrl: String? = null
+        val photoId: Long,
+        val photoUrl: String
     )
 }
