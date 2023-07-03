@@ -1,5 +1,6 @@
 package com.teampophory.pophory.network.retrofit.album
 
+import com.teampophory.pophory.BuildConfig
 import com.teampophory.pophory.network.PhotoNetworkDataSource
 import com.teampophory.pophory.network.model.PhotoListResponse
 import okhttp3.OkHttpClient
@@ -17,7 +18,7 @@ private interface RetrofitPhotoNetworkApi {
     ): PhotoListResponse
 }
 
-private const val PoPhoryBaseUrl = "BASE_URL"
+private const val PoPhoryBaseUrl = BuildConfig.POPHORY_BASE_URL
 
 class RetrofitPhotoNetwork @Inject constructor(
     jsonConverter: Converter.Factory,
