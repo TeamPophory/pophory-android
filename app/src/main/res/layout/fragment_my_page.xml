@@ -10,7 +10,7 @@
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar_mypage"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
+        android:layout_height="66dp"
         android:background="@color/white"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -74,7 +74,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="13dp"
-                android:text="한수아"
+                android:text="@string/mypage_name_default"
                 android:textColor="@color/pophory_black"
                 android:textFontWeight="700"
                 app:layout_constraintStart_toEndOf="@id/iv_mypage_profile"
@@ -85,7 +85,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="@string/mypage_picture_count"
+                android:text="@string/mypage_picture_count_default"
                 android:textColor="@color/pophory_black"
                 android:textFontWeight="500"
                 android:textSize="14sp"
@@ -117,7 +117,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_mypage"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

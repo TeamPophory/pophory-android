@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import com.teampophory.pophory.R
+import com.teampophory.pophory.common.fragment.toast
 import com.teampophory.pophory.common.view.ItemDiffCallback
 import com.teampophory.pophory.common.view.viewBinding
 import com.teampophory.pophory.databinding.FragmentMyPageBinding
@@ -35,33 +36,44 @@ class MyPageFragment : Fragment() {
     }
 
     private fun initObserver() {
-        viewModel.photoList.observe(viewLifecycleOwner) { photoState ->
-            when (photoState) {
-                is PhotoState.Uninitialized -> {
-                    viewModel.getPhotos()
+        viewModel.photoList.observe(viewLifecycleOwner) { myPageInfoState ->
+            when (myPageInfoState) {
+                is MyPageInfoState.Uninitialized -> {
+                    viewModel.getMyPageInfo()
                 }
 
-                is PhotoState.Loading -> {}
+                is MyPageInfoState.Loading -> {}
 
-                is PhotoState.SuccessPhotos -> {
-                    myPageAdapter?.submitList(photoState.data.photos)
+                is MyPageInfoState.SuccessPhotos -> {
+                    with(binding) {
+                        tvMypageName.text = myPageInfoState.data.realName
+                        tvMypagePictureCount.text = getString(
+                            R.string.mypage_picture_count,
+                            myPageInfoState.data.photoCount
+                        )
+                    }
+                    myPageAdapter?.submitList(myPageInfoState.data.photos)
                 }
 
-                is PhotoState.Error -> {}
+                is MyPageInfoState.Error -> {}
             }
         }
     }
 
     private fun initRecyclerView() {
-        val gridLayoutManager = GridLayoutManager(requireContext(), 3)
+        val gridLayoutManager =
+            GridLayoutManager(requireContext(), 3, GridLayoutManager.VERTICAL, false)
 
         myPageAdapter = MyPageAdapter(ItemDiffCallback(
             onItemsTheSame = { old, new -> old == new },
             onContentsTheSame = { old, new -> old == new }
         )) { position ->
-//            val intent = Intent(context, AlbumListActivity::class.java)
-//            intent.putExtra("itemId", position)
-//            requireContext().startActivity(intent)
+            val photoList = viewModel.photoList.value
+            if (photoList is MyPageInfoState.SuccessPhotos) {
+                val itemId = photoList.data.photos?.getOrNull(position)?.photoId
+                toast(itemId.toString());
+                //TODO intent photo_detail activity
+            }
         }
 
         binding.rvMypage.apply {

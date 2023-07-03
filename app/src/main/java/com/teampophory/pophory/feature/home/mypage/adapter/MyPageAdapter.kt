@@ -2,18 +2,17 @@ package com.teampophory.pophory.feature.home.mypage.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.annotation.DrawableRes
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.teampophory.pophory.databinding.ItemMypageFeedBinding
-import com.teampophory.pophory.feature.album.model.PhotoList
+import com.teampophory.pophory.feature.home.mypage.model.MyPageInfo
 
 class MyPageAdapter(
-    diffCallback: DiffUtil.ItemCallback<PhotoList.Photo>,
+    diffCallback: DiffUtil.ItemCallback<MyPageInfo.Photo>,
     private val onItemClicked: (Int) -> Unit,
-) : ListAdapter<PhotoList.Photo, MyPageAdapter.MyPageViewHolder>(diffCallback) {
+) : ListAdapter<MyPageInfo.Photo, MyPageAdapter.MyPageViewHolder>(diffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyPageViewHolder {
         val binding =
@@ -26,8 +25,8 @@ class MyPageAdapter(
         private val onItemClicked: (Int) -> Unit
     ) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(photo: PhotoList.Photo) {
-            binding.ivMypageFeedItem.load(photo.imageUrl)  // Assuming 'src' is a property of PhotoList.Photo.
+        fun bind(photo: MyPageInfo.Photo) {
+            binding.ivMypageFeedItem.load(photo.photoUrl)  // Assuming 'src' is a property of PhotoList.Photo.
             itemView.setOnClickListener {
                 onItemClicked(adapterPosition)
             }
