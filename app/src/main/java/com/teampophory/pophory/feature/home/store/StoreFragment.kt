@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.teampophory.pophory.R
+import com.teampophory.pophory.common.view.ItemDiffCallback
 import com.teampophory.pophory.common.view.viewBinding
 import com.teampophory.pophory.databinding.FragmentStoreBinding
 import com.teampophory.pophory.feature.album.AlbumListActivity
@@ -41,16 +42,20 @@ class StoreFragment : Fragment() {
 
     private fun setupViewPager() {
         //2차 스프린트를 위해 position 값을 받아둠
-        adapter = StoreAdapter { position ->
+        adapter = StoreAdapter({ position ->
             val intent = Intent(context, AlbumListActivity::class.java)
             intent.putExtra("itemId", position)
             requireContext().startActivity(intent)
-        }
+        }, ItemDiffCallback(
+            onItemsTheSame = { old, new -> old == new },
+            onContentsTheSame = { old, new -> old == new }
+        ))
+
         binding.viewpagerStore.adapter = adapter
 
-        viewModel.albumList.observe(viewLifecycleOwner, Observer { list ->
+        viewModel.albumList.observe(viewLifecycleOwner) { list ->
             adapter?.submitList(list)
-        })
+        }
 
         //1차 스프린트용 입력 방지
         binding.viewpagerStore.isUserInputEnabled = false
@@ -72,7 +77,12 @@ class StoreFragment : Fragment() {
 
         if (start != -1) {
             spannableStringBuilder.setSpan(
-                ForegroundColorSpan(ContextCompat.getColor(requireContext(), R.color.pophory_purple)),
+                ForegroundColorSpan(
+                    ContextCompat.getColor(
+                        requireContext(),
+                        R.color.pophory_purple
+                    )
+                ),
                 start,
                 end,
                 Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
