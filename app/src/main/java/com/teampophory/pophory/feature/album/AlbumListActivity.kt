@@ -3,14 +3,13 @@ package com.teampophory.pophory.feature.album
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.flexbox.AlignItems
-import com.google.android.flexbox.FlexDirection
-import com.google.android.flexbox.FlexWrap
-import com.google.android.flexbox.FlexboxLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.teampophory.pophory.common.view.viewBinding
 import com.teampophory.pophory.databinding.ActivityAlbumListBinding
 import com.teampophory.pophory.feature.album.adapter.AlbumAdapter
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class AlbumListActivity : AppCompatActivity() {
 
     private val albumAdapter = AlbumAdapter()
@@ -34,7 +33,7 @@ class AlbumListActivity : AppCompatActivity() {
                 is AlbumState.Loading -> {}
 
                 is AlbumState.SuccessAlbums -> {
-                    albumAdapter.submitList(albumState.data.photos)
+                    albumAdapter.submitList(albumState.data)
                 }
 
                 is AlbumState.Error -> {}
@@ -43,14 +42,9 @@ class AlbumListActivity : AppCompatActivity() {
     }
 
     private fun initRecyclerView() {
-        val flexboxLayoutManager = FlexboxLayoutManager(this).apply {
-            flexWrap = FlexWrap.WRAP
-            flexDirection = FlexDirection.ROW
-            alignItems = AlignItems.STRETCH
-        }
-
         binding.rvAlbum.apply {
-            layoutManager = flexboxLayoutManager
+            layoutManager =
+                LinearLayoutManager(this@AlbumListActivity, LinearLayoutManager.VERTICAL, false)
             adapter = albumAdapter
         }
     }

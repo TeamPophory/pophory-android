@@ -5,28 +5,33 @@ import com.teampophory.pophory.network.model.PhotoListResponse
 import okhttp3.OkHttpClient
 import retrofit2.Converter
 import retrofit2.Retrofit
+import retrofit2.create
 import retrofit2.http.GET
+import retrofit2.http.Path
+import javax.inject.Inject
 
 private interface RetrofitPhotoNetworkApi {
-    @GET("photos")
-    suspend fun getPhotos(): PhotoListResponse
+    @GET("api/v1/albums/{albumId}/photos")
+    suspend fun getPhotos(
+        @Path("albumId") albumId: Int
+    ): PhotoListResponse
 }
 
-private const val PoPhoryBaseUrl = ""
+private const val PoPhoryBaseUrl = "BASE_URL"
 
-class RetrofitPhotoNetwork(
+class RetrofitPhotoNetwork @Inject constructor(
     jsonConverter: Converter.Factory,
     client: OkHttpClient
 ) : PhotoNetworkDataSource {
 
-    private val networkApi = Retrofit.Builder()
+    private val networkApi: RetrofitPhotoNetworkApi = Retrofit.Builder()
         .baseUrl(PoPhoryBaseUrl)
         .addConverterFactory(jsonConverter)
         .client(client)
         .build()
-        .create(RetrofitPhotoNetworkApi::class.java)
+        .create()
 
     override suspend fun getAlbums(): PhotoListResponse {
-        return networkApi.getPhotos()
+        return networkApi.getPhotos(2)
     }
 }
