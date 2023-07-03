@@ -64,13 +64,27 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="14dp"
-        android:text="카카오톡으로 시작하기"
+        android:text="Kakao로 시작하기"
+        android:textSize="18sp"
         android:background="@drawable/bg_kakao_login_btn"
+        android:paddingTop="19dp"
+        android:paddingBottom="18dp"
         android:gravity="center"
         android:paddingVertical="14dp"
         android:layout_marginBottom="22dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
+    
+    <ImageView
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:background="@drawable/ic_kakao"
+        app:layout_constraintStart_toStartOf="@id/btn_start_social_login"
+        app:layout_constraintTop_toTopOf="@id/btn_start_social_login"
+        app:layout_constraintBottom_toBottomOf="@id/btn_start_social_login"
+        android:layout_marginStart="20dp"/>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
