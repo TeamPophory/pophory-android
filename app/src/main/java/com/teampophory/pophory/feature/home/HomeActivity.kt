@@ -1,4 +1,4 @@
-package com.teampophory.pophory.feature
+package com.teampophory.pophory.feature.home
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -7,8 +7,8 @@ import androidx.fragment.app.commit
 import com.teampophory.pophory.R
 import com.teampophory.pophory.common.view.viewBinding
 import com.teampophory.pophory.databinding.ActivityHomeBinding
-import com.teampophory.pophory.feature.my_page.MyPageFragment
-import com.teampophory.pophory.feature.store.StoreFragment
+import com.teampophory.pophory.feature.home.mypage.MyPageFragment
+import com.teampophory.pophory.feature.home.store.StoreFragment
 
 class HomeActivity : AppCompatActivity() {
     private val binding: ActivityHomeBinding by viewBinding(ActivityHomeBinding::inflate)

@@ -1,4 +1,4 @@
-package com.teampophory.pophory.feature.store
+package com.teampophory.pophory.feature.home.mypage
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,17 +7,17 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.teampophory.pophory.R
 import com.teampophory.pophory.common.view.viewBinding
-import com.teampophory.pophory.databinding.FragmentStoreBinding
+import com.teampophory.pophory.databinding.FragmentMyPageBinding
 
-class StoreFragment : Fragment() {
-    private val binding by viewBinding(FragmentStoreBinding::bind)
+class MyPageFragment : Fragment() {
+    private val binding by viewBinding(FragmentMyPageBinding::bind)
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        return inflater.inflate(R.layout.fragment_store, container, false)
+        return inflater.inflate(R.layout.fragment_my_page, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

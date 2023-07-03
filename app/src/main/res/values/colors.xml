@@ -17,4 +17,5 @@
     <color name="onSurface25">#E0E1E5</color>
     <color name="onSurface0">#FFFFFF</color>
     <color name="gray_400">#C6C7C7</color>
+    <color name="gray_200">#FFF5F5F5</color>
 </resources>
