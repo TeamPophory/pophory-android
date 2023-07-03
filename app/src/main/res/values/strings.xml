@@ -12,4 +12,8 @@
     <string name="store_logo_contentDescription">앱의 로고 입니다.</string>
     <string name="store_welcome">"네컷 사진으로\n포포링만의 추억을 만들어봐!"</string>
     <string name="store_cheer">"8장 보관 중! 완성까지 22개 남았어!"</string>
+    
+    <!-- home_mypage -->
+    <string name="mypage_picture_count">그동안 찍은사진 0장</string>
+    <string name="mypage_feed_title">네컷사진 모아보기</string>
 </resources>

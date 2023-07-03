@@ -1,13 +1,131 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/gray_300"
     tools:context=".feature.home.mypage.MyPageFragment">
 
-    <TextView
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_mypage"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="마이" />
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/white"
+        app:layout_constraintTop_toTopOf="parent">
 
-</FrameLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/toolbar_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@popory_12345"
+                android:textColor="@color/pophory_black"
+                android:textFontWeight="600"
+                android:textSize="19sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/toolbar_setting_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="20dp"
+                android:src="@drawable/ic_setting"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="1dp"
+        android:background="@color/white"
+        android:paddingHorizontal="20dp"
+        android:paddingTop="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar_mypage"
+        app:layout_constraintVertical_bias="0.0"
+        tools:layout_editor_absoluteX="-35dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/iv_mypage_profile"
+                android:layout_width="72dp"
+                android:layout_height="72dp"
+                android:src="@drawable/img_profile_default"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_mypage_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="13dp"
+                android:text="한수아"
+                android:textColor="@color/pophory_black"
+                android:textFontWeight="700"
+                app:layout_constraintStart_toEndOf="@id/iv_mypage_profile"
+                app:layout_constraintTop_toTopOf="@+id/iv_mypage_profile" />
+
+            <TextView
+                android:id="@+id/tv_mypage_picture_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/mypage_picture_count"
+                android:textColor="@color/pophory_black"
+                android:textFontWeight="500"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="@id/tv_mypage_name"
+                app:layout_constraintTop_toBottomOf="@+id/tv_mypage_name" />
+
+            <TextView
+                android:id="@+id/tv_mypage_admob"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_marginTop="20dp"
+                android:background="@color/gray_300"
+                android:gravity="center"
+                android:text="광고"
+                app:layout_constraintTop_toBottomOf="@id/iv_mypage_profile" />
+
+            <TextView
+                android:id="@+id/tv_mypage_feed_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="26dp"
+                android:text="@string/mypage_feed_title"
+                android:textColor="@color/pophory_black"
+                android:textFontWeight="700"
+                android:textSize="19sp"
+                app:layout_constraintStart_toStartOf="@id/tv_mypage_admob"
+                app:layout_constraintTop_toBottomOf="@id/tv_mypage_admob" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_mypage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_mypage_feed_title"
+                tools:listitem="@layout/item_mypage_feed" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

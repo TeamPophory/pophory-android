@@ -36,6 +36,18 @@ class FakePhotoRepository : PhotoRepository {
                         studio = "studio4",
                         takenAt = "2021-01-04",
                         imageUrl = fakeImageUrl
+                    ),
+                    PhotoListResponse.Photo(
+                        id = 5,
+                        studio = "studio4",
+                        takenAt = "2021-01-04",
+                        imageUrl = fakeImageUrl
+                    ),
+                    PhotoListResponse.Photo(
+                        id = 6,
+                        studio = "studio4",
+                        takenAt = "2021-01-04",
+                        imageUrl = fakeImageUrl
                     )
                 )
             )
