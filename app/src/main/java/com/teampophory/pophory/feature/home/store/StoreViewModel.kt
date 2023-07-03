@@ -7,15 +7,15 @@ import com.teampophory.pophory.R
 
 class StoreViewModel : ViewModel() {
 
-    private val _photoList = MutableLiveData<List<Int>>()
+    private val _albumList = MutableLiveData<List<Int>>()
 
-    val photoList: LiveData<List<Int>> = _photoList
+    val albumList: LiveData<List<Int>> get() = _albumList
 
     val mockAlbumList = listOf(
         R.drawable.img_album_cover
     )
 
     init {
-        _photoList.value = mockAlbumList
+        _albumList.value = mockAlbumList
     }
 }

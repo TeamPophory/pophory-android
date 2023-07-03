@@ -9,14 +9,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.teampophory.pophory.databinding.ItemStorePagerBinding
 
 class StoreAdapter(private val onItemClicked: (Int) -> Unit) :
-    ListAdapter<Int, StoreAdapter.StoreViewHolder>(StoreDiffCallback()) {
+    ListAdapter<Int, StoreAdapter.StoreViewHolder>(StoreDiffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StoreViewHolder {
         val binding = ItemStorePagerBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return StoreViewHolder(binding)
+        return StoreViewHolder(binding, onItemClicked)
     }
 
-    inner class StoreViewHolder(private val binding: ItemStorePagerBinding) :
+    class StoreViewHolder(private val binding: ItemStorePagerBinding, private val onItemClicked: (Int) -> Unit) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(@DrawableRes src: Int) {
             binding.ivStorePager.setImageResource(src)
@@ -31,7 +31,7 @@ class StoreAdapter(private val onItemClicked: (Int) -> Unit) :
     }
 
     //2차 스프린트를 위한 DiffUtil
-    class StoreDiffCallback : DiffUtil.ItemCallback<Int>() {
+    object StoreDiffCallback : DiffUtil.ItemCallback<Int>() {
         override fun areItemsTheSame(oldItem: Int, newItem: Int): Boolean {
             return oldItem == newItem
         }

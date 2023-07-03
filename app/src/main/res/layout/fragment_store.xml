@@ -23,7 +23,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:text="@string/store_welcome"
-        android:textColor="@color/black"
+        android:textColor="@color/onSurface100"
+        android:textFontWeight="500"
         android:textSize="23sp"
         app:layout_constraintStart_toStartOf="@id/iv_store_logo"
         app:layout_constraintTop_toBottomOf="@id/iv_store_logo" />
@@ -33,9 +34,9 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="28dp"
+        app:layout_constraintBottom_toTopOf="@id/tv_store_cheer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/tv_store_cheer"
         app:layout_constraintTop_toBottomOf="@id/tv_store_welcome" />
 
     <TextView
@@ -43,7 +44,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="34dp"
-        android:layout_marginEnd="48dp"
         android:layout_marginBottom="42dp"
         android:paddingHorizontal="14dp"
         android:paddingVertical="8dp"
@@ -52,6 +52,7 @@
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         tools:text="3/30" />
 
 
