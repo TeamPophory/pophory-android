@@ -9,8 +9,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.teampophory.pophory.databinding.ItemStorePagerBinding
 
 class StoreAdapter(
+    diffCallback: DiffUtil.ItemCallback<Int>,
     private val onItemClicked: (Int) -> Unit,
-    diffCallback: DiffUtil.ItemCallback<Int>
 ) : ListAdapter<Int, StoreAdapter.StoreViewHolder>(diffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StoreViewHolder {
