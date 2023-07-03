@@ -42,14 +42,14 @@ class StoreFragment : Fragment() {
 
     private fun setupViewPager() {
         //2차 스프린트를 위해 position 값을 받아둠
-        adapter = StoreAdapter({ position ->
+        adapter = StoreAdapter(ItemDiffCallback(
+            onItemsTheSame = { old, new -> old == new },
+            onContentsTheSame = { old, new -> old == new }
+        )) { position ->
             val intent = Intent(context, AlbumListActivity::class.java)
             intent.putExtra("itemId", position)
             requireContext().startActivity(intent)
-        }, ItemDiffCallback(
-            onItemsTheSame = { old, new -> old == new },
-            onContentsTheSame = { old, new -> old == new }
-        ))
+        }
 
         binding.viewpagerStore.adapter = adapter
 
