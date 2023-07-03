@@ -1,4 +1,4 @@
-package com.teampophory.pophory.feature.setting.component
+package com.teampophory.pophory.feature.setting
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -11,6 +11,10 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
@@ -19,6 +23,7 @@ import com.teampophory.pophory.R
 import com.teampophory.pophory.common.compose.DefaultPreview
 import com.teampophory.pophory.common.compose.bottomBorder
 import com.teampophory.pophory.design.PophoryTheme
+import com.teampophory.pophory.feature.setting.component.SettingItem
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -30,6 +35,12 @@ fun SettingScreen(
     onLogout: () -> Unit = {},
     onWithdrawal: () -> Unit = {},
 ) {
+    var isDialogShow by remember { mutableStateOf(false) }
+
+    if (isDialogShow) {
+
+    }
+
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         topBar = {
