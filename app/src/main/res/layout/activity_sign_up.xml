@@ -47,8 +47,10 @@
         android:id="@+id/tab_first"
         android:layout_width="0dp"
         android:layout_height="3dp"
-        app:layout_constraintHorizontal_bias="0.5"
+        android:layout_marginStart="11dp"
+        android:background="@drawable/selector_sign_up_tab"
         app:layout_constraintEnd_toStartOf="@+id/tab_second"
+        app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
@@ -56,8 +58,9 @@
         android:id="@+id/tab_second"
         android:layout_width="0dp"
         android:layout_height="3dp"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintEnd_toStartOf="@id/tab_first"
+        android:layout_marginHorizontal="4dp"
+        android:background="@drawable/selector_sign_up_tab"
+        app:layout_constraintEnd_toStartOf="@id/tab_third"
         app:layout_constraintStart_toEndOf="@id/tab_first"
         app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
@@ -65,7 +68,8 @@
         android:id="@+id/tab_third"
         android:layout_width="0dp"
         android:layout_height="3dp"
-        app:layout_constraintHorizontal_bias="0.5"
+        android:background="@drawable/selector_sign_up_tab"
+        android:layout_marginEnd="11dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/tab_second"
         app:layout_constraintTop_toBottomOf="@id/toolbar" />
@@ -83,16 +87,16 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="12dp"
         android:layout_marginBottom="22dp"
-        android:background="@drawable/bg_sign_up_btn"
+        android:background="@drawable/selector_sign_up_btn"
         android:gravity="center"
         android:paddingTop="16dp"
         android:paddingBottom="15dp"
         android:text="다음으로 넘어가기"
-        android:layout_marginTop="12dp"
-        app:layout_constraintTop_toBottomOf="@id/viewpager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/viewpager" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -10,34 +10,26 @@
         android:id="@+id/tv_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="만나서 반가워\n너의 이름이 궁금해!"
+        android:text="마음에 쏙드는\n포포리 앨범 커버를 선택해줘!"
+        android:textSize="23sp"
+        android:layout_marginTop="32dp"
+        android:layout_marginStart="20dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>
 
-    <TextView
-        android:id="@+id/tv_sub"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="@id/tv_title"
-        app:layout_constraintTop_toBottomOf="@id/tv_title"
-        android:text="포포리 사용을 위해 실명 입력이 필요해요"
-        android:layout_marginTop="10dp"
-        />
 
-    <EditText
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:hint="이름(성+이름)"
-        android:textSize="15sp"
-        android:paddingStart="15dp"
-        android:paddingTop="18dp"
-        android:paddingBottom="21dp"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/selector_sign_up_edit_text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_sub"/>
+        <ImageView
+            android:id="@+id/iv_album_cover"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="32dp"
+            app:layout_constraintDimensionRatio="0.73"
+            app:layout_constraintTop_toBottomOf="@id/tv_title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginHorizontal="70dp"
+            android:src="@drawable/example_album_cover"
+            />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

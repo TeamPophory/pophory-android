@@ -5,8 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.teampophory.pophory.databinding.FragmentSignUpFirstBinding
+import androidx.viewpager2.widget.ViewPager2
 import com.teampophory.pophory.databinding.FragmentSignUpThirdBinding
+import com.teampophory.pophory.feature.on_boarding.OnBoardingData
 
 class SignUpThirdFragment : Fragment() {
 
@@ -25,6 +26,7 @@ class SignUpThirdFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
     }
 
     override fun onDestroy() {
