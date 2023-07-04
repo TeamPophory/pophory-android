@@ -9,7 +9,7 @@ plugins {
 }
 
 android {
-    namespace = "com.teampophory.pophory"   
+    namespace = "com.teampophory.pophory"
 
     defaultConfig {
         applicationId = "com.teampophory.pophory"
@@ -57,7 +57,7 @@ dependencies {
     implementation(libs.kakao.login)
     implementation(libs.startup)
     implementation(libs.fragment.ktx)
-    implementation(libs.retrofit.kotlin.serialization.converter)
+    implementation(libs.security)
 
     //Firebase
     implementation(platform(libs.firebase))
