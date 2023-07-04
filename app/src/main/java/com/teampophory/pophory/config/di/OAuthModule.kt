@@ -9,20 +9,16 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ActivityComponent
-import dagger.hilt.android.scopes.ActivityScoped
-import dagger.hilt.components.SingletonComponent
 
 @Module
 @InstallIn(ActivityComponent::class)
 object OAuthModule {
     @Provides
-    @ActivityScoped
     fun provideKakaoApiClient(): UserApiClient = UserApiClient.instance
 
     @Module
-    @InstallIn(SingletonComponent::class)
+    @InstallIn(ActivityComponent::class)
     interface Binder {
-        @ActivityScoped
         @Binds
         @Kakao
         fun bindKakaoAuthService(service: KakaoAuthService): OAuthService
