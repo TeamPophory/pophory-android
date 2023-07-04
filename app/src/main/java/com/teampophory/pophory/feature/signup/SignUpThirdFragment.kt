@@ -1,13 +1,11 @@
-package com.teampophory.pophory.feature.sign_up
+package com.teampophory.pophory.feature.signup
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.viewpager2.widget.ViewPager2
 import com.teampophory.pophory.databinding.FragmentSignUpThirdBinding
-import com.teampophory.pophory.feature.on_boarding.OnBoardingData
 
 class SignUpThirdFragment : Fragment() {
 

@@ -1,4 +1,4 @@
-package com.teampophory.pophory.feature.sign_up
+package com.teampophory.pophory.feature.signup
 
 import android.os.Bundle
 import android.text.Editable
@@ -11,13 +11,13 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.teampophory.pophory.R
 import com.teampophory.pophory.databinding.FragmentSignUpFirstBinding
-import com.teampophory.pophory.databinding.FragmentSignUpSecondBinding
 import java.util.regex.Pattern
 
-class SignUpSecondFragment : Fragment() {
+class SignUpFirstFragment : Fragment() {
 
-    private var _binding: FragmentSignUpSecondBinding? = null
-    private val binding: FragmentSignUpSecondBinding
+    private var _binding: FragmentSignUpFirstBinding? = null
+    private var buttonState:SignUpButtonInterface? = null
+    private val binding: FragmentSignUpFirstBinding
         get() = requireNotNull(_binding) { "앗 ! _binding이 null이다 !" }
 
     override fun onCreateView(
@@ -25,7 +25,7 @@ class SignUpSecondFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentSignUpSecondBinding.inflate(inflater, container, false)
+        _binding = FragmentSignUpFirstBinding.inflate(inflater, container, false)
         binding.tvErrorMessage.isVisible = false
         binding.btnDeleteEditText.isGone = true
         return binding.root
@@ -33,9 +33,9 @@ class SignUpSecondFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        //edittext 상태
         setEditText()
-
+        //edittext 삭제 버튼
         deleteAllEditText()
     }
 
@@ -76,22 +76,25 @@ class SignUpSecondFragment : Fragment() {
                     //X버튼 생성 여부
                     binding.btnDeleteEditText.isGone = count < 1
                     //글자 수 계산
-                    binding.tvTextCount.text = "(${s.toString().length}/12)"
+                    binding.tvTextCount.text = "(${s.toString().length}/6)"
 
-                    val pattern = Pattern.compile(ID_PATTERN)
+                    //에러 메시지 : 현재 한국어만 지원함!
+                    val pattern = Pattern.compile(HANGUL_PATTERN)
                     val matcher = pattern.matcher(binding.editTvName.text)
                     if (!matcher.find()) {
-                        binding.tvErrorMessage.text = "*올바른 형식의 아이디가 아닙니다"
+                        binding.tvErrorMessage.text = "현재 한국어만 지원하고 있어요."
                         binding.editTvName.setBackgroundResource(R.drawable.bg_sign_up_edit_text_error)
                         binding.tvErrorMessage.isVisible = true
-                    } else if (s.toString().length < 4) {
-                        binding.tvErrorMessage.text = "4-12글자 이내로 작성해주세요."
+                    } else if (s.toString().length < 2) {
+                        binding.tvErrorMessage.text = "2-6글자 이내로 작성해주세요."
                         binding.editTvName.setBackgroundResource(R.drawable.bg_sign_up_edit_text_error)
                         binding.tvErrorMessage.isVisible = true
                     } else {
                         binding.editTvName.setBackgroundResource(R.drawable.bg_sign_up_edit_text_selected)
                         binding.tvErrorMessage.isVisible = false
+                        buttonState?.setButtonState(true)
                     }
+
                 }
 
                 override fun afterTextChanged(s: Editable?) {
@@ -102,7 +105,12 @@ class SignUpSecondFragment : Fragment() {
         }
     }
 
+    fun setSignUpButtonInterface(buttonState: SignUpButtonInterface){
+        this.buttonState = buttonState
+    }
+
     companion object {
-        const val ID_PATTERN = "^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[._])[a-zA-Z0-9._]*\$"
+        const val HANGUL_PATTERN =
+            "^[ㄱ-ㅎㅏ-ㅣ가-힣]*\$"
     }
 }

@@ -8,7 +8,7 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.viewpager2.widget.ViewPager2
 import com.teampophory.pophory.databinding.ActivityOnBoardingBinding
 import com.teampophory.pophory.feature.on_boarding.adapter.OnBoardingViewPagerAdapter
-import com.teampophory.pophory.feature.sign_up.SignUpActivity
+import com.teampophory.pophory.feature.signup.SignUpActivity
 
 class OnBoardingActivity : AppCompatActivity() {
 

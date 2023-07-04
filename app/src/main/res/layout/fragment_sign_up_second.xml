@@ -32,7 +32,7 @@
         android:id="@+id/edit_tv_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="이름(성+이름)"
+        android:hint="아이디"
         android:textSize="15sp"
         android:maxLength="12"
         android:paddingStart="15dp"
