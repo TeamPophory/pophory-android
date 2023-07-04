@@ -1,9 +1,13 @@
 package com.teampophory.pophory.feature.home.mypage
 
 import android.os.Bundle
+import android.text.Spannable
+import android.text.SpannableStringBuilder
+import android.text.style.ForegroundColorSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
@@ -58,6 +62,7 @@ class MyPageFragment : Fragment() {
                             R.string.mypage_picture_count,
                             myPageInfoState.data.photoCount
                         )
+                        setSpannableString(myPageInfoState.data.photoCount)
                         if (myPageInfoState.data.photos.isNotEmpty()) {
                             ivMypageFeedEmpty.visibility = View.GONE
                             tvMypageFeedEmpty.visibility = View.GONE
@@ -99,5 +104,30 @@ class MyPageFragment : Fragment() {
             adapter = myPageAdapter
             isNestedScrollingEnabled = false
         }.addItemDecoration(GridSpacingItemDecoration(3, 10, false))
+    }
+
+    private fun setSpannableString(myPageInfoDataPhotoCount : Int) {
+        val fullText = getString(R.string.mypage_picture_count, myPageInfoDataPhotoCount)
+        val coloredText = myPageInfoDataPhotoCount.toString()
+
+        val spannableStringBuilder = SpannableStringBuilder(fullText)
+        val start = fullText.indexOf(coloredText)
+        val end = start + coloredText.length
+
+        if (start != -1) {
+            spannableStringBuilder.setSpan(
+                ForegroundColorSpan(
+                    ContextCompat.getColor(
+                        requireContext(),
+                        R.color.pophory_purple
+                    )
+                ),
+                start,
+                end,
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+            )
+        }
+
+        binding.tvMypagePictureCount.text = spannableStringBuilder
     }
 }
