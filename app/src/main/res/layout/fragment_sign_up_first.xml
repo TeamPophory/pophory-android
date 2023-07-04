@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="만나서 반가워\n너의 이름이 궁금해!"
+        android:textSize="23sp"
+        android:layout_marginTop="32dp"
+        android:layout_marginStart="20dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:id="@+id/tv_sub"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@id/tv_title"
+        app:layout_constraintTop_toBottomOf="@id/tv_title"
+        android:text="포포리 사용을 위해 실명 입력이 필요해요"
+        android:layout_marginTop="10dp"
+        />
+
+    <EditText
+        android:id="@+id/edit_tv_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="이름(성+이름)"
+        android:maxLength="6"
+        android:inputType="text"
+        android:textSize="15sp"
+        android:paddingStart="15dp"
+        android:paddingTop="18dp"
+        android:paddingBottom="21dp"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/bg_sign_up_edit_text_default"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_sub"/>
+    
+    <ImageView
+        android:id="@+id/btn_delete_edit_text"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:background="@drawable/ic_edit_text_delete"
+        app:layout_constraintEnd_toEndOf="@id/edit_tv_name"
+        app:layout_constraintTop_toTopOf="@id/edit_tv_name"
+        app:layout_constraintBottom_toBottomOf="@id/edit_tv_name"
+        android:layout_marginEnd="15dp"/>
+
+    <TextView
+        android:id="@+id/tv_error_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/pophory_red"
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toBottomOf="@id/edit_tv_name"
+        app:layout_constraintStart_toStartOf="@id/edit_tv_name"
+        android:layout_marginStart="6dp"/>
+
+    <TextView
+        android:id="@+id/tv_text_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="(0/6)"
+        android:textColor="@color/gray_400"
+        android:layout_marginTop="8dp"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="@id/edit_tv_name"
+        app:layout_constraintTop_toBottomOf="@id/edit_tv_name"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

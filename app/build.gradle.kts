@@ -49,9 +49,14 @@ dependencies {
     implementation(project(":bottomnavigation"))
     implementation(project(":core:common"))
     implementation(libs.constraintlayout)
+    implementation(libs.coil.core)
+    implementation(libs.flexbox)
+    debugImplementation(libs.bundles.flipper)
+    implementation(libs.kakao.login)
     implementation(libs.startup)
     implementation(libs.fragment.ktx)
     implementation(libs.security)
+    implementation(libs.splash.screen)
 
     // Google
     implementation(libs.google.android.gms)
