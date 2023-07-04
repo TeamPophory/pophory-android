@@ -108,6 +108,4 @@ class MyPageFragment : Fragment() {
             //TODO intent to setting
         }
     }
-
-
 }
