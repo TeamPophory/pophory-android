@@ -33,7 +33,13 @@ object NetModule {
     @Provides
     @Log
     fun provideLoggingInterceptor(): Interceptor =
-        HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
+        HttpLoggingInterceptor().setLevel(
+            if (BuildConfig.DEBUG) {
+                HttpLoggingInterceptor.Level.BODY
+            } else {
+                HttpLoggingInterceptor.Level.NONE
+            }
+        )
 
     @Singleton
     @Provides
