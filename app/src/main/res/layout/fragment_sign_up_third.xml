@@ -30,85 +30,92 @@
         app:layout_constraintTop_toBottomOf="@id/tv_title" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        app:layout_constraintTop_toBottomOf="@id/iv_album_cover"
-        android:layout_marginTop="30dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/iv_album_cover">
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cv_1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
-            app:cardCornerRadius="48dp"
-            app:cardElevation="0dp"
-            app:layout_constraintStart_toStartOf="parent">
 
-            <ImageView
-                android:id="@+id/iv_album_cover_1"
-                android:background="@color/pophory_purple"
-                android:layout_width="48dp"
-                android:layout_height="48dp"/>
-
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cv_2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="@id/cv_1"
-            app:layout_constraintStart_toEndOf="@id/cv_1"
+        <ImageView
+            android:id="@+id/iv_album_cover_1"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@color/gray_400"
             android:layout_marginStart="18dp"
-            app:cardElevation="0dp"
-            app:cardCornerRadius="48dp">
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageView
-                android:id="@+id/iv_album_cover_2"
-                android:background="@color/pophory_purple"
-                android:layout_width="48dp"
-                android:layout_height="48dp"/>
 
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cv_3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="@id/cv_1"
-            app:layout_constraintStart_toEndOf="@id/cv_2"
+        <ImageView
+            android:id="@+id/iv_album_select_1"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src = "@drawable/round_album_select"
             android:layout_marginStart="18dp"
-            app:cardElevation="0dp"
-            app:cardCornerRadius="48dp">
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
 
-            <ImageView
-                android:id="@+id/iv_album_cover_3"
-                android:background="@color/pophory_purple"
-                android:layout_width="48dp"
-                android:layout_height="48dp"/>
 
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cv_4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="@id/cv_1"
-            app:layout_constraintStart_toEndOf="@id/cv_3"
+        <ImageView
+            android:id="@+id/iv_album_cover_2"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@color/gray_400"
             android:layout_marginStart="18dp"
-            app:cardElevation="0dp"
-            app:cardCornerRadius="48dp">
+            app:layout_constraintStart_toEndOf="@id/iv_album_cover_1"
+            app:layout_constraintTop_toTopOf="@id/iv_album_cover_1"/>
 
-            <ImageView
-                android:id="@+id/iv_album_cover_4"
-                android:background="@color/pophory_purple"
-                android:layout_width="48dp"
-                android:layout_height="48dp"/>
+        <ImageView
+            android:id="@+id/iv_album_select_2"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src = "@drawable/round_album_select"
+            android:layout_marginStart="18dp"
+            app:layout_constraintStart_toEndOf="@id/iv_album_cover_1"
+            app:layout_constraintTop_toTopOf="@id/iv_album_cover_1"/>
 
-        </androidx.cardview.widget.CardView>
+
+        <ImageView
+            android:id="@+id/iv_album_cover_3"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@color/gray_400"
+            android:layout_marginStart="18dp"
+            app:layout_constraintStart_toEndOf="@id/iv_album_cover_2"
+            app:layout_constraintTop_toTopOf="@id/iv_album_cover_1"/>
+
+        <ImageView
+            android:id="@+id/iv_album_select_3"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src = "@drawable/round_album_select"
+            android:layout_marginStart="18dp"
+            app:layout_constraintStart_toEndOf="@id/iv_album_cover_2"
+            app:layout_constraintTop_toTopOf="@id/iv_album_cover_1"/>
+
+
+        <ImageView
+            android:id="@+id/iv_album_cover_4"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@color/gray_400"
+            android:layout_marginStart="18dp"
+            app:layout_constraintStart_toEndOf="@id/iv_album_cover_3"
+            app:layout_constraintTop_toTopOf="@id/iv_album_cover_1"/>
+
+        <ImageView
+            android:id="@+id/iv_album_select_4"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src = "@drawable/round_album_select"
+            android:layout_marginStart="18dp"
+            app:layout_constraintStart_toEndOf="@id/iv_album_cover_3"
+            app:layout_constraintTop_toTopOf="@id/iv_album_cover_1"/>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

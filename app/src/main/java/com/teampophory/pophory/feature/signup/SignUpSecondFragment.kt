@@ -84,10 +84,12 @@ class SignUpSecondFragment : Fragment() {
                         binding.tvErrorMessage.text = "*올바른 형식의 아이디가 아닙니다"
                         binding.editTvName.setBackgroundResource(R.drawable.bg_sign_up_edit_text_error)
                         binding.tvErrorMessage.isVisible = true
+                        buttonState?.setButtonState(false)
                     } else if (s.toString().length < 4) {
                         binding.tvErrorMessage.text = "4-12글자 이내로 작성해주세요."
                         binding.editTvName.setBackgroundResource(R.drawable.bg_sign_up_edit_text_error)
                         binding.tvErrorMessage.isVisible = true
+                        buttonState?.setButtonState(false)
                     } else {
                         binding.editTvName.setBackgroundResource(R.drawable.bg_sign_up_edit_text_selected)
                         binding.tvErrorMessage.isVisible = false

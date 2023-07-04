@@ -31,7 +31,7 @@
     </style>
     <style name="Theme.App.Popopopo.Starting" parent="Theme.SplashScreen">
         <item name="windowSplashScreenBackground">@color/white</item>
-        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_pophory</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_pophory_main_logo</item>
         <item name="windowSplashScreenAnimationDuration">2000</item>
         <item name="postSplashScreenTheme">@style/Theme.Pophory</item>
     </style>

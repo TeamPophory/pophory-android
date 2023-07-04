@@ -85,10 +85,12 @@ class SignUpFirstFragment : Fragment() {
                         binding.tvErrorMessage.text = "현재 한국어만 지원하고 있어요."
                         binding.editTvName.setBackgroundResource(R.drawable.bg_sign_up_edit_text_error)
                         binding.tvErrorMessage.isVisible = true
+                        buttonState?.setButtonState(false)
                     } else if (s.toString().length < 2) {
                         binding.tvErrorMessage.text = "2-6글자 이내로 작성해주세요."
                         binding.editTvName.setBackgroundResource(R.drawable.bg_sign_up_edit_text_error)
                         binding.tvErrorMessage.isVisible = true
+                        buttonState?.setButtonState(false)
                     } else {
                         binding.editTvName.setBackgroundResource(R.drawable.bg_sign_up_edit_text_selected)
                         binding.tvErrorMessage.isVisible = false
