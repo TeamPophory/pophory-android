@@ -15,7 +15,6 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.teampophory.pophory.R
 import com.teampophory.pophory.common.fragment.toast
 import com.teampophory.pophory.common.view.GridSpacingItemDecoration
-import com.teampophory.pophory.common.view.ItemDiffCallback
 import com.teampophory.pophory.common.view.viewBinding
 import com.teampophory.pophory.databinding.FragmentMypageBinding
 import com.teampophory.pophory.feature.home.mypage.adapter.MyPageAdapter
@@ -38,6 +37,7 @@ class MyPageFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initObserver()
+        setOnClickListener()
     }
 
     override fun onDestroyView() {
@@ -67,7 +67,7 @@ class MyPageFragment : Fragment() {
 
                         val isNotEmpty = myPageInfoState.data.photos.isNotEmpty()
 
-                        if(isNotEmpty) {
+                        if (isNotEmpty) {
                             myPageAdapter?.submitList(myPageInfoState.data.photos)
                         }
                         rvMypage.isVisible = isNotEmpty
@@ -75,6 +75,7 @@ class MyPageFragment : Fragment() {
                         tvMypageFeedEmpty.isVisible = !isNotEmpty
                     }
                 }
+
                 is MyPageInfoState.Error -> {}
             }
         }
@@ -85,10 +86,7 @@ class MyPageFragment : Fragment() {
             GridLayoutManager(requireContext(), 3, GridLayoutManager.VERTICAL, false)
 
 
-        myPageAdapter = MyPageAdapter(ItemDiffCallback(
-            onItemsTheSame = { old, new -> old == new },
-            onContentsTheSame = { old, new -> old == new }
-        )) { position ->
+        myPageAdapter = MyPageAdapter { position ->
             val photoList = viewModel.photoList.value
             if (photoList is MyPageInfoState.SuccessMyPageInfo) {
                 val itemId = photoList.data.photos.getOrNull(position)?.photoId
@@ -127,5 +125,11 @@ class MyPageFragment : Fragment() {
         }
 
         binding.tvMypagePictureCount.text = spannableStringBuilder
+    }
+
+    private fun setOnClickListener() {
+        binding.ivToolbarSetting.setOnClickListener {
+            //TODO intent to setting
+        }
     }
 }
