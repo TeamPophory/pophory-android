@@ -2,7 +2,6 @@ package com.teampophory.pophory.data.repository
 
 import com.teampophory.pophory.network.PhotoNetworkDataSource
 import com.teampophory.pophory.network.model.PhotoListResponse
-import com.teampophory.pophory.network.retrofit.album.RetrofitPhotoNetwork
 import javax.inject.Inject
 
 class DefaultPhotoRepository @Inject constructor(
