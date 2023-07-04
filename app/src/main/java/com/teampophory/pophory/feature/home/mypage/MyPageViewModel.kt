@@ -15,7 +15,7 @@ class MyPageViewModel : ViewModel() {
     private val myPageInfoRepository: MyPageInfoRepository = FakeMyPageInfoRepository()
 
     private val _myPageUserInfo = MutableLiveData<MyPageInfoState>(MyPageInfoState.Uninitialized)
-    val photoList: LiveData<MyPageInfoState> get() = _myPageUserInfo
+    val myPageInfo: LiveData<MyPageInfoState> get() = _myPageUserInfo
 
     fun getMyPageInfo() {
         viewModelScope.launch {

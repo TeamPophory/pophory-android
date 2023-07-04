@@ -50,114 +50,46 @@
         android:background="@color/gray_200"
         app:layout_constraintTop_toBottomOf="@id/toolbar_mypage" />
 
-    <androidx.core.widget.NestedScrollView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_mypage"
         android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="20dp"
+        android:visibility="gone"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/div_mypage"
+        tools:itemCount="6"
+        tools:listitem="@layout/item_mypage_feed"
+        tools:visibility="visible" />
+
+    <ImageView
+        android:id="@+id/iv_mypage_feed_empty"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="40dp"
+        android:layout_marginTop="38dp"
+        android:src="@drawable/img_empty_peed"
+        android:visibility="gone"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rv_mypage" />
+
+    <TextView
+        android:id="@+id/tv_mypage_feed_empty"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:paddingHorizontal="20dp"
-        app:layout_constraintTop_toBottomOf="@id/div_mypage">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <ImageView
-                android:id="@+id/iv_mypage_profile"
-                android:layout_width="72dp"
-                android:layout_height="72dp"
-                android:layout_marginTop="20dp"
-                android:src="@drawable/img_profile_default"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/tv_mypage_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="13dp"
-                android:textColor="@color/pophory_black"
-                android:textFontWeight="700"
-                app:layout_constraintStart_toEndOf="@id/iv_mypage_profile"
-                app:layout_constraintTop_toTopOf="@+id/iv_mypage_profile" />
-
-            <TextView
-                android:id="@+id/tv_mypage_picture_count"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:textColor="@color/pophory_black"
-                android:textFontWeight="500"
-                android:textSize="14sp"
-                app:layout_constraintStart_toStartOf="@id/tv_mypage_name"
-                app:layout_constraintTop_toBottomOf="@+id/tv_mypage_name" />
-
-            <TextView
-                android:id="@+id/tv_mypage_admob"
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:layout_marginTop="20dp"
-                android:background="@color/gray_300"
-                android:gravity="center"
-                android:text="광고"
-                app:layout_constraintTop_toBottomOf="@id/iv_mypage_profile" />
-
-            <TextView
-                android:id="@+id/tv_mypage_feed_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="26dp"
-                android:text="@string/mypage_feed_title"
-                android:textColor="@color/pophory_black"
-                android:textFontWeight="700"
-                android:textSize="19sp"
-                app:layout_constraintStart_toStartOf="@id/tv_mypage_admob"
-                app:layout_constraintTop_toBottomOf="@id/tv_mypage_admob" />
-
-            <ImageView
-                android:id="@+id/iv_mypage_feed_empty"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_marginHorizontal="40dp"
-                android:layout_marginTop="38dp"
-                android:src="@drawable/img_empty_peed"
-                android:visibility="gone"
-                app:layout_constraintDimensionRatio="1:1"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_mypage_feed_title" />
-
-            <TextView
-                android:id="@+id/tv_mypage_feed_empty"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:text="@string/mypage_feed_empty"
-                android:textColor="@color/pophory_black"
-                android:textSize="18sp"
-                android:visibility="gone"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/iv_mypage_feed_empty" />
-
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_mypage"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="14dp"
-                android:visibility="gone"
-                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_mypage_feed_title"
-                tools:itemCount="6"
-                tools:listitem="@layout/item_mypage_feed"
-                tools:visibility="visible" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.core.widget.NestedScrollView>
+        android:layout_marginTop="20dp"
+        android:text="@string/mypage_feed_empty"
+        android:textColor="@color/pophory_black"
+        android:textSize="18sp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/iv_mypage_feed_empty" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
