@@ -12,29 +12,35 @@ class DefaultPophoryDataStore @Inject constructor(
     override var accessToken: String
         get() = preferences.getString("access_token", "").orEmpty()
         set(value) {
-            preferences.edit {
+            preferences.edit(commit = true) {
                 putString("access_token", value)
             }
         }
     override var refreshToken: String
         get() = preferences.getString("refresh_token", "").orEmpty()
         set(value) {
-            preferences.edit {
+            preferences.edit(commit = true) {
                 putString("refresh_token", value)
             }
         }
     override var userName: String
         get() = preferences.getString("user_name", "").orEmpty()
         set(value) {
-            preferences.edit {
+            preferences.edit(commit = true) {
                 putString("user_name", value)
             }
         }
     override var userId: String
         get() = preferences.getString("user_id", "").orEmpty()
         set(value) {
-            preferences.edit {
+            preferences.edit(commit = true) {
                 putString("user_id", value)
             }
         }
+
+    override fun clear() {
+        preferences.edit(commit = true) {
+            clear()
+        }
+    }
 }

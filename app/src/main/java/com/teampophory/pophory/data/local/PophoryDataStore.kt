@@ -5,4 +5,6 @@ interface PophoryDataStore {
     var refreshToken: String
     var userName: String
     var userId: String
+
+    fun clear()
 }
