@@ -56,6 +56,7 @@ dependencies {
     implementation(libs.kakao.login)
     implementation(libs.startup)
     implementation(libs.fragment.ktx)
+    implementation(libs.retrofit.kotlin.serialization.converter)
 
     //Firebase
     implementation(platform(libs.firebase))

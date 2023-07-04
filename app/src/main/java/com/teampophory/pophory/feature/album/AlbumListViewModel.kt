@@ -5,14 +5,16 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.teampophory.pophory.data.repository.PhotoRepository
-import com.teampophory.pophory.data.repository.fake.FakePhotoRepository
 import com.teampophory.pophory.network.model.toPhotoList
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import timber.log.Timber
+import javax.inject.Inject
 
-class AlbumListViewModel : ViewModel() {
-
-    private val photoRepository: PhotoRepository = FakePhotoRepository()
+@HiltViewModel
+class AlbumListViewModel @Inject constructor(
+    private val photoRepository: PhotoRepository
+) : ViewModel() {
 
     private val _albumList = MutableLiveData<AlbumState>(AlbumState.Uninitialized)
     val albumList: LiveData<AlbumState> get() = _albumList

@@ -24,9 +24,14 @@ internal fun Project.configureAndroidCommonPlugin() {
     extensions.getByType<BaseExtension>().apply {
         defaultConfig {
             val kakaoApiKey = properties["kakaoApiKey"] as? String ?: ""
+            val pophoryBaseUrl = properties["pophoryBaseUrl"] as? String ?: ""
+
             manifestPlaceholders["sentryDsn"] = properties["sentryDsn"] as String
             manifestPlaceholders["kakaoApiKey"] = properties["kakaoApiKey"] as String
+            manifestPlaceholders["pophoryBaseUrl"] = properties["pophoryBaseUrl"] as String
+
             buildConfigField("String", "KAKAO_API_KEY", "\"${kakaoApiKey}\"")
+            buildConfigField("String", "POPHORY_BASE_URL", "\"${pophoryBaseUrl}\"")
         }
         buildFeatures.apply {
             viewBinding = true
