@@ -48,16 +48,22 @@ android {
 dependencies {
     implementation(project(":bottomnavigation"))
     implementation(project(":core:common"))
-    implementation(libs.dot.indicator)
-    implementation(libs.google.android.gms)
     implementation(libs.constraintlayout)
-    implementation(libs.coil.core)
-    implementation(libs.flexbox)
-    debugImplementation(libs.bundles.flipper)
-    implementation(libs.kakao.login)
     implementation(libs.startup)
     implementation(libs.fragment.ktx)
     implementation(libs.security)
+
+    // Google
+    implementation(libs.google.android.gms)
+    implementation(libs.flexbox)
+
+    // Third Party
+    implementation(libs.dot.indicator)
+    implementation(libs.coil.core)
+    implementation(libs.kakao.login)
+    implementation(libs.bundles.retrofit)
+
+    debugImplementation(libs.bundles.flipper)
 
     //Firebase
     implementation(platform(libs.firebase))
