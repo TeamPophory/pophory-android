@@ -48,15 +48,23 @@ class SignUpActivity : AppCompatActivity() {
                 clickCompleteButton()
 
             } else {
+
                 binding.btnNext.text = "다음으로 넘어가기"
                 binding.btnNext.isEnabled = false
+
+                if(position == 1 && binding.btnNext.isEnabled){
+                    clickCompleteButton()
+                }
             }
 
         }
     }
 
     private fun clickCompleteButton() {
-
+        binding.btnNext.setOnClickListener {
+            val dialog = SignUpDialogFragment()
+            dialog.show(supportFragmentManager,"")
+        }
     }
 
     private fun setViewPager() {
