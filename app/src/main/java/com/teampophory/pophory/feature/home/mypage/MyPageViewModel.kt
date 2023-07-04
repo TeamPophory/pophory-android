@@ -20,12 +20,21 @@ class MyPageViewModel : ViewModel() {
     fun getMyPageInfo() {
         viewModelScope.launch {
             _myPageUserInfo.value = MyPageInfoState.Loading
+
             myPageInfoRepository.getMyPageInfo()
                 .onSuccess {
                     _myPageUserInfo.value = MyPageInfoState.SuccessPhotos(it.toMyPageInfo())
                 }.onFailure {
                     _myPageUserInfo.value = MyPageInfoState.Error(it)
                 }
+
+            //Empty List
+//            myPageInfoRepository.getMyPageEmtpyInfo()
+//                .onSuccess {
+//                    _myPageUserInfo.value = MyPageInfoState.SuccessPhotos(it.toMyPageInfo())
+//                }.onFailure {
+//                    _myPageUserInfo.value = MyPageInfoState.Error(it)
+//                }
         }
     }
 }
