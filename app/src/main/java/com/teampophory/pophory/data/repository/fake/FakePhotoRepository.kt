@@ -1,7 +1,6 @@
 package com.teampophory.pophory.data.repository.fake
 
 import com.teampophory.pophory.data.repository.PhotoRepository
-import com.teampophory.pophory.network.model.MyPageInfoResponse
 import com.teampophory.pophory.network.model.PhotoListResponse
 import kotlinx.coroutines.delay
 
