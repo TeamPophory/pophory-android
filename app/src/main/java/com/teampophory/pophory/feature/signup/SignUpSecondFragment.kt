@@ -39,7 +39,7 @@ class SignUpSecondFragment : Fragment() {
         deleteAllEditText()
     }
 
-    override fun onDestroy() {
+    override fun onDestroyView() {
         super.onDestroy()
         _binding = null
     }

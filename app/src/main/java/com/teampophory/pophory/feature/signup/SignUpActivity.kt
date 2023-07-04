@@ -6,13 +6,15 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.ViewPager2
 import com.teampophory.pophory.common.context.toast
+import com.teampophory.pophory.common.view.viewBinding
+import com.teampophory.pophory.databinding.ActivityOnBoardingBinding
 import com.teampophory.pophory.databinding.ActivitySignUpBinding
 import com.teampophory.pophory.feature.on_boarding.OnBoardingActivity
 import com.teampophory.pophory.feature.signup.adapter.SignUpViewPagerAdapter
 
 class SignUpActivity : AppCompatActivity(), SignUpButtonInterface {
 
-    private lateinit var binding: ActivitySignUpBinding
+    private val binding by viewBinding(ActivitySignUpBinding::inflate)
     private lateinit var viewPager: ViewPager2
     private lateinit var viewPagerAdapter: SignUpViewPagerAdapter
 
@@ -21,7 +23,6 @@ class SignUpActivity : AppCompatActivity(), SignUpButtonInterface {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivitySignUpBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
 
@@ -46,9 +47,11 @@ class SignUpActivity : AppCompatActivity(), SignUpButtonInterface {
                     startActivity(intent)
                     finish()
                 }
+
                 1 -> {
                     binding.viewpager.currentItem = backPosition
                 }
+
                 2 -> {
                     binding.viewpager.currentItem = backPosition
                 }
@@ -121,7 +124,7 @@ class SignUpActivity : AppCompatActivity(), SignUpButtonInterface {
 
         viewPager.apply {
             adapter = viewPagerAdapter
-//            isUserInputEnabled = false
+            isUserInputEnabled = false
         }
         viewPager.registerOnPageChangeCallback(pageChangeCallback)
     }

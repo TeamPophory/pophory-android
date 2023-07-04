@@ -30,7 +30,7 @@ class SignUpThirdFragment : Fragment() {
         selectAlbumCover()
     }
 
-    override fun onDestroy() {
+    override fun onDestroyView() {
         super.onDestroy()
         _binding = null
     }

@@ -26,21 +26,21 @@ class SignUpFirstFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentSignUpFirstBinding.inflate(inflater, container, false)
-        binding.tvErrorMessage.isVisible = false
-        binding.btnDeleteEditText.isGone = true
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.tvErrorMessage.isVisible = false
+        binding.btnDeleteEditText.isGone = true
         //edittext 상태
         setEditText()
         //edittext 삭제 버튼
         deleteAllEditText()
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
+    override fun onDestroyView() {
+        super.onDestroyView()
         _binding = null
     }
 
@@ -53,9 +53,9 @@ class SignUpFirstFragment : Fragment() {
     private fun setEditText() {
         //텍스트창 활성화
         binding.editTvName.apply {
-            setOnFocusChangeListener { view, b ->
+            setOnFocusChangeListener { view, hasFocus ->
                 //포커스가 주어졌을 때
-                if (b) {
+                if (hasFocus) {
                     setBackgroundResource(R.drawable.bg_sign_up_edit_text_selected)
                 } else {
                     setBackgroundResource(R.drawable.bg_sign_up_edit_text_default)
@@ -112,7 +112,6 @@ class SignUpFirstFragment : Fragment() {
     }
 
     companion object {
-        const val HANGUL_PATTERN =
-            "^[ㄱ-ㅎㅏ-ㅣ가-힣]*\$"
+        const val HANGUL_PATTERN = "^[ㄱ-ㅎㅏ-ㅣ가-힣]*\$"
     }
 }
