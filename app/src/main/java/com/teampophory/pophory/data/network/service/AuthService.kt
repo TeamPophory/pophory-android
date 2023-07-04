@@ -1,6 +1,6 @@
 package com.teampophory.pophory.data.network.service
 
-import com.teampophory.pophory.data.network.model.AuthResponse
+import com.teampophory.pophory.data.network.model.auth.AuthResponse
 import retrofit2.http.Header
 import retrofit2.http.POST
 import retrofit2.http.PUT
