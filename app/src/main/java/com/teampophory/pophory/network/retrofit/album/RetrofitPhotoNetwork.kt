@@ -18,19 +18,10 @@ private interface RetrofitPhotoNetworkApi {
     ): PhotoListResponse
 }
 
-private const val PoPhoryBaseUrl = BuildConfig.POPHORY_BASE_URL
-
 class RetrofitPhotoNetwork @Inject constructor(
-    jsonConverter: Converter.Factory,
-    client: OkHttpClient
+    retrofit: Retrofit
 ) : PhotoNetworkDataSource {
-
-    private val networkApi: RetrofitPhotoNetworkApi = Retrofit.Builder()
-        .baseUrl(PoPhoryBaseUrl)
-        .addConverterFactory(jsonConverter)
-        .client(client)
-        .build()
-        .create()
+    private val networkApi: RetrofitPhotoNetworkApi = retrofit.create()
 
     override suspend fun getAlbums(): PhotoListResponse {
         return networkApi.getPhotos(2)

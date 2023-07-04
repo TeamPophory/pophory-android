@@ -1,7 +1,7 @@
 package com.teampophory.pophory.di
 
 import com.teampophory.pophory.data.repository.PhotoRepository
-import com.teampophory.pophory.data.repository.PhotoRepositoryImpl
+import com.teampophory.pophory.data.repository.DefaultPhotoRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -15,6 +15,6 @@ interface RepositoryBindModule {
     @Binds
     @Singleton
     fun bindPhotoRepository(
-        photoRepositoryImpl: PhotoRepositoryImpl
+        defaultPhotoRepository: DefaultPhotoRepository
     ): PhotoRepository
 }
