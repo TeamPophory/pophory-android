@@ -14,14 +14,13 @@ import com.teampophory.pophory.R
 import com.teampophory.pophory.common.view.ItemDiffCallback
 import com.teampophory.pophory.databinding.ItemMypageFeedBinding
 import com.teampophory.pophory.databinding.ItemMypageProfileBinding
-import com.teampophory.pophory.feature.home.mypage.model.MyPageInfo
-
+import com.teampophory.pophory.feature.home.mypage.MyPageDisplayItem
 
 class MyPageAdapter(
-    private val onItemClicked: (MyPageInfo.Photo) -> Unit
-) : ListAdapter<Any, RecyclerView.ViewHolder>(
-    ItemDiffCallback<Any>(
-        onItemsTheSame = { old, new -> old.hashCode() == new.hashCode() },
+    private val onItemClicked: (MyPageDisplayItem.Photo) -> Unit
+) : ListAdapter<MyPageDisplayItem, RecyclerView.ViewHolder>(
+    ItemDiffCallback<MyPageDisplayItem>(
+        onItemsTheSame = { old, new -> old == new },
         onContentsTheSame = { old, new -> old == new }
     )
 ) {
@@ -31,9 +30,9 @@ class MyPageAdapter(
     }
 
     override fun getItemViewType(position: Int): Int {
-        return when (position) {
-            0 -> VIEW_TYPE_PROFILE
-            else -> VIEW_TYPE_PHOTO
+        return when (getItem(position)) {
+            is MyPageDisplayItem.Profile -> VIEW_TYPE_PROFILE
+            is MyPageDisplayItem.Photo -> VIEW_TYPE_PHOTO
         }
     }
 
@@ -57,27 +56,23 @@ class MyPageAdapter(
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        when (holder) {
-            is ProfileViewHolder -> {
-                val profileInfo = getItem(0) as MyPageInfo
-                holder.bind(profileInfo)
+        when (val item = getItem(position)) {
+            is MyPageDisplayItem.Profile -> {
+                (holder as ProfileViewHolder).bind(item)
             }
 
-            is PhotoViewHolder -> {
-                val photo = getItem(position) as MyPageInfo.Photo
-                holder.bind(photo)
+            is MyPageDisplayItem.Photo -> {
+                (holder as PhotoViewHolder).bind(item)
             }
-
-            else -> throw IllegalArgumentException("Invalid view holder")
         }
     }
 
     class PhotoViewHolder(
         private val binding: ItemMypageFeedBinding,
-        private val onItemClicked: (MyPageInfo.Photo) -> Unit
+        private val onItemClicked: (MyPageDisplayItem.Photo) -> Unit
     ) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(photo: MyPageInfo.Photo) {
-            binding.ivMypageFeedItem.load(photo.photoUrl)
+        fun bind(photo: MyPageDisplayItem.Photo) {
+            binding.ivMypageFeedItem.load(photo.photo.photoUrl)
             itemView.setOnClickListener {
                 onItemClicked(photo)
             }
@@ -88,7 +83,7 @@ class MyPageAdapter(
         private val binding: ItemMypageProfileBinding,
         private val context: Context
     ) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(profileInfo: MyPageInfo) {
+        fun bind(profileInfo: MyPageDisplayItem.Profile) {
             with(binding) {
                 tvMypageName.text = profileInfo.realName
                 tvMypagePictureCount.text = setSpannableString(profileInfo.photoCount)

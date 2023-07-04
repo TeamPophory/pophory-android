@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.teampophory.pophory.data.repository.MyPageInfoRepository
 import com.teampophory.pophory.data.repository.fake.FakeMyPageInfoRepository
-import com.teampophory.pophory.network.model.toMyPageInfo
 import kotlinx.coroutines.launch
 
 
@@ -23,7 +22,8 @@ class MyPageViewModel : ViewModel() {
 
             myPageInfoRepository.getMyPageInfo()
                 .onSuccess {
-                    _myPageUserInfo.value = MyPageInfoState.SuccessMyPageInfo(it.toMyPageInfo())
+                    _myPageUserInfo.value =
+                        MyPageInfoState.SuccessMyPageInfo(it.toItems())
                 }.onFailure {
                     _myPageUserInfo.value = MyPageInfoState.Error(it)
                 }

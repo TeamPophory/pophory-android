@@ -54,20 +54,18 @@ class MyPageFragment : Fragment() {
                 is MyPageInfoState.Loading -> {}
 
                 is MyPageInfoState.SuccessMyPageInfo -> {
-                    val isNotEmpty = myPageInfoState.data.photos.isNotEmpty()
-                    val myPageInfoData = arrayListOf<Any>().apply {
-                        add(myPageInfoState.data)
-                        addAll(myPageInfoState.data.photos)
-                    }
+                    val photoItems =
+                        myPageInfoState.data.filterIsInstance<MyPageDisplayItem.Photo>()
+                    val isEmpty = photoItems.isEmpty()
+                    val myPageInfoData = myPageInfoState.data
+                    val profileItem =
+                        myPageInfoState.data.firstOrNull { it is MyPageDisplayItem.Profile } as? MyPageDisplayItem.Profile
 
                     with(binding) {
-                        tvMypageToolbarNickname.text = "@${myPageInfoState.data.nickname}"
-                        if (isNotEmpty) {
-                            myPageAdapter?.submitList(myPageInfoData)
-                        }
-                        ivMypageFeedEmpty.isVisible = !isNotEmpty
-                        tvMypageFeedEmpty.isVisible = !isNotEmpty
-                        rvMypage.isVisible = isNotEmpty
+                        tvMypageToolbarNickname.text = "@${profileItem?.nickname}"
+                        myPageAdapter?.submitList(myPageInfoData)
+                        ivMypageFeedEmpty.isVisible = isEmpty
+                        tvMypageFeedEmpty.isVisible = isEmpty
                     }
                 }
 
@@ -80,10 +78,10 @@ class MyPageFragment : Fragment() {
         val gridLayoutManager =
             GridLayoutManager(requireContext(), 3, GridLayoutManager.VERTICAL, false)
 
-        myPageAdapter = MyPageAdapter { photo ->
+        myPageAdapter = MyPageAdapter { photos ->
             val photoList = viewModel.myPageInfo.value
             if (photoList is MyPageInfoState.SuccessMyPageInfo) {
-                toast(photo.photoId.toString());
+                toast(photos.photo.photoId.toString());
                 //TODO intent photo_detail activity
             }
         }
