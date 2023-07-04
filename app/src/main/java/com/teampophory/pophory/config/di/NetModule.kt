@@ -3,7 +3,7 @@ package com.teampophory.pophory.config.di
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import com.teampophory.pophory.config.di.qualifier.Auth
 import com.teampophory.pophory.config.di.qualifier.Log
-import com.teampophory.pophory.data.network.AuthInterceptor
+import com.teampophory.pophory.data.network.interceptor.AuthInterceptor
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

@@ -1,4 +1,4 @@
-package com.teampophory.pophory.data.network
+package com.teampophory.pophory.data.network.interceptor
 
 import com.teampophory.pophory.data.local.PophoryDataStore
 import okhttp3.Interceptor
