@@ -51,4 +51,18 @@ class FakeMyPageInfoRepository : MyPageInfoRepository {
             )
         }
     }
+
+    override suspend fun getMyPageEmtpyInfo(): Result<MyPageInfoResponse> {
+        delay(300)
+        return runCatching {
+            MyPageInfoResponse(
+                "한수아",
+                "HANSUAH",
+                "",
+                5,
+                listOf(
+                )
+            )
+        }
+    }
 }
