@@ -18,7 +18,7 @@ sealed class AlbumViewHolder(
     ) : AlbumViewHolder(binding) {
         override fun bind(item: PhotoItem) {
             if (item is PhotoItem.HorizontalItem) {
-                binding.ivHorizontalImage.load(item.imageUrl)
+                binding.ivHorizontalImage.load(item.photo.imageUrl)
             }
         }
     }
@@ -29,10 +29,10 @@ sealed class AlbumViewHolder(
         override fun bind(item: PhotoItem) {
             with(binding) {
                 if (item is PhotoItem.VerticalItem) {
-                    item.photo.let { (first, second) ->
-                        ivFirstVerticalImage.load(first.imageUrl)
-                        ivSecondVerticalImage.load(second.imageUrl)
-                    }
+                    val firstImageUrl = item.photos.firstOrNull() ?: return
+                    val secondImageView = item.photos.getOrNull(1) ?: return
+                    ivFirstVerticalImage.load(firstImageUrl)
+                    ivSecondVerticalImage.load(secondImageView)
                 }
             }
         }

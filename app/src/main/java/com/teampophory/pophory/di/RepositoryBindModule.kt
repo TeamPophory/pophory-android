@@ -12,7 +12,6 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 interface RepositoryBindModule {
 
-
     @Binds
     @Singleton
     fun bindPhotoRepository(

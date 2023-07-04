@@ -1,7 +1,6 @@
 package com.teampophory.pophory.di
 
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
-import com.teampophory.pophory.network.okhttp.AuthInterceptor
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -27,7 +26,6 @@ object NetworkModule {
     fun provideOkHttpClient(): OkHttpClient {
         val interceptor = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
         return OkHttpClient.Builder()
-            .addInterceptor(AuthInterceptor())
             .addInterceptor(interceptor)
             .build()
     }

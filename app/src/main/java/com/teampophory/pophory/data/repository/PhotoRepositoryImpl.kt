@@ -8,7 +8,7 @@ class PhotoRepositoryImpl @Inject constructor(
     private val retrofitPhotoNetwork: RetrofitPhotoNetwork
 ) : PhotoRepository {
     override suspend fun getPhotos(): Result<PhotoListResponse> {
-        return runCatching {retrofitPhotoNetwork.getAlbums()}
+        return runCatching { retrofitPhotoNetwork.getAlbums() }
     }
 
 }
