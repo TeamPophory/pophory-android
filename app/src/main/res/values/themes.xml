@@ -17,6 +17,16 @@
         <item name="colorOnSecondaryContainer">@color/onSurface0</item>
         <!-- FAB shape custom -->
         <item name="floatingActionButtonStyle">@style/Widget.Pophory.FloatingActionButton</item>
+        <item name="textAppearanceHeadlineLarge">@style/TextAppearance.Pophory.HeadLineLarge</item>
+        <item name="textAppearanceHeadlineMedium">
+            @style/TextAppearance.Pophory.HeadLineMedium
+        </item>
+        <item name="textAppearanceHeadlineSmall">@style/TextAppearance.Pophory.HeadLineSmall</item>
+        <item name="textAppearanceBodyLarge">@style/TextAppearance.Pophory.BodyLarge</item>
+        <item name="textAppearanceBodyMedium">@style/TextAppearance.Pophory.BodyMedium</item>
+        <item name="textAppearanceBodySmall">@style/TextAppearance.Pophory.BodySmall</item>
+        <item name="textAppearanceLabelLarge">@style/TextAppearance.Pophory.LabelLarge</item>
+        <item name="textAppearanceLabelMedium">@style/TextAppearance.Pophory.LabelMedium</item>
     </style>
 
     <style name="Widget.Pophory.FloatingActionButton" parent="Widget.MaterialComponents.FloatingActionButton">
