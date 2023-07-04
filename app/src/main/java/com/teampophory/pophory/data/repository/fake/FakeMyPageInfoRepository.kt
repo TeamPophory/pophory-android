@@ -17,50 +17,7 @@ class FakeMyPageInfoRepository : MyPageInfoRepository {
                 "",
                 5,
                 listOf(
-                    MyPageInfoResponse.Photo(
-                        1,
-                        fakeImageUrl,
-                        "인생네컷",
-                        "2023.06.26"
-                    ),
-                    MyPageInfoResponse.Photo(
-                        2,
-                        fakeImageUrl,
-                        "인생네컷",
-                        "2023.06.26"
-                    ),
-                    MyPageInfoResponse.Photo(
-                        3,
-                        fakeImageUrl,
-                        "인생네컷",
-                        "2023.06.26"
-                    ),
-                    MyPageInfoResponse.Photo(
-                        4,
-                        fakeImageUrl,
-                        "인생네컷",
-                        "2023.06.26"
-                    ),
-                    MyPageInfoResponse.Photo(
-                        5,
-                        fakeImageUrl,
-                        "인생네컷",
-                        "2023.06.26"
-                    )
-                )
-            )
-        }
-    }
 
-    override suspend fun getMyPageEmtpyInfo(): Result<MyPageInfoResponse> {
-        delay(300)
-        return runCatching {
-            MyPageInfoResponse(
-                "한수아",
-                "HANSUAH",
-                "",
-                5,
-                listOf(
                 )
             )
         }

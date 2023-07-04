@@ -8,16 +8,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import com.teampophory.pophory.R
 import com.teampophory.pophory.common.fragment.toast
+import com.teampophory.pophory.common.view.GridSpacingItemDecoration
 import com.teampophory.pophory.common.view.ItemDiffCallback
 import com.teampophory.pophory.common.view.viewBinding
 import com.teampophory.pophory.databinding.FragmentMypageBinding
 import com.teampophory.pophory.feature.home.mypage.adapter.MyPageAdapter
-import com.teampophory.pophory.feature.home.mypage.decorator.GridSpacingItemDecoration
 
 class MyPageFragment : Fragment() {
     private val binding by viewBinding(FragmentMypageBinding::bind)
@@ -54,7 +55,7 @@ class MyPageFragment : Fragment() {
 
                 is MyPageInfoState.Loading -> {}
 
-                is MyPageInfoState.SuccessPhotos -> {
+                is MyPageInfoState.SuccessMyPageInfo -> {
                     with(binding) {
                         tvMypageName.text = myPageInfoState.data.realName
                         tvMypageToolbarNickname.text = "@".plus(myPageInfoState.data.nickname)
@@ -63,20 +64,17 @@ class MyPageFragment : Fragment() {
                             myPageInfoState.data.photoCount
                         )
                         setSpannableString(myPageInfoState.data.photoCount)
-                        if (myPageInfoState.data.photos.isNotEmpty()) {
-                            ivMypageFeedEmpty.visibility = View.GONE
-                            tvMypageFeedEmpty.visibility = View.GONE
+
+                        val isNotEmpty = myPageInfoState.data.photos.isNotEmpty()
+
+                        if(isNotEmpty) {
                             myPageAdapter?.submitList(myPageInfoState.data.photos)
-                            rvMypage.visibility = View.VISIBLE
-                        } else {
-                            rvMypage.visibility = View.GONE
-                            ivMypageFeedEmpty.visibility = View.VISIBLE
-                            tvMypageFeedEmpty.visibility = View.VISIBLE
                         }
+                        rvMypage.isVisible = isNotEmpty
+                        ivMypageFeedEmpty.isVisible = !isNotEmpty
+                        tvMypageFeedEmpty.isVisible = !isNotEmpty
                     }
-
                 }
-
                 is MyPageInfoState.Error -> {}
             }
         }
@@ -92,7 +90,7 @@ class MyPageFragment : Fragment() {
             onContentsTheSame = { old, new -> old == new }
         )) { position ->
             val photoList = viewModel.photoList.value
-            if (photoList is MyPageInfoState.SuccessPhotos) {
+            if (photoList is MyPageInfoState.SuccessMyPageInfo) {
                 val itemId = photoList.data.photos.getOrNull(position)?.photoId
                 toast(itemId.toString());
                 //TODO intent photo_detail activity
@@ -106,7 +104,7 @@ class MyPageFragment : Fragment() {
         }.addItemDecoration(GridSpacingItemDecoration(3, 10, false))
     }
 
-    private fun setSpannableString(myPageInfoDataPhotoCount : Int) {
+    private fun setSpannableString(myPageInfoDataPhotoCount: Int) {
         val fullText = getString(R.string.mypage_picture_count, myPageInfoDataPhotoCount)
         val coloredText = myPageInfoDataPhotoCount.toString()
 

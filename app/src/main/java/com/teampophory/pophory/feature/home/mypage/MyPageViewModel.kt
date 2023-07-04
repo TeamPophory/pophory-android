@@ -23,18 +23,10 @@ class MyPageViewModel : ViewModel() {
 
             myPageInfoRepository.getMyPageInfo()
                 .onSuccess {
-                    _myPageUserInfo.value = MyPageInfoState.SuccessPhotos(it.toMyPageInfo())
+                    _myPageUserInfo.value = MyPageInfoState.SuccessMyPageInfo(it.toMyPageInfo())
                 }.onFailure {
                     _myPageUserInfo.value = MyPageInfoState.Error(it)
                 }
-
-            //Empty List
-//            myPageInfoRepository.getMyPageEmtpyInfo()
-//                .onSuccess {
-//                    _myPageUserInfo.value = MyPageInfoState.SuccessPhotos(it.toMyPageInfo())
-//                }.onFailure {
-//                    _myPageUserInfo.value = MyPageInfoState.Error(it)
-//                }
         }
     }
 }
