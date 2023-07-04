@@ -11,7 +11,7 @@
         android:layout_width="98dp"
         android:layout_height="34dp"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="20dp"
         android:contentDescription="@string/store_logo_contentDescription"
         android:src="@drawable/ic_store_logo"
         app:layout_constraintStart_toStartOf="parent"
