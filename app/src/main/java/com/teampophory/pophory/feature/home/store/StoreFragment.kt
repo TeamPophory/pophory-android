@@ -11,7 +11,6 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import com.teampophory.pophory.R
 import com.teampophory.pophory.common.view.ItemDiffCallback
 import com.teampophory.pophory.common.view.viewBinding
@@ -53,18 +52,14 @@ class StoreFragment : Fragment() {
 
         binding.viewpagerStore.adapter = adapter
 
-        viewModel.albumList.observe(viewLifecycleOwner) { list ->
-            adapter?.submitList(list)
-        }
-
         //1차 스프린트용 입력 방지
         binding.viewpagerStore.isUserInputEnabled = false
     }
 
     private fun observeAlbumList() {
-        viewModel.albumList.observe(viewLifecycleOwner, Observer { list ->
+        viewModel.albumList.observe(viewLifecycleOwner) { list ->
             adapter?.submitList(list)
-        })
+        }
     }
 
     private fun setSpannableString() {

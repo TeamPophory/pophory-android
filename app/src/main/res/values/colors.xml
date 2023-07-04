@@ -11,11 +11,13 @@
     <!-- Pophory -->
     <color name="pophory_purple">#725BFF</color>
     <color name="pophory_red">#FC4646</color>
+    <color name="pophory_black">#FF212121</color>
     <color name="onSurface100">#212121</color>
     <color name="onSurface75">#5F6168</color>
     <color name="onSurface50">#B8B9BE</color>
     <color name="onSurface25">#E0E1E5</color>
     <color name="onSurface0">#FFFFFF</color>
     <color name="gray_400">#C6C7C7</color>
+    <color name="gray_300">#E0E1E5</color>
     <color name="gray_200">#FFF5F5F5</color>
 </resources>
