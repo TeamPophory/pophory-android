@@ -44,5 +44,9 @@ gradlePlugin {
             id = "com.teampophory.pophory.test"
             implementationClass = "com.teampophory.pophory.plugin.AndroidTestPlugin"
         }
+        create("compose") {
+            id = "com.teampophory.pophory.compose"
+            implementationClass = "com.teampophory.pophory.plugin.ComposePlugin"
+        }
     }
 }

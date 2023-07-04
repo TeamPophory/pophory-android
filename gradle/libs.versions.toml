@@ -27,6 +27,7 @@ dagger-hilt = "2.46.1"
 dagger-hilt-navigation-compose = "1.0.0"
 flexbox = "3.0.0"
 fragment-ktx = "1.6.0"
+activity-compose = "1.7.2"
 
 # material + google
 material = "1.9.0"
@@ -94,6 +95,19 @@ constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayo
 flexbox = {group = "com.google.android.flexbox", name = "flexbox", version.ref = "flexbox"}
 fragment-ktx = { module = "androidx.fragment:fragment-ktx", version.ref = "fragment-ktx" }
 
+# compose
+compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "compose-bom" }
+ui = { group = "androidx.compose.ui", name = "ui" }
+ui-graphics = { group = "androidx.compose.ui", name = "ui-graphics" }
+ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
+ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
+ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
+ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
+ui-foundation = { group = "androidx.compose.foundation", name = "foundation" }
+material3-compose = { group = "androidx.compose.material3", name = "material3" }
+coil-compose = { group = "io.coil-kt", name = "coil-compose", version.ref = "coil" }
+activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activity" }
+
 # dagger-hilt
 hilt = { module = "com.google.dagger:hilt-android", version.ref = "dagger-hilt" }
 hilt-kapt = { module = "com.google.dagger:hilt-compiler", version.ref = "dagger-hilt" }
@@ -143,7 +157,6 @@ retrofit-kotlin-serialization-converter = { group = "com.jakewharton.retrofit", 
 timber = { module = "com.jakewharton.timber:timber", version.ref = "timber" }
 
 coil-core = { module = "io.coil-kt:coil", version.ref = "coil" }
-coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
 
 dot-indicator = { module = "com.tbuonomo:dotsindicator", version.ref = "dot-indicator" }
 
@@ -169,3 +182,4 @@ app-distribution = { id = "com.google.firebase.appdistribution", version.ref = "
 firebase = ["firebase-analytics", "firebase-crashlytics"]
 flipper = ["flipper", "soloader", "flipper-network"]
 lifecycle = ["lifecycle", "lifecycle-viewmodel", "lifecycle-livedata"]
+compose = ["ui", "ui-graphics", "ui-tooling", "ui-tooling-preview", "material3-compose", "coil-compose", "ui-foundation", "activity-compose"]

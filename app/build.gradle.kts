@@ -1,6 +1,7 @@
 @Suppress("DSL_SCOPE_VIOLATION") // TODO: Remove once KTIJ-19369 is fixed
 plugins {
     id("com.teampophory.pophory.application")
+    id("com.teampophory.pophory.compose")
     alias(libs.plugins.sentry)
     alias(libs.plugins.google.services)
     alias(libs.plugins.app.distribution)
