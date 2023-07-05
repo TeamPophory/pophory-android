@@ -80,7 +80,7 @@
         </activity>
         <activity
             android:name=".feature.setting.SettingActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".feature.setting.webview.WebViewActivity"
             android:exported="false" />
