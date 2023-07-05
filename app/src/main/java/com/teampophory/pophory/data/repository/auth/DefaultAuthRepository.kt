@@ -23,6 +23,7 @@ class DefaultAuthRepository @Inject constructor(
 
     override suspend fun withdraw() {
         service.withdraw()
+        dataStore.clear()
     }
 
     override suspend fun logout() {
