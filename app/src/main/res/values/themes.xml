@@ -12,6 +12,9 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor">@color/white</item>
         <!-- Customize your theme here. -->
+        <item name="android:background">@color/white</item>
+        <item name="colorOnBackground">@color/pophory_black</item>
+        <item name="colorError">@color/pophory_red</item>
         <!-- Bottom nav bar active indicator color set -->
         <item name="colorSecondaryContainer">@color/pophory_black</item>
         <item name="colorOnSecondaryContainer">@color/white</item>
@@ -24,6 +27,7 @@
         <item name="colorOnSurface30">@color/gray_30</item>
         <item name="colorOnSurface20">@color/gray_20</item>
         <item name="colorOnSurface10">@color/gray_10</item>
+        <item name="colorOnSurface">@color/white</item>
         <!-- Headline -->
         <item name="textAppearanceHeadlineBold">@style/TextAppearance.Pophory.HeadLineBold</item>
         <item name="textAppearanceHeadlineLarge">@style/TextAppearance.Pophory.HeadLineLarge</item>

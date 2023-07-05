@@ -1,18 +1,16 @@
-package com.teampophory.pophory.feature.on_boarding
+package com.teampophory.pophory.feature.onboarding
 
 import android.content.Context
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.core.splashscreen.SplashScreen
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.viewpager2.widget.ViewPager2
 import com.teampophory.pophory.R
 import com.teampophory.pophory.common.view.viewBinding
 import com.teampophory.pophory.databinding.ActivityOnBoardingBinding
-import com.teampophory.pophory.feature.on_boarding.adapter.OnBoardingViewPagerAdapter
+import com.teampophory.pophory.feature.onboarding.adapter.OnBoardingViewPagerAdapter
 import com.teampophory.pophory.feature.signup.SignUpActivity
 
 class OnBoardingActivity : AppCompatActivity() {

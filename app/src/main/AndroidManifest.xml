@@ -69,7 +69,7 @@
             android:name=".feature.signup.SignUpActivity"
             android:exported="false" />
         <activity
-            android:name=".feature.on_boarding.OnBoardingActivity"
+            android:name=".feature.onboarding.OnBoardingActivity"
             android:exported="true"
             android:theme="@style/Theme.App.Pophory.Starting">
             <intent-filter>

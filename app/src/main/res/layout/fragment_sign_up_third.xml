@@ -12,7 +12,8 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="32dp"
         android:text="마음에 쏙드는\n포포리 앨범 커버를 선택해줘!"
-        android:textSize="23sp"
+        android:textAppearance="?textAppearanceHeadlineMedium"
+        android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -24,14 +25,15 @@
         android:layout_marginHorizontal="70dp"
         android:layout_marginTop="32dp"
         android:src="@drawable/example_album_cover"
-        app:layout_constraintDimensionRatio="0.73"
+        app:layout_constraintDimensionRatio="220:264"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_title" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="60dp"
         android:layout_marginTop="30dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -42,9 +44,10 @@
             android:id="@+id/iv_album_cover_1"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:src="@color/gray_400"
-            android:layout_marginStart="18dp"
+            android:src="?colorOnSurface40"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/iv_album_cover_2"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -53,68 +56,71 @@
             android:id="@+id/iv_album_select_1"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:src = "@drawable/round_album_select"
-            android:layout_marginStart="18dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            android:src="@drawable/round_album_select"
+            app:layout_constraintBottom_toBottomOf="@id/iv_album_cover_1"
+            app:layout_constraintEnd_toEndOf="@id/iv_album_cover_1"
+            app:layout_constraintStart_toStartOf="@id/iv_album_cover_1"
+            app:layout_constraintTop_toTopOf="@id/iv_album_cover_1" />
 
 
         <ImageView
             android:id="@+id/iv_album_cover_2"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:src="@color/gray_400"
-            android:layout_marginStart="18dp"
+            android:src="?colorOnSurface40"
+            app:layout_constraintEnd_toStartOf="@id/iv_album_cover_3"
             app:layout_constraintStart_toEndOf="@id/iv_album_cover_1"
-            app:layout_constraintTop_toTopOf="@id/iv_album_cover_1"/>
+            app:layout_constraintTop_toTopOf="@id/iv_album_cover_1" />
 
         <ImageView
             android:id="@+id/iv_album_select_2"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:src = "@drawable/round_album_select"
-            android:layout_marginStart="18dp"
-            app:layout_constraintStart_toEndOf="@id/iv_album_cover_1"
-            app:layout_constraintTop_toTopOf="@id/iv_album_cover_1"/>
+            android:src="@drawable/round_album_select"
+            app:layout_constraintBottom_toBottomOf="@id/iv_album_cover_2"
+            app:layout_constraintEnd_toEndOf="@id/iv_album_cover_2"
+            app:layout_constraintStart_toStartOf="@id/iv_album_cover_2"
+            app:layout_constraintTop_toTopOf="@id/iv_album_cover_2" />
 
 
         <ImageView
             android:id="@+id/iv_album_cover_3"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:src="@color/gray_400"
-            android:layout_marginStart="18dp"
+            android:src="?colorOnSurface40"
+            app:layout_constraintEnd_toStartOf="@id/iv_album_cover_4"
             app:layout_constraintStart_toEndOf="@id/iv_album_cover_2"
-            app:layout_constraintTop_toTopOf="@id/iv_album_cover_1"/>
+            app:layout_constraintTop_toTopOf="@id/iv_album_cover_1" />
 
         <ImageView
             android:id="@+id/iv_album_select_3"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:src = "@drawable/round_album_select"
-            android:layout_marginStart="18dp"
-            app:layout_constraintStart_toEndOf="@id/iv_album_cover_2"
-            app:layout_constraintTop_toTopOf="@id/iv_album_cover_1"/>
+            android:src="@drawable/round_album_select"
+            app:layout_constraintBottom_toBottomOf="@id/iv_album_cover_3"
+            app:layout_constraintEnd_toEndOf="@id/iv_album_cover_3"
+            app:layout_constraintStart_toStartOf="@id/iv_album_cover_3"
+            app:layout_constraintTop_toTopOf="@id/iv_album_cover_3" />
 
 
         <ImageView
             android:id="@+id/iv_album_cover_4"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:src="@color/gray_400"
-            android:layout_marginStart="18dp"
+            android:src="?colorOnSurface40"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/iv_album_cover_3"
-            app:layout_constraintTop_toTopOf="@id/iv_album_cover_1"/>
+            app:layout_constraintTop_toTopOf="@id/iv_album_cover_1" />
 
         <ImageView
             android:id="@+id/iv_album_select_4"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:src = "@drawable/round_album_select"
-            android:layout_marginStart="18dp"
-            app:layout_constraintStart_toEndOf="@id/iv_album_cover_3"
-            app:layout_constraintTop_toTopOf="@id/iv_album_cover_1"/>
+            android:src="@drawable/round_album_select"
+            app:layout_constraintBottom_toBottomOf="@id/iv_album_cover_4"
+            app:layout_constraintEnd_toEndOf="@id/iv_album_cover_4"
+            app:layout_constraintStart_toStartOf="@id/iv_album_cover_4"
+            app:layout_constraintTop_toTopOf="@id/iv_album_cover_4" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -1,4 +1,4 @@
-package com.teampophory.pophory.feature.on_boarding
+package com.teampophory.pophory.feature.onboarding
 
 import android.graphics.Color
 import android.graphics.drawable.Drawable

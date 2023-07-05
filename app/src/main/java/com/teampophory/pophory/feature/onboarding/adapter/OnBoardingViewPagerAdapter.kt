@@ -1,15 +1,12 @@
-package com.teampophory.pophory.feature.on_boarding.adapter
+package com.teampophory.pophory.feature.onboarding.adapter
 
-import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.graphics.drawable.toDrawable
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.teampophory.pophory.common.view.ItemDiffCallback
 import com.teampophory.pophory.databinding.ItemOnboardingViewpagerBinding
-import com.teampophory.pophory.feature.on_boarding.OnBoardingData
+import com.teampophory.pophory.feature.onboarding.OnBoardingData
 
 class OnBoardingViewPagerAdapter :
     ListAdapter<OnBoardingData, OnBoardingViewPagerAdapter.ViewHolder>(
