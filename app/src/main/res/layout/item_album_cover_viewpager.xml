@@ -1,63 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="match_parent">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/album1"
-        app:cardCornerRadius="48dp"
         android:layout_width="48dp"
         android:layout_height="48dp"
+        app:cardCornerRadius="24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/album2"
+        app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/gray_400"/>
+            android:background="?colorOnSurface40" />
 
     </androidx.cardview.widget.CardView>
+
     <androidx.cardview.widget.CardView
         android:id="@+id/album2"
-        app:cardCornerRadius="48dp"
         android:layout_width="48dp"
         android:layout_height="48dp"
+        app:cardCornerRadius="24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/album3"
         app:layout_constraintStart_toEndOf="@id/album1"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintTop_toTopOf="parent">
+
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/gray_400"/>
+            android:background="?colorOnSurface40" />
     </androidx.cardview.widget.CardView>
+
     <androidx.cardview.widget.CardView
         android:id="@+id/album3"
-        app:cardCornerRadius="48dp"
         android:layout_width="48dp"
         android:layout_height="48dp"
+        app:cardCornerRadius="24dp"
+        app:layout_constraintBottom_toBottomOf="@id/album1"
+        app:layout_constraintEnd_toStartOf="@id/album4"
         app:layout_constraintStart_toEndOf="@id/album2"
-        app:layout_constraintTop_toTopOf="@id/album1"
-        app:layout_constraintBottom_toBottomOf="@id/album1">
+        app:layout_constraintTop_toTopOf="@id/album1">
+
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/gray_400"/>
+            android:background="?colorOnSurface40" />
     </androidx.cardview.widget.CardView>
+
     <androidx.cardview.widget.CardView
         android:id="@+id/album4"
-        app:cardCornerRadius="48dp"
         android:layout_width="48dp"
         android:layout_height="48dp"
+        app:cardCornerRadius="24dp"
+        app:layout_constraintBottom_toBottomOf="@id/album1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/album3"
-        app:layout_constraintTop_toTopOf="@id/album1"
-        app:layout_constraintBottom_toBottomOf="@id/album1">
+        app:layout_constraintTop_toTopOf="@id/album1">
+
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/gray_400"/>
+            android:background="?colorOnSurface40" />
     </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

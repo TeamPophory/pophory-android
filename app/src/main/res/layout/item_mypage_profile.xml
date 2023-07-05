@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -18,31 +19,36 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="13dp"
-        android:textColor="@color/pophory_black"
-        android:textFontWeight="700"
+        android:textAppearance="?textAppearanceHeadlineSmall"
+        android:textColor="?colorOnSurface100"
+        app:layout_constraintBottom_toTopOf="@id/tv_mypage_picture_count"
         app:layout_constraintStart_toEndOf="@id/iv_mypage_profile"
-        app:layout_constraintTop_toTopOf="@+id/iv_mypage_profile" />
+        app:layout_constraintTop_toTopOf="@+id/iv_mypage_profile"
+        app:layout_constraintVertical_chainStyle="packed"
+        tools:text="누누누" />
 
     <TextView
         android:id="@+id/tv_mypage_picture_count"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:textColor="@color/pophory_black"
-        android:textFontWeight="500"
-        android:textSize="14sp"
+        android:textAppearance="@style/TextAppearance.Pophory.Text1"
+        android:textColor="?colorOnSurface100"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_mypage_profile"
         app:layout_constraintStart_toStartOf="@id/tv_mypage_name"
-        app:layout_constraintTop_toBottomOf="@+id/tv_mypage_name" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_mypage_name"
+
+        tools:text="그동안 찍은 사진" />
 
     <TextView
         android:id="@+id/tv_mypage_admob"
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:layout_marginTop="20dp"
-        android:background="@color/gray_300"
+        android:background="?colorOnSurface40"
         android:gravity="center"
         android:text="광고"
+        android:textAppearance="?textAppearancePopupText1"
         app:layout_constraintTop_toBottomOf="@id/iv_mypage_profile" />
 
     <TextView
@@ -52,11 +58,10 @@
         android:layout_marginTop="26dp"
         android:layout_marginBottom="20dp"
         android:text="@string/mypage_feed_title"
-        android:textColor="@color/pophory_black"
-        android:textFontWeight="700"
-        android:textSize="19sp"
+        android:textAppearance="?textAppearanceHeadlineMedium"
+        android:textColor="?colorOnSurface100"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@id/tv_mypage_admob"
         app:layout_constraintTop_toBottomOf="@id/tv_mypage_admob" />
-    
+
 </androidx.constraintlayout.widget.ConstraintLayout>

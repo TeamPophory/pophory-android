@@ -20,7 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_alignParentTop="true"
-        android:background="@color/gray_200"
+        android:background="?colorOnSurface20"
         app:layout_constraintBottom_toTopOf="@id/home_bottom" />
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -47,8 +47,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/shape_bottom_nav"
+                app:itemActiveIndicatorStyle="?colorOnSurface"
                 app:itemIconTint="@color/selc_bottom_nav_item"
-                app:itemActiveIndicatorStyle="@color/white"
                 app:itemTextColor="@color/selc_bottom_nav_item"
                 app:menu="@menu/menu_bottom_nav" />
 
@@ -62,7 +62,7 @@
             android:focusable="true"
             android:icon="@color/pophory_purple"
             android:src="@drawable/ic_add"
-            android:tint="@color/white"
+            android:tint="?colorOnSurface"
             app:layout_anchor="@id/home_bottom_app_bar" />
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".feature.on_boarding.OnBoardingActivity">
+    tools:context=".feature.onboarding.OnBoardingActivity">
 
     <ImageView
         android:id="@+id/dot_indicator_first"

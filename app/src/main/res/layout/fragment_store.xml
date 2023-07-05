@@ -23,9 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:text="@string/store_welcome"
-        android:textColor="@color/onSurface100"
-        android:textFontWeight="500"
-        android:textSize="23sp"
+        android:textAppearance="?textAppearanceHeadlineMedium"
         app:layout_constraintStart_toStartOf="@id/iv_store_logo"
         app:layout_constraintTop_toBottomOf="@id/iv_store_logo" />
 
@@ -37,8 +35,7 @@
         app:layout_constraintBottom_toTopOf="@id/tv_store_album_photoCount"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_store_welcome"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toBottomOf="@id/tv_store_welcome" />
 
     <TextView
         android:id="@+id/tv_store_album_photoCount"
@@ -53,13 +50,13 @@
         android:paddingTop="8dp"
         android:paddingEnd="18dp"
         android:paddingBottom="8dp"
-        android:text="3/30"
-        android:textColor="@color/white"
+        android:textAppearance="?textAppearancePopupButton2"
+        android:textColor="?colorOnPrimary"
         android:textSize="16sp"
-        app:layout_constraintTop_toBottomOf="@id/viewpager_store"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/viewpager_store"
         tools:text="3/30" />
 
 

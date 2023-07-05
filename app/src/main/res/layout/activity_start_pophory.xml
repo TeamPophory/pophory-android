@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/pophory_purple"
+    android:background="?colorPrimary"
     tools:context=".feature.signup.StartPophoryActivity">
 
 
@@ -14,36 +14,41 @@
         android:layout_height="0dp"
         android:layout_marginHorizontal="86dp"
         android:layout_marginTop="195dp"
-        android:background="@color/gray_400"
+        android:background="?colorOnSurface40"
         app:layout_constraintDimensionRatio="1"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tv_explanation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/iv_illustration"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:gravity="center"
         android:layout_marginTop="20dp"
-        android:text="포포리 앨범을 만들었어!\n지금 사진을 추가해볼까?"/>
+        android:background="?colorPrimary"
+        android:gravity="center"
+        android:text="포릿만을 위한\n앨범을 만들었어!"
+        android:textAppearance="?textAppearanceHeadlineLarge"
+        android:textColor="?colorOnSurface"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/iv_illustration" />
 
     <TextView
         android:id="@+id/btn_start_pophory"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginBottom="22dp"
         android:background="@drawable/bg_round_30dp_white"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:text="포포리 시작하기"
         android:gravity="center"
         android:paddingTop="21dp"
         android:paddingBottom="20dp"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginBottom="22dp"/>
+        android:text="포포리 시작하기"
+        android:textAppearance="?textAppearanceHeadlineSmall"
+        android:textColor="?colorPrimary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
