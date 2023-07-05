@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.ContextCompat
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.viewpager2.widget.ViewPager2
@@ -71,17 +72,12 @@ class OnBoardingActivity : AppCompatActivity() {
         //todo 이미지로 수정 예정
         adapter.submitList(
             mutableListOf(
-                OnBoardingData(getColorAsString(applicationContext, R.color.pophory_red)),
-                OnBoardingData(getColorAsString(applicationContext, R.color.pophory_purple)),
-                OnBoardingData(getColorAsString(applicationContext, R.color.pophory_red))
+                OnBoardingData(R.drawable.img_onboarding01),
+                OnBoardingData(R.drawable.img_onboarding02),
+                OnBoardingData(R.drawable.img_onboarding03)
             )
         )
         viewPager.adapter = adapter
         viewPager.registerOnPageChangeCallback(pageChangeCallback)
-    }
-
-    private fun getColorAsString(context: Context, colorResourceId: Int): String {
-        val colorValue: Int = ContextCompat.getColor(context, colorResourceId)
-        return String.format("#%06X", 0xFFFFFF and colorValue)
     }
 }
