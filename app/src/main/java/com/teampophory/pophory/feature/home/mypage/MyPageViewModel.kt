@@ -4,14 +4,16 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.teampophory.pophory.data.repository.MyPageInfoRepository
-import com.teampophory.pophory.data.repository.fake.FakeMyPageInfoRepository
+import com.teampophory.pophory.data.repository.MyPageRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 
-class MyPageViewModel : ViewModel() {
-
-    private val myPageInfoRepository: MyPageInfoRepository = FakeMyPageInfoRepository()
+@HiltViewModel
+class MyPageViewModel @Inject constructor(
+    private val myPageRepository: MyPageRepository
+) : ViewModel() {
 
     private val _myPageUserInfo = MutableLiveData<MyPageInfoState>(MyPageInfoState.Uninitialized)
     val myPageInfo: LiveData<MyPageInfoState> get() = _myPageUserInfo
@@ -19,8 +21,7 @@ class MyPageViewModel : ViewModel() {
     fun getMyPageInfo() {
         viewModelScope.launch {
             _myPageUserInfo.value = MyPageInfoState.Loading
-
-            myPageInfoRepository.getMyPageInfo()
+            myPageRepository.getMyPageInfo()
                 .onSuccess {
                     _myPageUserInfo.value =
                         MyPageInfoState.SuccessMyPageInfo(it.toItems())

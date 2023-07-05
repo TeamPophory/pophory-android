@@ -16,7 +16,9 @@ import com.teampophory.pophory.databinding.FragmentMypageBinding
 import com.teampophory.pophory.feature.home.mypage.adapter.MyPageAdapter
 import com.teampophory.pophory.feature.home.mypage.adapter.MyPageAdapter.Companion.VIEW_TYPE_PHOTO
 import com.teampophory.pophory.feature.home.mypage.adapter.MyPageAdapter.Companion.VIEW_TYPE_PROFILE
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MyPageFragment : Fragment() {
     private val binding by viewBinding(FragmentMypageBinding::bind)
 
@@ -70,6 +72,7 @@ class MyPageFragment : Fragment() {
                 }
 
                 is MyPageInfoState.Error -> {}
+                else -> {}
             }
         }
     }
