@@ -1,9 +1,8 @@
 package com.teampophory.pophory.feature.signup
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.teampophory.pophory.R
+import androidx.appcompat.app.AppCompatActivity
 import com.teampophory.pophory.common.view.viewBinding
 import com.teampophory.pophory.databinding.ActivityStartPophoryBinding
 import com.teampophory.pophory.feature.home.HomeActivity

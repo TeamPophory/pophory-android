@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 class SignUpViewModel : ViewModel() {
 
     private val _sampleLiveData = MutableLiveData<String>()
-    val sampleLiveData : LiveData<String>get() = _sampleLiveData
+    val sampleLiveData: LiveData<String> get() = _sampleLiveData
 
     fun getToastMessage() {
         _sampleLiveData.value = "테스트 입니다."

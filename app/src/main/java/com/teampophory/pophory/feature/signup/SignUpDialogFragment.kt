@@ -7,28 +7,26 @@ import android.graphics.Point
 import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowInsets
 import android.view.WindowManager
 import androidx.fragment.app.DialogFragment
-import com.teampophory.pophory.R
-import com.teampophory.pophory.common.view.dp
+import com.teampophory.pophory.common.view.viewBinding
 import com.teampophory.pophory.databinding.FragmentSignUpDialogBinding
 
 class SignUpDialogFragment : DialogFragment() {
+    private val binding by viewBinding(FragmentSignUpDialogBinding::bind)
 
-    private var _binding: FragmentSignUpDialogBinding? = null
-    private val binding get() = _binding!!
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        _binding = FragmentSignUpDialogBinding.inflate(inflater, container, false)
-        val view = binding.root
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
         // 레이아웃 배경을 투명하게 해줌
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        return view
+        return FragmentSignUpDialogBinding.inflate(inflater, container, false).root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -45,6 +43,7 @@ class SignUpDialogFragment : DialogFragment() {
             dialogWidthPercent(it, dialog)
         }
     }
+
     private fun dialogWidthPercent(context: Context, dialog: Dialog?, percent: Double = 0.8) {
         val deviceSize = getDeviceSize(context)
         dialog?.window?.run {
@@ -78,10 +77,5 @@ class SignUpDialogFragment : DialogFragment() {
 
             return intArrayOf(size.x, size.y)
         }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 }
