@@ -39,19 +39,22 @@ fun WithdrawDialog(
             Column(
                 modifier = Modifier.padding(
                     start = 16.dp,
-                    top = 16.dp,
+                    top = 36.dp,
                     end = 16.dp,
                     bottom = 24.dp
                 ),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
-                    text = "로그아웃 할거야?",
-                    modifier = Modifier.padding(top = 48.dp)
+                    text = "로그아웃 하실건가요?",
+                    style = PophoryTheme.typography.popupTitle,
+                    color = PophoryTheme.colors.onSurface100,
                 )
-                Spacer(modifier = Modifier.height(20.dp))
+                Spacer(modifier = Modifier.height(12.dp))
                 Text(
-                    text = "다음에 꼭 다시 보자!",
+                    text = "다음에 꼭 다시 보길 바라요",
+                    style = PophoryTheme.typography.popupText,
+                    color = PophoryTheme.colors.onSurface50,
                     textAlign = TextAlign.Center
                 )
                 Spacer(modifier = Modifier.height(24.dp))
@@ -62,11 +65,12 @@ fun WithdrawDialog(
                         .height(48.dp),
                     shape = RoundedCornerShape(30.dp),
                     colors = ButtonDefaults.buttonColors(
-                        containerColor = PophoryTheme.colors.onSurface40
+                        containerColor = PophoryTheme.colors.onSurface100
                     )
                 ) {
                     Text(
-                        text = "로그아웃 할래",
+                        text = "돌아가기",
+                        style = PophoryTheme.typography.popupButton1,
                         color = PophoryTheme.colors.white,
                     )
                 }
@@ -78,12 +82,13 @@ fun WithdrawDialog(
                         .height(48.dp),
                     shape = RoundedCornerShape(30.dp),
                     colors = ButtonDefaults.buttonColors(
-                        containerColor = PophoryTheme.colors.onSurface20
+                        containerColor = PophoryTheme.colors.onSurface40
                     )
                 ) {
                     Text(
-                        text = "아차, 포포리로 돌아갈래!",
-                        color = PophoryTheme.colors.white
+                        text = "로그아웃하기",
+                        style = PophoryTheme.typography.popupButton1,
+                        color = PophoryTheme.colors.white,
                     )
                 }
             }

@@ -27,7 +27,6 @@ fun SettingItem(
     @DrawableRes right: Int = R.drawable.ic_chevron_right,
     onClick: () -> Unit = {},
 ) {
-    val colors = PophoryTheme.colors
     Column {
         Row(
             modifier = Modifier
@@ -40,7 +39,8 @@ fun SettingItem(
         ) {
             Text(
                 text = title,
-                color = colors.onSurface40
+                color = PophoryTheme.colors.onSurface100,
+                style = PophoryTheme.typography.title1,
             )
             Image(
                 painter = painterResource(id = right),
@@ -52,7 +52,7 @@ fun SettingItem(
                 .fillMaxWidth()
                 .padding(horizontal = 20.dp),
             thickness = Dp.Hairline,
-            color = colors.onSurface20,
+            color = PophoryTheme.colors.onSurface30,
         )
     }
 }
