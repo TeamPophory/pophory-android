@@ -1,9 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Color Attributes -->
     <attr name="colorOnSurface100" format="reference" />
     <attr name="colorOnSurface50" format="reference" />
     <attr name="colorOnSurface40" format="reference" />
     <attr name="colorOnSurface30" format="reference" />
     <attr name="colorOnSurface20" format="reference" />
     <attr name="colorOnSurface10" format="reference" />
+
+    <!-- Typography Attributes -->
+    <attr name="textAppearanceHeadlineBold" format="reference" />
+    <attr name="textAppearanceCaption1" format="reference" />
+    <attr name="textAppearanceCaption2" format="reference" />
+    <attr name="textAppearanceText1" format="reference" />
+    <attr name="textAppearancePopupText1" format="reference" />
+    <attr name="textAppearanceModalText1" format="reference" />
+    <attr name="textAppearancePopupButton1" format="reference" />
+    <attr name="textAppearancePopupButton2" format="reference" />
 </resources>

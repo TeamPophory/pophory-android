@@ -9,9 +9,15 @@
         <item name="android:includeFontPadding">false</item>
     </style>
 
-    <style name="TextAppearance.Pophory.HeadLineLarge">
+    <style name="TextAppearance.Pophory.HeadLineBold">
         <item name="android:textFontWeight">700</item>
         <item name="android:textSize">24sp</item>
+        <item name="lineHeight">32sp</item>
+    </style>
+
+    <style name="TextAppearance.Pophory.HeadLineLarge">
+        <item name="android:textFontWeight">500</item>
+        <item name="android:textSize">23sp</item>
         <item name="lineHeight">32sp</item>
     </style>
 
@@ -28,37 +34,49 @@
 
     <style name="TextAppearance.Pophory.TitleLarge">
         <item name="android:textFontWeight">700</item>
-        <item name="android:textSize">19sp</item>
+        <item name="android:textSize">20sp</item>
+        <item name="lineHeight">28sp</item>
     </style>
 
     <style name="TextAppearance.Pophory.TitleMedium">
+        <item name="android:textFontWeight">700</item>
+        <item name="android:textSize">19sp</item>
+    </style>
+
+    <style name="TextAppearance.Pophory.TitleSmall">
         <item name="android:textFontWeight">500</item>
         <item name="android:textSize">16sp</item>
         <item name="lineHeight">22sp</item>
     </style>
 
-    <style name="TextAppearance.Pophory.BodyLarge">
+    <style name="TextAppearance.Pophory.Text1">
         <item name="android:textFontWeight">500</item>
         <item name="android:textSize">15sp</item>
         <item name="lineHeight">19sp</item>
     </style>
 
-    <style name="TextAppearance.Pophory.BodyMedium">
+    <style name="TextAppearance.Pophory.PopupText1">
+        <item name="android:textFontWeight">400</item>
+        <item name="android:textSize">16sp</item>
+        <item name="lineHeight">22sp</item>
+    </style>
+
+    <style name="TextAppearance.Pophory.ModalText1">
+        <item name="android:textFontWeight">500</item>
+        <item name="android:textSize">18sp</item>
+        <item name="lineHeight">25sp</item>
+    </style>
+
+    <style name="TextAppearance.Pophory.Caption1">
         <item name="android:textFontWeight">500</item>
         <item name="android:textSize">13sp</item>
         <item name="lineHeight">18sp</item>
     </style>
 
-    <style name="TextAppearance.Pophory.BodySmall">
+    <style name="TextAppearance.Pophory.Caption2">
         <item name="android:textFontWeight">500</item>
         <item name="android:textSize">12sp</item>
         <item name="lineHeight">17sp</item>
-    </style>
-
-    <style name="TextAppearance.Pophory.LabelLarge">
-        <item name="android:textFontWeight">500</item>
-        <item name="android:textSize">16sp</item>
-        <item name="lineHeight">22sp</item>
     </style>
 
     <style name="TextAppearance.Pophory.LabelMedium">
@@ -66,16 +84,15 @@
         <item name="android:textSize">12sp</item>
     </style>
 
-    <style name="TextAppearance.Pophory.ModalTitle">
-        <item name="android:textFontWeight">700</item>
-        <item name="android:textSize">20sp</item>
-        <item name="lineHeight">28sp</item>
+    <style name="TextAppearance.Pophory.PopupButton1">
+        <item name="android:textFontWeight">500</item>
+        <item name="android:textSize">16sp</item>
+        <item name="lineHeight">22sp</item>
     </style>
 
-    <style name="TextAppearance.Pophory.ModalText">
-        <item name="android:textFontWeight">700</item>
-        <item name="android:textSize">18sp</item>
-        <item name="lineHeight">25sp</item>
+    <style name="TextAppearance.Pophory.PopupButton2">
+        <item name="android:textFontWeight">500</item>
+        <item name="android:textSize">14sp</item>
     </style>
 
 </resources>
