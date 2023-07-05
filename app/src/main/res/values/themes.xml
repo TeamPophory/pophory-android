@@ -59,11 +59,6 @@
         <item name="shapeAppearanceOverlay">@style/ShapeAppearanceOverlay.Pophory.FAB</item>
     </style>
 
-    <style name="ShapeAppearanceOverlay.Pophory.FAB" parent="">
-        <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">50%</item>
-    </style>
-
     <style name="Theme.App.Pophory.Starting" parent="Theme.SplashScreen">
         <item name="windowSplashScreenBackground">@color/white</item>
         <item name="windowSplashScreenAnimatedIcon">@drawable/ic_pophory_main_logo</item>
