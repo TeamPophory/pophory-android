@@ -71,7 +71,7 @@
         <activity
             android:name=".feature.on_boarding.OnBoardingActivity"
             android:exported="true"
-            android:theme="@style/Theme.App.Popopopo.Starting">
+            android:theme="@style/Theme.App.Pophory.Starting">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -81,9 +81,6 @@
         <activity
             android:name=".feature.setting.SettingActivity"
             android:exported="false" />
-        <activity
-            android:name=".OnBoardingActivity"
-            android:exported="true"/>
 
         <activity
             android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="colorOnSurface100" format="reference" />
+    <attr name="colorOnSurface50" format="reference" />
+    <attr name="colorOnSurface40" format="reference" />
+    <attr name="colorOnSurface30" format="reference" />
+    <attr name="colorOnSurface20" format="reference" />
+    <attr name="colorOnSurface10" format="reference" />
+</resources>
