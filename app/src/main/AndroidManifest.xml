@@ -69,7 +69,7 @@
             android:name=".feature.signup.SignUpActivity"
             android:exported="false" />
         <activity
-            android:name=".feature.on_boarding.OnBoardingActivity"
+            android:name=".feature.onboarding.OnBoardingActivity"
             android:exported="true"
             android:theme="@style/Theme.App.Popopopo.Starting">
             <intent-filter>
@@ -80,10 +80,10 @@
         </activity>
         <activity
             android:name=".feature.setting.SettingActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
-            android:name=".OnBoardingActivity"
-            android:exported="true"/>
+            android:name=".feature.setting.webview.WebViewActivity"
+            android:exported="false" />
 
         <activity
             android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"

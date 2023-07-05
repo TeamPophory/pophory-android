@@ -61,6 +61,7 @@ dependencies {
     // Google
     implementation(libs.google.android.gms)
     implementation(libs.flexbox)
+    implementation(libs.accompanist.webview)
 
     // Third Party
     implementation(libs.dot.indicator)

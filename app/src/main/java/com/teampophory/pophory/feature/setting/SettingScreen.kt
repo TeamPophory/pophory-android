@@ -35,12 +35,6 @@ fun SettingScreen(
     onLogout: () -> Unit = {},
     onWithdrawal: () -> Unit = {},
 ) {
-    var isDialogShow by remember { mutableStateOf(false) }
-
-    if (isDialogShow) {
-
-    }
-
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         topBar = {
