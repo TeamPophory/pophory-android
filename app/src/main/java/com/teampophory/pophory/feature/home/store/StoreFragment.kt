@@ -9,19 +9,20 @@ import androidx.core.text.buildSpannedString
 import androidx.core.text.color
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.viewpager2.widget.ViewPager2
 import com.teampophory.pophory.R
 import com.teampophory.pophory.common.fragment.colorOf
 import com.teampophory.pophory.common.primitive.textAppearance
-import com.teampophory.pophory.common.view.ItemDiffCallback
 import com.teampophory.pophory.common.view.viewBinding
 import com.teampophory.pophory.databinding.FragmentStoreBinding
 import com.teampophory.pophory.feature.album.AlbumListActivity
-import com.teampophory.pophory.feature.home.mypage.MyPageInfoState
+import com.teampophory.pophory.feature.home.store.apdater.OnPageChangedListener
 import com.teampophory.pophory.feature.home.store.apdater.StoreAdapter
+import com.teampophory.pophory.feature.home.store.model.AlbumItem
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class StoreFragment : Fragment() {
+class StoreFragment : Fragment(), OnPageChangedListener {
     private val binding by viewBinding(FragmentStoreBinding::bind)
 
     private var storeAdapter: StoreAdapter? = null
@@ -53,8 +54,11 @@ class StoreFragment : Fragment() {
                 is StoreState.Loading -> {}
 
                 is StoreState.SuccessAlbums -> {
-                    with(binding){
+                    with(binding) {
                         storeAdapter?.submitList(storeState.data)
+
+                        //최초 데이터 세팅
+                        binding.tvStoreAlbumPhotoCount.text = storeState.data[0].photoCount.toString() + "/30"
                     }
                 }
 
@@ -65,17 +69,26 @@ class StoreFragment : Fragment() {
     }
 
     private fun setupViewPager() {
-        storeAdapter = StoreAdapter { albumItem ->
+        storeAdapter = StoreAdapter({ albumItem ->
             val intent = Intent(context, AlbumListActivity::class.java).apply {
                 putExtra("albumId", albumItem.id)
             }
             startActivity(intent)
-        }
+        }, this)
 
         binding.viewpagerStore.adapter = storeAdapter
 
         //1차 스프린트용 입력 방지
         binding.viewpagerStore.isUserInputEnabled = false
+
+        // 페이지가 변경될 때마다 콜백 등록
+        binding.viewpagerStore.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                super.onPageSelected(position)
+                val currentItem = storeAdapter?.currentList?.get(position)
+                currentItem?.let { onPageChanged(it) }
+            }
+        })
     }
 
     private fun setSpannableString() {
@@ -93,5 +106,9 @@ class StoreFragment : Fragment() {
         }
 
         binding.tvStoreWelcome.text = text
+    }
+
+    override fun onPageChanged(albumItem: AlbumItem) {
+        binding.tvStoreAlbumPhotoCount.text = albumItem.photoCount.toString() + "/30"
     }
 }

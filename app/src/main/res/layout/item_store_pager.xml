@@ -9,6 +9,7 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_marginHorizontal="45dp"
+        android:src="@drawable/img_album_cover"
         android:contentDescription="pager item image"
         android:scaleType="centerCrop"
         app:layout_constraintBottom_toBottomOf="parent"
