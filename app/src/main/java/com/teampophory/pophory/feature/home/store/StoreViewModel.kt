@@ -11,11 +11,11 @@ class StoreViewModel : ViewModel() {
 
     val albumList: LiveData<List<Int>> get() = _albumList
 
-    val mockAlbumList = listOf(
-        R.drawable.img_album_cover
+    val albumCoverList = listOf(
+        R.drawable.ic_album_cover_friends
     )
 
     init {
-        _albumList.value = mockAlbumList
+        _albumList.value = albumCoverList
     }
 }

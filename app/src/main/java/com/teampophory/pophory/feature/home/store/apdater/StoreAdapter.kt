@@ -22,8 +22,7 @@ class StoreAdapter(
     class StoreViewHolder(
         private val binding: ItemStorePagerBinding,
         private val onItemClicked: (Int) -> Unit
-    ) :
-        RecyclerView.ViewHolder(binding.root) {
+    ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(@DrawableRes src: Int) {
             binding.ivStorePager.setImageResource(src)
             itemView.setOnClickListener {
