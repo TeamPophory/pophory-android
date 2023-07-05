@@ -25,16 +25,18 @@
                 android:src="@drawable/ic_back"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.5" />
 
             <TextView
                 android:id="@+id/tv_sign_up"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="회원가입"
-                android:textAppearance="?textAppearanceHeadlineMedium"
+                android:textSize="19sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -66,8 +68,8 @@
         android:id="@+id/tab_third"
         android:layout_width="0dp"
         android:layout_height="3dp"
-        android:layout_marginEnd="11dp"
         android:background="@drawable/selector_sign_up_tab"
+        android:layout_marginEnd="11dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/tab_second"
         app:layout_constraintTop_toBottomOf="@id/toolbar" />
@@ -92,8 +94,6 @@
         android:paddingTop="16dp"
         android:paddingBottom="15dp"
         android:text="다음으로 넘어가기"
-        android:textAppearance="?textAppearanceHeadlineSmall"
-        android:textColor="?colorOnSurface"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

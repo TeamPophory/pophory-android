@@ -5,17 +5,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".feature.onboarding.OnBoardingActivity">
+    tools:context=".feature.on_boarding.OnBoardingActivity">
 
     <ImageView
         android:id="@+id/dot_indicator_first"
         android:layout_width="9dp"
         android:layout_height="9dp"
-        android:layout_marginTop="46dp"
         android:layout_marginEnd="9dp"
         android:background="@drawable/round_dot_indicator"
         app:layout_constraintEnd_toStartOf="@id/dot_indicator_second"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@id/viewpager_onboarding"/>
 
     <ImageView
         android:id="@+id/dot_indicator_second"
@@ -41,10 +40,10 @@
         android:layout_height="0dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/dot_indicator_first"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@id/tv_social_login"
         android:layout_marginBottom="22dp"
-        android:layout_marginTop="22dp"/>
+        android:layout_marginTop="48dp"/>
 
     <TextView
         android:id="@+id/tv_social_login"
