@@ -14,8 +14,6 @@ import com.teampophory.pophory.feature.signup.adapter.SignUpViewPagerAdapter
 class SignUpActivity : AppCompatActivity(), SignUpButtonInterface {
 
     private val binding by viewBinding(ActivitySignUpBinding::inflate)
-    private lateinit var viewPager: ViewPager2
-    private lateinit var viewPagerAdapter: SignUpViewPagerAdapter
 
     private val viewModel by viewModels<SignUpViewModel>()
     private var currentPosition = 0
@@ -29,11 +27,11 @@ class SignUpActivity : AppCompatActivity(), SignUpButtonInterface {
             toast(it)
         }
 
-        //다음 버튼
+        // 다음 버튼
         clickNextButton()
-        //뷰페이저
+        // 뷰페이저
         setViewPager()
-        //백버튼 클릭
+        // 백버튼 클릭
         clickToolbarBackButton()
     }
 
@@ -63,15 +61,14 @@ class SignUpActivity : AppCompatActivity(), SignUpButtonInterface {
         binding.btnNext.setOnClickListener {
             when (currentPosition) {
                 0 -> {
-                    val nextPosition = currentPosition + 1
-                    binding.viewpager.currentItem = nextPosition
+                    binding.viewpager.currentItem = currentPosition + 1
                 }
 
                 1 -> {
-                    //todo 중복된 아이디가 존재하는 경우
+                    // TODO 중복된 아이디가 존재하는 경우
                     val dialog = SignUpDialogFragment()
                     dialog.show(supportFragmentManager, "")
-                    //중복된 아이디가 존재하지 않을 경우
+//                    중복된 아이디가 존재하지 않을 경우
 //                    val nextPosition = currentPosition + 1
 //                    binding.viewpager.currentItem = nextPosition
                 }
@@ -86,17 +83,13 @@ class SignUpActivity : AppCompatActivity(), SignUpButtonInterface {
 
 
     private val pageChangeCallback = object : ViewPager2.OnPageChangeCallback() {
-        override fun onPageScrollStateChanged(state: Int) {
-            super.onPageScrollStateChanged(state)
-        }
-
         override fun onPageScrolled(
             position: Int,
             positionOffset: Float,
             positionOffsetPixels: Int
         ) {
             super.onPageScrolled(position, positionOffset, positionOffsetPixels)
-            //tablayout 변경
+            // tablayout 변경
             with(binding) {
                 tabFirst.isSelected = position == 0
                 tabSecond.isSelected = position == 1
@@ -118,14 +111,11 @@ class SignUpActivity : AppCompatActivity(), SignUpButtonInterface {
     }
 
     private fun setViewPager() {
-        viewPagerAdapter = SignUpViewPagerAdapter(this, this)
-        viewPager = binding.viewpager
-
-        viewPager.apply {
-            adapter = viewPagerAdapter
+        binding.viewpager.apply {
+            adapter = SignUpViewPagerAdapter(this@SignUpActivity, this@SignUpActivity)
             isUserInputEnabled = false
         }
-        viewPager.registerOnPageChangeCallback(pageChangeCallback)
+        binding.viewpager.registerOnPageChangeCallback(pageChangeCallback)
     }
 
     private fun setButton(buttonText: String, isEnabled: Boolean) {
@@ -133,7 +123,7 @@ class SignUpActivity : AppCompatActivity(), SignUpButtonInterface {
         binding.btnNext.isEnabled = isEnabled
     }
 
-    override fun setButtonState(state: Boolean) {
+    override fun onChangeState(state: Boolean) {
         binding.btnNext.isEnabled = state
     }
 }
