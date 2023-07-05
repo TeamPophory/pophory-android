@@ -12,7 +12,7 @@
         android:scaleType="centerCrop"
         android:src="@drawable/vertical_example"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintDimensionRatio="0.66"
+        app:layout_constraintDimensionRatio="2:3"
         app:layout_constraintEnd_toStartOf="@id/ivSecondVerticalImage"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -25,7 +25,7 @@
         android:scaleType="centerCrop"
         android:src="@drawable/vertical_example"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintDimensionRatio="0.66"
+        app:layout_constraintDimensionRatio="2:3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/ivFirstVerticalImage"
         app:layout_constraintTop_toTopOf="parent" />

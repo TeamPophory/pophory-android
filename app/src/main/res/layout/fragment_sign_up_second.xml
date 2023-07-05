@@ -1,79 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <TextView
         android:id="@+id/tv_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="너만의 재치있는\n포포리 아이디를 만들어줘!"
-        android:textSize="23sp"
-        android:layout_marginTop="32dp"
         android:layout_marginStart="20dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+        android:layout_marginTop="32dp"
+        android:text="너만의 재치있는\n포포리 아이디를 만들어줘!"
+        android:textAppearance="?textAppearanceHeadlineMedium"
+        android:textColor="?colorOnBackground"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tv_sub"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="영어, 숫자, 특수문자 조합 4-12자리 이내로 \n작성해요 (특수 문자는 ._만 가능해요)"
+        android:textAppearance="?textAppearanceTitleSmall"
+        android:textColor="?colorOnSurface50"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="@id/tv_title"
-        app:layout_constraintTop_toBottomOf="@id/tv_title"
-        android:text="영어, 숫자, 특수문자 조합 4-12자리 이내로 \n작성해요(특수 문자는 ._만 가능해요)"
-        android:layout_marginTop="10dp"
-        />
+        app:layout_constraintTop_toBottomOf="@id/tv_title" />
 
     <EditText
         android:id="@+id/edit_tv_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/bg_sign_up_edit_text_default"
         android:hint="아이디"
-        android:textSize="15sp"
         android:maxLength="12"
         android:paddingStart="15dp"
         android:paddingTop="18dp"
         android:paddingBottom="21dp"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/bg_sign_up_edit_text_default"
+        android:textAppearance="?textAppearanceText1"
+        android:textColor="?colorOnSurface100"
+        android:textColorHint="?colorOnSurface40"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_sub"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_sub" />
 
     <ImageView
         android:id="@+id/btn_delete_edit_text"
         android:layout_width="24dp"
         android:layout_height="24dp"
+        android:layout_marginEnd="15dp"
         android:background="@drawable/ic_edit_text_delete"
-        app:layout_constraintEnd_toEndOf="@id/edit_tv_name"
-        app:layout_constraintTop_toTopOf="@id/edit_tv_name"
         app:layout_constraintBottom_toBottomOf="@id/edit_tv_name"
-        android:layout_marginEnd="15dp"/>
+        app:layout_constraintEnd_toEndOf="@id/edit_tv_name"
+        app:layout_constraintTop_toTopOf="@id/edit_tv_name" />
 
     <TextView
         android:id="@+id/tv_error_message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/pophory_red"
+        android:layout_marginStart="6dp"
         android:layout_marginTop="10dp"
-        app:layout_constraintTop_toBottomOf="@id/edit_tv_name"
+        android:textAppearance="?textAppearanceCaption1"
+        android:textColor="?colorError"
         app:layout_constraintStart_toStartOf="@id/edit_tv_name"
-        android:layout_marginStart="6dp"/>
+        app:layout_constraintTop_toBottomOf="@id/edit_tv_name"
+        tools:text="비밀번호 입력 이상하게 함 ㅅㄱ" />
 
     <TextView
         android:id="@+id/tv_text_count"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="(0/12)"
-        android:textColor="@color/gray_400"
         android:layout_marginTop="8dp"
-        android:textSize="15sp"
+        android:text="(0/12)"
+        android:textAppearance="?textAppearanceText1"
+        android:textColor="?colorOnSurface40"
         app:layout_constraintEnd_toEndOf="@id/edit_tv_name"
-        app:layout_constraintTop_toBottomOf="@id/edit_tv_name"/>
+        app:layout_constraintTop_toBottomOf="@id/edit_tv_name" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

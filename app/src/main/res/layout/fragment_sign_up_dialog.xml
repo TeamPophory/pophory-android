@@ -20,6 +20,8 @@
             android:layout_marginTop="24dp"
             android:gravity="center"
             android:text="이미 있는 아이디에요\n다른 아이디를 입력해주세요!"
+            android:textAppearance="?textAppearancePopupText1"
+            android:textColor="?colorOnSurface50"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -33,6 +35,8 @@
             android:gravity="center"
             android:paddingVertical="14dp"
             android:text="확인했어요"
+            android:textAppearance="?textAppearancePopupButton1"
+            android:textColor="?colorOnSurface"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

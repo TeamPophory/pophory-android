@@ -7,9 +7,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.ViewPager2
 import com.teampophory.pophory.common.context.toast
 import com.teampophory.pophory.common.view.viewBinding
-import com.teampophory.pophory.databinding.ActivityOnBoardingBinding
 import com.teampophory.pophory.databinding.ActivitySignUpBinding
-import com.teampophory.pophory.feature.on_boarding.OnBoardingActivity
+import com.teampophory.pophory.feature.onboarding.OnBoardingActivity
 import com.teampophory.pophory.feature.signup.adapter.SignUpViewPagerAdapter
 
 class SignUpActivity : AppCompatActivity(), SignUpButtonInterface {
