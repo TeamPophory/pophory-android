@@ -16,8 +16,6 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -26,6 +24,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.google.accompanist.web.AccompanistWebViewClient
+import com.google.accompanist.web.LoadingState
 import com.google.accompanist.web.WebView
 import com.google.accompanist.web.rememberWebViewNavigator
 import com.google.accompanist.web.rememberWebViewState
@@ -42,7 +41,6 @@ fun WebViewScreen(
     onBack: () -> Unit = {}
 ) {
     val state = rememberWebViewState(url)
-    val title by remember(state) { mutableStateOf(state.pageTitle) }
     val webViewNavigator = rememberWebViewNavigator()
     val webViewClient = remember { AccompanistWebViewClient() }
 
@@ -52,9 +50,10 @@ fun WebViewScreen(
             CenterAlignedTopAppBar(
                 title = {
                     Text(
-                        text = title.orEmpty(),
+                        text = state.pageTitle ?: "Loading...",
                         textAlign = TextAlign.Center,
-                        modifier = Modifier.fillMaxWidth()
+                        modifier = Modifier.fillMaxWidth(),
+                        style = PophoryTheme.typography.headline2
                     )
                 },
                 navigationIcon = {
@@ -75,7 +74,7 @@ fun WebViewScreen(
             )
         }
     ) {
-        if (state.isLoading) {
+        if (state.pageTitle == null) {
             Box(
                 modifier = Modifier
                     .padding(it)
