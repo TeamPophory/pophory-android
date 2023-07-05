@@ -65,7 +65,7 @@ class PophoryColors(
 fun pophoryLightColors(
     white: Color = White,
     primary: Color = Purple,
-    red: Color = Red,
+    red: Color = Error,
     onSurface40: Color = Gray400,
     onSurface30: Color = Gray300,
     onSurface20: Color = Gray200,
