@@ -10,7 +10,7 @@
         android:id="@+id/tv_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="만나서 반가워\n너의 이름이 궁금해!"
+        android:text="시작할 준비가 되었다면\n너의 이름을 알려줘!"
         android:textSize="23sp"
         android:layout_marginTop="32dp"
         android:layout_marginStart="20dp"
@@ -24,7 +24,7 @@
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="@id/tv_title"
         app:layout_constraintTop_toBottomOf="@id/tv_title"
-        android:text="포포리 사용을 위해 실명 입력이 필요해요"
+        android:text="원활한 포포리 사용을 위해 실명 입력이 필요해요"
         android:layout_marginTop="10dp"
         />
 
