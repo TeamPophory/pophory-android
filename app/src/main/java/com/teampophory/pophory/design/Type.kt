@@ -83,6 +83,40 @@ class PophoryTypography(
         modalTitle = other.modalTitle
         modalText = other.modalText
     }
+
+    fun copy(
+        headlineBold1: TextStyle = this.headlineBold1,
+        headlineMedium1: TextStyle = this.headlineMedium1,
+        headline2: TextStyle = this.headline2,
+        headline3: TextStyle = this.headline3,
+        title1: TextStyle = this.title1,
+        text1: TextStyle = this.text1,
+        caption1: TextStyle = this.caption1,
+        caption2: TextStyle = this.caption2,
+        nav: TextStyle = this.nav,
+        popupTitle: TextStyle = this.popupTitle,
+        popupText: TextStyle = this.popupText,
+        popupButton1: TextStyle = this.popupButton1,
+        popupButton2: TextStyle = this.popupButton2,
+        modalTitle: TextStyle = this.modalTitle,
+        modalText: TextStyle = this.modalText,
+    ): PophoryTypography = PophoryTypography(
+        headlineBold1,
+        headlineMedium1,
+        headline2,
+        headline3,
+        title1,
+        text1,
+        caption1,
+        caption2,
+        nav,
+        popupTitle,
+        popupText,
+        popupButton1,
+        popupButton2,
+        modalTitle,
+        modalText,
+    )
 }
 
 @Composable

@@ -15,7 +15,9 @@ import androidx.compose.ui.graphics.Color
 class PophoryColors(
     white: Color,
     primary: Color,
-    red: Color,
+    error: Color,
+    onSurface100: Color,
+    onSurface50: Color,
     onSurface40: Color,
     onSurface30: Color,
     onSurface20: Color,
@@ -26,7 +28,11 @@ class PophoryColors(
         private set
     var primary by mutableStateOf(primary)
         private set
-    var red by mutableStateOf(red)
+    var error by mutableStateOf(error)
+        private set
+    var onSurface100 by mutableStateOf(onSurface100)
+        private set
+    var onSurface50 by mutableStateOf(onSurface50)
         private set
     var onSurface40 by mutableStateOf(onSurface40)
         private set
@@ -42,18 +48,20 @@ class PophoryColors(
     fun copy(): PophoryColors = PophoryColors(
         white = white,
         primary = primary,
-        red = red,
-        onSurface40,
-        onSurface30,
-        onSurface20,
-        onSurface10,
-        isLight
+        error = error,
+        onSurface100 = onSurface100,
+        onSurface50 = onSurface50,
+        onSurface40 = onSurface40,
+        onSurface30 = onSurface30,
+        onSurface20 = onSurface20,
+        onSurface10 = onSurface10,
+        isLight = isLight
     )
 
     fun update(other: PophoryColors) {
         white = other.white
         primary = other.primary
-        red = other.red
+        error = other.error
         onSurface40 = other.onSurface40
         onSurface30 = other.onSurface30
         onSurface20 = other.onSurface20
@@ -65,7 +73,9 @@ class PophoryColors(
 fun pophoryLightColors(
     white: Color = White,
     primary: Color = Purple,
-    red: Color = Error,
+    error: Color = Error,
+    onSurface100: Color = Black,
+    onSurface50: Color = Gray500,
     onSurface40: Color = Gray400,
     onSurface30: Color = Gray300,
     onSurface20: Color = Gray200,
@@ -75,7 +85,9 @@ fun pophoryLightColors(
     return PophoryColors(
         white = white,
         primary = primary,
-        red = red,
+        error = error,
+        onSurface100 = onSurface100,
+        onSurface50 = onSurface50,
         onSurface40 = onSurface40,
         onSurface30 = onSurface30,
         onSurface20 = onSurface20,
@@ -85,22 +97,30 @@ fun pophoryLightColors(
 }
 
 private val LocalPophoryColors = staticCompositionLocalOf<PophoryColors> {
-    error("No SoptColors provided")
+    error("No PophoryColors provided")
+}
+private val LocalPophoryTypography = staticCompositionLocalOf<PophoryTypography> {
+    error("No PophoryTypography provided")
 }
 
 object PophoryTheme {
     val colors: PophoryColors @Composable get() = LocalPophoryColors.current
+    val typography: PophoryTypography @Composable get() = LocalPophoryTypography.current
 }
 
 @Composable
-fun ProvidePophoryColor(
+fun ProvidePophoryColorAndTypography(
     colors: PophoryColors,
+    typography: PophoryTypography,
     content: @Composable () -> Unit
 ) {
     val provideColors = remember { colors.copy() }
     provideColors.update(colors)
+    val provideTypography = remember { typography.copy() }
+    provideTypography.update(typography)
     CompositionLocalProvider(
         LocalPophoryColors provides provideColors,
+        LocalPophoryTypography provides provideTypography,
         content = content
     )
 }
@@ -111,7 +131,8 @@ fun PophoryTheme(
     content: @Composable () -> Unit
 ) {
     val colors = pophoryLightColors()
-    ProvidePophoryColor(colors) {
+    val typography = PophoryTypography()
+    ProvidePophoryColorAndTypography(colors, typography) {
         MaterialTheme(content = content)
     }
 }
