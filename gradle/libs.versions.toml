@@ -93,7 +93,7 @@ startup = { module = "androidx.startup:startup-runtime", version.ref = "startup"
 security = { module = "androidx.security:security-crypto", version.ref = "security" }
 desugarLibs = { module = "com.android.tools:desugar_jdk_libs", version.ref = "desugarJdk" }
 constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
-flexbox = {group = "com.google.android.flexbox", name = "flexbox", version.ref = "flexbox"}
+flexbox = { group = "com.google.android.flexbox", name = "flexbox", version.ref = "flexbox" }
 fragment-ktx = { module = "androidx.fragment:fragment-ktx", version.ref = "fragment-ktx" }
 
 # compose
@@ -108,6 +108,7 @@ ui-foundation = { group = "androidx.compose.foundation", name = "foundation" }
 material3-compose = { group = "androidx.compose.material3", name = "material3" }
 coil-compose = { group = "io.coil-kt", name = "coil-compose", version.ref = "coil" }
 activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activity" }
+lifecycle-compose = { group = "androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "lifecycle" }
 
 # dagger-hilt
 hilt = { module = "com.google.dagger:hilt-android", version.ref = "dagger-hilt" }
@@ -186,5 +187,5 @@ app-distribution = { id = "com.google.firebase.appdistribution", version.ref = "
 firebase = ["firebase-analytics", "firebase-crashlytics"]
 flipper = ["flipper", "soloader", "flipper-network"]
 lifecycle = ["lifecycle", "lifecycle-viewmodel", "lifecycle-livedata"]
-compose = ["ui", "ui-graphics", "ui-tooling", "ui-tooling-preview", "material3-compose", "coil-compose", "ui-foundation", "activity-compose"]
+compose = ["ui", "ui-graphics", "ui-tooling", "ui-tooling-preview", "material3-compose", "coil-compose", "ui-foundation", "activity-compose", "lifecycle-compose"]
 retrofit = ["retrofit", "retrofit-kotlin-serialization-converter"]
