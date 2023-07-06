@@ -34,6 +34,7 @@ class StudioSelectFragment : BottomSheetDialogFragment() {
         super.onViewCreated(view, savedInstanceState)
         val adapter = StudioAdapter(requireContext()) {
             viewModel.onUpdateStudio(it)
+            dismissAllowingStateLoss()
         }
         binding.listStudio.adapter = adapter
         binding.listStudio.addItemDecoration(
