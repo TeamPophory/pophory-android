@@ -64,15 +64,20 @@
             android:exported="false" />
         <activity
             android:name=".feature.home.HomeActivity"
-            android:exported="false" />
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".feature.signup.SignUpActivity"
             android:exported="false" />
         <activity
             android:name=".feature.onboarding.OnBoardingActivity"
             android:exported="true"
-            android:theme="@style/Theme.App.Popopopo.Starting">
-        </activity>
+            android:theme="@style/Theme.App.Popopopo.Starting" />
         <activity
             android:name=".feature.setting.SettingActivity"
             android:exported="true" />
@@ -96,14 +101,7 @@
         </activity>
         <activity
             android:name=".feature.album.list.AlbumListActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-
+            android:exported="false" />
         <activity android:name=".feature.album.detail.AlbumDetailActivity" />
     </application>
 </manifest>
