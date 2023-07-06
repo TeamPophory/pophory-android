@@ -6,8 +6,8 @@ sealed class MyPageDisplayItem {
         val nickname: String,
         val photoCount: Int
     ) : MyPageDisplayItem()
-
     data class Photo(val photo: MyPageInfo.Photo) : MyPageDisplayItem()
+    object Empty : MyPageDisplayItem()
 }
 
 data class MyPageInfo(

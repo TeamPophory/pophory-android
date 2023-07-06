@@ -14,8 +14,10 @@ import com.teampophory.pophory.common.view.GridSpacingItemDecoration
 import com.teampophory.pophory.common.view.viewBinding
 import com.teampophory.pophory.databinding.FragmentMypageBinding
 import com.teampophory.pophory.feature.home.mypage.adapter.MyPageAdapter
+import com.teampophory.pophory.feature.home.mypage.adapter.MyPageAdapter.Companion.VIEW_TYPE_EMPTY
 import com.teampophory.pophory.feature.home.mypage.adapter.MyPageAdapter.Companion.VIEW_TYPE_PHOTO
 import com.teampophory.pophory.feature.home.mypage.adapter.MyPageAdapter.Companion.VIEW_TYPE_PROFILE
+import com.teampophory.pophory.feature.home.mypage.util.GridSpacingCustomDecoration
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -59,17 +61,21 @@ class MyPageFragment : Fragment() {
                     val photoItems =
                         myPageInfoState.data.filterIsInstance<MyPageDisplayItem.Photo>()
                     val isEmpty = photoItems.isEmpty()
-                    val myPageInfoData = myPageInfoState.data
-                    val profileItem =
-                        myPageInfoState.data.firstOrNull { it is MyPageDisplayItem.Profile } as? MyPageDisplayItem.Profile
+
+                    val myPageInfoData = if (isEmpty) {
+                        myPageInfoState.data.toMutableList().also { it.add(MyPageDisplayItem.Empty) }
+                    } else {
+                        myPageInfoState.data
+                    }
 
                     with(binding) {
+                        val profileItem =
+                            myPageInfoState.data.firstOrNull { it is MyPageDisplayItem.Profile } as? MyPageDisplayItem.Profile
                         tvMypageToolbarNickname.text = "@${profileItem?.nickname}"
                         myPageAdapter?.submitList(myPageInfoData)
-                        ivMypageFeedEmpty.isVisible = isEmpty
-                        tvMypageFeedEmpty.isVisible = isEmpty
                     }
                 }
+
 
                 is MyPageInfoState.Error -> {}
                 else -> {}
@@ -91,9 +97,10 @@ class MyPageFragment : Fragment() {
 
         gridLayoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
             override fun getSpanSize(position: Int): Int {
-                return when (position) {
+                return when (myPageAdapter?.getItemViewType(position)) {
                     VIEW_TYPE_PROFILE -> 3
                     VIEW_TYPE_PHOTO -> 1
+                    VIEW_TYPE_EMPTY -> 3
                     else -> 1
                 }
             }
@@ -103,7 +110,7 @@ class MyPageFragment : Fragment() {
             layoutManager = gridLayoutManager
             adapter = myPageAdapter
             isNestedScrollingEnabled = false
-        }.addItemDecoration(GridSpacingItemDecoration(3, 2, false))
+        }.addItemDecoration(GridSpacingCustomDecoration(3, 2, false))
     }
 
     private fun setOnClickListener() {
