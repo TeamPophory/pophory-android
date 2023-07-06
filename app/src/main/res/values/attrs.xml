@@ -15,6 +15,7 @@
     <attr name="textAppearanceText1" format="reference" />
     <attr name="textAppearancePopupText1" format="reference" />
     <attr name="textAppearanceModalText1" format="reference" />
+    <attr name="textAppearanceModalText2" format="reference" />
     <attr name="textAppearancePopupButton1" format="reference" />
     <attr name="textAppearancePopupButton2" format="reference" />
 </resources>

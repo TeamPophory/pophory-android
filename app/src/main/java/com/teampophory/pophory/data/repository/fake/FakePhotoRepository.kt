@@ -1,16 +1,13 @@
 package com.teampophory.pophory.data.repository.fake
 
-import com.teampophory.pophory.common.image.ContentUriRequestBody
-import com.teampophory.pophory.data.model.photo.Studio
-import com.teampophory.pophory.data.repository.photo.PhotoRepository
-import com.teampophory.pophory.network.model.PhotoListResponse
+import com.teampophory.pophory.data.repository.photo.AlbumRepository
+import com.teampophory.pophory.data.network.model.album.PhotoListResponse
 import kotlinx.coroutines.delay
 
-class FakePhotoRepository : PhotoRepository {
-    private val fakeImageUrl =
-        "https://images.unsplash.com/photo-1687023956422-117d5c47029d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=3432&q=80"
+class FakePhotoRepository : AlbumRepository {
+    private val fakeImageUrl = "https://images.unsplash.com/photo-1687023956422-117d5c47029d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=3432&q=80"
 
-    override suspend fun getPhotos(): Result<PhotoListResponse> {
+    override suspend fun getPhotos(id: Int): Result<PhotoListResponse> {
         delay(300)
         return runCatching {
             PhotoListResponse(
@@ -55,5 +52,10 @@ class FakePhotoRepository : PhotoRepository {
         photo: ContentUriRequestBody
     ): Result<Unit> {
         TODO("Not yet implemented")
+    }
+
+    override suspend fun deletePhoto(photoId: Long): Result<Unit> {
+        delay(300)
+        return runCatching {  }
     }
 }
