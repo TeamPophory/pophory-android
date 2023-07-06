@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:backgroundTint="@color/white"
     app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
 
@@ -21,7 +22,7 @@
         android:id="@+id/txt_title_select_studio"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
+        android:layout_marginStart="20dp"
         android:text="사진관 선택하기"
         android:textAppearance="?textAppearanceHeadlineMedium"
         app:layout_constraintStart_toStartOf="parent"
@@ -31,11 +32,12 @@
         android:id="@+id/list_studio"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20dp"
+        android:layout_marginHorizontal="8dp"
+        android:layout_marginTop="8dp"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_title_select_studio"
         app:spanCount="3"
-
         tools:listitem="@layout/item_studio_select" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

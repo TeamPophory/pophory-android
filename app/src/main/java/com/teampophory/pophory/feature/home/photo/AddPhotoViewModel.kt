@@ -5,11 +5,16 @@ import androidx.lifecycle.viewModelScope
 import com.teampophory.pophory.common.time.systemNow
 import com.teampophory.pophory.data.model.photo.Studio
 import com.teampophory.pophory.data.repository.photo.PhotoRepository
+import com.teampophory.pophory.feature.home.photo.model.StudioUiModel
+import com.teampophory.pophory.feature.home.photo.model.toUiModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import kotlinx.datetime.Instant
 import timber.log.Timber
@@ -26,9 +31,11 @@ class AddPhotoViewModel @Inject constructor(
 ) : ViewModel() {
     private val _createdAt = MutableStateFlow(Instant.systemNow().toEpochMilliseconds())
     val createdAt = _createdAt.asStateFlow()
-    var allStudios: List<Studio> = emptyList()
-        private set
-    private var currentStudio: MutableStateFlow<Set<Studio>> = MutableStateFlow(emptySet())
+    private val allStudio = MutableStateFlow<List<Studio>>(emptyList())
+    private val currentStudio: MutableStateFlow<Set<StudioUiModel>> = MutableStateFlow(emptySet())
+    val studio = allStudio.combine(currentStudio) { all, current ->
+        all.map { it.toUiModel(current.any { item -> item.id == it.id }) }
+    }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(1000L), emptyList())
     private val _event = MutableSharedFlow<AddPhotoEvent>()
     val event = _event.asSharedFlow()
 
@@ -36,7 +43,7 @@ class AddPhotoViewModel @Inject constructor(
         viewModelScope.launch {
             photoRepository.getStudios()
                 .onSuccess {
-                    allStudios = it
+                    allStudio.value = it
                 }.onFailure(Timber::e)
         }
     }
@@ -57,14 +64,7 @@ class AddPhotoViewModel @Inject constructor(
         }
     }
 
-    fun onUpdateStudio(new: Studio) {
-        if (currentStudio.value.contains(new)) {
-            currentStudio.value = currentStudio.value - new
-            return
-        }
-        if (currentStudio.value.isNotEmpty()) {
-            return
-        }
-        currentStudio.value = currentStudio.value + new
+    fun onUpdateStudio(new: StudioUiModel) {
+        currentStudio.value = setOf(new)
     }
 }

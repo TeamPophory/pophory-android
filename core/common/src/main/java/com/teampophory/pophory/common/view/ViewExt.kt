@@ -44,13 +44,8 @@ class GridSpacingItemDecoration(
         parent: RecyclerView,
         state: RecyclerView.State
     ) {
-        val position = parent.getChildAdapterPosition(view) - 1 // item position
+        val position = parent.getChildAdapterPosition(view) // item position
         val column = position % spanCount // item column
-
-        // If it's the first item (position 0), skip decoration
-        if (position == -1) {
-            return
-        }
 
         if (!includeEdge) {
             outRect.left =

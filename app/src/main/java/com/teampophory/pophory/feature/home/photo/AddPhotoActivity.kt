@@ -67,7 +67,7 @@ class AddPhotoActivity : BindingActivity<ActivityAddPhotoBinding>(R.layout.activ
                     }
 
                     AddPhotoEvent.STUDIO -> {
-                        // TODO BottomSheet 회의
+                        StudioSelectFragment().show(supportFragmentManager, "studio")
                     }
                 }
             }.launchIn(lifecycleScope)
