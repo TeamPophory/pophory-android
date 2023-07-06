@@ -1,5 +1,7 @@
 package com.teampophory.pophory.data.network.model.auth
 
+import com.teampophory.pophory.data.model.auth.Token
+import com.teampophory.pophory.data.model.auth.UserAuthentication
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
