@@ -10,5 +10,4 @@ class DefaultMyPageRepository @Inject constructor(
     override suspend fun getMyPageInfo(): Result<MyPageResponse> {
         return runCatching { retrofitMyPageNetwork.getMyPages() }
     }
-
 }

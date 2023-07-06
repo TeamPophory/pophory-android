@@ -10,5 +10,4 @@ class DefaultStoreRepository @Inject constructor(
     override suspend fun getAlbums(): Result<StoreResponse> {
         return runCatching { retrofitStoreNetwork.getAlbums() }
     }
-
 }
