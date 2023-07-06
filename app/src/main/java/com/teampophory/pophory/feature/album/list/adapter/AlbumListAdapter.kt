@@ -9,6 +9,7 @@ import com.teampophory.pophory.databinding.ItemVerticalPhotoBinding
 import com.teampophory.pophory.feature.album.detail.AlbumDetailActivity
 import com.teampophory.pophory.feature.album.model.PhotoItem
 import com.teampophory.pophory.feature.album.list.viewholder.AlbumViewHolder
+import com.teampophory.pophory.feature.album.model.OrientType
 
 class AlbumListAdapter : ListAdapter<PhotoItem, AlbumViewHolder>(
     ItemDiffCallback<PhotoItem>(
@@ -26,6 +27,7 @@ class AlbumListAdapter : ListAdapter<PhotoItem, AlbumViewHolder>(
                         false
                     ),
                     onItemClicked = {
+                        if (it.orientType == OrientType.NONE) return@HorizontalViewHolder
                         AlbumDetailActivity.startActivity(parent.context, it)
                     }
                 )
@@ -38,6 +40,7 @@ class AlbumListAdapter : ListAdapter<PhotoItem, AlbumViewHolder>(
                         parent,
                         false
                     ), onItemClicked = {
+                        if (it.orientType == OrientType.NONE) return@VerticalViewHolder
                         AlbumDetailActivity.startActivity(parent.context, it)
                     }
                 )
