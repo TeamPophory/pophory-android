@@ -1,19 +1,35 @@
 package com.teampophory.pophory.feature.home
 
 import android.os.Bundle
+import androidx.activity.result.PickVisualMediaRequest
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import com.teampophory.pophory.R
 import com.teampophory.pophory.common.view.viewBinding
 import com.teampophory.pophory.databinding.ActivityHomeBinding
+import com.teampophory.pophory.feature.HomeViewModel
 import com.teampophory.pophory.feature.home.mypage.MyPageFragment
+import com.teampophory.pophory.feature.home.photo.AddPhotoActivity
 import com.teampophory.pophory.feature.home.store.StoreFragment
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 
 @AndroidEntryPoint
 class HomeActivity : AppCompatActivity() {
     private val binding: ActivityHomeBinding by viewBinding(ActivityHomeBinding::inflate)
+    private val viewModel by viewModels<HomeViewModel>()
+    private val imagePicker = registerForActivityResult(ActivityResultContracts.PickVisualMedia()) {
+        Timber.d("Nunu imagePicker $it")
+        it?.let { uri ->
+            val currentAlbum = viewModel.currentAlbum
+            currentAlbum?.let { album ->
+                startActivity(AddPhotoActivity.getIntent(this, uri, album.id))
+            }
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,6 +47,9 @@ class HomeActivity : AppCompatActivity() {
             }
             selectedFragment?.let { changeFragment(it) }
             return@setOnItemSelectedListener selectedFragment != null
+        }
+        binding.bottomNavFav.setOnClickListener {
+            imagePicker.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
         }
     }
 

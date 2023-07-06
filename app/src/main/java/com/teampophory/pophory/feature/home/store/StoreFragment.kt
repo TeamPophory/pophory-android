@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.core.text.buildSpannedString
 import androidx.core.text.color
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.viewpager2.widget.ViewPager2
 import com.teampophory.pophory.R
@@ -15,6 +16,7 @@ import com.teampophory.pophory.common.fragment.colorOf
 import com.teampophory.pophory.common.primitive.textAppearance
 import com.teampophory.pophory.common.view.viewBinding
 import com.teampophory.pophory.databinding.FragmentStoreBinding
+import com.teampophory.pophory.feature.HomeViewModel
 import com.teampophory.pophory.feature.album.AlbumListActivity
 import com.teampophory.pophory.feature.home.store.apdater.OnPageChangedListener
 import com.teampophory.pophory.feature.home.store.apdater.StoreAdapter
@@ -28,11 +30,12 @@ class StoreFragment : Fragment(), OnPageChangedListener {
     private var storeAdapter: StoreAdapter? = null
 
     private val viewModel by viewModels<StoreViewModel>()
+    private val homeViewModel by activityViewModels<HomeViewModel>()
 
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View {
         return inflater.inflate(R.layout.fragment_store, container, false)
     }
@@ -80,7 +83,8 @@ class StoreFragment : Fragment(), OnPageChangedListener {
         binding.viewpagerStore.isUserInputEnabled = false
 
         // 페이지가 변경될 때마다 콜백 등록
-        binding.viewpagerStore.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+        binding.viewpagerStore.registerOnPageChangeCallback(object :
+            ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
                 val currentItem = storeAdapter?.currentList?.get(position)
@@ -107,6 +111,7 @@ class StoreFragment : Fragment(), OnPageChangedListener {
     }
 
     override fun onPageChanged(albumItem: AlbumItem) {
+        homeViewModel.onUpdateAlbum(albumItem)
         binding.tvStoreAlbumPhotoCount.text = albumItem.photoCount.toString() + "/30"
     }
 }
