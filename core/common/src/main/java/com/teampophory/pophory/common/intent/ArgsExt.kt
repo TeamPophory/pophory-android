@@ -20,6 +20,6 @@ fun stringArgs() = ReadOnlyProperty<Fragment, String> { thisRef, property ->
     thisRef.requireArguments().getString(property.name, "")
 }
 
-fun <P : Parcelable> parcelableExtra() = ReadOnlyProperty<Fragment, P?> { thisRef, property ->
+fun <P : Parcelable> parcelableArgs() = ReadOnlyProperty<Fragment, P?> { thisRef, property ->
     thisRef.requireArguments().getParcelable(property.name)
 }
