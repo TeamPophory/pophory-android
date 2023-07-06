@@ -103,6 +103,8 @@
         <activity
             android:name=".feature.album.list.AlbumListActivity"
             android:exported="false" />
+        <activity android:name=".feature.album.detail.AlbumDetailActivity" />
+            android:exported="false" />
         <activity
             android:name=".feature.home.photo.AddPhotoActivity"
             android:exported="false" />
