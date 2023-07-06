@@ -44,6 +44,6 @@ class StoreAdapter(
     }
 }
 
-interface OnPageChangedListener {
+fun interface OnPageChangedListener {
     fun onPageChanged(albumItem: AlbumItem)
 }

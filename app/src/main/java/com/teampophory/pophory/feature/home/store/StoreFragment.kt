@@ -30,9 +30,9 @@ class StoreFragment : Fragment(), OnPageChangedListener {
     private val viewModel by viewModels<StoreViewModel>()
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View {
         return inflater.inflate(R.layout.fragment_store, container, false)
     }
@@ -58,7 +58,7 @@ class StoreFragment : Fragment(), OnPageChangedListener {
                         storeAdapter?.submitList(storeState.data)
 
                         //최초 데이터 세팅
-                        binding.tvStoreAlbumPhotoCount.text = storeState.data[0].photoCount.toString() + "/30"
+                        storeState.data.firstOrNull()?.let { onPageChanged(it) }
                     }
                 }
 
@@ -70,9 +70,7 @@ class StoreFragment : Fragment(), OnPageChangedListener {
 
     private fun setupViewPager() {
         storeAdapter = StoreAdapter({ albumItem ->
-            val intent = Intent(context, AlbumListActivity::class.java).apply {
-                putExtra("albumId", albumItem.id)
-            }
+            val intent = Intent(context, AlbumListActivity::class.java)
             startActivity(intent)
         }, this)
 
@@ -99,7 +97,7 @@ class StoreFragment : Fragment(), OnPageChangedListener {
         val text = buildSpannedString {
             color(colorOf(R.color.pophory_purple)) {
                 textAppearance(requireContext(), R.style.TextAppearance_Pophory_HeadLineBold) {
-                    append("포포리 앨범")
+                    append(coloredText)
                 }
             }
             append(splittedText[1])
