@@ -24,7 +24,7 @@
         android:layout_height="0dp"
         android:layout_marginStart="4dp"
         android:scaleType="centerCrop"
-        android:src="@drawable/vertical_example"
+        android:src="@drawable/img_default_vertical_1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintDimensionRatio="2:3"
         app:layout_constraintEnd_toEndOf="parent"
