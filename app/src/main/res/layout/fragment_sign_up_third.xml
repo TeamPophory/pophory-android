@@ -11,9 +11,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="32dp"
-        android:text="마음에 쏙드는\n포포리 앨범 커버를 선택해줘!"
-        android:textAppearance="?textAppearanceHeadlineMedium"
-        android:textSize="24sp"
+        android:text="@string/sign_up_third_title"
+        android:textAppearance="@style/TextAppearance.Pophory.HeadLineLarge"
+        android:textSize="23sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
