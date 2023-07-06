@@ -12,7 +12,6 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor">@color/white</item>
         <!-- Customize your theme here. -->
-        <item name="android:background">@color/white</item>
         <item name="colorOnBackground">@color/pophory_black</item>
         <item name="colorError">@color/pophory_red</item>
         <!-- Bottom nav bar active indicator color set -->

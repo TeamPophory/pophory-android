@@ -68,6 +68,7 @@ dependencies {
     implementation(libs.coil.core)
     implementation(libs.kakao.login)
     implementation(libs.bundles.retrofit)
+    implementation(libs.process.phoenix)
 
     debugImplementation(libs.bundles.flipper)
 
