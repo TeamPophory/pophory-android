@@ -52,9 +52,6 @@ fun SettingScreen(
 
     Scaffold(
         modifier = Modifier.fillMaxSize(),
-        snackbarHost = {
-
-        },
         topBar = {
             CenterAlignedTopAppBar(
                 title = {
