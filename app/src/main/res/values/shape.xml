@@ -13,4 +13,12 @@
         <item name="cornerSizeBottomRight">26dp</item>
         <item name="cornerSizeBottomLeft">4dp</item>
     </style>
+
+    <style name="ShapeAppearanceOverlay.Pophory.RoundedCorners" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeBottomLeft">1dp</item>
+        <item name="cornerSizeTopLeft">1dp</item>
+        <item name="cornerSizeTopRight">7dp</item>
+        <item name="cornerSizeBottomRight">7dp</item>
+    </style>
 </resources>
