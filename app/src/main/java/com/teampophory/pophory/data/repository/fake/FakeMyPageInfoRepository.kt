@@ -1,6 +1,6 @@
 package com.teampophory.pophory.data.repository.fake
 
-import com.teampophory.pophory.data.repository.MyPageRepository
+import com.teampophory.pophory.data.repository.my.MyPageRepository
 import com.teampophory.pophory.network.model.MyPageResponse
 import kotlinx.coroutines.delay
 

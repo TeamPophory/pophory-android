@@ -1,6 +1,7 @@
 package com.teampophory.pophory.data.repository.fake
 
-import com.teampophory.pophory.data.repository.PhotoRepository
+import com.teampophory.pophory.data.model.photo.Studio
+import com.teampophory.pophory.data.repository.photo.PhotoRepository
 import com.teampophory.pophory.network.model.PhotoListResponse
 import kotlinx.coroutines.delay
 
@@ -40,5 +41,9 @@ class FakePhotoRepository : PhotoRepository {
                 )
             )
         }
+    }
+
+    override suspend fun getStudios(): Result<List<Studio>> {
+        TODO("Not yet implemented")
     }
 }

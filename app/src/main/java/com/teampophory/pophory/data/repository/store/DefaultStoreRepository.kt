@@ -1,4 +1,4 @@
-package com.teampophory.pophory.data.repository
+package com.teampophory.pophory.data.repository.store
 
 import com.teampophory.pophory.network.StoreNetworkDataSource
 import com.teampophory.pophory.network.model.StoreResponse

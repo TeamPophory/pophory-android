@@ -1,7 +1,7 @@
 package com.teampophory.pophory.config.di
 
-import com.teampophory.pophory.data.repository.DefaultMyPageRepository
-import com.teampophory.pophory.data.repository.MyPageRepository
+import com.teampophory.pophory.data.repository.my.DefaultMyPageRepository
+import com.teampophory.pophory.data.repository.my.MyPageRepository
 import com.teampophory.pophory.network.MyPageNetworkDataSource
 import com.teampophory.pophory.network.retrofit.mypage.RetrofitMyPageNetwork
 import com.teampophory.pophory.network.retrofit.mypage.RetrofitMyPageNetworkApi
