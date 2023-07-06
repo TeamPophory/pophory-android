@@ -11,30 +11,36 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="32dp"
-        android:text="마음에 쏙드는\n포포리 앨범 커버를 선택해줘!"
-        android:textAppearance="?textAppearanceHeadlineMedium"
-        android:textSize="24sp"
+        android:text="@string/sign_up_third_title"
+        android:textAppearance="@style/TextAppearance.Pophory.HeadLineLarge"
+        android:textSize="23sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
 
-    <ImageView
+    <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/iv_album_cover"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginHorizontal="70dp"
         android:layout_marginTop="32dp"
-        android:src="@drawable/example_album_cover"
-        app:layout_constraintDimensionRatio="220:264"
+        android:scaleType="centerCrop"
+        app:layout_constraintDimensionRatio="0.73"
+        android:src="@drawable/ic_album_cover_friends"
+        app:layout_constraintBottom_toTopOf="@id/layout_select_cover"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_title" />
+        app:layout_constraintTop_toBottomOf="@id/tv_title"
+        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.Pophory.ShapeableImageView"/>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_select_cover"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="60dp"
         android:layout_marginTop="30dp"
+        android:layout_margin="19dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/iv_album_cover">
@@ -44,10 +50,9 @@
             android:id="@+id/iv_album_cover_1"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:src="?colorOnSurface40"
+            android:src="@drawable/ic_selector_friends"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/iv_album_cover_2"
-            app:layout_constraintHorizontal_chainStyle="spread_inside"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -67,7 +72,7 @@
             android:id="@+id/iv_album_cover_2"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:src="?colorOnSurface40"
+            android:src="@drawable/ic_selector_love"
             app:layout_constraintEnd_toStartOf="@id/iv_album_cover_3"
             app:layout_constraintStart_toEndOf="@id/iv_album_cover_1"
             app:layout_constraintTop_toTopOf="@id/iv_album_cover_1" />
@@ -87,7 +92,7 @@
             android:id="@+id/iv_album_cover_3"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:src="?colorOnSurface40"
+            android:src="@drawable/ic_selector_myalbum"
             app:layout_constraintEnd_toStartOf="@id/iv_album_cover_4"
             app:layout_constraintStart_toEndOf="@id/iv_album_cover_2"
             app:layout_constraintTop_toTopOf="@id/iv_album_cover_1" />
@@ -107,7 +112,7 @@
             android:id="@+id/iv_album_cover_4"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:src="?colorOnSurface40"
+            android:src="@drawable/ic_selector_collect_book"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/iv_album_cover_3"
             app:layout_constraintTop_toTopOf="@id/iv_album_cover_1" />

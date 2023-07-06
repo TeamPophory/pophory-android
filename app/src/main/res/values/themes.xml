@@ -74,4 +74,8 @@
         <item name="windowSplashScreenAnimationDuration">2000</item>
         <item name="postSplashScreenTheme">@style/Theme.Pophory</item>
     </style>
+
+    <style name="Theme.App.StartPophory" parent="Theme.Pophory">
+        <item name="android:statusBarColor">@color/pophory_purple</item>
+    </style>
 </resources>

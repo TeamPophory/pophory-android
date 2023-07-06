@@ -36,7 +36,6 @@ class SignUpActivity : AppCompatActivity(), SignUpButtonInterface {
     }
 
     private fun clickToolbarBackButton() {
-        val backPosition = currentPosition - 1
         binding.btnBack.setOnClickListener {
             when (currentPosition) {
                 0 -> {
@@ -46,11 +45,11 @@ class SignUpActivity : AppCompatActivity(), SignUpButtonInterface {
                 }
 
                 1 -> {
-                    binding.viewpager.currentItem = backPosition
+                    binding.viewpager.currentItem = 0
                 }
 
                 2 -> {
-                    binding.viewpager.currentItem = backPosition
+                    binding.viewpager.currentItem = 1
                 }
             }
         }
@@ -71,8 +70,8 @@ class SignUpActivity : AppCompatActivity(), SignUpButtonInterface {
                     }
                     supportFragmentManager.beginTransaction().add(dialog,"").commitAllowingStateLoss()
 //                    중복된 아이디가 존재하지 않을 경우
-//                    val nextPosition = currentPosition + 1
-//                    binding.viewpager.currentItem = nextPosition
+                    val nextPosition = currentPosition + 1
+                    binding.viewpager.currentItem = nextPosition
                 }
 
                 2 -> {

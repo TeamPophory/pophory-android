@@ -18,21 +18,21 @@
 
             <ImageView
                 android:id="@+id/btn_back"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_marginStart="20dp"
-                android:contentDescription="back_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="12dp"
+                android:layout_marginStart="8dp"
                 android:src="@drawable/ic_back"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.5" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/tv_sign_up"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="회원가입"
+                android:text="@string/sign_up"
+                android:textAppearance="@style/TextAppearance.Pophory.HeadLineMedium"
                 android:textSize="19sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -91,9 +91,11 @@
         android:layout_marginBottom="22dp"
         android:background="@drawable/selector_sign_up_btn"
         android:gravity="center"
-        android:paddingTop="16dp"
-        android:paddingBottom="15dp"
-        android:text="다음으로 넘어가기"
+        android:paddingTop="21dp"
+        android:paddingBottom="20dp"
+        android:text="@string/sign_up_next_button"
+        android:textColor="@color/white"
+        android:textAppearance="@style/TextAppearance.Pophory.HeadLineSmall"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
