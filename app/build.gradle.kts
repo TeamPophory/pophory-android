@@ -28,6 +28,7 @@ android {
 
     buildTypes {
         debug {
+            //appDistribution upload debug
             firebaseAppDistribution {
                 artifactType = "APK"
                 releaseNotesFile = "firebase/releaseNote.txt"

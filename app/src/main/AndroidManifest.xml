@@ -72,11 +72,6 @@
             android:name=".feature.onboarding.OnBoardingActivity"
             android:exported="true"
             android:theme="@style/Theme.App.Popopopo.Starting">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".feature.setting.SettingActivity"
@@ -100,7 +95,15 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".feature.album.AlbumListActivity"
-            android:exported="false" />
+            android:name=".feature.album.list.AlbumListActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".feature.album.detail.AlbumDetailActivity" />
     </application>
 </manifest>

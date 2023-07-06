@@ -1,5 +1,6 @@
 package com.teampophory.pophory.config.di
 
+import com.teampophory.pophory.data.network.service.AlbumService
 import com.teampophory.pophory.data.network.service.AuthService
 import com.teampophory.pophory.data.repository.auth.AuthRepository
 import com.teampophory.pophory.data.repository.auth.DefaultAuthRepository
