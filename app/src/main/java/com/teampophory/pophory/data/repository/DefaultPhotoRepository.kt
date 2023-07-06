@@ -10,5 +10,4 @@ class DefaultPhotoRepository @Inject constructor(
     override suspend fun getPhotos(): Result<PhotoListResponse> {
         return runCatching { retrofitPhotoNetwork.getAlbums() }
     }
-
 }

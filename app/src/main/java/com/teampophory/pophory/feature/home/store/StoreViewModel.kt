@@ -3,19 +3,30 @@ package com.teampophory.pophory.feature.home.store
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.teampophory.pophory.R
+import androidx.lifecycle.viewModelScope
+import com.teampophory.pophory.data.repository.StoreRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class StoreViewModel : ViewModel() {
+@HiltViewModel
+class StoreViewModel @Inject constructor(
+    private val storeRepository: StoreRepository
+) : ViewModel() {
 
-    private val _albumList = MutableLiveData<List<Int>>()
+    private val _albums = MutableLiveData<StoreState>(StoreState.Uninitialized)
+    val albums: LiveData<StoreState> get() = _albums
 
-    val albumList: LiveData<List<Int>> get() = _albumList
-
-    val mockAlbumList = listOf(
-        R.drawable.img_album_cover
-    )
-
-    init {
-        _albumList.value = mockAlbumList
+    fun getAlbums() {
+        viewModelScope.launch {
+            _albums.value = StoreState.Loading
+            storeRepository.getAlbums()
+                .onSuccess {
+                    _albums.value =
+                        StoreState.SuccessAlbums(it.toAlbums())
+                }.onFailure {
+                    _albums.value = StoreState.Error(it)
+                }
+        }
     }
 }

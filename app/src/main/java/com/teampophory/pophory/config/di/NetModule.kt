@@ -2,6 +2,7 @@ package com.teampophory.pophory.config.di
 
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import com.teampophory.pophory.BuildConfig
+import com.teampophory.pophory.FlipperInitializer
 import com.teampophory.pophory.config.di.qualifier.Auth
 import com.teampophory.pophory.config.di.qualifier.Log
 import com.teampophory.pophory.data.network.interceptor.AuthInterceptor
@@ -54,6 +55,7 @@ object NetModule {
     ): OkHttpClient = OkHttpClient.Builder()
         .addInterceptor(logInterceptor)
         .addInterceptor(authInterceptor)
+        .apply { FlipperInitializer.initOkHttpClient(this) }
         .build()
 
     // TODO by Nunu BaseUrl 변경

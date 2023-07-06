@@ -2,88 +2,111 @@ package com.teampophory.pophory.feature.home.store
 
 import android.content.Intent
 import android.os.Bundle
-import android.text.Spannable
-import android.text.SpannableStringBuilder
-import android.text.style.ForegroundColorSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
+import androidx.core.text.buildSpannedString
+import androidx.core.text.color
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.viewpager2.widget.ViewPager2
 import com.teampophory.pophory.R
-import com.teampophory.pophory.common.view.ItemDiffCallback
+import com.teampophory.pophory.common.fragment.colorOf
+import com.teampophory.pophory.common.primitive.textAppearance
 import com.teampophory.pophory.common.view.viewBinding
 import com.teampophory.pophory.databinding.FragmentStoreBinding
 import com.teampophory.pophory.feature.album.AlbumListActivity
+import com.teampophory.pophory.feature.home.store.apdater.OnPageChangedListener
 import com.teampophory.pophory.feature.home.store.apdater.StoreAdapter
+import com.teampophory.pophory.feature.home.store.model.AlbumItem
+import dagger.hilt.android.AndroidEntryPoint
 
-class StoreFragment : Fragment() {
+@AndroidEntryPoint
+class StoreFragment : Fragment(), OnPageChangedListener {
     private val binding by viewBinding(FragmentStoreBinding::bind)
 
-    private var adapter: StoreAdapter? = null
+    private var storeAdapter: StoreAdapter? = null
+
     private val viewModel by viewModels<StoreViewModel>()
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View {
         return inflater.inflate(R.layout.fragment_store, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupViewPager()
-        observeAlbumList()
+        initObserver()
         setSpannableString()
     }
 
-    private fun setupViewPager() {
-        //2차 스프린트를 위해 position 값을 받아둠
-        adapter = StoreAdapter(ItemDiffCallback(
-            onItemsTheSame = { old, new -> old == new },
-            onContentsTheSame = { old, new -> old == new }
-        )) { position ->
-            val intent = Intent(context, AlbumListActivity::class.java)
-            intent.putExtra("itemId", position)
-            requireContext().startActivity(intent)
-        }
+    private fun initObserver() {
+        viewModel.albums.observe(viewLifecycleOwner) { storeState ->
+            when (storeState) {
+                is StoreState.Uninitialized -> {
+                    viewModel.getAlbums()
+                    setupViewPager()
+                }
 
-        binding.viewpagerStore.adapter = adapter
+                is StoreState.Loading -> {}
+
+                is StoreState.SuccessAlbums -> {
+                    with(binding) {
+                        storeAdapter?.submitList(storeState.data)
+
+                        //최초 데이터 세팅
+                        storeState.data.firstOrNull()?.let { onPageChanged(it) }
+                    }
+                }
+
+                is StoreState.Error -> {}
+                else -> {}
+            }
+        }
+    }
+
+    private fun setupViewPager() {
+        storeAdapter = StoreAdapter({ albumItem ->
+            val intent = Intent(context, AlbumListActivity::class.java)
+            startActivity(intent)
+        }, this)
+
+        binding.viewpagerStore.adapter = storeAdapter
 
         //1차 스프린트용 입력 방지
         binding.viewpagerStore.isUserInputEnabled = false
-    }
 
-    private fun observeAlbumList() {
-        viewModel.albumList.observe(viewLifecycleOwner) { list ->
-            adapter?.submitList(list)
-        }
+        // 페이지가 변경될 때마다 콜백 등록
+        binding.viewpagerStore.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                super.onPageSelected(position)
+                val currentItem = storeAdapter?.currentList?.get(position)
+                currentItem?.let { onPageChanged(it) }
+            }
+        })
     }
 
     private fun setSpannableString() {
         val fullText = getString(R.string.store_welcome)
-        val coloredText = "포포링만의 추억을" // 색상을 변경하려는 특정 단어
+        val coloredText = "포포리 앨범" // 색상을 변경하려는 특정 단어
+        val splittedText = fullText.split(coloredText)
 
-        val spannableStringBuilder = SpannableStringBuilder(fullText)
-        val start = fullText.indexOf(coloredText)
-        val end = start + coloredText.length
-
-        if (start != -1) {
-            spannableStringBuilder.setSpan(
-                ForegroundColorSpan(
-                    ContextCompat.getColor(
-                        requireContext(),
-                        R.color.pophory_purple
-                    )
-                ),
-                start,
-                end,
-                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
-            )
+        val text = buildSpannedString {
+            color(colorOf(R.color.pophory_purple)) {
+                textAppearance(requireContext(), R.style.TextAppearance_Pophory_HeadLineBold) {
+                    append(coloredText)
+                }
+            }
+            append(splittedText[1])
         }
 
-        binding.tvStoreWelcome.text = spannableStringBuilder
+        binding.tvStoreWelcome.text = text
+    }
+
+    override fun onPageChanged(albumItem: AlbumItem) {
+        binding.tvStoreAlbumPhotoCount.text = albumItem.photoCount.toString() + "/30"
     }
 }

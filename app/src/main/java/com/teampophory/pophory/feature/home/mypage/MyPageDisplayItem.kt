@@ -17,7 +17,7 @@ data class MyPageInfo(
     val photos: List<Photo>
 ) {
     data class Photo(
-        val photoId: Long,
+        val photoId: Int,
         val photoUrl: String
     )
 }
