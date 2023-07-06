@@ -10,6 +10,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.Window
 import android.view.WindowInsets
 import android.view.WindowManager
 import androidx.fragment.app.DialogFragment
@@ -25,13 +26,12 @@ class SignUpDialogFragment : DialogFragment() {
         savedInstanceState: Bundle?
     ): View {
         // 레이아웃 배경을 투명하게 해줌
-        dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
         return FragmentSignUpDialogBinding.inflate(inflater, container, false).root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         binding.btnDialog.setOnClickListener {
             dismiss()
         }
@@ -41,6 +41,10 @@ class SignUpDialogFragment : DialogFragment() {
         super.onResume()
         context?.let {
             dialogWidthPercent(it, dialog)
+        }
+        dialog?.window?.run {
+            setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            requestFeature(Window.FEATURE_NO_TITLE)
         }
     }
 
