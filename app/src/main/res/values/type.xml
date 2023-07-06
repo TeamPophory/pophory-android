@@ -11,7 +11,7 @@
 
     <style name="TextAppearance.Pophory.HeadLineBold">
         <item name="android:textFontWeight">700</item>
-        <item name="android:textSize">24sp</item>
+        <item name="android:textSize">23sp</item>
         <item name="lineHeight">32sp</item>
     </style>
 

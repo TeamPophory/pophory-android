@@ -36,7 +36,6 @@ class SignUpActivity : AppCompatActivity(), SignUpButtonInterface {
     }
 
     private fun clickToolbarBackButton() {
-        val backPosition = currentPosition - 1
         binding.btnBack.setOnClickListener {
             when (currentPosition) {
                 0 -> {
@@ -46,11 +45,11 @@ class SignUpActivity : AppCompatActivity(), SignUpButtonInterface {
                 }
 
                 1 -> {
-                    binding.viewpager.currentItem = backPosition
+                    binding.viewpager.currentItem = 0
                 }
 
                 2 -> {
-                    binding.viewpager.currentItem = backPosition
+                    binding.viewpager.currentItem = 1
                 }
             }
         }
