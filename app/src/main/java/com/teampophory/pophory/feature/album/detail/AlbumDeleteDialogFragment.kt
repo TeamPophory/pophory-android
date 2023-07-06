@@ -33,10 +33,10 @@ class AlbumDeleteDialogFragment : DialogFragment() {
 
     private fun initButtonClickListener() {
         with(binding) {
-            tvReturn.setOnClickListener {
+            tvReturnButton.setOnClickListener {
                 dismissAllowingStateLoss()
             }
-            tvDelete.setOnClickListener {
+            tvDeleteButton.setOnClickListener {
                 viewModel.deleteAlbum()
             }
         }

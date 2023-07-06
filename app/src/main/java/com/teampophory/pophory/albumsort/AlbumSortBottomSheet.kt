@@ -1,16 +1,20 @@
-package com.teampophory.pophory.bottomsheet
+package com.teampophory.pophory.albumsort
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.teampophory.pophory.databinding.ModalBottomSheetContentBinding
+import com.teampophory.pophory.feature.album.list.AlbumListViewModel
 
-class ModalBottomSheet : BottomSheetDialogFragment() {
+class AlbumSortBottomSheet : BottomSheetDialogFragment() {
 
     private var _binding: ModalBottomSheetContentBinding? = null
     private val binding get() = _binding!!
+
+    private val viewModel by activityViewModels<AlbumListViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -29,16 +33,14 @@ class ModalBottomSheet : BottomSheetDialogFragment() {
     private fun initListMenuViews() {
         with(binding) {
             tvSortNewest.setOnClickListener {
+                viewModel.sortPhotoList(AlbumSortType.NEWEST)
                 dismissAllowingStateLoss()
             }
             tvSortOldest.setOnClickListener {
+                viewModel.sortPhotoList(AlbumSortType.OLDEST)
                 dismissAllowingStateLoss()
             }
         }
-    }
-
-    override fun onStart() {
-        super.onStart()
     }
 
     override fun onDestroyView() {

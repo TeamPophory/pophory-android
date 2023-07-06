@@ -1,8 +1,10 @@
 package com.teampophory.pophory.feature.album.list.viewholder
 
+import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
 import coil.load
+import com.teampophory.pophory.R
 import com.teampophory.pophory.databinding.ItemHorizontalPhotoBinding
 import com.teampophory.pophory.databinding.ItemVerticalPhotoBinding
 import com.teampophory.pophory.feature.album.model.PhotoDetail
@@ -31,8 +33,8 @@ sealed class AlbumViewHolder(
     }
 
     class VerticalViewHolder(
-            private val binding: ItemVerticalPhotoBinding,
-            private val onItemClicked: (PhotoDetail) -> Unit
+        private val binding: ItemVerticalPhotoBinding,
+        private val onItemClicked: (PhotoDetail) -> Unit
     ) : AlbumViewHolder(binding) {
         override fun bind(item: PhotoItem) {
             with(binding) {
@@ -40,17 +42,36 @@ sealed class AlbumViewHolder(
                     val firstImageData = item.photoDetails.firstOrNull() ?: return
                     val secondImageData = item.photoDetails.getOrNull(1) ?: return
 
-                    ivFirstVerticalImage.setOnClickListener {
-                        onItemClicked(firstImageData)
+                    ivFirstVerticalImage.run {
+                        loadAndDisplayImage(firstImageData)
+                        setOnClickListener {
+                            onItemClicked(firstImageData)
+                        }
                     }
 
-                    ivSecondVerticalImage.setOnClickListener {
-                        onItemClicked(secondImageData)
+                    ivSecondVerticalImage.run {
+                        if (secondImageData.imageUrl.isNotBlank()) {
+                            loadAndDisplayImage(secondImageData)
+                            load(secondImageData.imageUrl) {
+                                crossfade(true)
+                                placeholder(R.drawable.img_loading_vertical)
+                            }
+                        } else {
+                            load(R.drawable.img_default_vertical_1)
+                        }
+
+                        setOnClickListener {
+                            onItemClicked(secondImageData)
+                        }
                     }
-                    ivFirstVerticalImage.load(firstImageData.imageUrl)
-                    ivSecondVerticalImage.load(secondImageData.imageUrl)
                 }
             }
         }
+
+        private fun ImageView.loadAndDisplayImage(photoDetail: PhotoDetail) =
+            load(photoDetail.imageUrl) {
+                crossfade(true)
+                placeholder(R.drawable.img_loading_vertical)
+            }
     }
 }
