@@ -23,13 +23,18 @@ sealed class AlbumViewHolder(
         override fun bind(item: PhotoItem) {
             if (item is PhotoItem.HorizontalItem) {
                 binding.ivHorizontalImage.run {
-                    load(item.photoDetail.imageUrl)
+                    loadAndDisplayHorizontalImage(item.photoDetail)
                     setOnClickListener {
                         onItemClicked(item.photoDetail)
                     }
                 }
             }
         }
+        private fun ImageView.loadAndDisplayHorizontalImage(photoDetail: PhotoDetail) =
+            load(photoDetail.imageUrl) {
+                crossfade(true)
+                placeholder(R.drawable.img_loading_horizontal)
+            }
     }
 
     class VerticalViewHolder(
@@ -43,7 +48,7 @@ sealed class AlbumViewHolder(
                     val secondImageData = item.photoDetails.getOrNull(1) ?: return
 
                     ivFirstVerticalImage.run {
-                        loadAndDisplayImage(firstImageData)
+                        loadAndDisplayVerticalImage(firstImageData)
                         setOnClickListener {
                             onItemClicked(firstImageData)
                         }
@@ -51,7 +56,7 @@ sealed class AlbumViewHolder(
 
                     ivSecondVerticalImage.run {
                         if (secondImageData.imageUrl.isNotBlank()) {
-                            loadAndDisplayImage(secondImageData)
+                            loadAndDisplayVerticalImage(secondImageData)
                             load(secondImageData.imageUrl) {
                                 crossfade(true)
                                 placeholder(R.drawable.img_loading_vertical)
@@ -68,7 +73,7 @@ sealed class AlbumViewHolder(
             }
         }
 
-        private fun ImageView.loadAndDisplayImage(photoDetail: PhotoDetail) =
+        private fun ImageView.loadAndDisplayVerticalImage(photoDetail: PhotoDetail) =
             load(photoDetail.imageUrl) {
                 crossfade(true)
                 placeholder(R.drawable.img_loading_vertical)
