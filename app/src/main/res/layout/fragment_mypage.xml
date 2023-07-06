@@ -73,26 +73,26 @@
         android:layout_width="0dp"
         android:layout_height="180dp"
         android:layout_marginHorizontal="40dp"
-        android:layout_marginTop="34dp"
+        android:layout_marginBottom="16dp"
         android:src="@drawable/ic_empty_feed"
-        android:visibility="visible"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@id/tv_mypage_feed_empty"
         app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/rv_mypage" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/tv_mypage_feed_empty"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginBottom="56dp"
         android:text="@string/mypage_feed_empty"
         android:textAppearance="?textAppearanceHeadlineSmall"
         android:textColor="?colorOnSurface100"
         android:textSize="18sp"
-        android:visibility="visible"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/iv_mypage_feed_empty" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
