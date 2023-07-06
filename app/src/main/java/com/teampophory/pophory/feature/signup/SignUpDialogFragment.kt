@@ -44,7 +44,6 @@ class SignUpDialogFragment : DialogFragment() {
         }
         dialog?.window?.run {
             setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-            requestFeature(Window.FEATURE_NO_TITLE)
         }
     }
 
