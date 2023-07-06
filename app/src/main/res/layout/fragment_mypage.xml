@@ -6,11 +6,11 @@
     android:layout_height="match_parent"
     tools:context=".feature.home.mypage.MyPageFragment">
 
-    <androidx.appcompat.widget.Toolbar
+    <Toolbar
         android:id="@+id/toolbar_mypage"
         android:layout_width="0dp"
         android:layout_height="?actionBarSize"
-        android:background="?android:background"
+        android:background="?colorSurface"
         app:layout_constraintBottom_toTopOf="@id/div_mypage"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -43,7 +43,7 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </androidx.appcompat.widget.Toolbar>
+    </Toolbar>
 
     <View
         android:id="@+id/div_mypage"
