@@ -39,10 +39,12 @@ class SignUpThirdFragment : Fragment() {
     }
 
     private fun setAlbumSelectState(number: Int){
-        binding.ivAlbumSelect1.isVisible = number == 1
-        binding.ivAlbumSelect2.isVisible = number == 2
-        binding.ivAlbumSelect3.isVisible = number == 3
-        binding.ivAlbumSelect4.isVisible = number == 4
+        with(binding){
+            ivAlbumSelect1.isVisible = number == 1
+            ivAlbumSelect2.isVisible = number == 2
+            ivAlbumSelect3.isVisible = number == 3
+            ivAlbumSelect4.isVisible = number == 4
+        }
     }
 
     private fun setSpannableString() {
