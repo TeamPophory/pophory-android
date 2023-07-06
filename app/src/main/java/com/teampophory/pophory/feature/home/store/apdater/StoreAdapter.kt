@@ -33,9 +33,6 @@ class StoreAdapter(
                 onItemClicked(albumItem)
                 onPageChangedListener.onPageChanged(albumItem)
             }
-            with(binding) {
-
-            }
         }
     }
 
