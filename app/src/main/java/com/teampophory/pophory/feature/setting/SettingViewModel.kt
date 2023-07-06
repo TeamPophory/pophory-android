@@ -7,6 +7,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import javax.inject.Inject
 
 enum class Event {
@@ -31,6 +32,7 @@ class SettingViewModel @Inject constructor(
             }.onSuccess {
                 _event.emit(Event.LOGOUT)
             }.onFailure {
+                Timber.e(it)
                 _message.emit("네트워크 연결상황이 좋지 않아 로그아웃에 실패했습니다.")
             }
         }
@@ -43,6 +45,7 @@ class SettingViewModel @Inject constructor(
             }.onSuccess {
                 _event.emit(Event.WITHDRAWAL)
             }.onFailure {
+                Timber.e(it)
                 _message.emit("네트워크 연결상황이 좋지 않아 회원탈퇴에 실패했습니다.")
             }
         }

@@ -19,48 +19,32 @@ class OnBoardingActivity : AppCompatActivity() {
     private lateinit var viewPager: ViewPager2
     private lateinit var adapter: OnBoardingViewPagerAdapter
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen()
         super.onCreate(savedInstanceState)
-
         setContentView(binding.root)
-
         setViewPager()
-
         clickKakaoLoginBtn()
     }
 
     private val pageChangeCallback = object : ViewPager2.OnPageChangeCallback() {
-        override fun onPageScrollStateChanged(state: Int) {
-            super.onPageScrollStateChanged(state)
-        }
-
         override fun onPageScrolled(
             position: Int,
             positionOffset: Float,
             positionOffsetPixels: Int
         ) {
             super.onPageScrolled(position, positionOffset, positionOffsetPixels)
-
             binding.dotIndicatorFirst.isSelected = position == 0
             binding.dotIndicatorSecond.isSelected = position == 1
             binding.dotIndicatorThird.isSelected = position == 2
         }
-
-        override fun onPageSelected(position: Int) {
-            super.onPageSelected(position)
-
-        }
     }
 
-    //todo 카카오 로그인으로 수정 예정
+    // TODO 카카오 로그인으로 수정 예정
     private fun clickKakaoLoginBtn() {
         binding.btnStartSocialLogin.setOnClickListener {
             val intent = Intent(this, SignUpActivity::class.java)
             startActivity(intent)
-
-
         }
     }
 
@@ -68,7 +52,7 @@ class OnBoardingActivity : AppCompatActivity() {
         viewPager = binding.viewpagerOnboarding
         adapter = OnBoardingViewPagerAdapter()
 
-        //todo 이미지로 수정 예정
+        // TODO 이미지로 수정 예정
         adapter.submitList(
             mutableListOf(
                 OnBoardingData(getColorAsString(applicationContext, R.color.pophory_red)),

@@ -1,5 +1,6 @@
 package com.teampophory.pophory.feature.setting
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
@@ -7,13 +8,18 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.runtime.getValue
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import com.jakewharton.processphoenix.ProcessPhoenix
 import com.teampophory.pophory.config.di.qualifier.Kakao
 import com.teampophory.pophory.design.PophoryTheme
 import com.teampophory.pophory.feature.auth.social.OAuthService
+import com.teampophory.pophory.feature.onboarding.OnBoardingActivity
 import com.teampophory.pophory.feature.setting.webview.WebViewActivity
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -58,9 +64,15 @@ class SettingActivity : AppCompatActivity() {
                         )
                     },
                     onLogout = ::logout,
+                    onWithdrawal = ::withdrawal
                 )
             }
         }
+        viewModel.event
+            .flowWithLifecycle(lifecycle)
+            .onEach {
+                ProcessPhoenix.triggerRebirth(this, Intent(this, OnBoardingActivity::class.java))
+            }.launchIn(lifecycleScope)
     }
 
     private fun logout() {
@@ -70,6 +82,18 @@ class SettingActivity : AppCompatActivity() {
                     kakaoAuthService.logout()
                 }.onSuccess {
                     viewModel.logout()
+                }
+            }
+        }
+    }
+
+    private fun withdrawal() {
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                runCatching {
+                    kakaoAuthService.withdraw()
+                }.onSuccess {
+                    viewModel.withdrawal()
                 }
             }
         }
