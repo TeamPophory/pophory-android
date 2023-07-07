@@ -74,7 +74,10 @@ class OnBoardingActivity : AppCompatActivity() {
                                 }
                             }
                         }
-                        .onFailure { snackBar(binding.root) { "로그인에 실패했습니다." } }
+                        .onFailure {
+                            Timber.e(it)
+                            snackBar(binding.root) { "로그인에 실패했습니다." }
+                        }
                 }.onFailure(Timber::e)
             }
         }
