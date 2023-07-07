@@ -23,7 +23,7 @@ class DefaultAuthRepository @Inject constructor(
     }
 
     override suspend fun withdraw() {
-        service.withdraw()
+        service.withdraw("Bearer ${dataStore.accessToken}")
         dataStore.clear()
     }
 

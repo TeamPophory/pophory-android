@@ -15,5 +15,7 @@ interface AuthService {
     ): AuthResponse
 
     @PUT("api/v1/auth")
-    suspend fun withdraw()
+    suspend fun withdraw(
+        @Header("Authorization") authorization: String,
+    )
 }
