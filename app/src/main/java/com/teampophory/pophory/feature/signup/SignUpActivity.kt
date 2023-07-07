@@ -29,6 +29,19 @@ class SignUpActivity : AppCompatActivity(), SignUpButtonInterface {
             val intent = Intent(this, HomeActivity::class.java)
             startActivity((intent))
         }
+
+        viewModel.nicknameCheckResult.observe(this) {it ->
+            if(!it.isDuplicated) {
+                // TODO 중복된 아이디가 존재하지 않을 경우
+                val nextPosition = currentPosition + 1
+                binding.viewpager.currentItem = nextPosition
+            } else {
+                // TODO 중복된 아이디가 존재하는 경우
+                val dialog = SignUpDialogFragment()
+                supportFragmentManager.beginTransaction().add(dialog, "")
+                    .commitAllowingStateLoss()
+            }
+        }
         // 다음 버튼
         clickNextButton()
         // 뷰페이저
@@ -67,13 +80,7 @@ class SignUpActivity : AppCompatActivity(), SignUpButtonInterface {
                 }
 
                 1 -> {
-                    // TODO 중복된 아이디가 존재하는 경우
-                    val dialog = SignUpDialogFragment()
-                    supportFragmentManager.beginTransaction().add(dialog, "")
-                        .commitAllowingStateLoss()
-                    // TODO 중복된 아이디가 존재하지 않을 경우
-                    val nextPosition = currentPosition + 1
-                    binding.viewpager.currentItem = nextPosition
+                    viewModel.nicknameCheck()
                 }
 
                 2 -> {
