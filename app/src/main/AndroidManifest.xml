@@ -73,7 +73,7 @@
         <activity
             android:name=".feature.onboarding.OnBoardingActivity"
             android:exported="true"
-            android:theme="@style/Theme.App.Popopopo.Starting">
+            android:theme="@style/Theme.App.Pophory.Starting">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

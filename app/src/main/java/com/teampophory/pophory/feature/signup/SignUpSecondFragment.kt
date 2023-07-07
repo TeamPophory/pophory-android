@@ -10,6 +10,7 @@ import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import com.teampophory.pophory.R
 import com.teampophory.pophory.common.fragment.colorOf
 import com.teampophory.pophory.common.primitive.textAppearance
@@ -20,6 +21,7 @@ import java.util.regex.Pattern
 class SignUpSecondFragment : Fragment() {
     private val binding by viewBinding(FragmentSignUpSecondBinding::bind)
     private var buttonState: SignUpButtonInterface? = null
+    private val signUpViewModel by activityViewModels<SignUpViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,13 +42,13 @@ class SignUpSecondFragment : Fragment() {
 
     private fun deleteAllEditText() {
         binding.btnDeleteEditText.setOnClickListener {
-            binding.editTvName.text.clear()
+            binding.editTvId.text.clear()
         }
     }
 
     private fun setEditText() {
         // 텍스트창 활성화
-        binding.editTvName.apply {
+        binding.editTvId.apply {
             setOnFocusChangeListener { _, hasFocus ->
                 // 포커스가 주어졌을 때
                 if (hasFocus) {
@@ -56,25 +58,25 @@ class SignUpSecondFragment : Fragment() {
                 }
             }
             doAfterTextChanged {
+                signUpViewModel.setNickName(it.toString())
                 //X버튼 생성 여부
                 binding.btnDeleteEditText.isGone = it?.isEmpty() == true
                 //글자 수 계산
                 binding.tvTextCount.text = "(${it.toString().length}/12)"
 
-                val textMatcher = HANGUL_REGEX.matcher(binding.editTvName.text)
-                val specialMatcher = SPECIAL_REGEX.matcher(binding.editTvName.text)
+                val textMatcher = HANGUL_REGEX.matcher(binding.editTvId.text)
                 if (!textMatcher.find()) {
                     binding.tvErrorMessage.text = "*올바른 형식의 아이디가 아닙니다"
-                    binding.editTvName.setBackgroundResource(R.drawable.bg_sign_up_edit_text_error)
+                    binding.editTvId.setBackgroundResource(R.drawable.bg_sign_up_edit_text_error)
                     binding.tvErrorMessage.isVisible = true
                     buttonState?.onChangeState(false)
                 } else if (it.toString().length < 4) {
                     binding.tvErrorMessage.text = "4-12글자 이내로 작성해주세요."
-                    binding.editTvName.setBackgroundResource(R.drawable.bg_sign_up_edit_text_error)
+                    binding.editTvId.setBackgroundResource(R.drawable.bg_sign_up_edit_text_error)
                     binding.tvErrorMessage.isVisible = true
                     buttonState?.onChangeState(false)
                 } else {
-                    binding.editTvName.setBackgroundResource(R.drawable.bg_sign_up_edit_text_selected)
+                    binding.editTvId.setBackgroundResource(R.drawable.bg_sign_up_edit_text_selected)
                     binding.tvErrorMessage.isVisible = false
                     buttonState?.onChangeState(true)
                 }
@@ -106,8 +108,5 @@ class SignUpSecondFragment : Fragment() {
     companion object {
         private const val HANGUL_PATTERN = "^[a-zA-Z0-9._]{4,12}\$"
         val HANGUL_REGEX: Pattern = Pattern.compile(HANGUL_PATTERN)
-
-        private const val SPECIAL_PATTERN = "^[^._]*$"
-        val SPECIAL_REGEX: Pattern = Pattern.compile(SPECIAL_PATTERN)
     }
 }
