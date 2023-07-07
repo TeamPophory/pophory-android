@@ -13,6 +13,8 @@ import androidx.fragment.app.viewModels
 import androidx.viewpager2.widget.ViewPager2
 import com.teampophory.pophory.R
 import com.teampophory.pophory.common.fragment.colorOf
+import com.teampophory.pophory.common.fragment.hideLoading
+import com.teampophory.pophory.common.fragment.showLoading
 import com.teampophory.pophory.common.primitive.textAppearance
 import com.teampophory.pophory.common.view.viewBinding
 import com.teampophory.pophory.databinding.FragmentStoreBinding
@@ -54,9 +56,12 @@ class StoreFragment : Fragment(), OnPageChangedListener {
                     setupViewPager()
                 }
 
-                is StoreState.Loading -> {}
+                is StoreState.Loading -> {
+                    showLoading()
+                }
 
                 is StoreState.SuccessAlbums -> {
+                    hideLoading()
                     with(binding) {
                         storeAdapter?.submitList(storeState.data)
 
@@ -65,7 +70,9 @@ class StoreFragment : Fragment(), OnPageChangedListener {
                     }
                 }
 
-                is StoreState.Error -> {}
+                is StoreState.Error -> {
+                    hideLoading()
+                }
                 else -> {}
             }
         }
