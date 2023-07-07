@@ -18,8 +18,10 @@
     <string name="mypage_picture_count">그동안 찍은사진 %d장</string>
     <string name="mypage_feed_title">네컷사진 모아보기</string>
     <string name="mypage_feed_empty">네컷 사진을 추가해볼까?</string>
+    <string name="sort_default_text">과거에 찍은 순</string>
+
+    <!-- album -->
     <string name="sort_newest">최근에 찍은 순</string>
     <string name="sort_oldest">과거에 찍은 순</string>
     <string name="select_sort">정렬 선택하기</string>
-    <string name="sort_default_text">과거에 찍은 순</string>
 </resources>
