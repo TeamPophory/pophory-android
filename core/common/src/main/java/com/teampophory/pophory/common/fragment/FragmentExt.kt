@@ -7,6 +7,7 @@ import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.commit
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.snackbar.Snackbar
 import com.teampophory.pophory.common.view.LoadingProgressIndicator
@@ -27,19 +28,20 @@ fun Fragment.stringOf(@StringRes resId: Int) = getString(resId)
 
 fun Fragment.colorOf(@ColorRes resId: Int) = ContextCompat.getColor(requireContext(), resId)
 
-fun Fragment.drawableOf(@DrawableRes resId: Int) = ContextCompat.getDrawable(requireContext(), resId)
+fun Fragment.drawableOf(@DrawableRes resId: Int) =
+    ContextCompat.getDrawable(requireContext(), resId)
 
 fun Fragment.showLoading() {
-    childFragmentManager.beginTransaction()
-        .add(LoadingProgressIndicator.newInstance(), LoadingProgressIndicator.TAG)
-        .commitAllowingStateLoss()
+    childFragmentManager.commit(allowStateLoss = true) {
+        add(LoadingProgressIndicator.newInstance(), LoadingProgressIndicator.TAG)
+    }
 }
 
 fun Fragment.hideLoading() {
-    childFragmentManager.findFragmentByTag(LoadingProgressIndicator.TAG)?.let {
-        childFragmentManager.beginTransaction()
-            .remove(it)
-            .commitAllowingStateLoss()
+    childFragmentManager.findFragmentByTag(LoadingProgressIndicator.TAG)?.let { fragment ->
+        childFragmentManager.commit(allowStateLoss = true) {
+            remove(fragment)
+        }
     }
 }
 

@@ -1,18 +1,19 @@
 package com.teampophory.pophory.common.activity
 
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.commit
 import com.teampophory.pophory.common.view.LoadingProgressIndicator
 
 fun AppCompatActivity.showLoading() {
-    supportFragmentManager.beginTransaction()
-        .add(LoadingProgressIndicator.newInstance(), LoadingProgressIndicator.TAG)
-        .commitAllowingStateLoss()
+    supportFragmentManager.commit(allowStateLoss = true) {
+        add(LoadingProgressIndicator.newInstance(), LoadingProgressIndicator.TAG)
+    }
 }
 
 fun AppCompatActivity.hideLoading() {
-    supportFragmentManager.findFragmentByTag(LoadingProgressIndicator.TAG)?.let {
-        supportFragmentManager.beginTransaction()
-            .remove(it)
-            .commitAllowingStateLoss()
+    supportFragmentManager.findFragmentByTag(LoadingProgressIndicator.TAG)?.let { fragment ->
+        supportFragmentManager.commit(allowStateLoss = true) {
+            remove(fragment)
+        }
     }
 }

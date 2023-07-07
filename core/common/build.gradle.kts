@@ -15,3 +15,7 @@ android {
         consumerProguardFiles("consumer-rules.pro")
     }
 }
+
+dependencies {
+    implementation(libs.fragment.ktx)
+}
