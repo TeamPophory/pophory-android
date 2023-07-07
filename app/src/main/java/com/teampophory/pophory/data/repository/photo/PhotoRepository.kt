@@ -10,7 +10,7 @@ interface PhotoRepository {
     suspend fun addPhoto(
         albumId: Int,
         takenAt: String,
-        studioId: Int,
+        studioId: Long,
         photo: ContentUriRequestBody
     ): Result<Unit>
 }

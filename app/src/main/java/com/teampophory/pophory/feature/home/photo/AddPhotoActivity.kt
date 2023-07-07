@@ -13,11 +13,16 @@ import com.google.android.material.datepicker.DateValidatorPointBackward
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.teampophory.pophory.R
 import com.teampophory.pophory.common.activity.BindingActivity
+import com.teampophory.pophory.common.context.colorOf
+import com.teampophory.pophory.common.context.snackBar
+import com.teampophory.pophory.common.context.toast
+import com.teampophory.pophory.common.image.ContentUriRequestBody
 import com.teampophory.pophory.common.image.getImageSize
 import com.teampophory.pophory.common.image.toImageContent
 import com.teampophory.pophory.common.intent.parcelableExtra
 import com.teampophory.pophory.common.intent.stringExtra
 import com.teampophory.pophory.common.time.systemNow
+import com.teampophory.pophory.common.view.setOnSingleClickListener
 import com.teampophory.pophory.databinding.ActivityAddPhotoBinding
 import com.teampophory.pophory.feature.home.store.model.AlbumItem
 import com.teampophory.pophory.util.toCoverDrawable
@@ -48,6 +53,7 @@ class AddPhotoActivity : BindingActivity<ActivityAddPhotoBinding>(R.layout.activ
         val realImageUri = Uri.parse(imageUri)?.toImageContent(this)
         val imageSize = realImageUri?.getImageSize()
         imageSize?.let {
+            viewModel.onUpdateImage(ContentUriRequestBody(this, Uri.parse(imageUri)))
             if (it.width >= it.height) {
                 binding.imgBackground.setImageResource(R.drawable.img_background_width)
                 binding.imgHorizontal.load(realImageUri) {
@@ -75,6 +81,9 @@ class AddPhotoActivity : BindingActivity<ActivityAddPhotoBinding>(R.layout.activ
         }
         albumCover?.albumCover?.toCoverDrawable()
             ?.let { binding.imgAlbumCover.setImageResource(it) }
+        binding.btnSubmit.setOnSingleClickListener {
+            viewModel.onSubmit()
+        }
     }
 
     private fun subscribeEvent() {
@@ -106,6 +115,15 @@ class AddPhotoActivity : BindingActivity<ActivityAddPhotoBinding>(R.layout.activ
                     AddPhotoEvent.STUDIO -> {
                         StudioSelectFragment().show(supportFragmentManager, "studio")
                     }
+
+                    AddPhotoEvent.REQUEST_ERROR -> {
+                        snackBar(binding.root) { "요청에 실패했습니다." }
+                    }
+
+                    AddPhotoEvent.ADD_SUCCESS -> {
+                        finish()
+                        toast("사진이 추가되었습니다.")
+                    }
                 }
             }.launchIn(lifecycleScope)
     }
@@ -119,6 +137,17 @@ class AddPhotoActivity : BindingActivity<ActivityAddPhotoBinding>(R.layout.activ
                         "yyyy.MM.dd(EEEEE)",
                         Locale.getDefault()
                     ).format(Date(it))
+            }.launchIn(lifecycleScope)
+        viewModel.currentStudio
+            .flowWithLifecycle(lifecycle)
+            .onEach {
+                if (it.isNotEmpty()) {
+                    binding.txtStudio.text = it.joinToString { studio -> studio.name }
+                    binding.txtStudio.setTextColor(colorOf(R.color.pophory_black))
+                } else {
+                    binding.txtStudio.text = "사진관을 선택해주세요"
+                    binding.txtStudio.setTextColor(colorOf(R.color.gray_40))
+                }
             }.launchIn(lifecycleScope)
     }
 

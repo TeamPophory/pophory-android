@@ -46,7 +46,7 @@ class RetrofitPhotoNetwork @Inject constructor(
     override suspend fun addPhoto(
         albumId: Int,
         takenAt: String,
-        studioId: Int,
+        studioId: Long,
         photo: ContentUriRequestBody
     ) {
         val file = photo.toFormData("photo")

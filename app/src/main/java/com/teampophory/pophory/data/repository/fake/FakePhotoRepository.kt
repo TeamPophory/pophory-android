@@ -51,7 +51,7 @@ class FakePhotoRepository : PhotoRepository {
     override suspend fun addPhoto(
         albumId: Int,
         takenAt: String,
-        studioId: Int,
+        studioId: Long,
         photo: ContentUriRequestBody
     ): Result<Unit> {
         TODO("Not yet implemented")
