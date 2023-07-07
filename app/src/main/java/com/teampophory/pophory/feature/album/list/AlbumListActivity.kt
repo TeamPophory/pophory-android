@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -40,7 +41,7 @@ class AlbumListActivity : AppCompatActivity() {
 
     private fun initData() {
         val albumId = intent.getIntExtra(ALBUM_ID, 0)
-        viewModel.setAlbumId(albumId)
+        viewModel.setAlbumId(0)
     }
 
     private fun initObserver() {
@@ -58,12 +59,18 @@ class AlbumListActivity : AppCompatActivity() {
                 is AlbumListState.SuccessLoadAlbums -> {
                     hideLoading()
                     val photoItems = processPhotoDetails(albumState.data)
-                    albumListAdapter.submitList(photoItems)
+                    if (photoItems.isNotEmpty()) {
+                        binding.clEmptyView.isVisible = false
+                        albumListAdapter.submitList(photoItems)
+                    } else {
+                        binding.clEmptyView.isVisible = true
+                    }
                     Timber.tag(TAG).d("initObserver: %s", albumState.data)
                 }
 
                 is AlbumListState.Error -> {
                     hideLoading()
+                    binding.clEmptyView.isVisible = true
                     Timber.tag(TAG).e(albumState.error)
                 }
             }

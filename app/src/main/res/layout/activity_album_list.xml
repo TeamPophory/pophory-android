@@ -84,4 +84,40 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvSort" />
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clEmptyView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible">
+
+        <ImageView
+            android:id="@+id/ivEmptyFeed"
+            android:layout_width="180dp"
+            android:layout_height="180dp"
+            android:layout_marginBottom="14dp"
+            android:src="@drawable/ic_empty_feed"
+            app:layout_constraintBottom_toTopOf="@id/tvEmptyFeed"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvEmptyFeed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/mypage_feed_empty"
+            android:textAppearance="?textAppearanceHeadlineSmall"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ivEmptyFeed" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
