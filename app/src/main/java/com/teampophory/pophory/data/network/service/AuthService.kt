@@ -3,9 +3,9 @@ package com.teampophory.pophory.data.network.service
 import com.teampophory.pophory.data.network.model.auth.AuthResponse
 import com.teampophory.pophory.data.network.model.auth.SocialType
 import retrofit2.http.Body
+import retrofit2.http.DELETE
 import retrofit2.http.Header
 import retrofit2.http.POST
-import retrofit2.http.PUT
 
 interface AuthService {
     @POST("api/v1/auth")
@@ -14,6 +14,8 @@ interface AuthService {
         @Body socialType: SocialType
     ): AuthResponse
 
-    @PUT("api/v1/auth")
-    suspend fun withdraw()
+    @DELETE("api/v1/auth")
+    suspend fun withdraw(
+        @Header("Authorization") authorization: String,
+    )
 }

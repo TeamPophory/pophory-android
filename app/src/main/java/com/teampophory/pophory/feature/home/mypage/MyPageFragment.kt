@@ -1,5 +1,6 @@
 package com.teampophory.pophory.feature.home.mypage
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -21,6 +22,7 @@ import com.teampophory.pophory.feature.home.mypage.adapter.MyPageAdapter.Compani
 import com.teampophory.pophory.feature.home.mypage.adapter.MyPageAdapter.Companion.VIEW_TYPE_PHOTO
 import com.teampophory.pophory.feature.home.mypage.adapter.MyPageAdapter.Companion.VIEW_TYPE_PROFILE
 import com.teampophory.pophory.feature.home.mypage.util.GridSpacingCustomDecoration
+import com.teampophory.pophory.feature.setting.SettingActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -69,7 +71,8 @@ class MyPageFragment : Fragment() {
                     val isEmpty = photoItems.isEmpty()
 
                     val myPageInfoData = if (isEmpty) {
-                        myPageInfoState.data.toMutableList().also { it.add(MyPageDisplayItem.Empty) }
+                        myPageInfoState.data.toMutableList()
+                            .also { it.add(MyPageDisplayItem.Empty) }
                     } else {
                         myPageInfoState.data
                     }
@@ -122,7 +125,7 @@ class MyPageFragment : Fragment() {
 
     private fun setOnClickListener() {
         binding.ivToolbarSetting.setOnClickListener {
-            //TODO intent to setting
+            startActivity(Intent(requireContext(), SettingActivity::class.java))
         }
     }
 }
