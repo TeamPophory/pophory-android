@@ -4,13 +4,13 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.teampophory.pophory.R
 import com.teampophory.pophory.albumsort.AlbumSortBottomSheet
 import com.teampophory.pophory.albumsort.AlbumSortType
+import com.teampophory.pophory.common.context.stringOf
 import com.teampophory.pophory.common.view.viewBinding
 import com.teampophory.pophory.databinding.ActivityAlbumListBinding
 import com.teampophory.pophory.feature.album.list.adapter.AlbumListAdapter
@@ -83,13 +83,13 @@ class AlbumListActivity : AppCompatActivity() {
     }
 
     private fun initSortViews() {
-        viewModel.albumSortType.flowWithLifecycle(lifecycle, Lifecycle.State.STARTED).onEach {
+        viewModel.albumSortType.flowWithLifecycle(lifecycle).onEach {
             binding.tvSort.text =  when(it) {
                 AlbumSortType.NEWEST -> {
-                    getString(R.string.sort_newest)
+                    stringOf(R.string.sort_newest)
                 }
                 AlbumSortType.OLDEST -> {
-                    getString(R.string.sort_oldest)
+                    stringOf(R.string.sort_oldest)
                 }
             }
         }.launchIn(lifecycleScope)
