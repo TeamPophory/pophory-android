@@ -41,4 +41,5 @@
     <!-- album -->
     <string name="sort_newest">최근에 찍은 순</string>
     <string name="sort_oldest">과거에 찍은 순</string>
-    <string name="select_sort">정렬 선택하기</string></resources>
+    <string name="select_sort">정렬 선택하기</string>
+</resources>

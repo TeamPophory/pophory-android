@@ -6,12 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.teampophory.pophory.databinding.ModalBottomSheetContentBinding
+import com.teampophory.pophory.databinding.BottomSheetAlbumSortBinding
 import com.teampophory.pophory.feature.album.list.AlbumListViewModel
 
 class AlbumSortBottomSheet : BottomSheetDialogFragment() {
 
-    private var _binding: ModalBottomSheetContentBinding? = null
+    private var _binding: BottomSheetAlbumSortBinding? = null
     private val binding get() = _binding!!
 
     private val viewModel by activityViewModels<AlbumListViewModel>()
@@ -21,7 +21,7 @@ class AlbumSortBottomSheet : BottomSheetDialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = ModalBottomSheetContentBinding.inflate(inflater, container, false)
+        _binding = BottomSheetAlbumSortBinding.inflate(inflater, container, false)
         return binding.root
     }
 

@@ -7,6 +7,8 @@ import androidx.lifecycle.viewModelScope
 import com.teampophory.pophory.albumsort.AlbumSortType
 import com.teampophory.pophory.data.repository.photo.AlbumRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
@@ -16,8 +18,11 @@ class AlbumListViewModel @Inject constructor(
     private val photoRepository: AlbumRepository
 ) : ViewModel() {
 
-    private val _albumId = MutableLiveData(0)
-    val albumId: LiveData<Int> get() = _albumId
+    private val _albumId = MutableStateFlow(0)
+    val albumId: StateFlow<Int> = _albumId
+
+    private val _albumSortType = MutableStateFlow(AlbumSortType.NEWEST)
+    val albumSortType: StateFlow<AlbumSortType> get() = _albumSortType
 
     private val _albumList = MutableLiveData<AlbumListState>(AlbumListState.Uninitialized)
     val albumList: LiveData<AlbumListState> get() = _albumList
@@ -29,7 +34,7 @@ class AlbumListViewModel @Inject constructor(
     fun getAlbums() {
         viewModelScope.launch {
             _albumList.value = AlbumListState.Loading
-            photoRepository.getPhotos(albumId.value ?: 0)
+            photoRepository.getPhotos(albumId.value)
                 .onSuccess {
                     _albumList.value = AlbumListState.SuccessLoadAlbums(it.mapPhotosToPhotoItems())
                 }.onFailure {
@@ -49,6 +54,7 @@ class AlbumListViewModel @Inject constructor(
                 AlbumListState.Error(Throwable("Sort Error"))
                 return
             }
+            _albumSortType.value = newest
             _albumList.value = AlbumListState.SuccessLoadAlbums(sortedPhotoItems)
         } else {
             getAlbums()

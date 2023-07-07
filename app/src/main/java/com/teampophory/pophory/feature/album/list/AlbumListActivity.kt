@@ -4,8 +4,13 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.flowWithLifecycle
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.teampophory.pophory.R
 import com.teampophory.pophory.albumsort.AlbumSortBottomSheet
+import com.teampophory.pophory.albumsort.AlbumSortType
 import com.teampophory.pophory.common.view.viewBinding
 import com.teampophory.pophory.databinding.ActivityAlbumListBinding
 import com.teampophory.pophory.feature.album.list.adapter.AlbumListAdapter
@@ -13,6 +18,8 @@ import com.teampophory.pophory.feature.album.model.OrientType
 import com.teampophory.pophory.feature.album.model.PhotoDetail
 import com.teampophory.pophory.feature.album.model.PhotoItem
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import timber.log.Timber
 
 @AndroidEntryPoint
@@ -76,6 +83,17 @@ class AlbumListActivity : AppCompatActivity() {
     }
 
     private fun initSortViews() {
+        viewModel.albumSortType.flowWithLifecycle(lifecycle, Lifecycle.State.STARTED).onEach {
+            binding.tvSort.text =  when(it) {
+                AlbumSortType.NEWEST -> {
+                    getString(R.string.sort_newest)
+                }
+                AlbumSortType.OLDEST -> {
+                    getString(R.string.sort_oldest)
+                }
+            }
+        }.launchIn(lifecycleScope)
+
         val modalBottomSheet = AlbumSortBottomSheet()
         binding.tvSort.setOnClickListener {
             modalBottomSheet.show(supportFragmentManager, AlbumSortBottomSheet.TAG)
@@ -106,7 +124,7 @@ class AlbumListActivity : AppCompatActivity() {
 
                 OrientType.HORIZONTAL -> {
                     if (verticalItemsBuffer.isNotEmpty()) {
-                        verticalItemsBuffer.add(PhotoDetail(0, "", "", "", 0, 0, OrientType.NONE))
+                        verticalItemsBuffer.add(createEmptyPhotoDetail())
                         photoItems.add(PhotoItem.VerticalItem(verticalItemsBuffer.toList()))
                         verticalItemsBuffer.clear()
                     }
