@@ -61,13 +61,11 @@ class SignUpViewModel @Inject constructor(
             ) {
                 if (response.isSuccessful) {
                     _signUpResult.value = response.body()
-                }else {
-                    Timber.d("signUp fail")
                 }
             }
 
             override fun onFailure(call: Call<SignUpResponse>, t: Throwable) {
-                TODO("Not yet implemented")
+                Timber.d("signUp fail")
             }
         })
     }
@@ -84,13 +82,11 @@ class SignUpViewModel @Inject constructor(
             ) {
                 if (response.isSuccessful) {
                     _nicknameCheckResult.value = response.body()
-                }else {
-                    Timber.d("nickname check fail")
                 }
             }
 
             override fun onFailure(call: Call<NicknameResponse>, t: Throwable) {
-                TODO("Not yet implemented")
+                Timber.d("nickname check fail")
             }
         })
     }
