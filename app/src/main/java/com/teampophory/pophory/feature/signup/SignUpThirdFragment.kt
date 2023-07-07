@@ -1,6 +1,7 @@
 package com.teampophory.pophory.feature.signup
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,15 +9,19 @@ import androidx.core.text.buildSpannedString
 import androidx.core.text.color
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 
 import com.teampophory.pophory.R
 import com.teampophory.pophory.common.fragment.colorOf
+import com.teampophory.pophory.common.fragment.toast
 import com.teampophory.pophory.common.primitive.textAppearance
 import com.teampophory.pophory.common.view.viewBinding
 import com.teampophory.pophory.databinding.FragmentSignUpThirdBinding
 
 class SignUpThirdFragment : Fragment() {
     private val binding by viewBinding(FragmentSignUpThirdBinding::bind)
+    private val signUpViewModel by activityViewModels<SignUpViewModel>()
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -30,6 +35,11 @@ class SignUpThirdFragment : Fragment() {
         setAlbumCoverImage()
         selectAlbumCover()
         setSpannableString()
+
+
+        signUpViewModel.albumCover.observe(viewLifecycleOwner){
+
+        }
     }
 
     private fun setAlbumCoverImage() {
@@ -72,21 +82,22 @@ class SignUpThirdFragment : Fragment() {
 
         binding.ivAlbumCover1.setOnClickListener {
             setAlbumSelectState(1)
+            signUpViewModel.getAlbumCover(1)
             binding.ivAlbumCover.setImageResource(R.drawable.ic_album_cover_friends)
         }
         binding.ivAlbumCover2.setOnClickListener {
             setAlbumSelectState(2)
-
+            signUpViewModel.getAlbumCover(2)
             binding.ivAlbumCover.setImageResource(R.drawable.ic_album_cover_love)
         }
         binding.ivAlbumCover3.setOnClickListener {
             setAlbumSelectState(3)
-
+            signUpViewModel.getAlbumCover(3)
             binding.ivAlbumCover.setImageResource(R.drawable.ic_album_cover_myalbum)
         }
         binding.ivAlbumCover4.setOnClickListener {
             setAlbumSelectState(4)
-
+            signUpViewModel.getAlbumCover(4)
             binding.ivAlbumCover.setImageResource(R.drawable.ic_album_cover_collectbook)
         }
     }

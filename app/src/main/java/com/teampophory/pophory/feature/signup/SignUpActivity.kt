@@ -8,6 +8,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.teampophory.pophory.common.context.toast
 import com.teampophory.pophory.common.view.viewBinding
 import com.teampophory.pophory.databinding.ActivitySignUpBinding
+import com.teampophory.pophory.feature.home.HomeActivity
 import com.teampophory.pophory.feature.onboarding.OnBoardingActivity
 import com.teampophory.pophory.feature.signup.adapter.SignUpViewPagerAdapter
 
@@ -22,11 +23,10 @@ class SignUpActivity : AppCompatActivity(), SignUpButtonInterface {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-
-        viewModel.sampleLiveData.observe(this) {
-            toast(it)
+        viewModel.signUpResult.observe(this) {
+            val intent = Intent(this, HomeActivity::class.java)
+            startActivity((intent))
         }
-
         // 다음 버튼
         clickNextButton()
         // 뷰페이저
@@ -34,6 +34,7 @@ class SignUpActivity : AppCompatActivity(), SignUpButtonInterface {
         // 백버튼 클릭
         clickToolbarBackButton()
     }
+
 
     private fun clickToolbarBackButton() {
         binding.btnBack.setOnClickListener {
@@ -65,18 +66,16 @@ class SignUpActivity : AppCompatActivity(), SignUpButtonInterface {
 
                 1 -> {
                     // TODO 중복된 아이디가 존재하는 경우
-                    val dialog = SignUpDialogFragment().apply {
-
-                    }
-                    supportFragmentManager.beginTransaction().add(dialog,"").commitAllowingStateLoss()
+                    val dialog = SignUpDialogFragment()
+                    supportFragmentManager.beginTransaction().add(dialog, "")
+                        .commitAllowingStateLoss()
 //                    중복된 아이디가 존재하지 않을 경우
                     val nextPosition = currentPosition + 1
                     binding.viewpager.currentItem = nextPosition
                 }
 
                 2 -> {
-                    val intent = Intent(this, StartPophoryActivity::class.java)
-                    startActivity(intent)
+                    viewModel.signUp()
                 }
             }
         }

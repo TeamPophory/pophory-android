@@ -30,7 +30,7 @@
         app:layout_constraintTop_toBottomOf="@id/tv_title" />
 
     <EditText
-        android:id="@+id/edit_tv_name"
+        android:id="@+id/edit_tv_id"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
@@ -54,9 +54,9 @@
         android:layout_height="24dp"
         android:layout_marginEnd="15dp"
         android:background="@drawable/ic_edit_text_delete"
-        app:layout_constraintBottom_toBottomOf="@id/edit_tv_name"
-        app:layout_constraintEnd_toEndOf="@id/edit_tv_name"
-        app:layout_constraintTop_toTopOf="@id/edit_tv_name" />
+        app:layout_constraintBottom_toBottomOf="@id/edit_tv_id"
+        app:layout_constraintEnd_toEndOf="@id/edit_tv_id"
+        app:layout_constraintTop_toTopOf="@id/edit_tv_id" />
 
     <TextView
         android:id="@+id/tv_error_message"
@@ -66,8 +66,8 @@
         android:layout_marginTop="10dp"
         android:textAppearance="@style/TextAppearance.Pophory.Caption1"
         android:textColor="?colorError"
-        app:layout_constraintStart_toStartOf="@id/edit_tv_name"
-        app:layout_constraintTop_toBottomOf="@id/edit_tv_name"
+        app:layout_constraintStart_toStartOf="@id/edit_tv_id"
+        app:layout_constraintTop_toBottomOf="@id/edit_tv_id"
         tools:text="비밀번호 입력 이상하게 함 ㅅㄱ" />
 
     <TextView
@@ -78,7 +78,7 @@
         android:text="@string/sign_up_second_count"
         android:textAppearance="@style/TextAppearance.Pophory.Text1"
         android:textColor="?colorOnSurface40"
-        app:layout_constraintEnd_toEndOf="@id/edit_tv_name"
-        app:layout_constraintTop_toBottomOf="@id/edit_tv_name" />
+        app:layout_constraintEnd_toEndOf="@id/edit_tv_id"
+        app:layout_constraintTop_toBottomOf="@id/edit_tv_id" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

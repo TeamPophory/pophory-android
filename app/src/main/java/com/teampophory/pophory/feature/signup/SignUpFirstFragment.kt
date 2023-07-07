@@ -11,6 +11,7 @@ import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import com.teampophory.pophory.R
 import com.teampophory.pophory.common.fragment.colorOf
 import com.teampophory.pophory.common.fragment.toast
@@ -21,8 +22,10 @@ import timber.log.Timber
 import java.util.regex.Pattern
 
 class SignUpFirstFragment : Fragment() {
+
     private val binding by viewBinding(FragmentSignUpFirstBinding::bind)
     private var buttonState: SignUpButtonInterface? = null
+    private val signUpViewModel by activityViewModels<SignUpViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -41,6 +44,10 @@ class SignUpFirstFragment : Fragment() {
         setEditText()
         // edittext 삭제 버튼
         deleteAllEditText()
+
+        signUpViewModel.realName.observe(viewLifecycleOwner){
+
+        }
     }
 
     private fun deleteAllEditText() {
@@ -62,6 +69,9 @@ class SignUpFirstFragment : Fragment() {
             }
             //edittext text 변화 감지
             doAfterTextChanged {
+
+                signUpViewModel.getRealName(it.toString())
+
                 binding.btnDeleteEditText.isGone = it?.isEmpty() == true
                 // 글자 수 계산
                 binding.tvTextCount.text = "(${it.toString().length}/6)"
