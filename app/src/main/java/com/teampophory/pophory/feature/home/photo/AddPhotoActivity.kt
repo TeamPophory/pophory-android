@@ -121,7 +121,8 @@ class AddPhotoActivity : BindingActivity<ActivityAddPhotoBinding>(R.layout.activ
                     }
 
                     AddPhotoEvent.ADD_SUCCESS -> {
-                        setResult(RESULT_OK)
+                        val intent = Intent().putExtra(EXTRA_ALBUM_ITEM, albumCover)
+                        setResult(RESULT_OK, intent)
                         finish()
                         toast("사진이 추가되었습니다.")
                     }
