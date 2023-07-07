@@ -1,5 +1,6 @@
 package com.teampophory.pophory.data.repository.fake
 
+import com.teampophory.pophory.common.image.ContentUriRequestBody
 import com.teampophory.pophory.data.model.photo.Studio
 import com.teampophory.pophory.data.repository.photo.PhotoRepository
 import com.teampophory.pophory.network.model.PhotoListResponse
@@ -44,6 +45,15 @@ class FakePhotoRepository : PhotoRepository {
     }
 
     override suspend fun getStudios(): Result<List<Studio>> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun addPhoto(
+        albumId: Int,
+        takenAt: String,
+        studioId: Int,
+        photo: ContentUriRequestBody
+    ): Result<Unit> {
         TODO("Not yet implemented")
     }
 }
