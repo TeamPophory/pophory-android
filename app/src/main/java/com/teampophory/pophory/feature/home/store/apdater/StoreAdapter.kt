@@ -4,9 +4,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.teampophory.pophory.R
 import com.teampophory.pophory.common.view.ItemDiffCallback
 import com.teampophory.pophory.databinding.ItemStorePagerBinding
 import com.teampophory.pophory.feature.home.store.model.AlbumItem
+import com.teampophory.pophory.util.toCoverDrawable
 
 class StoreAdapter(
     private val onItemClicked: (AlbumItem) -> Unit,
@@ -29,6 +31,9 @@ class StoreAdapter(
         private val onPageChangedListener: OnPageChangedListener
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(albumItem: AlbumItem) {
+
+            binding.ivStorePager.setBackgroundResource(albumItem.albumCover.toCoverDrawable())
+
             itemView.setOnClickListener {
                 onItemClicked(albumItem)
                 onPageChangedListener.onPageChanged(albumItem)

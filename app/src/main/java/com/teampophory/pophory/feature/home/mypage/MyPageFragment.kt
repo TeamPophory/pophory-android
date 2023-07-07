@@ -9,6 +9,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import com.teampophory.pophory.R
+import com.teampophory.pophory.common.fragment.hideLoading
+import com.teampophory.pophory.common.fragment.showLoading
 import com.teampophory.pophory.common.fragment.toast
 import com.teampophory.pophory.common.view.GridSpacingItemDecoration
 import com.teampophory.pophory.common.view.dp
@@ -56,9 +58,12 @@ class MyPageFragment : Fragment() {
                     initRecyclerView()
                 }
 
-                is MyPageInfoState.Loading -> {}
+                is MyPageInfoState.Loading -> {
+                    showLoading()
+                }
 
                 is MyPageInfoState.SuccessMyPageInfo -> {
+                    hideLoading()
                     val photoItems =
                         myPageInfoState.data.filterIsInstance<MyPageDisplayItem.Photo>()
                     val isEmpty = photoItems.isEmpty()
@@ -77,8 +82,9 @@ class MyPageFragment : Fragment() {
                     }
                 }
 
-
-                is MyPageInfoState.Error -> {}
+                is MyPageInfoState.Error -> {
+                    hideLoading()
+                }
                 else -> {}
             }
         }
