@@ -12,27 +12,30 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.teampophory.pophory.R
 import com.teampophory.pophory.common.view.ItemDiffCallback
+import com.teampophory.pophory.databinding.ItemMypageEmptyBinding
 import com.teampophory.pophory.databinding.ItemMypageFeedBinding
 import com.teampophory.pophory.databinding.ItemMypageProfileBinding
 import com.teampophory.pophory.feature.home.mypage.MyPageDisplayItem
 
 class MyPageAdapter(
-    private val onItemClicked: (MyPageDisplayItem.Photo) -> Unit
+        private val onItemClicked: (MyPageDisplayItem.Photo) -> Unit
 ) : ListAdapter<MyPageDisplayItem, RecyclerView.ViewHolder>(
-    ItemDiffCallback<MyPageDisplayItem>(
-        onItemsTheSame = { old, new -> old == new },
-        onContentsTheSame = { old, new -> old == new }
-    )
+        ItemDiffCallback<MyPageDisplayItem>(
+            onItemsTheSame = { old, new -> old == new },
+            onContentsTheSame = { old, new -> old == new }
+        )
 ) {
     companion object {
         const val VIEW_TYPE_PROFILE = 0
         const val VIEW_TYPE_PHOTO = 1
+        const val VIEW_TYPE_EMPTY = 2
     }
 
     override fun getItemViewType(position: Int): Int {
         return when (getItem(position)) {
             is MyPageDisplayItem.Profile -> VIEW_TYPE_PROFILE
             is MyPageDisplayItem.Photo -> VIEW_TYPE_PHOTO
+            is MyPageDisplayItem.Empty -> VIEW_TYPE_EMPTY
         }
     }
 
@@ -51,9 +54,16 @@ class MyPageAdapter(
                 PhotoViewHolder(binding, onItemClicked)
             }
 
+            VIEW_TYPE_EMPTY -> {
+                val binding =
+                    ItemMypageEmptyBinding.inflate(LayoutInflater.from(context), parent, false)
+                EmptyViewHolder(binding)
+            }
+
             else -> throw IllegalArgumentException("Invalid view type")
         }
     }
+
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (val item = getItem(position)) {
@@ -64,6 +74,8 @@ class MyPageAdapter(
             is MyPageDisplayItem.Photo -> {
                 (holder as PhotoViewHolder).bind(item)
             }
+
+            else -> {}
         }
     }
 
@@ -114,6 +126,10 @@ class MyPageAdapter(
             }
             return spannableStringBuilder
         }
+    }
+
+    class EmptyViewHolder(private val binding: ItemMypageEmptyBinding) :
+        RecyclerView.ViewHolder(binding.root) {
     }
 }
 
