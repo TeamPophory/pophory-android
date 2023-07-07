@@ -25,20 +25,11 @@ import kotlinx.coroutines.launch
 class HomeActivity : AppCompatActivity() {
     private val binding: ActivityHomeBinding by viewBinding(ActivityHomeBinding::inflate)
     private val viewModel by viewModels<HomeViewModel>()
-    private val addPhotoResultLauncher =
-        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-            if (it.resultCode == RESULT_OK) {
-                val albumItem =
-                    it.data?.getParcelableExtra(AddPhotoActivity.EXTRA_ALBUM_ITEM) as? AlbumItem
-                lifecycleScope.launch {
-                    val copyAlbumItem = albumItem?.copy(
-                        id = albumItem.id,
-                        title = albumItem.title,
-                        albumCover = albumItem.albumCover,
-                        photoCount = albumItem.photoCount + 1
-                    )
-                    viewModel.onUpdateAlbum(copyAlbumItem)
-                }
+    private val addPhotoResultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+        if (it.resultCode == RESULT_OK) {
+            val albumItem = it.data?.getParcelableExtra(AddPhotoActivity.EXTRA_ALBUM_ITEM) as? AlbumItem
+            lifecycleScope.launch {
+                viewModel.onUpdateAlbum(albumItem)
             }
         }
     private val imagePicker =

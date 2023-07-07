@@ -63,12 +63,10 @@ class StoreFragment : Fragment(), OnPageChangedListener {
 
                 is StoreState.SuccessAlbums -> {
                     hideLoading()
-                    with(binding) {
-                        storeAdapter?.submitList(storeState.data)
+                    storeAdapter?.submitList(storeState.data)
 
-                        //최초 데이터 세팅
-                        storeState.data.firstOrNull()?.let { onPageChanged(it) }
-                    }
+                    //최초 데이터 세팅
+                    storeState.data.firstOrNull()?.let { onPageChanged(it) }
                 }
 
                 is StoreState.Error -> {
@@ -80,10 +78,8 @@ class StoreFragment : Fragment(), OnPageChangedListener {
         }
 
         viewLifecycleOwner.lifecycleScope.launch {
-            homeViewModel.currentAlbum.collect { album ->
-                if (album != null) {
-                    onPageChanged(album)
-                }
+            homeViewModel.currentAlbum.collect {
+                viewModel.getAlbums()
             }
         }
     }
