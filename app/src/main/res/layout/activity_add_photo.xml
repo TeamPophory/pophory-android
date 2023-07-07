@@ -31,7 +31,8 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/layout_image"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="0dp"
+                    app:layout_constraintDimensionRatio="360:325"
                     app:layout_constraintTop_toTopOf="parent">
 
                     <ImageView
@@ -39,6 +40,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@color/black"
+                        android:scaleType="centerCrop"
                         tools:src="@drawable/img_background_width" />
 
                     <ImageView
