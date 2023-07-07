@@ -18,7 +18,7 @@ import com.teampophory.pophory.databinding.ItemMypageProfileBinding
 import com.teampophory.pophory.feature.home.mypage.MyPageDisplayItem
 
 class MyPageAdapter(
-    private val onItemClicked: (MyPageDisplayItem.Photo) -> Unit
+        private val onItemClicked: (MyPageDisplayItem.Photo) -> Unit
 ) : ListAdapter<MyPageDisplayItem, RecyclerView.ViewHolder>(
         ItemDiffCallback<MyPageDisplayItem>(
             onItemsTheSame = { old, new -> old == new },
