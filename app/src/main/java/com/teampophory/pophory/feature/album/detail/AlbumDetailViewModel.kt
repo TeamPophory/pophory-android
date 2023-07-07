@@ -29,19 +29,19 @@ class AlbumDetailViewModel @Inject constructor(
     val albumDetailState: LiveData<AlbumDetailState> get() = _albumDetailState
 
     fun setPhotoId(photoId: Int) {
-        this._id.value = photoId
+        _id.value = photoId
     }
 
     fun setStudio(studio: String) {
-        this._studio.value = studio
+        _studio.value = studio
     }
 
     fun setTakenAt(takenAt: String) {
-        this._takenAt.value = takenAt
+        _takenAt.value = takenAt
     }
 
     fun setImageUrl(imageUrl: String) {
-        this._imageUrl.value = imageUrl
+        _imageUrl.value = imageUrl
     }
 
     fun deleteAlbum() {

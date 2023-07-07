@@ -4,6 +4,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.teampophory.pophory.albumsort.AlbumSortType
 import com.teampophory.pophory.data.repository.photo.PhotoRepository
+import com.teampophory.pophory.feature.album.model.OrientType
+import com.teampophory.pophory.feature.album.model.PhotoDetail
+import com.teampophory.pophory.feature.album.model.PhotoItem
+import com.teampophory.pophory.feature.album.model.mapPhotoItemsToPhotoDetails
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -34,7 +38,8 @@ class AlbumListViewModel @Inject constructor(
             _albumListState.emit(AlbumListState.Loading)
             photoRepository.getPhotos(albumId.value)
                 .onSuccess {
-                    _albumListState.emit(AlbumListState.SuccessLoadAlbums(it.mapPhotosToPhotoItems()))
+                    val photoItems = it.mapPhotosToPhotoItems()
+                    _albumListState.emit(AlbumListState.SuccessLoadAlbums(processPhotoDetails(photoItems)))
                 }.onFailure {
                     Timber.e(it)
                     _albumListState.emit(AlbumListState.Error(it))
@@ -44,7 +49,7 @@ class AlbumListViewModel @Inject constructor(
 
     fun sortPhotoList(newest: AlbumSortType) {
         if (albumListState.value is AlbumListState.SuccessLoadAlbums) {
-            val photoItems = (albumListState.value as? AlbumListState.SuccessLoadAlbums)?.data
+            val photoItems = (albumListState.value as? AlbumListState.SuccessLoadAlbums)?.data?.mapPhotoItemsToPhotoDetails()
             val sortedPhotoItems = when (newest) {
                 AlbumSortType.NEWEST -> photoItems?.sortedByDescending { it.takenAt }
                 AlbumSortType.OLDEST -> photoItems?.sortedBy { it.takenAt }
@@ -53,9 +58,52 @@ class AlbumListViewModel @Inject constructor(
                 return
             }
             _albumSortType.value = newest
-            _albumListState.value = AlbumListState.SuccessLoadAlbums(sortedPhotoItems)
+            _albumListState.value = AlbumListState.SuccessLoadAlbums(processPhotoDetails(sortedPhotoItems))
         } else {
             getAlbums()
         }
     }
+
+
+    private fun processPhotoDetails(photoDetails: List<PhotoDetail>): List<PhotoItem> {
+        val photoItems = mutableListOf<PhotoItem>()
+        val verticalItemsBuffer = mutableListOf<PhotoDetail>()
+
+        photoDetails.forEach { photoDetail ->
+            when (photoDetail.orientType) {
+                OrientType.VERTICAL -> {
+                    verticalItemsBuffer.add(photoDetail)
+                    if (verticalItemsBuffer.size == 2) {
+                        photoItems.add(PhotoItem.VerticalItem(verticalItemsBuffer.toList()))
+                        verticalItemsBuffer.clear()
+                    }
+                }
+
+                OrientType.HORIZONTAL -> {
+                    if (verticalItemsBuffer.isNotEmpty()) {
+                        verticalItemsBuffer.add(createEmptyPhotoDetail())
+                        photoItems.add(PhotoItem.VerticalItem(verticalItemsBuffer.toList()))
+                        verticalItemsBuffer.clear()
+                    }
+                    photoItems.add(PhotoItem.HorizontalItem(photoDetail))
+                }
+
+                OrientType.NONE -> {
+
+                }
+            }
+        }
+
+        // 마지막에 VERTICAL 타입의 사진이 한 개만 남아 있는 경우를 처리
+        if (verticalItemsBuffer.isNotEmpty()) {
+            verticalItemsBuffer.add(createEmptyPhotoDetail())
+            photoItems.add(PhotoItem.VerticalItem(verticalItemsBuffer.toList()))
+        }
+        return photoItems
+    }
+
+    private fun createEmptyPhotoDetail(): PhotoDetail {
+        return PhotoDetail(0, "", "", "", 0, 0, OrientType.NONE)
+    }
+
 }

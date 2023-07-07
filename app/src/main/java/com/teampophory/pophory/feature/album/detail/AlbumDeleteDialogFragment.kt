@@ -43,6 +43,7 @@ class AlbumDeleteDialogFragment : DialogFragment() {
     }
 
     companion object {
+        val TAG = AlbumDeleteDialogFragment::class.java.simpleName
         @JvmStatic
         fun newInstance() = AlbumDeleteDialogFragment()
     }

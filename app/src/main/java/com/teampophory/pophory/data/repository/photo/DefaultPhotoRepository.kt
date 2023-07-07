@@ -11,7 +11,7 @@ import javax.inject.Inject
 class DefaultPhotoRepository @Inject constructor(
     private val albumService: AlbumService
 ) : PhotoRepository {
-    override suspend fun getPhotos(id:Int): Result<PhotoListResponse> {
+    override suspend fun getPhotos(id: Int): Result<PhotoListResponse> {
         return runCatching { albumService.getPhotos(id) }
     }
 

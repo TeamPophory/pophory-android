@@ -7,6 +7,8 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import coil.load
 import com.teampophory.pophory.common.context.toast
+import com.teampophory.pophory.common.intent.intExtra
+import com.teampophory.pophory.common.intent.stringExtra
 import com.teampophory.pophory.common.view.showAllowingStateLoss
 import com.teampophory.pophory.common.view.viewBinding
 import com.teampophory.pophory.databinding.ActivityAlbumDetailBinding
@@ -18,6 +20,11 @@ class AlbumDetailActivity : AppCompatActivity() {
 
     private val binding by viewBinding(ActivityAlbumDetailBinding::inflate)
     private val viewModel by viewModels<AlbumDetailViewModel>()
+
+    private val photoId by intExtra(0)
+    private val studio by stringExtra("")
+    private val takenAt by stringExtra("")
+    private val imageUrl by stringExtra("")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
@@ -32,7 +39,7 @@ class AlbumDetailActivity : AppCompatActivity() {
                 }
 
                 is AlbumDetailState.SuccessDeleteAlbum -> {
-                    supportFragmentManager.findFragmentByTag(TAG_AlbumDeleteDialogFragment)
+                    supportFragmentManager.findFragmentByTag(AlbumDeleteDialogFragment.TAG)
                         ?.let { fragment ->
                             (fragment as? AlbumDeleteDialogFragment)?.dismissAllowingStateLoss()
                         }
@@ -54,26 +61,17 @@ class AlbumDetailActivity : AppCompatActivity() {
 
         binding.ivAlbumDelete.setOnClickListener {
             AlbumDeleteDialogFragment.newInstance().apply {
-                showAllowingStateLoss(supportFragmentManager, TAG_AlbumDeleteDialogFragment)
+                showAllowingStateLoss(supportFragmentManager, AlbumDeleteDialogFragment.TAG)
             }
         }
     }
 
     private fun initData() {
-        with(intent) {
-            val photoId = getIntExtra(PHOTO_ID, 0)
-            val studio = getStringExtra(STUDIO) ?: ""
-            val takenAt = getStringExtra(TAKEN_AT) ?: ""
-            val imageUrl = getStringExtra(IMAGE_URL) ?: ""
-
-            with(viewModel) {
-                setPhotoId(photoId)
-                setStudio(studio)
-                setTakenAt(takenAt)
-                setImageUrl(imageUrl)
-            }
-            initViews()
-        }
+        viewModel.setPhotoId(photoId)
+        viewModel.setStudio(studio ?: "")
+        viewModel.setTakenAt(takenAt ?: "")
+        viewModel.setImageUrl(imageUrl ?: "")
+        initViews()
     }
 
     private fun initViews() {
@@ -86,7 +84,6 @@ class AlbumDetailActivity : AppCompatActivity() {
     }
 
     companion object {
-        private const val TAG_AlbumDeleteDialogFragment = "TAG_AlbumDeleteDialogFragment"
         private const val PHOTO_ID = "photoId"
         private const val STUDIO = "studio"
         private const val TAKEN_AT = "takenAt"
