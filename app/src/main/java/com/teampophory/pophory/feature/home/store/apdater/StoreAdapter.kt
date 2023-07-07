@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.teampophory.pophory.R
 import com.teampophory.pophory.common.view.ItemDiffCallback
 import com.teampophory.pophory.databinding.ItemStorePagerBinding
 import com.teampophory.pophory.feature.home.store.model.AlbumItem
@@ -29,6 +30,16 @@ class StoreAdapter(
         private val onPageChangedListener: OnPageChangedListener
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(albumItem: AlbumItem) {
+
+            val albumCover = when (albumItem.albumCover) {
+                1 -> R.drawable.ic_album_cover_friends
+                2 -> R.drawable.ic_album_cover_love
+                3 -> R.drawable.ic_album_cover_myalbum
+                4 -> R.drawable.ic_album_cover_collectbook
+                else -> R.drawable.ic_album_cover_myalbum
+            }
+            binding.ivStorePager.setBackgroundResource(albumCover)
+
             itemView.setOnClickListener {
                 onItemClicked(albumItem)
                 onPageChangedListener.onPageChanged(albumItem)

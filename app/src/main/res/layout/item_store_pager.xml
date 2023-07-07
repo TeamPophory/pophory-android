@@ -9,7 +9,6 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_marginHorizontal="45dp"
-        android:src="@drawable/ic_album_cover_friends"
         android:contentDescription="pager item image"
         android:scaleType="centerCrop"
         app:layout_constraintBottom_toBottomOf="parent"
