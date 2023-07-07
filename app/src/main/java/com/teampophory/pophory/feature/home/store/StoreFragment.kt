@@ -48,6 +48,11 @@ class StoreFragment : Fragment(), OnPageChangedListener {
         setSpannableString()
     }
 
+    override fun onResume() {
+        super.onResume()
+        viewModel.getAlbums()
+    }
+
     private fun initObserver() {
         viewModel.albums.observe(viewLifecycleOwner) { storeState ->
             when (storeState) {
