@@ -1,5 +1,7 @@
 package com.teampophory.pophory.feature.album.detail
 
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,6 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
 import com.teampophory.pophory.R
+import com.teampophory.pophory.common.context.dialogWidthPercent
 import com.teampophory.pophory.common.view.viewBinding
 import com.teampophory.pophory.databinding.FragmentAlbumDeleteDialogBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -29,6 +32,14 @@ class AlbumDeleteDialogFragment : DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initButtonClickListener()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        context?.dialogWidthPercent(dialog)
+        dialog?.window?.run {
+            setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        }
     }
 
     private fun initButtonClickListener() {

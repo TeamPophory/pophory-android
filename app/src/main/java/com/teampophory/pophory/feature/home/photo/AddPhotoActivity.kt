@@ -24,6 +24,7 @@ import com.teampophory.pophory.common.intent.stringExtra
 import com.teampophory.pophory.common.time.systemNow
 import com.teampophory.pophory.common.view.setOnSingleClickListener
 import com.teampophory.pophory.databinding.ActivityAddPhotoBinding
+import com.teampophory.pophory.feature.home.HomeActivity
 import com.teampophory.pophory.feature.home.store.model.AlbumItem
 import com.teampophory.pophory.util.toCoverDrawable
 import dagger.hilt.android.AndroidEntryPoint
@@ -121,7 +122,10 @@ class AddPhotoActivity : BindingActivity<ActivityAddPhotoBinding>(R.layout.activ
                     }
 
                     AddPhotoEvent.ADD_SUCCESS -> {
-                        val intent = Intent().putExtra(EXTRA_ALBUM_ITEM, albumCover)
+                        val intent = Intent(this, HomeActivity::class.java).putExtra(
+                            EXTRA_ALBUM_ITEM,
+                            albumCover
+                        )
                         setResult(RESULT_OK, intent)
                         finish()
                         toast("사진이 추가되었습니다.")
@@ -155,6 +159,7 @@ class AddPhotoActivity : BindingActivity<ActivityAddPhotoBinding>(R.layout.activ
 
     companion object {
         const val EXTRA_ALBUM_ITEM = "albumItem"
+
         @JvmStatic
         fun getIntent(context: Context, imageUri: String, albumCover: AlbumItem) =
             Intent(context, AddPhotoActivity::class.java).apply {

@@ -79,7 +79,9 @@ class StoreFragment : Fragment(), OnPageChangedListener {
 
         viewLifecycleOwner.lifecycleScope.launch {
             homeViewModel.currentAlbum.collect {
-                viewModel.getAlbums()
+                if (it != null) {
+                    viewModel.getAlbums()
+                }
             }
         }
     }
