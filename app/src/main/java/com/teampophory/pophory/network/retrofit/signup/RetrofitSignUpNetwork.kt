@@ -7,9 +7,8 @@ import retrofit2.http.Body
 import retrofit2.http.PATCH
 
 interface RetrofitSignUpNetwork {
-
     @PATCH("api/v1/member")
     fun signUp(
-        @Body request : SignUpRequest
+        @Body request: SignUpRequest
     ): Call<SignUpResponse>
 }

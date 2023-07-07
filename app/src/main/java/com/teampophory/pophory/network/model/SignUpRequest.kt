@@ -7,7 +7,7 @@ import kotlinx.serialization.Serializable
 data class SignUpRequest(
     @SerialName("realName")
     val realName: String,
-    @SerialName("nickName")
+    @SerialName("nickname")
     val nickName: String,
     @SerialName("albumCover")
     val albumCover: Int

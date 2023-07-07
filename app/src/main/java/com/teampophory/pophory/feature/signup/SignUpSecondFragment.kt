@@ -16,8 +16,10 @@ import com.teampophory.pophory.common.fragment.colorOf
 import com.teampophory.pophory.common.primitive.textAppearance
 import com.teampophory.pophory.common.view.viewBinding
 import com.teampophory.pophory.databinding.FragmentSignUpSecondBinding
+import dagger.hilt.android.AndroidEntryPoint
 import java.util.regex.Pattern
 
+@AndroidEntryPoint
 class SignUpSecondFragment : Fragment() {
     private val binding by viewBinding(FragmentSignUpSecondBinding::bind)
     private var buttonState: SignUpButtonInterface? = null

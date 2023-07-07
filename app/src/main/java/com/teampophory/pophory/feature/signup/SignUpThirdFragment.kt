@@ -15,7 +15,9 @@ import com.teampophory.pophory.common.fragment.colorOf
 import com.teampophory.pophory.common.primitive.textAppearance
 import com.teampophory.pophory.common.view.viewBinding
 import com.teampophory.pophory.databinding.FragmentSignUpThirdBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SignUpThirdFragment : Fragment() {
     private val binding by viewBinding(FragmentSignUpThirdBinding::bind)
     private val signUpViewModel by activityViewModels<SignUpViewModel>()

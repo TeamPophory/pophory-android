@@ -3,14 +3,19 @@ package com.teampophory.pophory.feature.signup
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.teampophory.pophory.feature.signup.ServicePool.signUpService
 import com.teampophory.pophory.network.model.SignUpRequest
 import com.teampophory.pophory.network.model.SignUpResponse
+import com.teampophory.pophory.network.retrofit.signup.RetrofitSignUpNetwork
+import dagger.hilt.android.lifecycle.HiltViewModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import javax.inject.Inject
 
-class SignUpViewModel : ViewModel() {
+@HiltViewModel
+class SignUpViewModel @Inject constructor(
+    private val signUpService: RetrofitSignUpNetwork
+) : ViewModel() {
 
     private val _signUpResult: MutableLiveData<SignUpResponse> = MutableLiveData()
     val signUpResult: LiveData<SignUpResponse> = _signUpResult
@@ -56,7 +61,6 @@ class SignUpViewModel : ViewModel() {
             override fun onFailure(call: Call<SignUpResponse>, t: Throwable) {
                 TODO("Not yet implemented")
             }
-
         })
     }
 

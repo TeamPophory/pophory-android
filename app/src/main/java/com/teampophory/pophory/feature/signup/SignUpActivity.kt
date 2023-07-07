@@ -11,7 +11,9 @@ import com.teampophory.pophory.databinding.ActivitySignUpBinding
 import com.teampophory.pophory.feature.home.HomeActivity
 import com.teampophory.pophory.feature.onboarding.OnBoardingActivity
 import com.teampophory.pophory.feature.signup.adapter.SignUpViewPagerAdapter
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SignUpActivity : AppCompatActivity(), SignUpButtonInterface {
 
     private val binding by viewBinding(ActivitySignUpBinding::inflate)
