@@ -12,6 +12,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -60,6 +61,8 @@ class SignUpViewModel @Inject constructor(
             ) {
                 if (response.isSuccessful) {
                     _signUpResult.value = response.body()
+                }else {
+                    Timber.d("signUp fail")
                 }
             }
 
@@ -81,6 +84,8 @@ class SignUpViewModel @Inject constructor(
             ) {
                 if (response.isSuccessful) {
                     _nicknameCheckResult.value = response.body()
+                }else {
+                    Timber.d("nickname check fail")
                 }
             }
 
