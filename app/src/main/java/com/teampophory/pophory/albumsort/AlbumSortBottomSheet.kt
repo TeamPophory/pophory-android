@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.teampophory.pophory.databinding.BottomSheetAlbumSortBinding
-import com.teampophory.pophory.feature.album.detail.AlbumDeleteDialogFragment
 import com.teampophory.pophory.feature.album.list.AlbumListViewModel
 
 class AlbumSortBottomSheet : BottomSheetDialogFragment() {
@@ -47,5 +46,9 @@ class AlbumSortBottomSheet : BottomSheetDialogFragment() {
     override fun onDestroyView() {
         _binding = null
         super.onDestroyView()
+    }
+
+    companion object {
+        val TAG: String = AlbumSortBottomSheet::class.java.simpleName
     }
 }
