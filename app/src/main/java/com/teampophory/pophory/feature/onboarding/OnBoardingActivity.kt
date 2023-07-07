@@ -17,6 +17,7 @@ import com.teampophory.pophory.feature.auth.social.OAuthService
 import com.teampophory.pophory.feature.home.HomeActivity
 import com.teampophory.pophory.feature.onboarding.adapter.OnBoardingViewPagerAdapter
 import com.teampophory.pophory.feature.signup.SignUpActivity
+import com.teampophory.pophory.feature.signup.SignUpApiFactory
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import timber.log.Timber
@@ -68,6 +69,7 @@ class OnBoardingActivity : AppCompatActivity() {
                                 }
 
                                 UserAccountState.UNREGISTERED -> {
+                                    SignUpApiFactory.token = token.accessToken
                                     val intent =
                                         Intent(this@OnBoardingActivity, SignUpActivity::class.java)
                                     startActivity(intent)

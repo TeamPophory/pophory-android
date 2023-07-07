@@ -2,8 +2,6 @@ package com.teampophory.pophory.feature.signup
 
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import com.teampophory.pophory.BuildConfig
-import com.teampophory.pophory.config.di.NetModule
-import com.teampophory.pophory.data.network.interceptor.AuthInterceptor
 import com.teampophory.pophory.network.retrofit.signup.RetrofitSignUpNetwork
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
@@ -13,11 +11,18 @@ import retrofit2.Retrofit
 
 object SignUpApiFactory {
 
+    var token = ""
+
     private const val POPHORY_BASE_URL = BuildConfig.POPHORY_BASE_URL
 
     private val client by lazy {
         OkHttpClient.Builder()
-            .addInterceptor(HttpLoggingInterceptor().apply {
+            .addInterceptor { chain ->
+                val authenticatedRequest = chain.request().newBuilder()
+                    .header("Authorization", "Bearer $token")
+                    .build()
+                return@addInterceptor chain.proceed(authenticatedRequest)
+            }.addInterceptor(HttpLoggingInterceptor().apply {
                 level =
                     if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BODY else HttpLoggingInterceptor.Level.NONE
             }).build()

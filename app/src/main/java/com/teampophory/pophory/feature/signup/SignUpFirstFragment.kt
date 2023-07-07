@@ -16,8 +16,10 @@ import com.teampophory.pophory.common.fragment.colorOf
 import com.teampophory.pophory.common.primitive.textAppearance
 import com.teampophory.pophory.common.view.viewBinding
 import com.teampophory.pophory.databinding.FragmentSignUpFirstBinding
+import dagger.hilt.android.AndroidEntryPoint
 import java.util.regex.Pattern
 
+@AndroidEntryPoint
 class SignUpFirstFragment : Fragment() {
 
     private val binding by viewBinding(FragmentSignUpFirstBinding::bind)
