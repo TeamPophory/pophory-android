@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.teampophory.pophory.R
 import com.teampophory.pophory.common.fragment.toast
 import com.teampophory.pophory.common.view.GridSpacingItemDecoration
+import com.teampophory.pophory.common.view.dp
 import com.teampophory.pophory.common.view.viewBinding
 import com.teampophory.pophory.databinding.FragmentMypageBinding
 import com.teampophory.pophory.feature.home.mypage.adapter.MyPageAdapter
@@ -110,7 +111,7 @@ class MyPageFragment : Fragment() {
             layoutManager = gridLayoutManager
             adapter = myPageAdapter
             isNestedScrollingEnabled = false
-        }.addItemDecoration(GridSpacingCustomDecoration(3, 2, false))
+        }.addItemDecoration(GridSpacingCustomDecoration(3, 2.dp, false))
     }
 
     private fun setOnClickListener() {

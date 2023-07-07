@@ -18,12 +18,12 @@ import com.teampophory.pophory.databinding.ItemMypageProfileBinding
 import com.teampophory.pophory.feature.home.mypage.MyPageDisplayItem
 
 class MyPageAdapter(
-        private val onItemClicked: (MyPageDisplayItem.Photo) -> Unit
+    private val onItemClicked: (MyPageDisplayItem.Photo) -> Unit
 ) : ListAdapter<MyPageDisplayItem, RecyclerView.ViewHolder>(
-        ItemDiffCallback<MyPageDisplayItem>(
-                onItemsTheSame = { old, new -> old == new },
-                onContentsTheSame = { old, new -> old == new }
-        )
+    ItemDiffCallback<MyPageDisplayItem>(
+        onItemsTheSame = { old, new -> old == new },
+        onContentsTheSame = { old, new -> old == new }
+    )
 ) {
     companion object {
         const val VIEW_TYPE_PROFILE = 0
@@ -44,19 +44,19 @@ class MyPageAdapter(
         return when (viewType) {
             VIEW_TYPE_PROFILE -> {
                 val binding =
-                        ItemMypageProfileBinding.inflate(LayoutInflater.from(context), parent, false)
+                    ItemMypageProfileBinding.inflate(LayoutInflater.from(context), parent, false)
                 ProfileViewHolder(binding, context)
             }
 
             VIEW_TYPE_PHOTO -> {
                 val binding =
-                        ItemMypageFeedBinding.inflate(LayoutInflater.from(context), parent, false)
+                    ItemMypageFeedBinding.inflate(LayoutInflater.from(context), parent, false)
                 PhotoViewHolder(binding, onItemClicked)
             }
 
             VIEW_TYPE_EMPTY -> {
                 val binding =
-                        ItemMypageEmptyBinding.inflate(LayoutInflater.from(context), parent, false)
+                    ItemMypageEmptyBinding.inflate(LayoutInflater.from(context), parent, false)
                 EmptyViewHolder(binding)
             }
 
@@ -127,8 +127,9 @@ class MyPageAdapter(
             return spannableStringBuilder
         }
     }
-    class EmptyViewHolder(private val binding: ItemMypageEmptyBinding)
-        : RecyclerView.ViewHolder(binding.root) {
+
+    class EmptyViewHolder(private val binding: ItemMypageEmptyBinding) :
+        RecyclerView.ViewHolder(binding.root) {
     }
 }
 
