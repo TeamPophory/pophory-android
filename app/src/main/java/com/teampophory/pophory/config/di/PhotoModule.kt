@@ -1,10 +1,8 @@
 package com.teampophory.pophory.config.di
 
-import com.teampophory.pophory.data.repository.photo.PhotoRepository
+import com.teampophory.pophory.data.network.service.AlbumService
 import com.teampophory.pophory.data.repository.photo.DefaultPhotoRepository
-import com.teampophory.pophory.network.PhotoNetworkDataSource
-import com.teampophory.pophory.network.retrofit.album.RetrofitPhotoNetwork
-import com.teampophory.pophory.network.retrofit.album.RetrofitPhotoNetworkApi
+import com.teampophory.pophory.data.repository.photo.PhotoRepository
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -19,7 +17,7 @@ import javax.inject.Singleton
 object PhotoModule {
     @Provides
     @Singleton
-    fun providePhotoNetworkService(retrofit: Retrofit): RetrofitPhotoNetworkApi = retrofit.create()
+    fun providePhotoNetworkService(retrofit: Retrofit): AlbumService = retrofit.create()
 
     @Module
     @InstallIn(SingletonComponent::class)
@@ -27,9 +25,5 @@ object PhotoModule {
         @Binds
         @Singleton
         fun bindPhotoRepository(defaultPhotoRepository: DefaultPhotoRepository): PhotoRepository
-
-        @Binds
-        @Singleton
-        fun bindPhotoNwtworkDataSource(retrofitPhotoNetwork: RetrofitPhotoNetwork): PhotoNetworkDataSource
     }
 }

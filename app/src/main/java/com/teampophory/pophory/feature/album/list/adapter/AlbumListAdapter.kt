@@ -1,4 +1,4 @@
-package com.teampophory.pophory.feature.album.adapter
+package com.teampophory.pophory.feature.album.list.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,12 +6,14 @@ import androidx.recyclerview.widget.ListAdapter
 import com.teampophory.pophory.common.view.ItemDiffCallback
 import com.teampophory.pophory.databinding.ItemHorizontalPhotoBinding
 import com.teampophory.pophory.databinding.ItemVerticalPhotoBinding
+import com.teampophory.pophory.feature.album.detail.AlbumDetailActivity
 import com.teampophory.pophory.feature.album.model.PhotoItem
-import com.teampophory.pophory.feature.album.viewholder.AlbumViewHolder
+import com.teampophory.pophory.feature.album.list.viewholder.AlbumViewHolder
+import com.teampophory.pophory.feature.album.model.OrientType
 
-class AlbumAdapter : ListAdapter<PhotoItem, AlbumViewHolder>(
+class AlbumListAdapter : ListAdapter<PhotoItem, AlbumViewHolder>(
     ItemDiffCallback<PhotoItem>(
-        onItemsTheSame = { old, new -> old.hashCode() == new.hashCode() },
+        onItemsTheSame = { old, new -> old == new },
         onContentsTheSame = { old, new -> old == new }
     )
 ) {
@@ -23,7 +25,11 @@ class AlbumAdapter : ListAdapter<PhotoItem, AlbumViewHolder>(
                         LayoutInflater.from(parent.context),
                         parent,
                         false
-                    )
+                    ),
+                    onItemClicked = {
+                        if (it.orientType == OrientType.NONE) return@HorizontalViewHolder
+                        AlbumDetailActivity.startActivity(parent.context, it)
+                    }
                 )
             }
 
@@ -33,7 +39,10 @@ class AlbumAdapter : ListAdapter<PhotoItem, AlbumViewHolder>(
                         LayoutInflater.from(parent.context),
                         parent,
                         false
-                    )
+                    ), onItemClicked = {
+                        if (it.orientType == OrientType.NONE) return@VerticalViewHolder
+                        AlbumDetailActivity.startActivity(parent.context, it)
+                    }
                 )
             }
         }

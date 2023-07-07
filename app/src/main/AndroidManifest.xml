@@ -20,8 +20,7 @@
         <activity
             android:name=".feature.signup.StartPophoryActivity"
             android:exported="false"
-            android:theme="@style/Theme.App.StartPophory"
-            />
+            android:theme="@style/Theme.App.StartPophory" />
 
         <meta-data
             android:name="io.sentry.dsn"
@@ -102,7 +101,9 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".feature.album.AlbumListActivity"
+            android:name=".feature.album.list.AlbumListActivity"
+            android:exported="false" />
+        <activity android:name=".feature.album.detail.AlbumDetailActivity"
             android:exported="false" />
         <activity
             android:name=".feature.home.photo.AddPhotoActivity"

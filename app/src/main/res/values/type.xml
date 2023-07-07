@@ -62,9 +62,15 @@
     </style>
 
     <style name="TextAppearance.Pophory.ModalText1">
+        <item name="android:textFontWeight">700</item>
+        <item name="android:textSize">20sp</item>
+        <item name="lineHeight">28sp</item>
+    </style>
+
+    <style name="TextAppearance.Pophory.ModalText2">
         <item name="android:textFontWeight">500</item>
         <item name="android:textSize">18sp</item>
-        <item name="lineHeight">25sp</item>
+        <item name="lineHeight">26sp</item>
     </style>
 
     <style name="TextAppearance.Pophory.Caption1">

@@ -37,4 +37,9 @@
     <string name="sign_up_id_popup_content">이미 있는 아이디에요\n다른 아이디를 입력해주세요!</string>
     <string name="sign_up_popup_button">돌아가기</string>
     <string name="sign_up_next_button">다음으로 넘어가기</string>
+
+    <!-- album -->
+    <string name="sort_newest">최근에 찍은 순</string>
+    <string name="sort_oldest">과거에 찍은 순</string>
+    <string name="select_sort">정렬 선택하기</string>
 </resources>

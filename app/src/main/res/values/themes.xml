@@ -44,6 +44,7 @@
         <item name="textAppearanceText1">@style/TextAppearance.Pophory.Text1</item>
         <item name="textAppearancePopupText1">@style/TextAppearance.Pophory.PopupText1</item>
         <item name="textAppearanceModalText1">@style/TextAppearance.Pophory.ModalText1</item>
+        <item name="textAppearanceModalText2">@style/TextAppearance.Pophory.ModalText2</item>
         <!-- Caption -->
         <item name="textAppearanceCaption1">@style/TextAppearance.Pophory.Caption1</item>
         <item name="textAppearanceCaption2">@style/TextAppearance.Pophory.Caption2</item>
