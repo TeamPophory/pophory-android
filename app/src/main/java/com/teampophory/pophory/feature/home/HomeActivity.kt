@@ -1,5 +1,7 @@
 package com.teampophory.pophory.feature.home
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
@@ -61,6 +63,14 @@ class HomeActivity : AppCompatActivity() {
     private fun changeFragment(fragment: Fragment) {
         supportFragmentManager.commit {
             replace(R.id.home_fcv, fragment)
+        }
+    }
+
+
+    companion object {
+        @JvmStatic
+        fun getIntent(context: Context) = Intent(context, HomeActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         }
     }
 }

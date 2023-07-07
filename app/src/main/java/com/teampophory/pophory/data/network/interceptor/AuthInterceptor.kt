@@ -10,9 +10,17 @@ class AuthInterceptor @Inject constructor(
 ) : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         val originalRequest = chain.request()
+        if (!shouldRequestAuthenticatedHeaders(originalRequest.url.encodedPath)) {
+            return chain.proceed(originalRequest)
+        }
         val headerRequest = originalRequest.newBuilder()
             .header("Authorization", "Bearer ${dataStore.accessToken}")
             .build()
         return chain.proceed(headerRequest)
+    }
+
+    private fun shouldRequestAuthenticatedHeaders(encodedPath: String) = when (encodedPath) {
+        "/api/v1/auth" -> false
+        else -> true
     }
 }
