@@ -8,6 +8,7 @@ import com.teampophory.pophory.R
 import com.teampophory.pophory.common.view.ItemDiffCallback
 import com.teampophory.pophory.databinding.ItemStorePagerBinding
 import com.teampophory.pophory.feature.home.store.model.AlbumItem
+import com.teampophory.pophory.util.toCoverDrawable
 
 class StoreAdapter(
     private val onItemClicked: (AlbumItem) -> Unit,
@@ -31,14 +32,7 @@ class StoreAdapter(
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(albumItem: AlbumItem) {
 
-            val albumCover = when (albumItem.albumCover) {
-                1 -> R.drawable.ic_album_cover_friends
-                2 -> R.drawable.ic_album_cover_love
-                3 -> R.drawable.ic_album_cover_myalbum
-                4 -> R.drawable.ic_album_cover_collectbook
-                else -> R.drawable.ic_album_cover_myalbum
-            }
-            binding.ivStorePager.setBackgroundResource(albumCover)
+            binding.ivStorePager.setBackgroundResource(albumItem.albumCover.toCoverDrawable())
 
             itemView.setOnClickListener {
                 onItemClicked(albumItem)
