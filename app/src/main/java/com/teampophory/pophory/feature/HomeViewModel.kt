@@ -15,6 +15,5 @@ class HomeViewModel : ViewModel() {
         viewModelScope.launch {
             _currentAlbum.emit(album)
         }
-
     }
 }
