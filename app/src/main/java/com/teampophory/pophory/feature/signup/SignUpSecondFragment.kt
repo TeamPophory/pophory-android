@@ -38,10 +38,6 @@ class SignUpSecondFragment : Fragment() {
         setEditText()
         deleteAllEditText()
         setSpannableString()
-
-        signUpViewModel.nickName.observe(viewLifecycleOwner){
-
-        }
     }
 
     private fun deleteAllEditText() {

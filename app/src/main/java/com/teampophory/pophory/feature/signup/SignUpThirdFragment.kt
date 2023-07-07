@@ -33,11 +33,6 @@ class SignUpThirdFragment : Fragment() {
         setAlbumCoverImage()
         selectAlbumCover()
         setSpannableString()
-
-
-        signUpViewModel.albumCover.observe(viewLifecycleOwner){
-
-        }
     }
 
     private fun setAlbumCoverImage() {

@@ -41,10 +41,6 @@ class SignUpFirstFragment : Fragment() {
         setEditText()
         // edittext 삭제 버튼
         deleteAllEditText()
-
-        signUpViewModel.realName.observe(viewLifecycleOwner){
-
-        }
     }
 
     private fun deleteAllEditText() {
