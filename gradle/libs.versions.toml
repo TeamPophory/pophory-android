@@ -53,7 +53,7 @@ androidx-test = "1.5.2"
 
 # gradle
 agp = "8.0.2"
-kspplugin = "1.8.22-1.0.11"
+kspplugin = "1.9.0-1.0.11"
 
 # third party
 flipper = "0.201.0"
