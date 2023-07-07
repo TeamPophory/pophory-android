@@ -1,6 +1,5 @@
 package com.teampophory.pophory.feature.home.store
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -90,9 +89,8 @@ class StoreFragment : Fragment(), OnPageChangedListener {
     }
 
     private fun setupViewPager() {
-        storeAdapter = StoreAdapter({ _ ->
-            val intent = Intent(context, AlbumListActivity::class.java)
-            startActivity(intent)
+        storeAdapter = StoreAdapter({ albumItem ->
+            AlbumListActivity.newInstance(requireContext(), albumItem.id).let(::startActivity)
         }, this)
 
         binding.viewpagerStore.adapter = storeAdapter
