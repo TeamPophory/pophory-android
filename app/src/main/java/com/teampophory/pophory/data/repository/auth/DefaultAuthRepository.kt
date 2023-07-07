@@ -3,6 +3,7 @@ package com.teampophory.pophory.data.repository.auth
 import com.teampophory.pophory.data.local.PophoryDataStore
 import com.teampophory.pophory.data.model.auth.Token
 import com.teampophory.pophory.data.model.auth.UserAuthentication
+import com.teampophory.pophory.data.network.model.auth.SocialType
 import com.teampophory.pophory.data.network.service.AuthService
 import javax.inject.Inject
 
@@ -12,7 +13,7 @@ class DefaultAuthRepository @Inject constructor(
 ) : AuthRepository {
     override suspend fun login(socialToken: String): UserAuthentication {
         val authorization = "Bearer $socialToken"
-        return service.login(authorization).toUserAuthentication()
+        return service.login(authorization, SocialType("KAKAO")).toUserAuthentication()
     }
 
     override fun save(token: Token) {

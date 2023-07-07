@@ -2,10 +2,12 @@ package com.teampophory.pophory.feature.auth.model
 
 typealias KakaoToken = com.kakao.sdk.auth.model.OAuthToken
 
-sealed interface OAuthToken
+sealed interface OAuthToken {
+    val accessToken: String
+}
 
 data class KakaoOAuthToken(
-    val accessToken: String,
+    override val accessToken: String,
     val refreshToken: String,
 ) : OAuthToken
 

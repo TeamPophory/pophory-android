@@ -1,31 +1,44 @@
 package com.teampophory.pophory.feature.onboarding
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.content.res.AppCompatResources
-import androidx.core.content.ContextCompat
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.lifecycle.lifecycleScope
 import androidx.viewpager2.widget.ViewPager2
 import com.teampophory.pophory.R
+import com.teampophory.pophory.common.context.snackBar
 import com.teampophory.pophory.common.view.viewBinding
+import com.teampophory.pophory.config.di.qualifier.Kakao
+import com.teampophory.pophory.data.model.auth.UserAccountState
 import com.teampophory.pophory.databinding.ActivityOnBoardingBinding
+import com.teampophory.pophory.domain.AuthUseCase
+import com.teampophory.pophory.feature.auth.social.OAuthService
+import com.teampophory.pophory.feature.home.HomeActivity
 import com.teampophory.pophory.feature.onboarding.adapter.OnBoardingViewPagerAdapter
 import com.teampophory.pophory.feature.signup.SignUpActivity
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
+import timber.log.Timber
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class OnBoardingActivity : AppCompatActivity() {
-
     private val binding by viewBinding(ActivityOnBoardingBinding::inflate)
-    private lateinit var viewPager: ViewPager2
-    private lateinit var adapter: OnBoardingViewPagerAdapter
+
+    @Inject
+    @Kakao
+    lateinit var kakaoAuthService: OAuthService
+
+    @Inject
+    lateinit var authUseCase: AuthUseCase
 
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen()
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         setViewPager()
-        clickKakaoLoginBtn()
+        setOnLoginPressed()
     }
 
     private val pageChangeCallback = object : ViewPager2.OnPageChangeCallback() {
@@ -41,19 +54,38 @@ class OnBoardingActivity : AppCompatActivity() {
         }
     }
 
-    // TODO 카카오 로그인으로 수정 예정
-    private fun clickKakaoLoginBtn() {
+    private fun setOnLoginPressed() {
         binding.btnStartSocialLogin.setOnClickListener {
-            val intent = Intent(this, SignUpActivity::class.java)
-            startActivity(intent)
+            lifecycleScope.launch {
+                runCatching {
+                    kakaoAuthService.login()
+                }.onSuccess { token ->
+                    authUseCase(token.accessToken)
+                        .onSuccess { state ->
+                            when (state) {
+                                UserAccountState.REGISTERED -> {
+                                    startActivity(HomeActivity.getIntent(this@OnBoardingActivity))
+                                }
+
+                                UserAccountState.UNREGISTERED -> {
+                                    val intent =
+                                        Intent(this@OnBoardingActivity, SignUpActivity::class.java)
+                                    startActivity(intent)
+                                }
+                            }
+                        }
+                        .onFailure {
+                            Timber.e(it)
+                            snackBar(binding.root) { "로그인에 실패했습니다." }
+                        }
+                }.onFailure(Timber::e)
+            }
         }
     }
 
     private fun setViewPager() {
-        viewPager = binding.viewpagerOnboarding
-        adapter = OnBoardingViewPagerAdapter()
+        val adapter = OnBoardingViewPagerAdapter()
 
-        // TODO 이미지로 수정 예정
         adapter.submitList(
             mutableListOf(
                 OnBoardingData(R.drawable.img_onboarding01),
@@ -61,7 +93,7 @@ class OnBoardingActivity : AppCompatActivity() {
                 OnBoardingData(R.drawable.img_onboarding03)
             )
         )
-        viewPager.adapter = adapter
-        viewPager.registerOnPageChangeCallback(pageChangeCallback)
+        binding.viewpagerOnboarding.adapter = adapter
+        binding.viewpagerOnboarding.registerOnPageChangeCallback(pageChangeCallback)
     }
 }
