@@ -3,6 +3,8 @@ package com.teampophory.pophory.feature.signup
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.teampophory.pophory.network.model.NicknameRequest
+import com.teampophory.pophory.network.model.NicknameResponse
 import com.teampophory.pophory.network.model.SignUpRequest
 import com.teampophory.pophory.network.model.SignUpResponse
 import com.teampophory.pophory.network.retrofit.signup.RetrofitSignUpNetwork
@@ -19,6 +21,9 @@ class SignUpViewModel @Inject constructor(
 
     private val _signUpResult: MutableLiveData<SignUpResponse> = MutableLiveData()
     val signUpResult: LiveData<SignUpResponse> = _signUpResult
+
+    private val _nicknameCheckResult: MutableLiveData<NicknameResponse> = MutableLiveData()
+    val nicknameCheckResult: LiveData<NicknameResponse> = _nicknameCheckResult
 
     private val _realName: MutableLiveData<String> = MutableLiveData()
     var realName: LiveData<String> = _realName
@@ -59,6 +64,27 @@ class SignUpViewModel @Inject constructor(
             }
 
             override fun onFailure(call: Call<SignUpResponse>, t: Throwable) {
+                TODO("Not yet implemented")
+            }
+        })
+    }
+
+    fun nicknameCheck() {
+        signUpService.nicknameCheck(
+            NicknameRequest(
+                nickName.value.orEmpty()
+            )
+        ).enqueue(object : Callback<NicknameResponse> {
+            override fun onResponse(
+                call: Call<NicknameResponse>,
+                response: Response<NicknameResponse>
+            ) {
+                if (response.isSuccessful) {
+                    _nicknameCheckResult.value = response.body()
+                }
+            }
+
+            override fun onFailure(call: Call<NicknameResponse>, t: Throwable) {
                 TODO("Not yet implemented")
             }
         })
