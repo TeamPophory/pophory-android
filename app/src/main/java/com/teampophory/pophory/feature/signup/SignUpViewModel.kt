@@ -61,11 +61,13 @@ class SignUpViewModel @Inject constructor(
             ) {
                 if (response.isSuccessful) {
                     _signUpResult.value = response.body()
+                } else {
+                    Timber.e(response.errorBody()?.string())
                 }
             }
 
             override fun onFailure(call: Call<SignUpResponse>, t: Throwable) {
-                Timber.d("signUp fail")
+                Timber.e(t)
             }
         })
     }
@@ -82,11 +84,13 @@ class SignUpViewModel @Inject constructor(
             ) {
                 if (response.isSuccessful) {
                     _nicknameCheckResult.value = response.body()
+                } else {
+                    Timber.e(response.errorBody()?.string())
                 }
             }
 
             override fun onFailure(call: Call<NicknameResponse>, t: Throwable) {
-                Timber.d("nickname check fail")
+                Timber.e(t)
             }
         })
     }
