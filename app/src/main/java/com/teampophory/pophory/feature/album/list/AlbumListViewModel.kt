@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.teampophory.pophory.albumsort.AlbumSortType
-import com.teampophory.pophory.data.repository.photo.AlbumRepository
+import com.teampophory.pophory.data.repository.photo.PhotoRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -15,7 +15,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class AlbumListViewModel @Inject constructor(
-    private val photoRepository: AlbumRepository
+    private val photoRepository: PhotoRepository
 ) : ViewModel() {
 
     private val _albumId = MutableStateFlow(0)

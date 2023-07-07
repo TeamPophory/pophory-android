@@ -1,13 +1,8 @@
 package com.teampophory.pophory.config.di
 
-import com.teampophory.pophory.data.repository.photo.PhotoRepository
-import com.teampophory.pophory.data.repository.photo.DefaultPhotoRepository
-import com.teampophory.pophory.network.PhotoNetworkDataSource
-import com.teampophory.pophory.network.retrofit.album.RetrofitPhotoNetwork
-import com.teampophory.pophory.network.retrofit.album.RetrofitPhotoNetworkApi
 import com.teampophory.pophory.data.network.service.AlbumService
-import com.teampophory.pophory.data.repository.photo.AlbumRepository
-import com.teampophory.pophory.data.repository.photo.DefaultAlbumRepository
+import com.teampophory.pophory.data.repository.photo.DefaultPhotoRepository
+import com.teampophory.pophory.data.repository.photo.PhotoRepository
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -29,6 +24,6 @@ object PhotoModule {
     interface Binder {
         @Binds
         @Singleton
-        fun bindPhotoRepository(defaultPhotoRepository: DefaultAlbumRepository): AlbumRepository
+        fun bindPhotoRepository(defaultPhotoRepository: DefaultPhotoRepository): PhotoRepository
     }
 }

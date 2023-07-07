@@ -4,14 +4,14 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.teampophory.pophory.data.repository.photo.AlbumRepository
+import com.teampophory.pophory.data.repository.photo.PhotoRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class AlbumDetailViewModel @Inject constructor(
-    private val albumRepository: AlbumRepository
+    private val photoRepository: PhotoRepository
 ) : ViewModel() {
     private val _id = MutableLiveData<Int>()
     val id: LiveData<Int> get() = _id
@@ -47,7 +47,7 @@ class AlbumDetailViewModel @Inject constructor(
     fun deleteAlbum() {
         val albumId = id.value?.toLong() ?: 0L
         viewModelScope.launch {
-            albumRepository.deletePhoto(albumId).onSuccess {
+            photoRepository.deletePhoto(albumId).onSuccess {
                 _albumDetailState.value = AlbumDetailState.SuccessDeleteAlbum
             }.onFailure {
                 _albumDetailState.value = AlbumDetailState.Error(it.message.toString())

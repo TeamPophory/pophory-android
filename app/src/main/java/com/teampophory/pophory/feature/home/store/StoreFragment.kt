@@ -19,7 +19,7 @@ import com.teampophory.pophory.common.primitive.textAppearance
 import com.teampophory.pophory.common.view.viewBinding
 import com.teampophory.pophory.databinding.FragmentStoreBinding
 import com.teampophory.pophory.feature.HomeViewModel
-import com.teampophory.pophory.feature.album.AlbumListActivity
+import com.teampophory.pophory.feature.album.list.AlbumListActivity
 import com.teampophory.pophory.feature.home.store.apdater.OnPageChangedListener
 import com.teampophory.pophory.feature.home.store.apdater.StoreAdapter
 import com.teampophory.pophory.feature.home.store.model.AlbumItem
@@ -79,7 +79,7 @@ class StoreFragment : Fragment(), OnPageChangedListener {
     }
 
     private fun setupViewPager() {
-        storeAdapter = StoreAdapter({ albumItem ->
+        storeAdapter = StoreAdapter({ _ ->
             val intent = Intent(context, AlbumListActivity::class.java)
             startActivity(intent)
         }, this)
