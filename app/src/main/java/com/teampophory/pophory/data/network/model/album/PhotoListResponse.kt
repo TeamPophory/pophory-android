@@ -35,23 +35,13 @@ data class PhotoListResponse(
             val imageUrl = photo.imageUrl ?: return photoDetails
             val width = photo.width ?: return photoDetails
             val height = photo.height ?: return photoDetails
-            when {
-                (width > height) -> {
-                    photoDetails.add(
-                        PhotoDetail(id, studio, takenAt, imageUrl, width, height, OrientType.HORIZONTAL)
-                    )
-                }
-                (width < height) -> {
-                    photoDetails.add(
-                        PhotoDetail(id, studio, takenAt, imageUrl, width, height, OrientType.VERTICAL)
-                    )
-                }
-                else -> {
-                    photoDetails.add(
-                        PhotoDetail(id, studio, takenAt, imageUrl, width, height, OrientType.NONE)
-                    )
-                }
+            val orientationType = when {
+                (width >= height) -> OrientType.HORIZONTAL
+                else -> OrientType.VERTICAL
             }
+            photoDetails.add(
+                PhotoDetail(id, studio, takenAt, imageUrl, width, height, orientationType)
+            )
         }
         return photoDetails
     }
