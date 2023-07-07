@@ -10,6 +10,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.teampophory.pophory.R
 import com.teampophory.pophory.albumsort.AlbumSortBottomSheet
 import com.teampophory.pophory.albumsort.AlbumSortType
+import com.teampophory.pophory.common.activity.hideLoading
+import com.teampophory.pophory.common.activity.showLoading
 import com.teampophory.pophory.common.context.stringOf
 import com.teampophory.pophory.common.view.viewBinding
 import com.teampophory.pophory.databinding.ActivityAlbumListBinding
@@ -42,7 +44,7 @@ class AlbumListActivity : AppCompatActivity() {
     }
 
     private fun initObserver() {
-        viewModel.albumList.observe(this) { albumState ->
+        viewModel.albumListState.flowWithLifecycle(lifecycle).onEach { albumState ->
             when (albumState) {
                 is AlbumListState.Uninitialized -> {
                     initViews()
@@ -50,20 +52,22 @@ class AlbumListActivity : AppCompatActivity() {
                 }
 
                 is AlbumListState.Loading -> {
-
+                    showLoading()
                 }
 
                 is AlbumListState.SuccessLoadAlbums -> {
+                    hideLoading()
                     val photoItems = processPhotoDetails(albumState.data)
                     albumListAdapter.submitList(photoItems)
                     Timber.tag(TAG).d("initObserver: %s", albumState.data)
                 }
 
                 is AlbumListState.Error -> {
+                    hideLoading()
                     Timber.tag(TAG).e(albumState.error)
                 }
             }
-        }
+        }.launchIn(lifecycleScope)
     }
 
     private fun initViews() {
@@ -84,10 +88,11 @@ class AlbumListActivity : AppCompatActivity() {
 
     private fun initSortViews() {
         viewModel.albumSortType.flowWithLifecycle(lifecycle).onEach {
-            binding.tvSort.text =  when(it) {
+            binding.tvSort.text = when (it) {
                 AlbumSortType.NEWEST -> {
                     stringOf(R.string.sort_newest)
                 }
+
                 AlbumSortType.OLDEST -> {
                     stringOf(R.string.sort_oldest)
                 }

@@ -1,7 +1,5 @@
 package com.teampophory.pophory.feature.album.list
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.teampophory.pophory.albumsort.AlbumSortType
@@ -24,8 +22,8 @@ class AlbumListViewModel @Inject constructor(
     private val _albumSortType = MutableStateFlow(AlbumSortType.NEWEST)
     val albumSortType: StateFlow<AlbumSortType> get() = _albumSortType
 
-    private val _albumList = MutableLiveData<AlbumListState>(AlbumListState.Uninitialized)
-    val albumList: LiveData<AlbumListState> get() = _albumList
+    private val _albumListState = MutableStateFlow<AlbumListState>(AlbumListState.Uninitialized)
+    val albumListState: StateFlow<AlbumListState> get() = _albumListState
 
     fun setAlbumId(id: Int) {
         _albumId.value = id
@@ -33,20 +31,20 @@ class AlbumListViewModel @Inject constructor(
 
     fun getAlbums() {
         viewModelScope.launch {
-            _albumList.value = AlbumListState.Loading
+            _albumListState.emit(AlbumListState.Loading)
             photoRepository.getPhotos(albumId.value)
                 .onSuccess {
-                    _albumList.value = AlbumListState.SuccessLoadAlbums(it.mapPhotosToPhotoItems())
+                    _albumListState.emit(AlbumListState.SuccessLoadAlbums(it.mapPhotosToPhotoItems()))
                 }.onFailure {
                     Timber.e(it)
-                    _albumList.value = AlbumListState.Error(it)
+                    _albumListState.emit(AlbumListState.Error(it))
                 }
         }
     }
 
     fun sortPhotoList(newest: AlbumSortType) {
-        if (albumList.value is AlbumListState.SuccessLoadAlbums) {
-            val photoItems = (albumList.value as? AlbumListState.SuccessLoadAlbums)?.data
+        if (albumListState.value is AlbumListState.SuccessLoadAlbums) {
+            val photoItems = (albumListState.value as? AlbumListState.SuccessLoadAlbums)?.data
             val sortedPhotoItems = when (newest) {
                 AlbumSortType.NEWEST -> photoItems?.sortedByDescending { it.takenAt }
                 AlbumSortType.OLDEST -> photoItems?.sortedBy { it.takenAt }
@@ -55,7 +53,7 @@ class AlbumListViewModel @Inject constructor(
                 return
             }
             _albumSortType.value = newest
-            _albumList.value = AlbumListState.SuccessLoadAlbums(sortedPhotoItems)
+            _albumListState.value = AlbumListState.SuccessLoadAlbums(sortedPhotoItems)
         } else {
             getAlbums()
         }
