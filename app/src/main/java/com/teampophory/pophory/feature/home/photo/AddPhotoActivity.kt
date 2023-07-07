@@ -14,10 +14,13 @@ import com.google.android.material.datepicker.MaterialDatePicker
 import com.teampophory.pophory.R
 import com.teampophory.pophory.common.activity.BindingActivity
 import com.teampophory.pophory.common.image.getImageSize
-import com.teampophory.pophory.common.intent.intExtra
+import com.teampophory.pophory.common.image.toImageContent
 import com.teampophory.pophory.common.intent.parcelableExtra
+import com.teampophory.pophory.common.intent.stringExtra
 import com.teampophory.pophory.common.time.systemNow
 import com.teampophory.pophory.databinding.ActivityAddPhotoBinding
+import com.teampophory.pophory.feature.home.store.model.AlbumItem
+import com.teampophory.pophory.util.toCoverDrawable
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -30,8 +33,8 @@ import java.util.TimeZone
 @AndroidEntryPoint
 class AddPhotoActivity : BindingActivity<ActivityAddPhotoBinding>(R.layout.activity_add_photo) {
     private val viewModel: AddPhotoViewModel by viewModels()
-    private val imageUri by parcelableExtra<Uri>()
-    private val albumCoverId by intExtra()
+    private val imageUri by stringExtra()
+    private val albumCover by parcelableExtra<AlbumItem>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,17 +45,18 @@ class AddPhotoActivity : BindingActivity<ActivityAddPhotoBinding>(R.layout.activ
     }
 
     private fun loadImage() {
-        val imageSize = imageUri?.getImageSize()
+        val realImageUri = Uri.parse(imageUri)?.toImageContent(this)
+        val imageSize = realImageUri?.getImageSize()
         imageSize?.let {
             if (it.width >= it.height) {
-                binding.imgBackground.load(R.drawable.img_background_width)
-                binding.imgHorizontal.load(imageUri) {
+                binding.imgBackground.setImageResource(R.drawable.img_background_width)
+                binding.imgHorizontal.load(realImageUri) {
                     crossfade(true)
                 }
                 return
             }
-            binding.imgBackground.load(R.drawable.img_background_height)
-            binding.imgVertical.load(imageUri) {
+            binding.imgBackground.setImageResource(R.drawable.img_background_height)
+            binding.imgVertical.load(realImageUri) {
                 crossfade(true)
             }
         }
@@ -69,6 +73,8 @@ class AddPhotoActivity : BindingActivity<ActivityAddPhotoBinding>(R.layout.activ
         binding.layoutStudio.setOnClickListener {
             viewModel.onStudioPressed()
         }
+        albumCover?.albumCover?.toCoverDrawable()
+            ?.let { binding.imgAlbumCover.setImageResource(it) }
     }
 
     private fun subscribeEvent() {
@@ -118,10 +124,10 @@ class AddPhotoActivity : BindingActivity<ActivityAddPhotoBinding>(R.layout.activ
 
     companion object {
         @JvmStatic
-        fun getIntent(context: Context, imageUri: Uri, albumCoverId: Int) =
+        fun getIntent(context: Context, imageUri: String, albumCover: AlbumItem) =
             Intent(context, AddPhotoActivity::class.java).apply {
                 putExtra("imageUri", imageUri)
-                putExtra("albumCoverId", albumCoverId)
+                putExtra("albumCover", albumCover)
             }
     }
 }

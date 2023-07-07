@@ -15,18 +15,16 @@ import com.teampophory.pophory.feature.home.mypage.MyPageFragment
 import com.teampophory.pophory.feature.home.photo.AddPhotoActivity
 import com.teampophory.pophory.feature.home.store.StoreFragment
 import dagger.hilt.android.AndroidEntryPoint
-import timber.log.Timber
 
 @AndroidEntryPoint
 class HomeActivity : AppCompatActivity() {
     private val binding: ActivityHomeBinding by viewBinding(ActivityHomeBinding::inflate)
     private val viewModel by viewModels<HomeViewModel>()
     private val imagePicker = registerForActivityResult(ActivityResultContracts.PickVisualMedia()) {
-        Timber.d("Nunu imagePicker $it")
         it?.let { uri ->
             val currentAlbum = viewModel.currentAlbum
             currentAlbum?.let { album ->
-                startActivity(AddPhotoActivity.getIntent(this, uri, album.id))
+                startActivity(AddPhotoActivity.getIntent(this, uri.toString(), album))
             }
         }
     }
