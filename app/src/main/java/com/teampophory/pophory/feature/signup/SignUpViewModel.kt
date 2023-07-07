@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModel
 import com.teampophory.pophory.feature.signup.ServicePool.signUpService
 import com.teampophory.pophory.network.model.SignUpRequest
 import com.teampophory.pophory.network.model.SignUpResponse
-import com.teampophory.pophory.network.retrofit.signup.RetrofitSignUpNetwork
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -25,15 +24,15 @@ class SignUpViewModel : ViewModel() {
     private val _albumCover: MutableLiveData<Int> = MutableLiveData()
     var albumCover: LiveData<Int> = _albumCover
 
-    fun getRealName(realName: String) {
+    fun setRealName(realName: String) {
         _realName.value = realName
     }
 
-    fun getNickName(nickName: String) {
+    fun setNickName(nickName: String) {
         _nickName.value = nickName
     }
 
-    fun getAlbumCover(albumCover: Int) {
+    fun setAlbumCover(albumCover: Int) {
         _albumCover.value = albumCover
     }
 
@@ -60,4 +59,5 @@ class SignUpViewModel : ViewModel() {
 
         })
     }
+
 }

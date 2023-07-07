@@ -1,7 +1,6 @@
 package com.teampophory.pophory.feature.signup
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,11 +13,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.teampophory.pophory.R
 import com.teampophory.pophory.common.fragment.colorOf
-import com.teampophory.pophory.common.fragment.toast
 import com.teampophory.pophory.common.primitive.textAppearance
 import com.teampophory.pophory.common.view.viewBinding
 import com.teampophory.pophory.databinding.FragmentSignUpFirstBinding
-import timber.log.Timber
 import java.util.regex.Pattern
 
 class SignUpFirstFragment : Fragment() {
@@ -70,7 +67,7 @@ class SignUpFirstFragment : Fragment() {
             //edittext text 변화 감지
             doAfterTextChanged {
 
-                signUpViewModel.getRealName(it.toString())
+                signUpViewModel.setRealName(it.toString())
 
                 binding.btnDeleteEditText.isGone = it?.isEmpty() == true
                 // 글자 수 계산

@@ -62,7 +62,7 @@ class SignUpSecondFragment : Fragment() {
                 }
             }
             doAfterTextChanged {
-                signUpViewModel.getNickName(it.toString())
+                signUpViewModel.setNickName(it.toString())
                 //X버튼 생성 여부
                 binding.btnDeleteEditText.isGone = it?.isEmpty() == true
                 //글자 수 계산

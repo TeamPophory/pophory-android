@@ -69,7 +69,7 @@ class SignUpActivity : AppCompatActivity(), SignUpButtonInterface {
                     val dialog = SignUpDialogFragment()
                     supportFragmentManager.beginTransaction().add(dialog, "")
                         .commitAllowingStateLoss()
-//                    중복된 아이디가 존재하지 않을 경우
+                    // TODO 중복된 아이디가 존재하지 않을 경우
                     val nextPosition = currentPosition + 1
                     binding.viewpager.currentItem = nextPosition
                 }
