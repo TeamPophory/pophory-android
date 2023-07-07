@@ -1,6 +1,6 @@
 package com.teampophory.pophory.domain
 
-import com.teampophory.pophory.data.network.model.auth.UserAccountState
+import com.teampophory.pophory.data.model.auth.UserAccountState
 import com.teampophory.pophory.data.repository.auth.AuthRepository
 import javax.inject.Inject
 

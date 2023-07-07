@@ -104,5 +104,8 @@
         <activity
             android:name=".feature.album.AlbumListActivity"
             android:exported="false" />
+        <activity
+            android:name=".feature.home.photo.AddPhotoActivity"
+            android:exported="true" />
     </application>
 </manifest>

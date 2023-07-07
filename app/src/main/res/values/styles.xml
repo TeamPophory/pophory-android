@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="ThemeOverlay.Pophory.MaterialCalendar" parent="ThemeOverlay.Material3.MaterialCalendar">
+        <item name="colorOnSurfaceVariant">@color/pophory_black</item>
+        <item name="colorOnSurface">@color/pophory_black</item>
+    </style>
+</resources>

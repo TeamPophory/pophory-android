@@ -1,7 +1,7 @@
 package com.teampophory.pophory.config.di
 
-import com.teampophory.pophory.data.repository.DefaultStoreRepository
-import com.teampophory.pophory.data.repository.StoreRepository
+import com.teampophory.pophory.data.repository.store.DefaultStoreRepository
+import com.teampophory.pophory.data.repository.store.StoreRepository
 import com.teampophory.pophory.network.StoreNetworkDataSource
 import com.teampophory.pophory.network.retrofit.store.RetrofitStoreNetwork
 import com.teampophory.pophory.network.retrofit.store.RetrofitStoreNetworkApi

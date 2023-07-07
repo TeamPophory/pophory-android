@@ -1,8 +1,8 @@
 package com.teampophory.pophory.data.repository.auth
 
 import com.teampophory.pophory.data.local.PophoryDataStore
-import com.teampophory.pophory.data.network.model.auth.Token
-import com.teampophory.pophory.data.network.model.auth.UserAuthentication
+import com.teampophory.pophory.data.model.auth.Token
+import com.teampophory.pophory.data.model.auth.UserAuthentication
 import com.teampophory.pophory.data.network.service.AuthService
 import javax.inject.Inject
 

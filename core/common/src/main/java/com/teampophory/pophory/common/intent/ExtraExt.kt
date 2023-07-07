@@ -41,7 +41,6 @@ fun <P : Parcelable> parcelableExtra(defaultValue: P? = null) =
     }
 
 
-
 inline fun <reified S : Serializable> serializableExtra(defaultValue: S? = null) =
     ReadOnlyProperty<Activity, S?> { thisRef, property ->
         thisRef.intent.serializableExtra(property.name) ?: defaultValue

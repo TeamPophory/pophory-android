@@ -1,4 +1,4 @@
-package com.teampophory.pophory.data.network.model.auth
+package com.teampophory.pophory.data.model.auth
 
 data class Token(
     val accessToken: String,

@@ -1,7 +1,7 @@
 package com.teampophory.pophory.config.di
 
-import com.teampophory.pophory.data.repository.PhotoRepository
-import com.teampophory.pophory.data.repository.DefaultPhotoRepository
+import com.teampophory.pophory.data.repository.photo.PhotoRepository
+import com.teampophory.pophory.data.repository.photo.DefaultPhotoRepository
 import com.teampophory.pophory.network.PhotoNetworkDataSource
 import com.teampophory.pophory.network.retrofit.album.RetrofitPhotoNetwork
 import com.teampophory.pophory.network.retrofit.album.RetrofitPhotoNetworkApi
