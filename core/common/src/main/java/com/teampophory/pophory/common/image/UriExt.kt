@@ -10,11 +10,11 @@ import android.util.Size
 import androidx.core.net.toFile
 import java.io.File
 
-fun Uri.getImageSize(): Size {
+fun Uri.getImageSize(context: Context): Size {
     val options = BitmapFactory.Options().apply {
         inJustDecodeBounds = true
     }
-    BitmapFactory.decodeFile(toFile().path, options)
+    BitmapFactory.decodeFile(toImageContent(context)?.path, options)
     return Size(options.outWidth, options.outHeight)
 }
 

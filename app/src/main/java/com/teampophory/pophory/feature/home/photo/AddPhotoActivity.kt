@@ -51,7 +51,7 @@ class AddPhotoActivity : BindingActivity<ActivityAddPhotoBinding>(R.layout.activ
 
     private fun loadImage() {
         val realImageUri = Uri.parse(imageUri)?.toImageContent(this)
-        val imageSize = realImageUri?.getImageSize()
+        val imageSize = realImageUri?.getImageSize(this)
         imageSize?.let {
             viewModel.onUpdateImage(ContentUriRequestBody(this, Uri.parse(imageUri)))
             if (it.width >= it.height) {
@@ -121,6 +121,8 @@ class AddPhotoActivity : BindingActivity<ActivityAddPhotoBinding>(R.layout.activ
                     }
 
                     AddPhotoEvent.ADD_SUCCESS -> {
+                        val intent = Intent().putExtra(EXTRA_ALBUM_ITEM, albumCover)
+                        setResult(RESULT_OK, intent)
                         finish()
                         toast("사진이 추가되었습니다.")
                     }
@@ -152,6 +154,7 @@ class AddPhotoActivity : BindingActivity<ActivityAddPhotoBinding>(R.layout.activ
     }
 
     companion object {
+        const val EXTRA_ALBUM_ITEM = "albumItem"
         @JvmStatic
         fun getIntent(context: Context, imageUri: String, albumCover: AlbumItem) =
             Intent(context, AddPhotoActivity::class.java).apply {

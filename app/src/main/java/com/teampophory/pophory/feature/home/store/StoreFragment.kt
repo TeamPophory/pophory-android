@@ -1,6 +1,5 @@
 package com.teampophory.pophory.feature.home.store
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +9,7 @@ import androidx.core.text.color
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.viewpager2.widget.ViewPager2
 import com.teampophory.pophory.R
 import com.teampophory.pophory.common.fragment.colorOf
@@ -24,6 +24,7 @@ import com.teampophory.pophory.feature.home.store.apdater.OnPageChangedListener
 import com.teampophory.pophory.feature.home.store.apdater.StoreAdapter
 import com.teampophory.pophory.feature.home.store.model.AlbumItem
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class StoreFragment : Fragment(), OnPageChangedListener {
@@ -73,15 +74,23 @@ class StoreFragment : Fragment(), OnPageChangedListener {
                 is StoreState.Error -> {
                     hideLoading()
                 }
+
                 else -> {}
+            }
+        }
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            homeViewModel.currentAlbum.collect { album ->
+                if (album != null) {
+                    onPageChanged(album)
+                }
             }
         }
     }
 
     private fun setupViewPager() {
-        storeAdapter = StoreAdapter({ _ ->
-            val intent = Intent(context, AlbumListActivity::class.java)
-            startActivity(intent)
+        storeAdapter = StoreAdapter({ albumItem ->
+            AlbumListActivity.newInstance(requireContext(), albumItem.id).let(::startActivity)
         }, this)
 
         binding.viewpagerStore.adapter = storeAdapter

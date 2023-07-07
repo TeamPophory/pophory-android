@@ -4,8 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.fragment.app.activityViewModels
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.teampophory.pophory.R
 import com.teampophory.pophory.databinding.BottomSheetAlbumSortBinding
 import com.teampophory.pophory.feature.album.list.AlbumListViewModel
 
@@ -31,12 +33,19 @@ class AlbumSortBottomSheet : BottomSheetDialogFragment() {
     }
 
     private fun initListMenuViews() {
+        val drawable = AppCompatResources.getDrawable(requireContext(), R.drawable.ic_check_big)
         with(binding) {
             tvSortNewest.setOnClickListener {
+                drawable?.setBounds(0, 0, drawable.intrinsicWidth, drawable.intrinsicHeight)
+                tvSortNewest.setCompoundDrawablesRelativeWithIntrinsicBounds(null, null, drawable, null)
+                tvSortOldest.setCompoundDrawablesRelativeWithIntrinsicBounds(null, null, null, null)
                 viewModel.sortPhotoList(AlbumSortType.NEWEST)
                 dismissAllowingStateLoss()
             }
             tvSortOldest.setOnClickListener {
+                drawable?.setBounds(0, 0, drawable.intrinsicWidth, drawable.intrinsicHeight)
+                tvSortNewest.setCompoundDrawablesRelativeWithIntrinsicBounds(null, null, null, null)
+                tvSortOldest.setCompoundDrawablesRelativeWithIntrinsicBounds(null, null, drawable, null)
                 viewModel.sortPhotoList(AlbumSortType.OLDEST)
                 dismissAllowingStateLoss()
             }

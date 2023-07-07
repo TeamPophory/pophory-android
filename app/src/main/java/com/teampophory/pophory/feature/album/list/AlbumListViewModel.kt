@@ -8,6 +8,7 @@ import com.teampophory.pophory.feature.album.model.OrientType
 import com.teampophory.pophory.feature.album.model.PhotoDetail
 import com.teampophory.pophory.feature.album.model.PhotoItem
 import com.teampophory.pophory.feature.album.model.mapPhotoItemsToPhotoDetails
+import com.teampophory.pophory.feature.home.store.model.AlbumItem
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -28,6 +29,15 @@ class AlbumListViewModel @Inject constructor(
 
     private val _albumListState = MutableStateFlow<AlbumListState>(AlbumListState.Uninitialized)
     val albumListState: StateFlow<AlbumListState> get() = _albumListState
+
+    private val _currentAlbum = MutableStateFlow<AlbumItem?>(null)
+    val currentAlbum: StateFlow<AlbumItem?> get() = _currentAlbum
+
+    fun onUpdateAlbum(album: AlbumItem?) {
+        viewModelScope.launch {
+            _currentAlbum.emit(album)
+        }
+    }
 
     fun setAlbumId(id: Int) {
         _albumId.value = id

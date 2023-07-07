@@ -3,6 +3,7 @@ package com.teampophory.pophory.feature.album.detail
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import coil.load
@@ -13,6 +14,7 @@ import com.teampophory.pophory.common.view.showAllowingStateLoss
 import com.teampophory.pophory.common.view.viewBinding
 import com.teampophory.pophory.databinding.ActivityAlbumDetailBinding
 import com.teampophory.pophory.feature.album.model.PhotoDetail
+import com.teampophory.pophory.feature.home.photo.AddPhotoActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

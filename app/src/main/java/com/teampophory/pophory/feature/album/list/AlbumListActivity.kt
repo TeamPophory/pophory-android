@@ -3,6 +3,8 @@ package com.teampophory.pophory.feature.album.list
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import androidx.activity.result.PickVisualMediaRequest
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
@@ -18,6 +20,7 @@ import com.teampophory.pophory.common.context.stringOf
 import com.teampophory.pophory.common.view.viewBinding
 import com.teampophory.pophory.databinding.ActivityAlbumListBinding
 import com.teampophory.pophory.feature.album.list.adapter.AlbumListAdapter
+import com.teampophory.pophory.feature.home.photo.AddPhotoActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -29,6 +32,14 @@ class AlbumListActivity : AppCompatActivity() {
     private val albumListAdapter = AlbumListAdapter()
     private val viewModel by viewModels<AlbumListViewModel>()
     private val binding by viewBinding(ActivityAlbumListBinding::inflate)
+
+    private val imagePicker = registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
+        val currentAlbum = viewModel.currentAlbum.value
+        val intent = currentAlbum?.let { albumItem ->
+            AddPhotoActivity.getIntent(this, uri.toString(), albumItem)
+        }
+        startActivity(intent)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -83,7 +94,7 @@ class AlbumListActivity : AppCompatActivity() {
 
     private fun initToolbar() {
         binding.ivAlbumAdd.setOnClickListener {
-            //TODO 사진 찍는 플로우 추가
+            imagePicker.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
         }
 
         binding.ivBack.setOnClickListener {
