@@ -1,4 +1,4 @@
-package com.teampophory.pophory.albumsort
+package com.teampophory.pophory.feature.album.albumsort
 
 import android.os.Bundle
 import android.view.LayoutInflater
