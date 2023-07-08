@@ -93,7 +93,7 @@ class StoreFragment : Fragment(), OnPageChangedListener {
 
     private fun setupViewPager() {
         storeAdapter = StoreAdapter({ albumItem ->
-            AlbumListActivity.newInstance(requireContext(), albumItem.id).let(::startActivity)
+            AlbumListActivity.newInstance(requireContext(), albumItem).let(::startActivity)
         }, this)
 
         binding.viewpagerStore.adapter = storeAdapter

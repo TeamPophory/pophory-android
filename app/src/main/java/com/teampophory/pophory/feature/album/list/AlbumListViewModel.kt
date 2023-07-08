@@ -21,8 +21,8 @@ class AlbumListViewModel @Inject constructor(
     private val photoRepository: PhotoRepository
 ) : ViewModel() {
 
-    private val _albumId = MutableStateFlow(0)
-    val albumId: StateFlow<Int> = _albumId
+    private val _albumItem = MutableStateFlow<AlbumItem?>(null)
+    val albumItem: StateFlow<AlbumItem?> = _albumItem
 
     private val _albumSortType = MutableStateFlow(AlbumSortType.NEWEST)
     val albumSortType: StateFlow<AlbumSortType> get() = _albumSortType
@@ -30,26 +30,23 @@ class AlbumListViewModel @Inject constructor(
     private val _albumListState = MutableStateFlow<AlbumListState>(AlbumListState.Uninitialized)
     val albumListState: StateFlow<AlbumListState> get() = _albumListState
 
-    private val _currentAlbum = MutableStateFlow<AlbumItem?>(null)
-    val currentAlbum: StateFlow<AlbumItem?> get() = _currentAlbum
-
-    fun onUpdateAlbum(album: AlbumItem?) {
-        viewModelScope.launch {
-            _currentAlbum.emit(album)
-        }
-    }
-
-    fun setAlbumId(id: Int) {
-        _albumId.value = id
+    fun setAlbumItem(albumItem: AlbumItem) {
+        _albumItem.value = albumItem
     }
 
     fun getAlbums() {
         viewModelScope.launch {
             _albumListState.emit(AlbumListState.Loading)
-            photoRepository.getPhotos(albumId.value)
+            photoRepository.getPhotos(albumItem.value?.id ?: 0)
                 .onSuccess {
                     val photoItems = it.mapPhotosToPhotoItems()
-                    _albumListState.emit(AlbumListState.SuccessLoadAlbums(processPhotoDetails(photoItems)))
+                    _albumListState.emit(
+                        AlbumListState.SuccessLoadAlbums(
+                            processPhotoDetails(
+                                photoItems
+                            )
+                        )
+                    )
                 }.onFailure {
                     Timber.e(it)
                     _albumListState.emit(AlbumListState.Error(it))
@@ -59,7 +56,8 @@ class AlbumListViewModel @Inject constructor(
 
     fun sortPhotoList(sortType: AlbumSortType) {
         if (albumListState.value is AlbumListState.SuccessLoadAlbums) {
-            val photoItems = (albumListState.value as? AlbumListState.SuccessLoadAlbums)?.data?.mapPhotoItemsToPhotoDetails()
+            val photoItems =
+                (albumListState.value as? AlbumListState.SuccessLoadAlbums)?.data?.mapPhotoItemsToPhotoDetails()
             val sortedPhotoItems = when (sortType) {
                 AlbumSortType.NEWEST -> photoItems?.sortedByDescending { it.takenAt }
                 AlbumSortType.OLDEST -> photoItems?.sortedBy { it.takenAt }
@@ -68,7 +66,8 @@ class AlbumListViewModel @Inject constructor(
                 return
             }
             _albumSortType.value = sortType
-            _albumListState.value = AlbumListState.SuccessLoadAlbums(processPhotoDetails(sortedPhotoItems))
+            _albumListState.value =
+                AlbumListState.SuccessLoadAlbums(processPhotoDetails(sortedPhotoItems))
         } else {
             getAlbums()
         }
