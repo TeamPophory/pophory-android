@@ -47,13 +47,13 @@ data class MyPageResponse(
                 }
                 MyPageDisplayItem.Photo(
                     PhotoDetail(
-                        it.id,
-                        it.imageUrl,
-                        it.studio,
-                        it.takenAt,
-                        it.width,
-                        it.height,
-                        orientType
+                        id = it.id,
+                        imageUrl = it.imageUrl,
+                        studio = it.studio,
+                        takenAt = it.takenAt,
+                        width = it.width,
+                        height = it.height,
+                        orientType = orientType
                     )
                 )
             } ?: emptyList()
