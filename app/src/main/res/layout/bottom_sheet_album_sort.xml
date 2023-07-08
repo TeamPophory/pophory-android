@@ -9,12 +9,12 @@
     <com.google.android.material.bottomsheet.BottomSheetDragHandleView
         android:id="@+id/dragHandle"
         android:layout_width="match_parent"
-        app:tint="@color/gray_30"
         android:layout_height="wrap_content"
         android:layout_marginTop="13dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/gray_30" />
 
     <TextView
         android:id="@+id/tvSelectSort"
@@ -37,11 +37,34 @@
         android:text="@string/sort_newest"
         android:textAppearance="?textAppearanceHeadlineMedium"
         android:textSize="18sp"
-        app:drawableEndCompat="@drawable/ic_check_big"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvSelectSort" />
+
+    <ImageView
+        android:id="@+id/ivCheckNewest"
+        android:layout_width="48dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="20dp"
+        android:padding="12dp"
+        android:src="@drawable/ic_check_big"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@id/tvSortNewest"
+        app:layout_constraintEnd_toEndOf="@id/tvSortNewest"
+        app:layout_constraintTop_toTopOf="@id/tvSortNewest" />
+
+    <ImageView
+        android:id="@+id/ivCheckOldest"
+        android:layout_width="48dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="20dp"
+        android:padding="12dp"
+        android:visibility="gone"
+        android:src="@drawable/ic_check_big"
+        app:layout_constraintBottom_toBottomOf="@id/tvSortOldest"
+        app:layout_constraintEnd_toEndOf="@id/tvSortOldest"
+        app:layout_constraintTop_toTopOf="@id/tvSortOldest" />
 
     <TextView
         android:id="@+id/tvSortOldest"
@@ -53,7 +76,6 @@
         android:paddingEnd="20dp"
         android:text="@string/sort_oldest"
         android:textAppearance="?textAppearanceHeadlineMedium"
-        app:drawableEndCompat="@drawable/ic_check_big"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

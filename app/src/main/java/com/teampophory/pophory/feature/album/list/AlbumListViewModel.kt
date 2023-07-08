@@ -57,17 +57,17 @@ class AlbumListViewModel @Inject constructor(
         }
     }
 
-    fun sortPhotoList(newest: AlbumSortType) {
+    fun sortPhotoList(sortType: AlbumSortType) {
         if (albumListState.value is AlbumListState.SuccessLoadAlbums) {
             val photoItems = (albumListState.value as? AlbumListState.SuccessLoadAlbums)?.data?.mapPhotoItemsToPhotoDetails()
-            val sortedPhotoItems = when (newest) {
+            val sortedPhotoItems = when (sortType) {
                 AlbumSortType.NEWEST -> photoItems?.sortedByDescending { it.takenAt }
                 AlbumSortType.OLDEST -> photoItems?.sortedBy { it.takenAt }
             } ?: run {
                 AlbumListState.Error(Throwable("Sort Error"))
                 return
             }
-            _albumSortType.value = newest
+            _albumSortType.value = sortType
             _albumListState.value = AlbumListState.SuccessLoadAlbums(processPhotoDetails(sortedPhotoItems))
         } else {
             getAlbums()

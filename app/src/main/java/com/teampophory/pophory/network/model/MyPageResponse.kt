@@ -1,7 +1,8 @@
 package com.teampophory.pophory.network.model
 
+import com.teampophory.pophory.feature.album.model.OrientType
+import com.teampophory.pophory.feature.album.model.PhotoDetail
 import com.teampophory.pophory.feature.home.mypage.MyPageDisplayItem
-import com.teampophory.pophory.feature.home.mypage.MyPageInfo
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -39,7 +40,22 @@ data class MyPageResponse(
             arrayListOf(MyPageDisplayItem.Profile(realName, nickname, photoCount))
         list.addAll(
             photos?.map {
-                MyPageDisplayItem.Photo(MyPageInfo.Photo(it.id ?: 0, it.imageUrl.orEmpty()))
+                val orientType = if (it.width > it.height) {
+                    OrientType.HORIZONTAL
+                } else {
+                    OrientType.VERTICAL
+                }
+                MyPageDisplayItem.Photo(
+                    PhotoDetail(
+                        it.id,
+                        it.imageUrl,
+                        it.studio,
+                        it.takenAt,
+                        it.width,
+                        it.height,
+                        orientType
+                    )
+                )
             } ?: emptyList()
         )
         return list
