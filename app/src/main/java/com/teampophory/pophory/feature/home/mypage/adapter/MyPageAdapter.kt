@@ -84,7 +84,7 @@ class MyPageAdapter(
         private val onItemClicked: (MyPageDisplayItem.Photo) -> Unit
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(photo: MyPageDisplayItem.Photo) {
-            binding.ivMypageFeedItem.load(photo.photo.photoUrl)
+            binding.ivMypageFeedItem.load(photo.photo.imageUrl)
             itemView.setOnClickListener {
                 onItemClicked(photo)
             }

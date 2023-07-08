@@ -86,7 +86,7 @@ class AddPhotoViewModel @Inject constructor(
     fun onSubmit() {
         viewModelScope.launch {
             photoRepository.addPhoto(
-                albumId = savedStateHandle.get<AlbumItem>("albumCover")?.id ?: -1,
+                albumId = savedStateHandle.get<AlbumItem>("albumItem")?.id ?: -1,
                 studioId = currentStudio.value.firstOrNull()?.id ?: -1L,
                 takenAt = SimpleDateFormat(
                     "yyyy.MM.dd",

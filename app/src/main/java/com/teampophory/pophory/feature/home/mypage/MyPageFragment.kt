@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
@@ -13,10 +12,10 @@ import com.teampophory.pophory.R
 import com.teampophory.pophory.common.fragment.hideLoading
 import com.teampophory.pophory.common.fragment.showLoading
 import com.teampophory.pophory.common.fragment.toast
-import com.teampophory.pophory.common.view.GridSpacingItemDecoration
 import com.teampophory.pophory.common.view.dp
 import com.teampophory.pophory.common.view.viewBinding
 import com.teampophory.pophory.databinding.FragmentMypageBinding
+import com.teampophory.pophory.feature.album.detail.AlbumDetailActivity
 import com.teampophory.pophory.feature.home.mypage.adapter.MyPageAdapter
 import com.teampophory.pophory.feature.home.mypage.adapter.MyPageAdapter.Companion.VIEW_TYPE_EMPTY
 import com.teampophory.pophory.feature.home.mypage.adapter.MyPageAdapter.Companion.VIEW_TYPE_PHOTO
@@ -88,6 +87,7 @@ class MyPageFragment : Fragment() {
                 is MyPageInfoState.Error -> {
                     hideLoading()
                 }
+
                 else -> {}
             }
         }
@@ -100,8 +100,8 @@ class MyPageFragment : Fragment() {
         myPageAdapter = MyPageAdapter { photos ->
             val photoList = viewModel.myPageInfo.value
             if (photoList is MyPageInfoState.SuccessMyPageInfo) {
-                toast(photos.photo.photoId.toString());
-                //TODO intent photo_detail activity
+                toast(photos.photo.id.toString());
+                AlbumDetailActivity.startActivity(requireContext(), photos.photo)
             }
         }
 

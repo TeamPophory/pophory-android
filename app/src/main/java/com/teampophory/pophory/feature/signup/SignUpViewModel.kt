@@ -32,7 +32,7 @@ class SignUpViewModel @Inject constructor(
     private val _nickName: MutableLiveData<String> = MutableLiveData()
     var nickName: LiveData<String> = _nickName
 
-    private val _albumCover: MutableLiveData<Int> = MutableLiveData()
+    private val _albumCover: MutableLiveData<Int> = MutableLiveData(1)
     var albumCover: LiveData<Int> = _albumCover
 
     fun setRealName(realName: String) {
@@ -52,7 +52,7 @@ class SignUpViewModel @Inject constructor(
             SignUpRequest(
                 realName.value.orEmpty(),
                 nickName.value.orEmpty(),
-                albumCover.value ?: 0
+                albumCover.value ?: 1
             )
         ).enqueue(object : Callback<SignUpResponse> {
             override fun onResponse(

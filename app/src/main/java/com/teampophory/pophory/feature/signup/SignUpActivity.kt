@@ -30,7 +30,7 @@ class SignUpActivity : AppCompatActivity(), SignUpButtonInterface {
             startActivity((intent))
         }
 
-        viewModel.nicknameCheckResult.observe(this) {it ->
+        viewModel.nicknameCheckResult.observe(this) {
             if(!it.isDuplicated) {
                 // TODO 중복된 아이디가 존재하지 않을 경우
                 val nextPosition = currentPosition + 1
