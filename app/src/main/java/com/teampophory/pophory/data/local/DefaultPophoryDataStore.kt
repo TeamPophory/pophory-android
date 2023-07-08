@@ -37,6 +37,13 @@ class DefaultPophoryDataStore @Inject constructor(
                 putString("user_id", value)
             }
         }
+    override var autoLoginConfigured: Boolean
+        get() = preferences.getBoolean("auto_login", false)
+        set(value) {
+            preferences.edit(commit = true) {
+                putBoolean("auto_login", value)
+            }
+        }
 
     override fun clear() {
         preferences.edit(commit = true) {
