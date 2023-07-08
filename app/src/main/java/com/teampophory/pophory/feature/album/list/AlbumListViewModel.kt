@@ -2,7 +2,7 @@ package com.teampophory.pophory.feature.album.list
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.teampophory.pophory.albumsort.AlbumSortType
+import com.teampophory.pophory.feature.album.albumsort.AlbumSortType
 import com.teampophory.pophory.data.repository.photo.PhotoRepository
 import com.teampophory.pophory.feature.album.model.OrientType
 import com.teampophory.pophory.feature.album.model.PhotoDetail

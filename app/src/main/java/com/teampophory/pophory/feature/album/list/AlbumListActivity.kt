@@ -12,8 +12,8 @@ import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.teampophory.pophory.R
-import com.teampophory.pophory.albumsort.AlbumSortBottomSheet
-import com.teampophory.pophory.albumsort.AlbumSortType
+import com.teampophory.pophory.feature.album.albumsort.AlbumSortBottomSheet
+import com.teampophory.pophory.feature.album.albumsort.AlbumSortType
 import com.teampophory.pophory.common.activity.hideLoading
 import com.teampophory.pophory.common.activity.showLoading
 import com.teampophory.pophory.common.context.stringOf
