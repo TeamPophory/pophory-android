@@ -5,7 +5,9 @@ import com.teampophory.pophory.data.model.auth.Token
 import com.teampophory.pophory.data.model.auth.UserAuthentication
 import com.teampophory.pophory.data.network.model.auth.SocialType
 import com.teampophory.pophory.data.network.service.AuthService
+import io.sentry.Sentry
 import javax.inject.Inject
+
 
 class DefaultAuthRepository @Inject constructor(
     private val dataStore: PophoryDataStore,
@@ -29,9 +31,15 @@ class DefaultAuthRepository @Inject constructor(
     override suspend fun withdraw() {
         service.withdraw("Bearer ${dataStore.accessToken}")
         dataStore.clear()
+        expireSentry()
     }
 
     override suspend fun logout() {
         dataStore.clear()
+        expireSentry()
+    }
+
+    private fun expireSentry() {
+        Sentry.configureScope { scope -> scope.user = null }
     }
 }
