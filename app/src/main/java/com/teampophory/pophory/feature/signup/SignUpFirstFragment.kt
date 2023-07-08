@@ -114,7 +114,7 @@ class SignUpFirstFragment : Fragment() {
     }
 
     companion object {
-        private const val HANGUL_PATTERN = "^[ㄱ-ㅎㅏ-ㅣ가-힣]*\$"
+        private const val HANGUL_PATTERN = "^[가-힣]*\$"
         val HANGUL_REGEX: Pattern = Pattern.compile(HANGUL_PATTERN)
     }
 }
