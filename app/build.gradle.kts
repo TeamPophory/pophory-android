@@ -1,3 +1,5 @@
+import java.util.Properties
+
 @Suppress("DSL_SCOPE_VIOLATION") // TODO: Remove once KTIJ-19369 is fixed
 plugins {
     pophory("application")
@@ -6,6 +8,10 @@ plugins {
     alias(libs.plugins.google.services)
     alias(libs.plugins.app.distribution)
     alias(libs.plugins.crashlytics)
+}
+
+val properties = Properties().apply {
+    load(rootProject.file("local.properties").inputStream())
 }
 
 android {
@@ -23,6 +29,12 @@ android {
             keyPassword = "android"
             storeFile = File("${project.rootDir.absolutePath}/keystore/debug.keystore")
             storePassword = "android"
+        }
+        create("release") {
+            keyAlias = properties.getProperty("keyAlias")
+            keyPassword = properties.getProperty("keyPassword")
+            storeFile = File("${project.rootDir.absolutePath}/keystore/key.jks")
+            storePassword = properties.getProperty("storePassword")
         }
     }
 
