@@ -23,7 +23,7 @@ import java.util.regex.Pattern
 class SignUpFirstFragment : Fragment() {
 
     private val binding by viewBinding(FragmentSignUpFirstBinding::bind)
-    private var buttonState: SignUpButtonInterface? = null
+    private var buttonState: OnButtonStateChangeListener? = null
     private val signUpViewModel by activityViewModels<SignUpViewModel>()
 
     override fun onCreateView(
@@ -77,22 +77,22 @@ class SignUpFirstFragment : Fragment() {
                     binding.tvErrorMessage.text = "현재 한국어만 지원하고 있어요."
                     binding.editTvName.setBackgroundResource(R.drawable.bg_sign_up_edit_text_error)
                     binding.tvErrorMessage.isVisible = true
-                    buttonState?.onChangeState(false)
+                    buttonState?.onChange(false)
                 } else if (it.toString().length < 2) {
                     binding.tvErrorMessage.text = "2-6글자 이내로 작성해주세요."
                     binding.editTvName.setBackgroundResource(R.drawable.bg_sign_up_edit_text_error)
                     binding.tvErrorMessage.isVisible = true
-                    buttonState?.onChangeState(false)
+                    buttonState?.onChange(false)
                 } else {
                     binding.editTvName.setBackgroundResource(R.drawable.bg_sign_up_edit_text_selected)
                     binding.tvErrorMessage.isVisible = false
-                    buttonState?.onChangeState(true)
+                    buttonState?.onChange(true)
                 }
             }
         }
     }
 
-    fun setSignUpButtonInterface(buttonState: SignUpButtonInterface) {
+    fun setSignUpButtonInterface(buttonState: OnButtonStateChangeListener) {
         this.buttonState = buttonState
     }
 

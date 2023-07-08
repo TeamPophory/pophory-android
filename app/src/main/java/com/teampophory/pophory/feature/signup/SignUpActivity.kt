@@ -4,17 +4,16 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.commit
 import androidx.viewpager2.widget.ViewPager2
-import com.teampophory.pophory.common.context.toast
 import com.teampophory.pophory.common.view.viewBinding
 import com.teampophory.pophory.databinding.ActivitySignUpBinding
-import com.teampophory.pophory.feature.home.HomeActivity
 import com.teampophory.pophory.feature.onboarding.OnBoardingActivity
 import com.teampophory.pophory.feature.signup.adapter.SignUpViewPagerAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class SignUpActivity : AppCompatActivity(), SignUpButtonInterface {
+class SignUpActivity : AppCompatActivity() {
 
     private val binding by viewBinding(ActivitySignUpBinding::inflate)
 
@@ -24,34 +23,30 @@ class SignUpActivity : AppCompatActivity(), SignUpButtonInterface {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+        setOnClickNextButton()
+        setViewPager()
+        setOnBackPressed()
+        observeEvent()
+    }
 
+    private fun observeEvent() {
         viewModel.signUpResult.observe(this) {
-            val intent = Intent(this, HomeActivity::class.java)
-            startActivity((intent))
+            startActivity(StartPophoryActivity.getIntent(this))
         }
 
         viewModel.nicknameCheckResult.observe(this) {
-            if(!it.isDuplicated) {
-                // TODO 중복된 아이디가 존재하지 않을 경우
+            if (!it.isDuplicated) {
                 val nextPosition = currentPosition + 1
                 binding.viewpager.currentItem = nextPosition
             } else {
-                // TODO 중복된 아이디가 존재하는 경우
-                val dialog = SignUpDialogFragment()
-                supportFragmentManager.beginTransaction().add(dialog, "")
-                    .commitAllowingStateLoss()
+                supportFragmentManager.commit(allowStateLoss = true) {
+                    add(SignUpDialogFragment(), SignUpDialogFragment::class.java.simpleName)
+                }
             }
         }
-        // 다음 버튼
-        clickNextButton()
-        // 뷰페이저
-        setViewPager()
-        // 백버튼 클릭
-        clickToolbarBackButton()
     }
 
-
-    private fun clickToolbarBackButton() {
+    private fun setOnBackPressed() {
         binding.btnBack.setOnClickListener {
             when (currentPosition) {
                 0 -> {
@@ -72,20 +67,12 @@ class SignUpActivity : AppCompatActivity(), SignUpButtonInterface {
     }
 
 
-    private fun clickNextButton() {
+    private fun setOnClickNextButton() {
         binding.btnNext.setOnClickListener {
             when (currentPosition) {
-                0 -> {
-                    binding.viewpager.currentItem = currentPosition + 1
-                }
-
-                1 -> {
-                    viewModel.nicknameCheck()
-                }
-
-                2 -> {
-                    viewModel.signUp()
-                }
+                0 -> binding.viewpager.currentItem = currentPosition + 1
+                1 -> viewModel.nicknameCheck()
+                2 -> viewModel.signUp()
             }
         }
     }
@@ -98,7 +85,6 @@ class SignUpActivity : AppCompatActivity(), SignUpButtonInterface {
             positionOffsetPixels: Int
         ) {
             super.onPageScrolled(position, positionOffset, positionOffsetPixels)
-            // tablayout 변경
             with(binding) {
                 tabFirst.isSelected = position == 0
                 tabSecond.isSelected = position == 1
@@ -110,29 +96,18 @@ class SignUpActivity : AppCompatActivity(), SignUpButtonInterface {
         override fun onPageSelected(position: Int) {
             super.onPageSelected(position)
             currentPosition = position
-
-            if (position == 2) {
-                setButton("완료하기", true)
-            } else {
-                setButton("다음으로 넘어가기", false)
-            }
+            binding.btnNext.text = if (position == 2) "완료하기" else "다음으로 넘어가기"
+            binding.btnNext.isEnabled = position == 2
         }
     }
 
     private fun setViewPager() {
         binding.viewpager.apply {
-            adapter = SignUpViewPagerAdapter(this@SignUpActivity, this@SignUpActivity)
+            adapter = SignUpViewPagerAdapter(this@SignUpActivity) {
+                binding.btnNext.isEnabled = it
+            }
             isUserInputEnabled = false
         }
         binding.viewpager.registerOnPageChangeCallback(pageChangeCallback)
-    }
-
-    private fun setButton(buttonText: String, isEnabled: Boolean) {
-        binding.btnNext.text = buttonText
-        binding.btnNext.isEnabled = isEnabled
-    }
-
-    override fun onChangeState(state: Boolean) {
-        binding.btnNext.isEnabled = state
     }
 }
