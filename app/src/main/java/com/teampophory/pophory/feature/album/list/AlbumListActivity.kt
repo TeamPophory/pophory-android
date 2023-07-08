@@ -17,10 +17,12 @@ import com.teampophory.pophory.feature.album.albumsort.AlbumSortType
 import com.teampophory.pophory.common.activity.hideLoading
 import com.teampophory.pophory.common.activity.showLoading
 import com.teampophory.pophory.common.context.stringOf
+import com.teampophory.pophory.common.intent.parcelableExtra
 import com.teampophory.pophory.common.view.viewBinding
 import com.teampophory.pophory.databinding.ActivityAlbumListBinding
 import com.teampophory.pophory.feature.album.list.adapter.AlbumListAdapter
 import com.teampophory.pophory.feature.home.photo.AddPhotoActivity
+import com.teampophory.pophory.feature.home.store.model.AlbumItem
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -32,13 +34,20 @@ class AlbumListActivity : AppCompatActivity() {
     private val albumListAdapter = AlbumListAdapter()
     private val viewModel by viewModels<AlbumListViewModel>()
     private val binding by viewBinding(ActivityAlbumListBinding::inflate)
+    private val albumItem by parcelableExtra<AlbumItem>()
+
+    private val addAlbumActivityLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        if (result.resultCode == RESULT_OK) {
+            finish()
+        }
+    }
 
     private val imagePicker = registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
-        val currentAlbum = viewModel.currentAlbum.value
+        val currentAlbum = viewModel.albumItem.value
         val intent = currentAlbum?.let { albumItem ->
             AddPhotoActivity.getIntent(this, uri.toString(), albumItem)
         }
-        startActivity(intent)
+        addAlbumActivityLauncher.launch(intent)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,8 +58,7 @@ class AlbumListActivity : AppCompatActivity() {
     }
 
     private fun initData() {
-        val albumId = intent.getIntExtra(ALBUM_ID, 0)
-        viewModel.setAlbumId(albumId)
+        albumItem?.let { viewModel.setAlbumItem(it) }
     }
 
     private fun initObserver() {
@@ -134,12 +142,11 @@ class AlbumListActivity : AppCompatActivity() {
 
     companion object {
         private const val TAG = "AlbumListActivity"
-        const val ALBUM_ID = "ALBUM_ID"
 
         @JvmStatic
-        fun newInstance(context: Context, albumId: Int): Intent =
+        fun newInstance(context: Context, albumItem: AlbumItem): Intent =
             Intent(context, AlbumListActivity::class.java).apply {
-                putExtra(ALBUM_ID, albumId)
+                putExtra("albumItem", albumItem)
             }
     }
 }
