@@ -6,6 +6,7 @@ import com.teampophory.pophory.data.model.auth.UserAuthentication
 interface AuthRepository {
     suspend fun login(socialToken: String): UserAuthentication
     fun save(token: Token)
+    fun configureAutoLogin(value: Boolean)
     suspend fun withdraw()
     suspend fun logout()
 }

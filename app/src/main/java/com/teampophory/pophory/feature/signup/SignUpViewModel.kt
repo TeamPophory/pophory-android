@@ -3,6 +3,7 @@ package com.teampophory.pophory.feature.signup
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.teampophory.pophory.domain.AutoLoginConfigureUseCase
 import com.teampophory.pophory.network.model.NicknameRequest
 import com.teampophory.pophory.network.model.NicknameResponse
 import com.teampophory.pophory.network.model.SignUpRequest
@@ -17,7 +18,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SignUpViewModel @Inject constructor(
-    private val signUpService: RetrofitSignUpNetwork
+    private val signUpService: RetrofitSignUpNetwork,
+    private val autoLoginConfigureUseCase: AutoLoginConfigureUseCase
 ) : ViewModel() {
 
     private val _signUpResult: MutableLiveData<SignUpResponse> = MutableLiveData()
@@ -83,6 +85,7 @@ class SignUpViewModel @Inject constructor(
                 response: Response<NicknameResponse>
             ) {
                 if (response.isSuccessful) {
+                    autoLoginConfigureUseCase(true)
                     _nicknameCheckResult.value = response.body()
                 } else {
                     Timber.e(response.errorBody()?.string())

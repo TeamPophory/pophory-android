@@ -22,6 +22,10 @@ class DefaultAuthRepository @Inject constructor(
         dataStore.refreshToken = refreshToken
     }
 
+    override fun configureAutoLogin(value: Boolean) {
+        dataStore.autoLoginConfigured = value
+    }
+
     override suspend fun withdraw() {
         service.withdraw("Bearer ${dataStore.accessToken}")
         dataStore.clear()
