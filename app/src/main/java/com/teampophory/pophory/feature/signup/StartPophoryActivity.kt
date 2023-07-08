@@ -1,5 +1,6 @@
 package com.teampophory.pophory.feature.signup
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.window.OnBackInvokedDispatcher
@@ -33,4 +34,10 @@ class StartPophoryActivity : AppCompatActivity() {
         this.onBackPressedDispatcher.addCallback(this, callback)
     }
 
+    companion object {
+        @JvmStatic
+        fun getIntent(context: Context) = Intent(context, StartPophoryActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        }
+    }
 }

@@ -22,7 +22,7 @@ import java.util.regex.Pattern
 @AndroidEntryPoint
 class SignUpSecondFragment : Fragment() {
     private val binding by viewBinding(FragmentSignUpSecondBinding::bind)
-    private var buttonState: SignUpButtonInterface? = null
+    private var buttonState: OnButtonStateChangeListener? = null
     private val signUpViewModel by activityViewModels<SignUpViewModel>()
 
     override fun onCreateView(
@@ -71,16 +71,16 @@ class SignUpSecondFragment : Fragment() {
                     binding.tvErrorMessage.text = "*올바른 형식의 아이디가 아닙니다"
                     binding.editTvId.setBackgroundResource(R.drawable.bg_sign_up_edit_text_error)
                     binding.tvErrorMessage.isVisible = true
-                    buttonState?.onChangeState(false)
+                    buttonState?.onChange(false)
                 } else if (it.toString().length < 4) {
                     binding.tvErrorMessage.text = "4-12글자 이내로 작성해주세요."
                     binding.editTvId.setBackgroundResource(R.drawable.bg_sign_up_edit_text_error)
                     binding.tvErrorMessage.isVisible = true
-                    buttonState?.onChangeState(false)
+                    buttonState?.onChange(false)
                 } else {
                     binding.editTvId.setBackgroundResource(R.drawable.bg_sign_up_edit_text_selected)
                     binding.tvErrorMessage.isVisible = false
-                    buttonState?.onChangeState(true)
+                    buttonState?.onChange(true)
                 }
             }
         }
@@ -103,7 +103,7 @@ class SignUpSecondFragment : Fragment() {
         binding.tvTitle.text = text
     }
 
-    fun setSignUpButtonInterface(buttonState: SignUpButtonInterface) {
+    fun setSignUpButtonInterface(buttonState: OnButtonStateChangeListener) {
         this.buttonState = buttonState
     }
 
