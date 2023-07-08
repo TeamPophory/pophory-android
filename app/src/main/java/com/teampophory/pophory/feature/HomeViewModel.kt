@@ -8,22 +8,18 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
-import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val fetchMeUseCase: ConfigureMeUseCase
+    private val configureMeUseCase: ConfigureMeUseCase
 ) : ViewModel() {
     private val _currentAlbum = MutableStateFlow<AlbumItem?>(null)
     val currentAlbum: StateFlow<AlbumItem?> get() = _currentAlbum
 
     init {
         viewModelScope.launch {
-            fetchMeUseCase()
-                .onSuccess {
-
-                }.onFailure(Timber::e)
+            configureMeUseCase()
         }
     }
 
