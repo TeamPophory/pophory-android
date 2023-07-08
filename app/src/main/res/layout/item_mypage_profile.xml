@@ -39,13 +39,14 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_mypage_name"
         tools:text="그동안 찍은 사진 n장" />
 
-    <TextView
+    <ImageView
         android:id="@+id/tv_mypage_admob"
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:layout_marginTop="20dp"
-        android:background="?colorOnSurface40"
         android:gravity="center"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_banner"
         android:text="광고"
         android:textAppearance="?textAppearancePopupText1"
         app:layout_constraintTop_toBottomOf="@id/iv_mypage_profile" />
