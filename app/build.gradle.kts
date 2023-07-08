@@ -44,7 +44,6 @@ android {
 
     buildTypes {
         debug {
-            //appDistribution upload debug
             firebaseAppDistribution {
                 artifactType = "APK"
                 releaseNotesFile = "firebase/releaseNote.txt"
@@ -58,6 +57,7 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            signingConfig = signingConfigs.getByName("release")
         }
     }
 }
