@@ -100,7 +100,6 @@ class MyPageFragment : Fragment() {
         myPageAdapter = MyPageAdapter { photos ->
             val photoList = viewModel.myPageInfo.value
             if (photoList is MyPageInfoState.SuccessMyPageInfo) {
-                toast(photos.photo.id.toString());
                 AlbumDetailActivity.startActivity(requireContext(), photos.photo)
             }
         }
