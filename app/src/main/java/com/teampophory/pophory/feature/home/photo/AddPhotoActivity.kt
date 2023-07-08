@@ -24,7 +24,6 @@ import com.teampophory.pophory.common.intent.stringExtra
 import com.teampophory.pophory.common.time.systemNow
 import com.teampophory.pophory.common.view.setOnSingleClickListener
 import com.teampophory.pophory.databinding.ActivityAddPhotoBinding
-import com.teampophory.pophory.feature.home.HomeActivity
 import com.teampophory.pophory.feature.home.store.model.AlbumItem
 import com.teampophory.pophory.util.toCoverDrawable
 import dagger.hilt.android.AndroidEntryPoint
@@ -40,7 +39,7 @@ import java.util.TimeZone
 class AddPhotoActivity : BindingActivity<ActivityAddPhotoBinding>(R.layout.activity_add_photo) {
     private val viewModel: AddPhotoViewModel by viewModels()
     private val imageUri by stringExtra()
-    private val albumCover by parcelableExtra<AlbumItem>()
+    private val albumItem by parcelableExtra<AlbumItem>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -80,7 +79,7 @@ class AddPhotoActivity : BindingActivity<ActivityAddPhotoBinding>(R.layout.activ
         binding.layoutStudio.setOnClickListener {
             viewModel.onStudioPressed()
         }
-        albumCover?.albumCover?.toCoverDrawable()
+        albumItem?.albumCover?.toCoverDrawable()
             ?.let { binding.imgAlbumCover.setImageResource(it) }
         binding.btnSubmit.setOnSingleClickListener {
             viewModel.onSubmit()
@@ -122,9 +121,9 @@ class AddPhotoActivity : BindingActivity<ActivityAddPhotoBinding>(R.layout.activ
                     }
 
                     AddPhotoEvent.ADD_SUCCESS -> {
-                        val intent = Intent(this, HomeActivity::class.java).putExtra(
+                        val intent = Intent().putExtra(
                             EXTRA_ALBUM_ITEM,
-                            albumCover
+                            albumItem
                         )
                         setResult(RESULT_OK, intent)
                         finish()
@@ -161,10 +160,10 @@ class AddPhotoActivity : BindingActivity<ActivityAddPhotoBinding>(R.layout.activ
         const val EXTRA_ALBUM_ITEM = "albumItem"
 
         @JvmStatic
-        fun getIntent(context: Context, imageUri: String, albumCover: AlbumItem) =
+        fun getIntent(context: Context, imageUri: String, albumItem: AlbumItem) =
             Intent(context, AddPhotoActivity::class.java).apply {
                 putExtra("imageUri", imageUri)
-                putExtra("albumCover", albumCover)
+                putExtra("albumItem", albumItem)
             }
     }
 }

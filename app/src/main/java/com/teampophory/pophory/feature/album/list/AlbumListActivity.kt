@@ -74,7 +74,7 @@ class AlbumListActivity : AppCompatActivity() {
                     } else {
                         binding.clEmptyView.isVisible = true
                     }
-                    Timber.tag(TAG).d("≈≈≈≈≈≈≈: %s", albumState.data)
+                    Timber.tag(TAG).d("SuccessLoadAlbums: %s", albumState.data)
                 }
 
                 is AlbumListState.Error -> {

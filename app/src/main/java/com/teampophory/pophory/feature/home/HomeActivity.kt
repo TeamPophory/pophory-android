@@ -32,17 +32,17 @@ class HomeActivity : AppCompatActivity() {
                 viewModel.onUpdateAlbum(albumItem)
             }
         }
-    private val imagePicker =
-        registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
-            val currentAlbum = viewModel.currentAlbum.value
-            val intent = currentAlbum?.let { albumItem ->
-                AddPhotoActivity.getIntent(this, uri.toString(), albumItem)
-            }
-            if (uri != null) {
-                addPhotoResultLauncher.launch(intent)
-            }
+    }
 
+    private val imagePicker = registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
+        val currentAlbum = viewModel.currentAlbum.value
+        val intent = currentAlbum?.let { albumItem ->
+            AddPhotoActivity.getIntent(this, uri.toString(), albumItem)
         }
+        if (uri != null) {
+            addPhotoResultLauncher.launch(intent)
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

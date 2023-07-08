@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -47,17 +46,8 @@ class AlbumSortBottomSheet : BottomSheetDialogFragment() {
     }
 
     private fun setCheckButtonState(sortType: AlbumSortType) {
-        when (sortType) {
-            AlbumSortType.NEWEST -> {
-                binding.ivCheckNewest.isVisible = true
-                binding.ivCheckOldest.isGone = true
-            }
-
-            else -> {
-                binding.ivCheckNewest.isVisible = false
-                binding.ivCheckOldest.isGone = false
-            }
-        }
+        binding.ivCheckNewest.isVisible = sortType == AlbumSortType.NEWEST
+        binding.ivCheckOldest.isVisible = sortType == AlbumSortType.OLDEST
     }
 
     override fun onDestroyView() {
