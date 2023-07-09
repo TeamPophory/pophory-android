@@ -87,7 +87,6 @@
 ##---------------END: google admob ----------
 
 ##---------------Begin: kotlin serialization ----------
-## com.mathpresso.qanda 아래 패키지에 적용되도록 되어 있는데, com.mathpresso.module's name 인 경우들이 있어서 com.mathpresso.* 부터 적용하도록 변경 필요할 수 있음 (현재는 @Keep 로 처리)
 -keepattributes *Annotation*, InnerClasses
 -dontnote kotlinx.serialization.AnnotationsKt # core serialization annotations
 
