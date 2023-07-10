@@ -9,7 +9,6 @@ import androidx.core.text.color
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
-import androidx.viewpager2.widget.ViewPager2
 import com.teampophory.pophory.R
 import com.teampophory.pophory.common.fragment.colorOf
 import com.teampophory.pophory.common.fragment.hideLoading
@@ -19,13 +18,11 @@ import com.teampophory.pophory.common.view.viewBinding
 import com.teampophory.pophory.databinding.FragmentStoreBinding
 import com.teampophory.pophory.feature.HomeViewModel
 import com.teampophory.pophory.feature.album.list.AlbumListActivity
-import com.teampophory.pophory.feature.home.store.apdater.OnPageChangedListener
 import com.teampophory.pophory.feature.home.store.apdater.StoreAdapter
-import com.teampophory.pophory.feature.home.store.model.AlbumItem
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class StoreFragment : Fragment(), OnPageChangedListener {
+class StoreFragment : Fragment() {
     private val binding by viewBinding(FragmentStoreBinding::bind)
 
     private var storeAdapter: StoreAdapter? = null
@@ -43,11 +40,12 @@ class StoreFragment : Fragment(), OnPageChangedListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initObserver()
+        initStoreObserver()
+        initHomeObserver()
         setSpannableString()
     }
 
-    private fun initObserver() {
+    private fun initStoreObserver() {
         viewModel.albums.observe(viewLifecycleOwner) { storeState ->
             when (storeState) {
                 is StoreState.Uninitialized -> {
@@ -61,8 +59,9 @@ class StoreFragment : Fragment(), OnPageChangedListener {
 
                 is StoreState.SuccessAlbums -> {
                     hideLoading()
+                    homeViewModel.onUpdateAlbum(storeState.data)
                     storeAdapter?.submitList(storeState.data)
-                    storeState.data.firstOrNull()?.let { onPageChanged(it) }
+                    updatePhotoCount()
                 }
 
                 is StoreState.Error -> {
@@ -76,25 +75,36 @@ class StoreFragment : Fragment(), OnPageChangedListener {
         }
     }
 
+
+    private fun initHomeObserver() {
+        homeViewModel.albumCountUpdate.observe(viewLifecycleOwner) {
+            viewModel.getAlbums()
+        }
+    }
+
     private fun setupViewPager() {
-        storeAdapter = StoreAdapter({ albumItem ->
+        storeAdapter = StoreAdapter { albumItem ->
             AlbumListActivity.newInstance(requireContext(), albumItem).let(::startActivity)
-        }, this)
+        }
+        binding.viewpagerStore.run {
+            adapter = storeAdapter
+            isUserInputEnabled = false
+            registerOnPageChangeCallback(object :
+                androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback() {
+                override fun onPageSelected(position: Int) {
+                    homeViewModel.onUpdateAlbumPosition(position)
+                    val photoCount = storeAdapter?.currentList?.get(position)?.photoCount.toString()
+                    binding.tvStoreAlbumPhotoCount.text = "$photoCount/15"
+                }
+            })
+        }
+    }
 
-        binding.viewpagerStore.adapter = storeAdapter
-
-        //1차 스프린트용 입력 방지
-        binding.viewpagerStore.isUserInputEnabled = false
-
-        // 페이지가 변경될 때마다 콜백 등록
-        binding.viewpagerStore.registerOnPageChangeCallback(object :
-            ViewPager2.OnPageChangeCallback() {
-            override fun onPageSelected(position: Int) {
-                super.onPageSelected(position)
-                val currentItem = storeAdapter?.currentList?.get(position)
-                currentItem?.let { onPageChanged(it) }
-            }
-        })
+    private fun updatePhotoCount() {
+        val position = homeViewModel.currentAlbumPosition.value
+        val photoCount =
+            homeViewModel.currentAlbum.value?.getOrNull(position)?.photoCount.toString()
+        binding.tvStoreAlbumPhotoCount.text = "$photoCount/15"
     }
 
     private fun setSpannableString() {
@@ -114,8 +124,7 @@ class StoreFragment : Fragment(), OnPageChangedListener {
         binding.tvStoreWelcome.text = text
     }
 
-    override fun onPageChanged(albumItem: AlbumItem) {
-        homeViewModel.onUpdateAlbum(albumItem)
-        binding.tvStoreAlbumPhotoCount.text = albumItem.photoCount.toString() + "/30"
+    companion object {
+        fun newInstance() = StoreFragment()
     }
 }

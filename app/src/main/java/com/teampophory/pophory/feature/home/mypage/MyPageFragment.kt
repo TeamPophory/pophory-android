@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.teampophory.pophory.R
 import com.teampophory.pophory.common.fragment.hideLoading
 import com.teampophory.pophory.common.fragment.showLoading
-import com.teampophory.pophory.common.fragment.toast
 import com.teampophory.pophory.common.view.dp
 import com.teampophory.pophory.common.view.viewBinding
 import com.teampophory.pophory.databinding.FragmentMypageBinding
@@ -126,5 +125,9 @@ class MyPageFragment : Fragment() {
         binding.ivToolbarSetting.setOnClickListener {
             startActivity(Intent(requireContext(), SettingActivity::class.java))
         }
+    }
+
+    companion object {
+        fun newInstance() = MyPageFragment()
     }
 }

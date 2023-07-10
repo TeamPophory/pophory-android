@@ -1,5 +1,6 @@
 package com.teampophory.pophory.feature
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.teampophory.pophory.domain.ConfigureMeUseCase
@@ -14,8 +15,14 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(
     private val configureMeUseCase: ConfigureMeUseCase
 ) : ViewModel() {
-    private val _currentAlbum = MutableStateFlow<AlbumItem?>(null)
-    val currentAlbum: StateFlow<AlbumItem?> get() = _currentAlbum
+    private val _currentAlbum = MutableStateFlow<List<AlbumItem>?>(null)
+    val currentAlbum: StateFlow<List<AlbumItem>?> get() = _currentAlbum
+
+    private val _currentAlbumPosition = MutableStateFlow(0)
+    val currentAlbumPosition: StateFlow<Int> get() = _currentAlbumPosition
+
+    private val _albumCountUpdate = MutableLiveData<Unit>()
+    val albumCountUpdate: MutableLiveData<Unit> get() = _albumCountUpdate
 
     init {
         viewModelScope.launch {
@@ -23,9 +30,19 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    fun onUpdateAlbum(album: AlbumItem?) {
+    fun onUpdateAlbum(album: List<AlbumItem>?) {
         viewModelScope.launch {
             _currentAlbum.emit(album)
         }
+    }
+
+    fun onUpdateAlbumPosition(position: Int) {
+        viewModelScope.launch {
+            _currentAlbumPosition.emit(position)
+        }
+    }
+
+    fun eventAlbumCountUpdate() {
+        _albumCountUpdate.value = Unit
     }
 }

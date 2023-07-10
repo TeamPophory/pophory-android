@@ -12,7 +12,6 @@ import com.teampophory.pophory.util.toCoverDrawable
 
 class StoreAdapter(
     private val onItemClicked: (AlbumItem) -> Unit,
-    private val onPageChangedListener: OnPageChangedListener
 ) : ListAdapter<AlbumItem, StoreAdapter.StoreViewHolder>(
     ItemDiffCallback<AlbumItem>(
         onItemsTheSame = { old, new -> old.hashCode() == new.hashCode() },
@@ -22,21 +21,17 @@ class StoreAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StoreViewHolder {
         val binding =
             ItemStorePagerBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return StoreViewHolder(binding, onItemClicked, onPageChangedListener)
+        return StoreViewHolder(binding, onItemClicked)
     }
 
     class StoreViewHolder(
         private val binding: ItemStorePagerBinding,
         private val onItemClicked: (AlbumItem) -> Unit,
-        private val onPageChangedListener: OnPageChangedListener
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(albumItem: AlbumItem) {
-
             binding.ivStorePager.setBackgroundResource(albumItem.albumCover.toCoverDrawable())
-
             itemView.setOnClickListener {
                 onItemClicked(albumItem)
-                onPageChangedListener.onPageChanged(albumItem)
             }
         }
     }
@@ -44,8 +39,4 @@ class StoreAdapter(
     override fun onBindViewHolder(holder: StoreViewHolder, position: Int) {
         holder.bind(getItem(position))
     }
-}
-
-fun interface OnPageChangedListener {
-    fun onPageChanged(albumItem: AlbumItem)
 }
