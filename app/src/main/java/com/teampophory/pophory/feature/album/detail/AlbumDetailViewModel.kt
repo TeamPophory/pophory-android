@@ -23,6 +23,10 @@ class AlbumDetailViewModel @Inject constructor(
         MutableLiveData<AlbumDetailState>(AlbumDetailState.Uninitialized)
     val albumDetailState: LiveData<AlbumDetailState> get() = _albumDetailState
 
+    init {
+        setData()
+    }
+
     fun deleteAlbum() {
         val albumId = photoDetailInfo.value?.id?.toLong() ?: 0L
         viewModelScope.launch {
@@ -34,7 +38,7 @@ class AlbumDetailViewModel @Inject constructor(
         }
     }
 
-    fun setData() {
+    private fun setData() {
         val id = savedStateHandle.get<Int>("id") ?: 0
         val studio = savedStateHandle.get<String>("studio").orEmpty()
         val takenAt = savedStateHandle.get<String>("takenAt").orEmpty()

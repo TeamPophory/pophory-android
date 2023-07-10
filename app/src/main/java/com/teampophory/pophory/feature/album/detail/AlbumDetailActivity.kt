@@ -29,7 +29,6 @@ class AlbumDetailActivity : AppCompatActivity() {
         viewModel.albumDetailState.observe(this) {
             when (it) {
                 AlbumDetailState.Uninitialized -> {
-                    viewModel.setData()
                     initViews()
                 }
 
