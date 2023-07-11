@@ -6,6 +6,7 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.teampophory.pophory.data.repository.photo.PhotoRepository
+import com.teampophory.pophory.feature.album.model.PhotoRaw
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -16,8 +17,8 @@ class AlbumDetailViewModel @Inject constructor(
     private val savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
-    private val _photoDetailInfo = MutableLiveData<PhotoDetailInfo>()
-    val photoDetailInfo: LiveData<PhotoDetailInfo> get() = _photoDetailInfo
+    private val _photoDetail = MutableLiveData<PhotoRaw>()
+    val photoDetail: LiveData<PhotoRaw> get() = _photoDetail
 
     private val _albumDetailState =
         MutableLiveData<AlbumDetailState>(AlbumDetailState.Uninitialized)
@@ -28,7 +29,7 @@ class AlbumDetailViewModel @Inject constructor(
     }
 
     fun deleteAlbum() {
-        val albumId = photoDetailInfo.value?.id?.toLong() ?: 0L
+        val albumId = photoDetail.value?.id?.toLong() ?: 0L
         viewModelScope.launch {
             photoRepository.deletePhoto(albumId).onSuccess {
                 _albumDetailState.value = AlbumDetailState.SuccessDeleteAlbum
@@ -43,13 +44,6 @@ class AlbumDetailViewModel @Inject constructor(
         val studio = savedStateHandle.get<String>("studio").orEmpty()
         val takenAt = savedStateHandle.get<String>("takenAt").orEmpty()
         val imageUrl = savedStateHandle.get<String>("imageUrl").orEmpty()
-        _photoDetailInfo.value = PhotoDetailInfo(id, studio, takenAt, imageUrl)
+        _photoDetail.value = PhotoRaw(id, studio, takenAt, imageUrl)
     }
-
-    data class PhotoDetailInfo(
-        var id: Int,
-        var studio: String,
-        var takenAt: String,
-        var imageUrl: String
-    )
 }

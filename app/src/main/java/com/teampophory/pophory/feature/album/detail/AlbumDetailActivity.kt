@@ -63,7 +63,7 @@ class AlbumDetailActivity : AppCompatActivity() {
     private fun initViews() {
         initButtonClickListener()
         with(binding) {
-            val photoDetailInfo = viewModel.photoDetailInfo.value
+            val photoDetailInfo = viewModel.photoDetail.value
             ivMainDetailAlbum.load(photoDetailInfo?.imageUrl)
             tvAlbumTakenAt.text = photoDetailInfo?.takenAt.orEmpty()
             tvStudio.text = photoDetailInfo?.studio.orEmpty()
