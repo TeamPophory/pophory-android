@@ -1,7 +1,9 @@
 package com.teampophory.pophory.feature.home
 
+import android.Manifest
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
@@ -9,6 +11,8 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
+import androidx.lifecycle.lifecycleScope
+import com.google.firebase.messaging.FirebaseMessaging
 import com.teampophory.pophory.R
 import com.teampophory.pophory.common.context.stringOf
 import com.teampophory.pophory.common.view.viewBinding
@@ -18,6 +22,9 @@ import com.teampophory.pophory.feature.home.photo.AddPhotoActivity
 import com.teampophory.pophory.feature.home.store.StoreFragment
 import com.teampophory.pophory.util.dialog.DialogUtil
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
+import timber.log.Timber
 
 @AndroidEntryPoint
 class HomeActivity : AppCompatActivity() {
@@ -39,12 +46,46 @@ class HomeActivity : AppCompatActivity() {
                 addPhotoResultLauncher.launch(intent)
             }
         }
+    private val permissionLauncher =
+        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
+            val deniedPermissionList = permissions.filter { !it.value }.map { it.key }
+            when {
+                deniedPermissionList.isNotEmpty() -> {
+                    val map = deniedPermissionList.groupBy { permission ->
+                        if (shouldShowRequestPermissionRationale(permission)) "denied" else "explained"
+                    }
+                    map["denied"]?.let {
+                        // 단순히 권한이 거부 되었을 때
+                    }
+                    map["explained"]?.let {
+                        // 권한 요청이 완전히 막혔을 때
+                        // TODO by Nunu 앱 상세 창 이동
+                    }
+                }
+
+                else -> {
+                    // 모든 권한이 허가 되었을 때
+                }
+            }
+        }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         setupBottomNavigationBar()
         initializeDefaultFragment(savedInstanceState)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            permissionLauncher.launch(
+                arrayOf(Manifest.permission.POST_NOTIFICATIONS)
+            )
+        }
+        lifecycleScope.launch {
+            runCatching {
+                FirebaseMessaging.getInstance().token.await()
+            }.onSuccess {
+                // TODO by Nunu 서버에 FCM Token 등록
+            }
+        }
     }
 
     private fun setupBottomNavigationBar() {

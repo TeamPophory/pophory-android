@@ -25,6 +25,7 @@ class PophoryMessagingService : FirebaseMessagingService() {
         if (dataStore.accessToken.isNotEmpty()) {
             GlobalScope.launch {
                 runCatching {
+                    // TODO by Nunu 토큰 등록
 //                    service.registerFirebaseToken(
 //                        dataStore.userToken, token.toDeviceToken()
 //                    )
