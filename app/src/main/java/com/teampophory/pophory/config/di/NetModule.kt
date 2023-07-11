@@ -78,6 +78,7 @@ object NetModule {
         @Log logInterceptor: Interceptor
     ): OkHttpClient = OkHttpClient.Builder()
         .addInterceptor(logInterceptor)
+        .apply { FlipperInitializer.initOkHttpClient(this) }
         .build()
 
     @Singleton
