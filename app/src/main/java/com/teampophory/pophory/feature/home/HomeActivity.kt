@@ -25,6 +25,13 @@ import kotlinx.coroutines.launch
 class HomeActivity : AppCompatActivity() {
     private val binding: ActivityHomeBinding by viewBinding(ActivityHomeBinding::inflate)
     private val viewModel by viewModels<HomeViewModel>()
+
+    private val fragmentMap = mapOf(
+        R.id.menu_store to StoreFragment(),
+        R.id.menu_my_page to MyPageFragment()
+    )
+
+
     private val addPhotoResultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
         if (it.resultCode == RESULT_OK) {
             val albumItem = it.data?.getParcelableExtra(AddPhotoActivity.EXTRA_ALBUM_ITEM) as? AlbumItem
@@ -48,19 +55,20 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         setupBottomNavigationBar()
+
+        //init fragment setting
         initializeDefaultFragment(savedInstanceState)
+        binding.homeBottomNav.selectedItemId = R.id.menu_store
     }
 
     private fun setupBottomNavigationBar() {
+
         binding.homeBottomNav.setOnItemSelectedListener { item ->
-            val selectedFragment = when (item.itemId) {
-                R.id.menu_store -> StoreFragment()
-                R.id.menu_my_page -> MyPageFragment()
-                else -> null
-            }
+            val selectedFragment = fragmentMap[item.itemId]
             selectedFragment?.let { changeFragment(it) }
             return@setOnItemSelectedListener selectedFragment != null
         }
+
         binding.bottomNavFav.setOnClickListener {
             imagePicker.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
         }
@@ -75,7 +83,12 @@ class HomeActivity : AppCompatActivity() {
 
     private fun changeFragment(fragment: Fragment) {
         supportFragmentManager.commit {
-            replace(R.id.home_fcv, fragment)
+            supportFragmentManager.fragments.forEach { hide(it) } // 모든 Fragment를 숨깁니다.
+            if (!fragment.isAdded) {
+                add(R.id.home_fcv, fragment)
+            } else {
+                show(fragment) // 선택한 Fragment만 보여줍니다.
+            }
         }
     }
 
