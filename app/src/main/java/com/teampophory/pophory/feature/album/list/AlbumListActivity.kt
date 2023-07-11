@@ -38,6 +38,7 @@ class AlbumListActivity : AppCompatActivity() {
 
     private val addAlbumActivityLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
         if (result.resultCode == RESULT_OK) {
+            setResult(RESULT_OK)
             finish()
         }
     }

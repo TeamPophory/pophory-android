@@ -1,9 +1,11 @@
 package com.teampophory.pophory.feature.home.store
 
+import android.app.Activity.RESULT_OK
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.text.buildSpannedString
 import androidx.core.text.color
 import androidx.fragment.app.Fragment
@@ -24,6 +26,11 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class StoreFragment : Fragment() {
     private val binding by viewBinding(FragmentStoreBinding::bind)
+    private val albumListAddPhotoLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        if (result.resultCode == RESULT_OK) {
+            viewModel.getAlbums()
+        }
+    }
 
     private var storeAdapter: StoreAdapter? = null
 
@@ -84,7 +91,8 @@ class StoreFragment : Fragment() {
 
     private fun setupViewPager() {
         storeAdapter = StoreAdapter { albumItem ->
-            AlbumListActivity.newInstance(requireContext(), albumItem).let(::startActivity)
+            val intent = AlbumListActivity.newInstance(requireContext(), albumItem)
+            albumListAddPhotoLauncher.launch(intent)
         }
         binding.viewpagerStore.run {
             adapter = storeAdapter
@@ -93,7 +101,7 @@ class StoreFragment : Fragment() {
                 androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback() {
                 override fun onPageSelected(position: Int) {
                     homeViewModel.onUpdateAlbumPosition(position)
-                    val photoCount = storeAdapter?.currentList?.get(position)?.photoCount.toString()
+                    val photoCount = storeAdapter?.currentList?.getOrNull(position)?.photoCount.toString()
                     binding.tvStoreAlbumPhotoCount.text = "$photoCount/15"
                 }
             })
@@ -103,25 +111,23 @@ class StoreFragment : Fragment() {
     private fun updatePhotoCount() {
         val position = homeViewModel.currentAlbumPosition.value
         val photoCount =
-            homeViewModel.currentAlbum.value?.getOrNull(position)?.photoCount.toString()
+            homeViewModel.currentAlbums.value?.getOrNull(position)?.photoCount.toString()
         binding.tvStoreAlbumPhotoCount.text = "$photoCount/15"
     }
 
     private fun setSpannableString() {
         val fullText = getString(R.string.store_welcome)
         val coloredText = "포포리 앨범" // 색상을 변경하려는 특정 단어
-        val splittedText = fullText.split(coloredText)
+        val splitText = fullText.split(coloredText)
 
-        val text = buildSpannedString {
+        buildSpannedString {
             color(colorOf(R.color.pophory_purple)) {
                 textAppearance(requireContext(), R.style.TextAppearance_Pophory_HeadLineBold) {
                     append(coloredText)
                 }
             }
-            append(splittedText[1])
-        }
-
-        binding.tvStoreWelcome.text = text
+            append(splitText.getOrNull(1).orEmpty())
+        }.let { binding.tvStoreWelcome.text = it }
     }
 
     companion object {

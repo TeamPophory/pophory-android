@@ -15,8 +15,8 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(
     private val configureMeUseCase: ConfigureMeUseCase
 ) : ViewModel() {
-    private val _currentAlbum = MutableStateFlow<List<AlbumItem>?>(null)
-    val currentAlbum: StateFlow<List<AlbumItem>?> get() = _currentAlbum
+    private val _currentAlbums = MutableStateFlow<List<AlbumItem>?>(null)
+    val currentAlbums: StateFlow<List<AlbumItem>?> get() = _currentAlbums
 
     private val _currentAlbumPosition = MutableStateFlow(0)
     val currentAlbumPosition: StateFlow<Int> get() = _currentAlbumPosition
@@ -32,7 +32,7 @@ class HomeViewModel @Inject constructor(
 
     fun onUpdateAlbum(album: List<AlbumItem>?) {
         viewModelScope.launch {
-            _currentAlbum.emit(album)
+            _currentAlbums.emit(album)
         }
     }
 
