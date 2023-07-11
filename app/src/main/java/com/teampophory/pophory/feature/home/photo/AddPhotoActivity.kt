@@ -121,10 +121,6 @@ class AddPhotoActivity : BindingActivity<ActivityAddPhotoBinding>(R.layout.activ
                     }
 
                     AddPhotoEvent.ADD_SUCCESS -> {
-                        val intent = Intent().putExtra(
-                            EXTRA_ALBUM_ITEM,
-                            albumItem
-                        )
                         setResult(RESULT_OK, intent)
                         finish()
                         toast("사진이 추가되었습니다.")
@@ -157,10 +153,8 @@ class AddPhotoActivity : BindingActivity<ActivityAddPhotoBinding>(R.layout.activ
     }
 
     companion object {
-        const val EXTRA_ALBUM_ITEM = "albumItem"
-
         @JvmStatic
-        fun getIntent(context: Context, imageUri: String, albumItem: AlbumItem) =
+        fun getIntent(context: Context, imageUri: String, albumItem: AlbumItem): Intent =
             Intent(context, AddPhotoActivity::class.java).apply {
                 putExtra("imageUri", imageUri)
                 putExtra("albumItem", albumItem)

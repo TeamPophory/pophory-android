@@ -9,7 +9,6 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
-import androidx.lifecycle.lifecycleScope
 import com.teampophory.pophory.R
 import com.teampophory.pophory.common.view.viewBinding
 import com.teampophory.pophory.databinding.ActivityHomeBinding
@@ -17,32 +16,28 @@ import com.teampophory.pophory.feature.HomeViewModel
 import com.teampophory.pophory.feature.home.mypage.MyPageFragment
 import com.teampophory.pophory.feature.home.photo.AddPhotoActivity
 import com.teampophory.pophory.feature.home.store.StoreFragment
-import com.teampophory.pophory.feature.home.store.model.AlbumItem
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class HomeActivity : AppCompatActivity() {
     private val binding: ActivityHomeBinding by viewBinding(ActivityHomeBinding::inflate)
     private val viewModel by viewModels<HomeViewModel>()
-    private val addPhotoResultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-        if (it.resultCode == RESULT_OK) {
-            val albumItem = it.data?.getParcelableExtra(AddPhotoActivity.EXTRA_ALBUM_ITEM) as? AlbumItem
-            lifecycleScope.launch {
-                viewModel.onUpdateAlbum(albumItem)
+    private val addPhotoResultLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+            if (it.resultCode == RESULT_OK) {
+                viewModel.eventAlbumCountUpdate()
             }
         }
-    }
 
-    private val imagePicker = registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
-        val currentAlbum = viewModel.currentAlbum.value
-        val intent = currentAlbum?.let { albumItem ->
-            AddPhotoActivity.getIntent(this, uri.toString(), albumItem)
+    private val imagePicker =
+        registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
+            val currentAlbumPosition = viewModel.currentAlbumPosition.value
+            val albumItem = viewModel.currentAlbums.value?.getOrNull(currentAlbumPosition)
+            if (uri != null && albumItem != null) {
+                val intent = AddPhotoActivity.getIntent(this, uri.toString(), albumItem)
+                addPhotoResultLauncher.launch(intent)
+            }
         }
-        if (uri != null) {
-            addPhotoResultLauncher.launch(intent)
-        }
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,8 +49,8 @@ class HomeActivity : AppCompatActivity() {
     private fun setupBottomNavigationBar() {
         binding.homeBottomNav.setOnItemSelectedListener { item ->
             val selectedFragment = when (item.itemId) {
-                R.id.menu_store -> StoreFragment()
-                R.id.menu_my_page -> MyPageFragment()
+                R.id.menu_store -> StoreFragment.newInstance()
+                R.id.menu_my_page -> MyPageFragment.newInstance()
                 else -> null
             }
             selectedFragment?.let { changeFragment(it) }
@@ -68,7 +63,7 @@ class HomeActivity : AppCompatActivity() {
 
     private fun initializeDefaultFragment(savedInstanceState: Bundle?) {
         if (savedInstanceState == null) {
-            val homeFragment = StoreFragment()
+            val homeFragment = StoreFragment.newInstance()
             changeFragment(homeFragment)
         }
     }

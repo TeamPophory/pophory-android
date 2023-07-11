@@ -22,8 +22,7 @@ class StoreViewModel @Inject constructor(
             _albums.value = StoreState.Loading
             storeRepository.getAlbums()
                 .onSuccess {
-                    _albums.value =
-                        StoreState.SuccessAlbums(it.toAlbums())
+                    _albums.value = StoreState.SuccessAlbums(it.toAlbums())
                 }.onFailure {
                     _albums.value = StoreState.Error(it)
                 }
