@@ -1,7 +1,9 @@
 package com.teampophory.pophory.config.di
 
 import com.teampophory.pophory.config.di.qualifier.Secured
+import com.teampophory.pophory.config.di.qualifier.Unsecured
 import com.teampophory.pophory.data.network.service.AuthService
+import com.teampophory.pophory.data.network.service.RefreshApi
 import com.teampophory.pophory.data.repository.auth.AuthRepository
 import com.teampophory.pophory.data.repository.auth.DefaultAuthRepository
 import com.teampophory.pophory.network.retrofit.signup.RetrofitSignUpNetwork
@@ -11,6 +13,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
+import retrofit2.create
 import javax.inject.Singleton
 
 @Module
@@ -25,6 +28,10 @@ object AuthModule {
     @Singleton
     fun provideSignUpService(@Secured retrofit: Retrofit): RetrofitSignUpNetwork =
         retrofit.create(RetrofitSignUpNetwork::class.java)
+
+    @Provides
+    @Singleton
+    fun provideRefreshApi(@Unsecured retrofit: Retrofit): RefreshApi = retrofit.create()
 
     @Module
     @InstallIn(SingletonComponent::class)
