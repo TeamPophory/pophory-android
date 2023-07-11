@@ -18,7 +18,7 @@ import javax.inject.Singleton
 object PhotoModule {
     @Provides
     @Singleton
-    fun providePhotoNetworkService(retrofit: Retrofit): PhotoService = retrofit.create()
+    fun providePhotoNetworkService(@Secured retrofit: Retrofit): PhotoService = retrofit.create()
 
     @Module
     @InstallIn(SingletonComponent::class)
