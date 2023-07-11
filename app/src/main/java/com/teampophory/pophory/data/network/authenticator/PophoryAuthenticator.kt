@@ -31,13 +31,13 @@ class PophoryAuthenticator @Inject constructor(
             val refreshToken = dataStore.refreshToken
             val newTokens = runCatching {
                 runBlocking {
-                    api.refreshToken(refreshToken)
+                    api.refreshToken("Bearer $refreshToken")
                 }
             }.onSuccess {
                 dataStore.refreshToken = it.refreshToken
                 dataStore.accessToken = it.accessToken
             }.onFailure {
-                Timber.e("refreshToken failed cause=${it}")
+                Timber.e(it)
                 dataStore.clear()
                 ProcessPhoenix.triggerRebirth(
                     context,
