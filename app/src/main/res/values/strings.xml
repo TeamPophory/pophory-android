@@ -11,6 +11,7 @@
     <!-- home_stroe -->
     <string name="store_logo_contentDescription">앱의 로고 입니다.</string>
     <string name="store_welcome">"포포리 앨범에\n소중한 추억을 보관해봐!"</string>
+    <string name="store_photo_count_format">%d/15</string>
 
     <!-- home_mypage -->
     <string name="mypage_name_default">포포리</string>

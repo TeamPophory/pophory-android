@@ -15,6 +15,7 @@ import com.teampophory.pophory.R
 import com.teampophory.pophory.common.fragment.colorOf
 import com.teampophory.pophory.common.fragment.hideLoading
 import com.teampophory.pophory.common.fragment.showLoading
+import com.teampophory.pophory.common.fragment.stringOf
 import com.teampophory.pophory.common.primitive.textAppearance
 import com.teampophory.pophory.common.view.viewBinding
 import com.teampophory.pophory.databinding.FragmentStoreBinding
@@ -102,7 +103,7 @@ class StoreFragment : Fragment() {
                 override fun onPageSelected(position: Int) {
                     homeViewModel.onUpdateAlbumPosition(position)
                     val photoCount = storeAdapter?.currentList?.getOrNull(position)?.photoCount.toString()
-                    binding.tvStoreAlbumPhotoCount.text = "$photoCount/15"
+                    binding.tvStoreAlbumPhotoCount.text = stringOf(R.string.store_photo_count_format, photoCount)
                 }
             })
         }
@@ -112,7 +113,7 @@ class StoreFragment : Fragment() {
         val position = homeViewModel.currentAlbumPosition.value
         val photoCount =
             homeViewModel.currentAlbums.value?.getOrNull(position)?.photoCount.toString()
-        binding.tvStoreAlbumPhotoCount.text = "$photoCount/15"
+        binding.tvStoreAlbumPhotoCount.text = stringOf(R.string.store_photo_count_format, photoCount)
     }
 
     private fun setSpannableString() {

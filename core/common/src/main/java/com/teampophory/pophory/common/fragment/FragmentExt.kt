@@ -24,7 +24,7 @@ fun Fragment.snackBar(anchorView: View, message: () -> String) {
     Snackbar.make(anchorView, message(), Snackbar.LENGTH_SHORT).show()
 }
 
-fun Fragment.stringOf(@StringRes resId: Int) = getString(resId)
+fun Fragment.stringOf(@StringRes resId: Int, formatArgs: Any? = null) = getString(resId, formatArgs)
 
 fun Fragment.colorOf(@ColorRes resId: Int) = ContextCompat.getColor(requireContext(), resId)
 
