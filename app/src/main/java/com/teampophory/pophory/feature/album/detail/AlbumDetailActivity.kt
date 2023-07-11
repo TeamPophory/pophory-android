@@ -22,7 +22,16 @@ class AlbumDetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+    }
+
+    override fun onEnterAnimationComplete() {
+        super.onEnterAnimationComplete()
         initObserver()
+    }
+
+    override fun onDestroy() {
+        supportFinishAfterTransition();
+        super.onDestroy()
     }
 
     private fun initObserver() {
@@ -71,13 +80,13 @@ class AlbumDetailActivity : AppCompatActivity() {
     }
 
     companion object {
-        fun startActivity(context: Context, photoDetail: PhotoDetail) {
-            Intent(context, AlbumDetailActivity::class.java).apply {
+        fun newIntent(context: Context, photoDetail: PhotoDetail): Intent {
+            return Intent(context, AlbumDetailActivity::class.java).apply {
                 putExtra("photoId", photoDetail.id)
                 putExtra("studio", photoDetail.studio)
                 putExtra("takenAt", photoDetail.takenAt)
                 putExtra("imageUrl", photoDetail.imageUrl)
-            }.let(context::startActivity)
+            }
         }
     }
 }
