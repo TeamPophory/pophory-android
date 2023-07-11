@@ -6,7 +6,9 @@ import androidx.lifecycle.viewModelScope
 import com.teampophory.pophory.domain.ConfigureMeUseCase
 import com.teampophory.pophory.feature.home.store.model.AlbumItem
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -21,8 +23,8 @@ class HomeViewModel @Inject constructor(
     private val _currentAlbumPosition = MutableStateFlow(0)
     val currentAlbumPosition: StateFlow<Int> get() = _currentAlbumPosition
 
-    private val _albumCountUpdate = MutableLiveData<Unit>()
-    val albumCountUpdate: MutableLiveData<Unit> get() = _albumCountUpdate
+    private val _albumCountUpdate = MutableSharedFlow<Unit>()
+    val albumCountUpdate: SharedFlow<Unit> get() = _albumCountUpdate
 
     init {
         viewModelScope.launch {
@@ -43,6 +45,8 @@ class HomeViewModel @Inject constructor(
     }
 
     fun eventAlbumCountUpdate() {
-        _albumCountUpdate.value = Unit
+        viewModelScope.launch {
+            _albumCountUpdate.emit(Unit)
+        }
     }
 }

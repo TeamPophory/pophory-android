@@ -11,11 +11,14 @@ import androidx.core.text.color
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.flowWithLifecycle
 import com.teampophory.pophory.R
 import com.teampophory.pophory.common.fragment.colorOf
 import com.teampophory.pophory.common.fragment.hideLoading
 import com.teampophory.pophory.common.fragment.showLoading
 import com.teampophory.pophory.common.fragment.stringOf
+import com.teampophory.pophory.common.fragment.viewLifeCycle
+import com.teampophory.pophory.common.fragment.viewLifeCycleScope
 import com.teampophory.pophory.common.primitive.textAppearance
 import com.teampophory.pophory.common.view.viewBinding
 import com.teampophory.pophory.databinding.FragmentStoreBinding
@@ -23,6 +26,8 @@ import com.teampophory.pophory.feature.HomeViewModel
 import com.teampophory.pophory.feature.album.list.AlbumListActivity
 import com.teampophory.pophory.feature.home.store.apdater.StoreAdapter
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 
 @AndroidEntryPoint
 class StoreFragment : Fragment() {
@@ -85,9 +90,9 @@ class StoreFragment : Fragment() {
 
 
     private fun initHomeObserver() {
-        homeViewModel.albumCountUpdate.observe(viewLifecycleOwner) {
+        homeViewModel.albumCountUpdate.flowWithLifecycle(viewLifeCycle).onEach {
             viewModel.getAlbums()
-        }
+        }.launchIn(viewLifeCycleScope)
     }
 
     private fun setupViewPager() {
