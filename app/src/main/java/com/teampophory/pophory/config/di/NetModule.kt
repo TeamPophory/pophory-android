@@ -27,10 +27,17 @@ import javax.inject.Singleton
 object NetModule {
     private const val PophoryBaseUrl = BuildConfig.POPHORY_BASE_URL
 
+    @Provides
+    @Singleton
+    fun provideJson(): Json = Json {
+        ignoreUnknownKeys = true
+        coerceInputValues = true
+    }
+
     @Singleton
     @Provides
-    fun provideJsonConverterFactory(): Converter.Factory {
-        return Json.asConverterFactory("application/json".toMediaType())
+    fun provideJsonConverterFactory(json: Json): Converter.Factory {
+        return json.asConverterFactory("application/json".toMediaType())
     }
 
     @Singleton
