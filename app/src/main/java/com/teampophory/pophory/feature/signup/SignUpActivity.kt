@@ -2,6 +2,7 @@ package com.teampophory.pophory.feature.signup
 
 import android.content.Intent
 import android.os.Bundle
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.commit
@@ -20,6 +21,27 @@ class SignUpActivity : AppCompatActivity() {
     private val viewModel by viewModels<SignUpViewModel>()
     private var currentPosition = 0
 
+    private val callback = object : OnBackPressedCallback(true) {
+        override fun handleOnBackPressed() {
+            // 뒤로 버튼 이벤트 처리
+            when (currentPosition) {
+                0 -> {
+                    val intent = Intent(this@SignUpActivity, OnBoardingActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                }
+
+                1 -> {
+                    binding.viewpager.currentItem = 0
+                }
+
+                2 -> {
+                    binding.viewpager.currentItem = 1
+                }
+            }
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
@@ -27,6 +49,8 @@ class SignUpActivity : AppCompatActivity() {
         setViewPager()
         setOnBackPressed()
         observeEvent()
+
+        this.onBackPressedDispatcher.addCallback(this, callback)
     }
 
     private fun observeEvent() {
