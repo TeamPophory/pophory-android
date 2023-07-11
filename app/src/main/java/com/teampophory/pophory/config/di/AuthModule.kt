@@ -2,6 +2,7 @@ package com.teampophory.pophory.config.di
 
 import com.teampophory.pophory.config.di.qualifier.Secured
 import com.teampophory.pophory.config.di.qualifier.Unsecured
+import com.teampophory.pophory.data.network.authenticator.PophoryAuthenticator
 import com.teampophory.pophory.data.network.service.AuthService
 import com.teampophory.pophory.data.network.service.RefreshApi
 import com.teampophory.pophory.data.repository.auth.AuthRepository
@@ -12,6 +13,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import okhttp3.Authenticator
 import retrofit2.Retrofit
 import retrofit2.create
 import javax.inject.Singleton
@@ -39,5 +41,9 @@ object AuthModule {
         @Binds
         @Singleton
         fun provideAuthService(repository: DefaultAuthRepository): AuthRepository
+
+        @Binds
+        @Singleton
+        fun provideAuthenticator(authenticator: PophoryAuthenticator): Authenticator
     }
 }
