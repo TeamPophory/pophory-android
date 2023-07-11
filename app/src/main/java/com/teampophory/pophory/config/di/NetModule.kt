@@ -101,6 +101,7 @@ object NetModule {
         converterFactory: Converter.Factory
     ): Retrofit = Retrofit.Builder()
         .baseUrl(PophoryBaseUrl)
+        .client(client)
         .addConverterFactory(converterFactory)
         .build()
 }
