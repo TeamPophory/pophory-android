@@ -209,7 +209,7 @@ app-distribution = { id = "com.google.firebase.appdistribution", version.ref = "
 oss = { id = "com.google.android.gms.oss-licenses-plugin", version.ref = "oss-plugin" }
 
 [bundles]
-firebase = ["firebase-analytics", "firebase-crashlytics", "firebase-dynamiclink"]
+firebase = ["firebase-analytics", "firebase-crashlytics", "firebase-dynamiclink", "firebase-messaging"]
 flipper = ["flipper", "soloader", "flipper-network"]
 lifecycle = ["lifecycle", "lifecycle-viewmodel", "lifecycle-livedata"]
 compose = ["ui", "ui-graphics", "ui-tooling", "ui-tooling-preview", "material3-compose", "coil-compose", "ui-foundation", "activity-compose", "lifecycle-compose", "navigation-compose"]
