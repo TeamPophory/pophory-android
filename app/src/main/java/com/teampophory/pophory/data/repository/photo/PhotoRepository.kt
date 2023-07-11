@@ -16,5 +16,5 @@ interface PhotoRepository {
         takenAt: String,
         studioId: Long,
         photo: ContentUriRequestBody
-    ):Result<Unit>
+    ): Result<Unit>
 }

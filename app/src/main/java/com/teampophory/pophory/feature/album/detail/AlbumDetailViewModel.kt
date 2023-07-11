@@ -2,50 +2,34 @@ package com.teampophory.pophory.feature.album.detail
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.teampophory.pophory.data.repository.photo.PhotoRepository
+import com.teampophory.pophory.feature.album.model.PhotoRaw
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class AlbumDetailViewModel @Inject constructor(
-    private val photoRepository: PhotoRepository
+    private val photoRepository: PhotoRepository,
+    private val savedStateHandle: SavedStateHandle
 ) : ViewModel() {
-    private val _id = MutableLiveData<Int>()
-    val id: LiveData<Int> get() = _id
 
-    private val _studio = MutableLiveData<String>()
-    val studio: LiveData<String> get() = _studio
+    private val _photoDetail = MutableLiveData<PhotoRaw>()
+    val photoDetail: LiveData<PhotoRaw> get() = _photoDetail
 
-    private val _takenAt = MutableLiveData<String>()
-    val takenAt: LiveData<String> get() = _takenAt
-
-    private val _imageUrl = MutableLiveData<String>()
-    val imageUrl: LiveData<String> get() = _imageUrl
-
-    private val _albumDetailState = MutableLiveData<AlbumDetailState>(AlbumDetailState.Uninitialized)
+    private val _albumDetailState =
+        MutableLiveData<AlbumDetailState>(AlbumDetailState.Uninitialized)
     val albumDetailState: LiveData<AlbumDetailState> get() = _albumDetailState
 
-    fun setPhotoId(photoId: Int) {
-        _id.value = photoId
-    }
-
-    fun setStudio(studio: String) {
-        _studio.value = studio
-    }
-
-    fun setTakenAt(takenAt: String) {
-        _takenAt.value = takenAt
-    }
-
-    fun setImageUrl(imageUrl: String) {
-        _imageUrl.value = imageUrl
+    init {
+        setData()
     }
 
     fun deleteAlbum() {
-        val albumId = id.value?.toLong() ?: 0L
+        val albumId = photoDetail.value?.id?.toLong() ?: 0L
         viewModelScope.launch {
             photoRepository.deletePhoto(albumId).onSuccess {
                 _albumDetailState.value = AlbumDetailState.SuccessDeleteAlbum
@@ -53,5 +37,13 @@ class AlbumDetailViewModel @Inject constructor(
                 _albumDetailState.value = AlbumDetailState.Error(it.message.toString())
             }
         }
+    }
+
+    private fun setData() {
+        val id = savedStateHandle.get<Int>("id") ?: 0
+        val studio = savedStateHandle.get<String>("studio").orEmpty()
+        val takenAt = savedStateHandle.get<String>("takenAt").orEmpty()
+        val imageUrl = savedStateHandle.get<String>("imageUrl").orEmpty()
+        _photoDetail.value = PhotoRaw(id, studio, takenAt, imageUrl)
     }
 }

@@ -13,7 +13,7 @@ import retrofit2.http.Part
 import retrofit2.http.PartMap
 import retrofit2.http.Path
 
-interface AlbumService {
+interface PhotoService {
 
     @GET("api/v1/studios")
     suspend fun fetchStudios(): StudioResponse

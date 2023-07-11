@@ -3,18 +3,14 @@ package com.teampophory.pophory.feature.album.detail
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import coil.load
 import com.teampophory.pophory.common.context.toast
-import com.teampophory.pophory.common.intent.intExtra
-import com.teampophory.pophory.common.intent.stringExtra
 import com.teampophory.pophory.common.view.showAllowingStateLoss
 import com.teampophory.pophory.common.view.viewBinding
 import com.teampophory.pophory.databinding.ActivityAlbumDetailBinding
 import com.teampophory.pophory.feature.album.model.PhotoDetail
-import com.teampophory.pophory.feature.home.photo.AddPhotoActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -23,10 +19,6 @@ class AlbumDetailActivity : AppCompatActivity() {
     private val binding by viewBinding(ActivityAlbumDetailBinding::inflate)
     private val viewModel by viewModels<AlbumDetailViewModel>()
 
-    private val photoId by intExtra(0)
-    private val studio by stringExtra("")
-    private val takenAt by stringExtra("")
-    private val imageUrl by stringExtra("")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
@@ -37,7 +29,7 @@ class AlbumDetailActivity : AppCompatActivity() {
         viewModel.albumDetailState.observe(this) {
             when (it) {
                 AlbumDetailState.Uninitialized -> {
-                    initData()
+                    initViews()
                 }
 
                 is AlbumDetailState.SuccessDeleteAlbum -> {
@@ -68,34 +60,23 @@ class AlbumDetailActivity : AppCompatActivity() {
         }
     }
 
-    private fun initData() {
-        viewModel.setPhotoId(photoId)
-        viewModel.setStudio(studio ?: "")
-        viewModel.setTakenAt(takenAt ?: "")
-        viewModel.setImageUrl(imageUrl ?: "")
-        initViews()
-    }
-
     private fun initViews() {
         initButtonClickListener()
         with(binding) {
-            ivMainDetailAlbum.load(viewModel.imageUrl.value)
-            tvAlbumTakenAt.text = viewModel.takenAt.value
-            tvStudio.text = viewModel.studio.value
+            val photoDetailInfo = viewModel.photoDetail.value
+            ivMainDetailAlbum.load(photoDetailInfo?.imageUrl)
+            tvAlbumTakenAt.text = photoDetailInfo?.takenAt.orEmpty()
+            tvStudio.text = photoDetailInfo?.studio.orEmpty()
         }
     }
 
     companion object {
-        private const val PHOTO_ID = "photoId"
-        private const val STUDIO = "studio"
-        private const val TAKEN_AT = "takenAt"
-        private const val IMAGE_URL = "imageUrl"
         fun startActivity(context: Context, photoDetail: PhotoDetail) {
             Intent(context, AlbumDetailActivity::class.java).apply {
-                putExtra(PHOTO_ID, photoDetail.id)
-                putExtra(STUDIO, photoDetail.studio)
-                putExtra(TAKEN_AT, photoDetail.takenAt)
-                putExtra(IMAGE_URL, photoDetail.imageUrl)
+                putExtra("photoId", photoDetail.id)
+                putExtra("studio", photoDetail.studio)
+                putExtra("takenAt", photoDetail.takenAt)
+                putExtra("imageUrl", photoDetail.imageUrl)
             }.let(context::startActivity)
         }
     }
