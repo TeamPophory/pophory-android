@@ -1,5 +1,6 @@
 package com.teampophory.pophory.config.di
 
+import com.teampophory.pophory.config.di.qualifier.Secured
 import com.teampophory.pophory.data.repository.my.DefaultMyPageRepository
 import com.teampophory.pophory.data.repository.my.MyPageRepository
 import com.teampophory.pophory.network.MyPageNetworkDataSource
@@ -19,7 +20,7 @@ import javax.inject.Singleton
 object MyPageModule {
     @Provides
     @Singleton
-    fun provideMyPageNetworkService(retrofit: Retrofit): RetrofitMyPageNetworkApi = retrofit.create()
+    fun provideMyPageNetworkService(@Secured retrofit: Retrofit): RetrofitMyPageNetworkApi = retrofit.create()
 
     @Module
     @InstallIn(SingletonComponent::class)

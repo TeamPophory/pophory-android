@@ -1,5 +1,6 @@
 package com.teampophory.pophory.config.di
 
+import com.teampophory.pophory.config.di.qualifier.Secured
 import com.teampophory.pophory.data.network.service.AuthService
 import com.teampophory.pophory.data.repository.auth.AuthRepository
 import com.teampophory.pophory.data.repository.auth.DefaultAuthRepository
@@ -17,12 +18,12 @@ import javax.inject.Singleton
 object AuthModule {
     @Provides
     @Singleton
-    fun provideAuthService(retrofit: Retrofit): AuthService =
+    fun provideAuthService(@Secured retrofit: Retrofit): AuthService =
         retrofit.create(AuthService::class.java)
 
     @Provides
     @Singleton
-    fun provideSignUpService(retrofit: Retrofit): RetrofitSignUpNetwork =
+    fun provideSignUpService(@Secured retrofit: Retrofit): RetrofitSignUpNetwork =
         retrofit.create(RetrofitSignUpNetwork::class.java)
 
     @Module

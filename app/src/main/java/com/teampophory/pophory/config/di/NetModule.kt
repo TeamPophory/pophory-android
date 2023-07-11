@@ -5,6 +5,8 @@ import com.teampophory.pophory.BuildConfig
 import com.teampophory.pophory.FlipperInitializer
 import com.teampophory.pophory.config.di.qualifier.Auth
 import com.teampophory.pophory.config.di.qualifier.Log
+import com.teampophory.pophory.config.di.qualifier.Secured
+import com.teampophory.pophory.config.di.qualifier.Unsecured
 import com.teampophory.pophory.data.network.interceptor.AuthInterceptor
 import dagger.Module
 import dagger.Provides
@@ -49,6 +51,7 @@ object NetModule {
 
     @Singleton
     @Provides
+    @Secured
     fun provideOkHttpClient(
         @Log logInterceptor: Interceptor,
         @Auth authInterceptor: Interceptor
@@ -58,15 +61,35 @@ object NetModule {
         .apply { FlipperInitializer.initOkHttpClient(this) }
         .build()
 
-    // TODO by Nunu BaseUrl 변경
     @Singleton
     @Provides
+    @Unsecured
+    fun provideOkHttpClientNotNeededAuth(
+        @Log logInterceptor: Interceptor
+    ): OkHttpClient = OkHttpClient.Builder()
+        .addInterceptor(logInterceptor)
+        .build()
+
+    @Singleton
+    @Provides
+    @Secured
     fun provideRetrofit(
-        client: OkHttpClient,
+        @Secured client: OkHttpClient,
         converterFactory: Converter.Factory
     ): Retrofit = Retrofit.Builder()
         .baseUrl(PophoryBaseUrl)
         .client(client)
+        .addConverterFactory(converterFactory)
+        .build()
+
+    @Singleton
+    @Provides
+    @Unsecured
+    fun provideRetrofitNotNeededAuth(
+        @Unsecured client: OkHttpClient,
+        converterFactory: Converter.Factory
+    ): Retrofit = Retrofit.Builder()
+        .baseUrl(PophoryBaseUrl)
         .addConverterFactory(converterFactory)
         .build()
 }

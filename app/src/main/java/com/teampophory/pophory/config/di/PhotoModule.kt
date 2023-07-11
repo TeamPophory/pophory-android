@@ -1,5 +1,6 @@
 package com.teampophory.pophory.config.di
 
+import com.teampophory.pophory.config.di.qualifier.Secured
 import com.teampophory.pophory.data.network.service.PhotoService
 import com.teampophory.pophory.data.repository.photo.DefaultPhotoRepository
 import com.teampophory.pophory.data.repository.photo.PhotoRepository
