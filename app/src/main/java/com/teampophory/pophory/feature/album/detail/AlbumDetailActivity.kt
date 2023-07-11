@@ -80,7 +80,7 @@ class AlbumDetailActivity : AppCompatActivity() {
     }
 
     companion object {
-        fun newIntent(context: Context, photoDetail: PhotoDetail):Intent {
+        fun newIntent(context: Context, photoDetail: PhotoDetail): Intent {
             return Intent(context, AlbumDetailActivity::class.java).apply {
                 putExtra("photoId", photoDetail.id)
                 putExtra("studio", photoDetail.studio)
