@@ -2,7 +2,9 @@ package com.teampophory.pophory.config.di
 
 import com.teampophory.pophory.data.repository.store.DefaultStoreRepository
 import com.teampophory.pophory.data.repository.store.StoreRepository
+import com.teampophory.pophory.network.PhotoNetworkDataSource
 import com.teampophory.pophory.network.StoreNetworkDataSource
+import com.teampophory.pophory.network.retrofit.photo.PhotoNetwork
 import com.teampophory.pophory.network.retrofit.store.RetrofitStoreNetwork
 import com.teampophory.pophory.network.retrofit.store.RetrofitStoreNetworkApi
 import dagger.Binds
@@ -31,5 +33,9 @@ object StoreModule {
         @Binds
         @Singleton
         fun bindStoreNetworkDataSource(retrofitStoreNetwork: RetrofitStoreNetwork): StoreNetworkDataSource
+
+        @Binds
+        @Singleton
+        fun bindPhotoNetworkDataSource(photoNetwork: PhotoNetwork): PhotoNetworkDataSource
     }
 }

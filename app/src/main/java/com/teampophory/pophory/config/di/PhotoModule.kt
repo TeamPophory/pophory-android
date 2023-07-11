@@ -1,6 +1,6 @@
 package com.teampophory.pophory.config.di
 
-import com.teampophory.pophory.data.network.service.AlbumService
+import com.teampophory.pophory.data.network.service.PhotoService
 import com.teampophory.pophory.data.repository.photo.DefaultPhotoRepository
 import com.teampophory.pophory.data.repository.photo.PhotoRepository
 import dagger.Binds
@@ -17,7 +17,7 @@ import javax.inject.Singleton
 object PhotoModule {
     @Provides
     @Singleton
-    fun providePhotoNetworkService(retrofit: Retrofit): AlbumService = retrofit.create()
+    fun providePhotoNetworkService(retrofit: Retrofit): PhotoService = retrofit.create()
 
     @Module
     @InstallIn(SingletonComponent::class)
