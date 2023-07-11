@@ -103,10 +103,15 @@
         <activity
             android:name=".feature.album.list.AlbumListActivity"
             android:exported="false" />
-        <activity android:name=".feature.album.detail.AlbumDetailActivity"
+        <activity
+            android:name=".feature.album.detail.AlbumDetailActivity"
             android:exported="false" />
         <activity
             android:name=".feature.home.photo.AddPhotoActivity"
             android:exported="false" />
+
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_channel_id"
+            android:value="@string/default_notification_channel_id" />
     </application>
 </manifest>
