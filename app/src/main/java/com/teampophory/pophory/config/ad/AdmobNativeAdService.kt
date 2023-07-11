@@ -20,7 +20,7 @@ import dagger.assisted.AssistedInject
 import dagger.hilt.android.qualifiers.ActivityContext
 import timber.log.Timber
 
-class AdmobService @AssistedInject constructor(
+class AdmobNativeAdService @AssistedInject constructor(
     @ActivityContext private val context: Context,
     @Assisted private val adUnitId: String,
     @Assisted private val adContainer: FrameLayout
@@ -74,6 +74,6 @@ class AdmobService @AssistedInject constructor(
 }
 
 @AssistedFactory
-interface AdmobServiceFactory {
-    fun create(adUnitId: String, adContainer: FrameLayout): AdmobService
+interface AdmobNativeAdFactory {
+    fun create(adUnitId: String, adContainer: FrameLayout): AdmobNativeAdService
 }
