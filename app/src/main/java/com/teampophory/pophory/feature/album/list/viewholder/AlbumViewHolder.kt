@@ -30,6 +30,7 @@ sealed class AlbumViewHolder(
                 }
             }
         }
+
         private fun ImageView.loadAndDisplayHorizontalImage(photoDetail: PhotoDetail) =
             load(photoDetail.imageUrl) {
                 crossfade(true)
@@ -39,7 +40,7 @@ sealed class AlbumViewHolder(
 
     class VerticalViewHolder(
         private val binding: ItemVerticalPhotoBinding,
-        private val onItemClicked: (PhotoDetail) -> Unit
+        private val onItemClicked: (Pair<VerticalItemType, PhotoDetail>) -> Unit
     ) : AlbumViewHolder(binding) {
         override fun bind(item: PhotoItem) {
             with(binding) {
@@ -50,7 +51,7 @@ sealed class AlbumViewHolder(
                     ivFirstVerticalImage.run {
                         loadAndDisplayVerticalImage(firstImageData)
                         setOnClickListener {
-                            onItemClicked(firstImageData)
+                            onItemClicked(Pair(VerticalItemType.FIRST, firstImageData))
                         }
                     }
 
@@ -66,7 +67,7 @@ sealed class AlbumViewHolder(
                         }
 
                         setOnClickListener {
-                            onItemClicked(secondImageData)
+                            onItemClicked(Pair(VerticalItemType.SECOND, secondImageData))
                         }
                     }
                 }
@@ -78,5 +79,9 @@ sealed class AlbumViewHolder(
                 crossfade(true)
                 placeholder(R.drawable.img_loading_vertical)
             }
+    }
+
+    enum class VerticalItemType {
+        FIRST, SECOND
     }
 }

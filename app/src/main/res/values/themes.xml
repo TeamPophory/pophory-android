@@ -54,6 +54,9 @@
         <!-- For Bottom Navigation -->
         <item name="textAppearanceLabelMedium">@style/TextAppearance.Pophory.LabelMedium</item>
         <item name="android:windowLightStatusBar">true</item>
+
+        <!-- Shared Element Transition -->
+        <item name="android:windowActivityTransitions">true</item>
     </style>
 
     <style name="Theme.Pophory" parent="Base.Theme.Pophory" />
