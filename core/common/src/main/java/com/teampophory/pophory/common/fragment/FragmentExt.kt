@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.snackbar.Snackbar
+import com.teampophory.pophory.common.view.ErrorFullScreenDialogFragment
 import com.teampophory.pophory.common.view.LoadingProgressIndicator
 
 fun Fragment.toast(message: String) {
@@ -39,6 +40,20 @@ fun Fragment.showLoading() {
 
 fun Fragment.hideLoading() {
     childFragmentManager.findFragmentByTag(LoadingProgressIndicator.TAG)?.let { fragment ->
+        childFragmentManager.commit(allowStateLoss = true) {
+            remove(fragment)
+        }
+    }
+}
+
+fun Fragment.showError() {
+    childFragmentManager.commit(allowStateLoss = true) {
+        add(ErrorFullScreenDialogFragment.newInstance(), ErrorFullScreenDialogFragment.TAG)
+    }
+}
+
+fun Fragment.hideError() {
+    childFragmentManager.findFragmentByTag(ErrorFullScreenDialogFragment.TAG)?.let { fragment ->
         childFragmentManager.commit(allowStateLoss = true) {
             remove(fragment)
         }
