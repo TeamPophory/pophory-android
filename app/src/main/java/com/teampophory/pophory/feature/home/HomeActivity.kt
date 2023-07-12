@@ -56,6 +56,9 @@ class HomeActivity : AppCompatActivity() {
             selectedFragment?.let { changeFragment(it) }
             return@setOnItemSelectedListener selectedFragment != null
         }
+
+        binding.homeBottomNav.setOnItemReselectedListener { }
+
         binding.bottomNavFav.setOnClickListener {
             imagePicker.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
         }
