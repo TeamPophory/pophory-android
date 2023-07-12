@@ -39,13 +39,15 @@ class PophoryAuthenticator @Inject constructor(
                 dataStore.accessToken = it.accessToken
             }.onFailure {
                 Timber.e(it)
-                UserApiClient.instance.logout { error ->
-                    Timber.e(error)
-                    dataStore.clear()
-                    ProcessPhoenix.triggerRebirth(
-                        context,
-                        Intent(context, OnBoardingActivity::class.java)
-                    )
+                runBlocking {
+                    UserApiClient.instance.logout { error ->
+                        Timber.e(error)
+                        dataStore.clear()
+                        ProcessPhoenix.triggerRebirth(
+                            context,
+                            Intent(context, OnBoardingActivity::class.java)
+                        )
+                    }
                 }
             }.getOrThrow()
 
