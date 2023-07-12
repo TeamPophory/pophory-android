@@ -3,6 +3,7 @@ package com.teampophory.pophory.data.network.authenticator
 import android.content.Context
 import android.content.Intent
 import com.jakewharton.processphoenix.ProcessPhoenix
+import com.kakao.sdk.user.UserApiClient
 import com.teampophory.pophory.data.local.PophoryDataStore
 import com.teampophory.pophory.data.network.service.RefreshApi
 import com.teampophory.pophory.feature.onboarding.OnBoardingActivity
@@ -38,11 +39,14 @@ class PophoryAuthenticator @Inject constructor(
                 dataStore.accessToken = it.accessToken
             }.onFailure {
                 Timber.e(it)
-                dataStore.clear()
-                ProcessPhoenix.triggerRebirth(
-                    context,
-                    Intent(context, OnBoardingActivity::class.java)
-                )
+                UserApiClient.instance.logout { error ->
+                    Timber.e(error)
+                    dataStore.clear()
+                    ProcessPhoenix.triggerRebirth(
+                        context,
+                        Intent(context, OnBoardingActivity::class.java)
+                    )
+                }
             }.getOrThrow()
 
             return response.request.newBuilder()
