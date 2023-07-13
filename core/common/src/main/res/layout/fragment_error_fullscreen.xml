@@ -19,8 +19,8 @@
         android:id="@+id/tvErrorTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="네트워크 오류가 발생했어요"
+        android:layout_marginTop="48dp"
+        android:text="현재 접속이 원활하지 않아요"
         android:textColor="#5f6168"
         android:textSize="18sp"
         android:textStyle="bold"
@@ -33,14 +33,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="연결 확인 후 다시 시도해주세요"
+        android:text="네트워크 연결을 확인하거나\n잠시 후 다시 시도해주세요"
         android:textColor="#5f6168"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="@id/ivError"
         app:layout_constraintStart_toStartOf="@id/ivError"
         app:layout_constraintTop_toBottomOf="@id/tvErrorTitle" />
-
-
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>
