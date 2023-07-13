@@ -36,7 +36,7 @@ in-app-update = "2.1.0"
 secret-gradle-plugin = "2.0.1"
 google-services = "4.3.15"
 crashlytics = "2.9.6"
-firebase = "32.1.1"
+firebase = "32.2.0"
 app-distribution = "4.0.0"
 admob = "22.2.0"
 
