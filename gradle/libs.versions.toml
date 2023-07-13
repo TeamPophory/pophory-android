@@ -69,7 +69,7 @@ sentry-android = "6.25.1"
 process-pheonix = "2.1.2"
 constraintlayout = "2.1.4"
 dot-indicator = "5.0"
-kakao = "2.14.0"
+kakao = "2.15.0"
 splash-screen = "1.0.1"
 
 [libraries]
