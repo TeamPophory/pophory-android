@@ -43,6 +43,7 @@ class SignUpFirstFragment : Fragment() {
         setEditText()
         // edittext 삭제 버튼
         deleteAllEditText()
+        signUpViewModel.setButtonState(!binding.editTvName.text.isNullOrEmpty() && !binding.tvErrorMessage.isVisible)
     }
 
     private fun deleteAllEditText() {
@@ -66,6 +67,7 @@ class SignUpFirstFragment : Fragment() {
             doAfterTextChanged {
 
                 signUpViewModel.setRealName(it.toString())
+                signUpViewModel.setButtonState(!binding.editTvName.text.isNullOrEmpty() && !binding.tvErrorMessage.isVisible)
 
                 binding.btnDeleteEditText.isGone = it?.isEmpty() == true
                 // 글자 수 계산
@@ -77,16 +79,19 @@ class SignUpFirstFragment : Fragment() {
                     binding.tvErrorMessage.text = "현재 한국어만 지원하고 있어요."
                     binding.editTvName.setBackgroundResource(R.drawable.bg_sign_up_edit_text_error)
                     binding.tvErrorMessage.isVisible = true
-                    buttonState?.onChange(false)
+                    //buttonState?.onChange(false)
+                    //signUpViewModel.setButtonState(false)
                 } else if (it.toString().length < 2) {
                     binding.tvErrorMessage.text = "2-6글자 이내로 작성해주세요."
                     binding.editTvName.setBackgroundResource(R.drawable.bg_sign_up_edit_text_error)
                     binding.tvErrorMessage.isVisible = true
-                    buttonState?.onChange(false)
+                    //buttonState?.onChange(false)
+                    //signUpViewModel.setButtonState(false)
                 } else {
                     binding.editTvName.setBackgroundResource(R.drawable.bg_sign_up_edit_text_selected)
                     binding.tvErrorMessage.isVisible = false
-                    buttonState?.onChange(true)
+                    //buttonState?.onChange(true)
+                    //signUpViewModel.setButtonState(true)
                 }
             }
         }

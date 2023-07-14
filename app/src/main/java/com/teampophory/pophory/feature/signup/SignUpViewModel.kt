@@ -3,6 +3,7 @@ package com.teampophory.pophory.feature.signup
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.teampophory.pophory.databinding.FragmentSignUpFirstBinding
 import com.teampophory.pophory.domain.AutoLoginConfigureUseCase
 import com.teampophory.pophory.network.model.NicknameRequest
 import com.teampophory.pophory.network.model.NicknameResponse
@@ -28,6 +29,12 @@ class SignUpViewModel @Inject constructor(
     private val _nicknameCheckResult: MutableLiveData<NicknameResponse> = MutableLiveData()
     val nicknameCheckResult: LiveData<NicknameResponse> = _nicknameCheckResult
 
+    private val _buttonState: MutableLiveData<Boolean> = MutableLiveData()
+    val buttonState: LiveData<Boolean> = _buttonState
+
+    private val _edittextState: MutableLiveData<String> = MutableLiveData()
+    val edittextState: LiveData<String> = _edittextState
+
     private val _realName: MutableLiveData<String> = MutableLiveData()
     var realName: LiveData<String> = _realName
 
@@ -36,6 +43,14 @@ class SignUpViewModel @Inject constructor(
 
     private val _albumCover: MutableLiveData<Int> = MutableLiveData(1)
     var albumCover: LiveData<Int> = _albumCover
+
+    fun setButtonState(state: Boolean) {
+        _buttonState.value = state
+    }
+
+    fun setEdittextState(state: String) {
+        _edittextState.value = state
+    }
 
     fun setRealName(realName: String) {
         _realName.value = realName

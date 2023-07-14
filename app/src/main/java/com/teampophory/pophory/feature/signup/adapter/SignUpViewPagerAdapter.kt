@@ -10,7 +10,7 @@ import com.teampophory.pophory.feature.signup.SignUpThirdFragment
 
 class SignUpViewPagerAdapter(
     fragmentActivity: FragmentActivity,
-    private val buttonState: OnButtonStateChangeListener
+    //private val buttonState: OnButtonStateChangeListener
 ) : FragmentStateAdapter(fragmentActivity) {
 
     override fun getItemCount() = 3
@@ -19,13 +19,13 @@ class SignUpViewPagerAdapter(
         return when (position) {
             0 -> {
                 SignUpFirstFragment().apply {
-                    setSignUpButtonInterface(buttonState)
+                    //setSignUpButtonInterface(buttonState)
                 }
             }
 
             1 -> {
                 SignUpSecondFragment().apply {
-                    setSignUpButtonInterface(buttonState)
+                    //setSignUpButtonInterface(buttonState)
                 }
             }
 

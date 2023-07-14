@@ -72,15 +72,18 @@ class SignUpSecondFragment : Fragment() {
                     binding.editTvId.setBackgroundResource(R.drawable.bg_sign_up_edit_text_error)
                     binding.tvErrorMessage.isVisible = true
                     buttonState?.onChange(false)
+                    signUpViewModel.setButtonState(false)
                 } else if (it.toString().length < 4) {
                     binding.tvErrorMessage.text = "4-12글자 이내로 작성해주세요."
                     binding.editTvId.setBackgroundResource(R.drawable.bg_sign_up_edit_text_error)
                     binding.tvErrorMessage.isVisible = true
                     buttonState?.onChange(false)
+                    signUpViewModel.setButtonState(false)
                 } else {
                     binding.editTvId.setBackgroundResource(R.drawable.bg_sign_up_edit_text_selected)
                     binding.tvErrorMessage.isVisible = false
                     buttonState?.onChange(true)
+                    signUpViewModel.setButtonState(true)
                 }
             }
         }
