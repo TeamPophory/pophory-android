@@ -18,6 +18,7 @@ import com.teampophory.pophory.common.fragment.colorOf
 import com.teampophory.pophory.common.fragment.hideLoading
 import com.teampophory.pophory.common.fragment.showLoading
 import com.teampophory.pophory.common.fragment.stringOf
+import com.teampophory.pophory.common.fragment.toast
 import com.teampophory.pophory.common.fragment.viewLifeCycle
 import com.teampophory.pophory.common.fragment.viewLifeCycleScope
 import com.teampophory.pophory.common.primitive.textAppearance
@@ -183,7 +184,14 @@ class StoreFragment : Fragment() {
                 }
             }
             append(splitText.getOrNull(1).orEmpty())
-        }.let { textView.text = it }
+
+            //15일경우 예외상황 처리
+            if(coloredText.equals("15")) {
+                append("15")
+            }
+        }.let {
+            textView.text = it
+        }
     }
 
     companion object {
