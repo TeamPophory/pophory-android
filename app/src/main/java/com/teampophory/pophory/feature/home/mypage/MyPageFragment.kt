@@ -57,12 +57,10 @@ class MyPageFragment : Fragment() {
                 is MyPageInfoState.SuccessMyPageInfo -> {
                     hideLoading()
                     with(binding) {
-                        val profileItem =
-                            myPageInfoState.data.firstOrNull { it is MyPageDisplayItem.Profile } as? MyPageDisplayItem.Profile
-                        tvMypageToolbarNickname.text = "@${profileItem?.nickname}"
-                        tvMypageName.text = profileItem?.realName ?: ""
-                        tvMypagePictureCount.text =
-                            profileItem?.photoCount?.let { setSpannableString(it) }
+                        val profile = myPageInfoState.data
+                        tvMypageToolbarNickname.text = "@${profile.nickname}"
+                        tvMypageName.text = profile.realName
+                        tvMypagePictureCount.text = setSpannableString(profile.photoCount)
                     }
                 }
 
@@ -76,8 +74,19 @@ class MyPageFragment : Fragment() {
     }
 
     private fun setOnClickListener() {
-        binding.ivToolbarSetting.setOnClickListener {
-            startActivity(Intent(requireContext(), SettingActivity::class.java))
+        with(binding) {
+            //setting 이동
+            ivToolbarSetting.setOnClickListener {
+                startActivity(Intent(requireContext(), SettingActivity::class.java))
+            }
+            //share 이동
+            layoutMypageShare.setOnClickListener{
+                //TODO Intent to Share
+            }
+            //stroy 이동
+            layoutMypageStory.setOnClickListener{
+                //TODO Intent to Story
+            }
         }
     }
 
