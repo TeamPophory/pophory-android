@@ -55,29 +55,45 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbar_mypage" />
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="124dp"
+        android:background="#EBE8FF"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/div_mypage"
+        tools:text="임시로 영역을 잠아두는 tv"/>
+
+    <ImageView
+        android:id="@+id/iv_mypage_profile_background"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_profile_background"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/div_mypage"
+        tools:text="일러스트가 들어갈 공간"/>
 
     <ImageView
         android:id="@+id/iv_mypage_profile"
         android:layout_width="72dp"
         android:layout_height="72dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="22dp"
+        android:layout_marginTop="66dp"
         android:src="@drawable/ic_profile"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/div_mypage" />
+        app:layout_constraintTop_toTopOf="@id/iv_mypage_profile_background" />
 
     <TextView
         android:id="@+id/tv_mypage_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="14dp"
+        android:layout_marginTop="13dp"
         android:textAppearance="?textAppearanceHeadlineSmall"
         android:textColor="?colorOnSurface100"
-        app:layout_constraintBottom_toTopOf="@id/tv_mypage_picture_count"
-        app:layout_constraintStart_toEndOf="@id/iv_mypage_profile"
-        app:layout_constraintTop_toTopOf="@+id/iv_mypage_profile"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/iv_mypage_profile"
         app:layout_constraintVertical_chainStyle="packed"
-        tools:text="누누누" />
+        tools:text="서재원" />
 
     <TextView
         android:id="@+id/tv_mypage_picture_count"
@@ -86,9 +102,9 @@
         android:layout_marginTop="8dp"
         android:textAppearance="@style/TextAppearance.Pophory.Text1"
         android:textColor="?colorOnSurface100"
-        app:layout_constraintBottom_toBottomOf="@+id/iv_mypage_profile"
-        app:layout_constraintStart_toStartOf="@id/tv_mypage_name"
-        app:layout_constraintTop_toBottomOf="@+id/tv_mypage_name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_mypage_name"
         tools:text="그동안 찍은 사진 n장" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -97,13 +113,13 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
         android:layout_marginTop="20dp"
-        android:background="@drawable/bg_round_20dp_lightpurple"
+        android:background="@drawable/bg_round_16dp_gray20"
         android:paddingHorizontal="20dp"
         android:paddingTop="20dp"
         android:paddingBottom="18dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/iv_mypage_profile">
+        app:layout_constraintTop_toBottomOf="@id/tv_mypage_picture_count">
 
         <TextView
             android:id="@+id/tv_mypage_share_title"
@@ -112,7 +128,7 @@
             android:text="네컷사진 공유하기"
             android:textAppearance="?textAppearanceHeadlineMedium"
             android:textColor="?colorOnSurface100"
-            android:textSize="17sp"
+            android:textSize="19sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -121,6 +137,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_chevron_right"
+            app:layout_constraintBottom_toBottomOf="@id/tv_mypage_share_title"
             app:layout_constraintStart_toEndOf="@id/tv_mypage_share_title"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -129,24 +146,24 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="포릿이 너의 네컷사진을 전달해줄게!"
+            android:text="포릿이 너의 네컷사진을\n전달해줄게!"
             android:textAppearance="?textAppearanceCaption1"
             android:textColor="?colorOnSurface50"
-            android:textSize="13sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_mypage_share_title" />
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <ImageView
             android:id="@+id/iv_mypage_share_image"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_width="114dp"
+            android:layout_height="103dp"
             android:layout_marginTop="14dp"
             android:gravity="center"
             android:scaleType="fitXY"
-            android:src="@drawable/ic_banner"
-            android:text="광고"
+            android:src="@drawable/ic_empty_feed"
             android:textAppearance="?textAppearancePopupText1"
-            app:layout_constraintTop_toBottomOf="@id/tv_mypage_share_subtitle" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -154,9 +171,9 @@
         android:id="@+id/layout_mypage_story"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/bg_round_20dp_lightpurple"
         android:layout_marginHorizontal="20dp"
         android:layout_marginTop="14dp"
+        android:background="@drawable/bg_round_16dp_gray20"
         android:paddingHorizontal="20dp"
         android:paddingTop="20dp"
         android:paddingBottom="16dp"
@@ -171,7 +188,7 @@
             android:text="포릿 이야기 들으러 가기"
             android:textAppearance="?textAppearanceHeadlineMedium"
             android:textColor="?colorOnSurface100"
-            android:textSize="17sp"
+            android:textSize="19sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -180,8 +197,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_chevron_right"
+            app:layout_constraintBottom_toBottomOf="@id/tv_mypage_story_title"
             app:layout_constraintStart_toEndOf="@id/tv_mypage_story_title"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="@id/tv_mypage_story_title" />
 
         <TextView
             android:id="@+id/tv_mypage_story_subtitle"
