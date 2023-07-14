@@ -22,7 +22,6 @@ import java.util.regex.Pattern
 @AndroidEntryPoint
 class SignUpSecondFragment : Fragment() {
     private val binding by viewBinding(FragmentSignUpSecondBinding::bind)
-    private var buttonState: OnButtonStateChangeListener? = null
     private val signUpViewModel by activityViewModels<SignUpViewModel>()
 
     override fun onCreateView(
@@ -40,6 +39,8 @@ class SignUpSecondFragment : Fragment() {
         setEditText()
         deleteAllEditText()
         setSpannableString()
+
+        signUpViewModel.setButtonState(false)
     }
 
     private fun deleteAllEditText() {
@@ -71,18 +72,15 @@ class SignUpSecondFragment : Fragment() {
                     binding.tvErrorMessage.text = "*올바른 형식의 아이디가 아닙니다"
                     binding.editTvId.setBackgroundResource(R.drawable.bg_sign_up_edit_text_error)
                     binding.tvErrorMessage.isVisible = true
-                    buttonState?.onChange(false)
                     signUpViewModel.setButtonState(false)
-                } else if (it.toString().length < 4) {
+                } else if (it.toString().length < 4 || it.toString().length > 12) {
                     binding.tvErrorMessage.text = "4-12글자 이내로 작성해주세요."
                     binding.editTvId.setBackgroundResource(R.drawable.bg_sign_up_edit_text_error)
                     binding.tvErrorMessage.isVisible = true
-                    buttonState?.onChange(false)
                     signUpViewModel.setButtonState(false)
                 } else {
                     binding.editTvId.setBackgroundResource(R.drawable.bg_sign_up_edit_text_selected)
                     binding.tvErrorMessage.isVisible = false
-                    buttonState?.onChange(true)
                     signUpViewModel.setButtonState(true)
                 }
             }
@@ -104,10 +102,6 @@ class SignUpSecondFragment : Fragment() {
             append(splittedText[1])
         }
         binding.tvTitle.text = text
-    }
-
-    fun setSignUpButtonInterface(buttonState: OnButtonStateChangeListener) {
-        this.buttonState = buttonState
     }
 
     companion object {

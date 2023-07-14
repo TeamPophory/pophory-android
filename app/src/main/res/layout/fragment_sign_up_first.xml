@@ -68,7 +68,6 @@
         android:background="@drawable/bg_sign_up_edit_text_default"
         android:hint="@string/sign_up_first_name_hint"
         android:inputType="text"
-        android:maxLength="6"
         android:paddingStart="15dp"
         android:paddingTop="18dp"
         android:paddingBottom="21dp"

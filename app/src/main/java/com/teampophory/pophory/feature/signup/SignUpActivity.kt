@@ -24,23 +24,18 @@ class SignUpActivity : AppCompatActivity() {
 
     private val binding by viewBinding(ActivitySignUpBinding::inflate)
 
-        }
-    }
+    private val viewModel by viewModels<SignUpViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-
-        observeEvent()
-
-        //TODO 수정 필요
         binding.btnNext.isEnabled = true
 
+        observeEvent()
         //다음 버튼
         setOnClickNextButton()
         //툴바 뒤로 가기 버튼
         setOnToolbarBackPressed()
-        //TODO 기기 뒤로 가기 버튼
     }
 
     private fun setOnToolbarBackPressed() {
@@ -50,13 +45,8 @@ class SignUpActivity : AppCompatActivity() {
         binding.btnBack.setOnClickListener {
             val currentFragment = navController.currentDestination?.label
             when (currentFragment) {
-                SIGN_UP_FIRST_FRAGMENT -> {
-                    val intent = Intent(this, OnBoardingActivity::class.java)
-                    startActivity(intent)
-                }
-
+                SIGN_UP_FIRST_FRAGMENT -> startActivity(Intent(this, OnBoardingActivity::class.java))
                 SIGN_UP_SECOND_FRAGMENT -> navController.popBackStack()
-
                 SIGN_UP_THIRD_FRAGMENT -> navController.popBackStack()
             }
         }
@@ -64,19 +54,15 @@ class SignUpActivity : AppCompatActivity() {
 
     private fun setOnClickNextButton() {
 
-        val navHostFragment =
-            supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         val navController = navHostFragment.findNavController()
 
         binding.btnNext.setOnClickListener {
             val currentFragment = navController.currentDestination?.label
             when (currentFragment) {
                 SIGN_UP_FIRST_FRAGMENT -> navigateToFragment(1)
-                SIGN_UP_SECOND_FRAGMENT -> navigateToFragment(2)
-                SIGN_UP_THIRD_FRAGMENT -> {
-                    val intent = Intent(this, StartPophoryActivity::class.java)
-                    startActivity(intent)
-                }
+                SIGN_UP_SECOND_FRAGMENT -> viewModel.nicknameCheck()
+                SIGN_UP_THIRD_FRAGMENT -> viewModel.signUp()
             }
         }
     }
@@ -90,12 +76,6 @@ class SignUpActivity : AppCompatActivity() {
             1 -> navController.navigate(R.id.action_signUpFirstFragment_to_signUpSecondFragment)
             2 -> navController.navigate(R.id.action_signUpSecondFragment_to_signUpThirdFragment)
         }
-    }
-
-    companion object {
-        const val SIGN_UP_FIRST_FRAGMENT = "SignUpFirstFragment"
-        const val SIGN_UP_SECOND_FRAGMENT = "SignUpSecondFragment"
-        const val SIGN_UP_THIRD_FRAGMENT = "SignUpThirdFragment"
     }
 
     private fun observeEvent() {
@@ -117,13 +97,9 @@ class SignUpActivity : AppCompatActivity() {
             binding.btnNext.isEnabled = it
         }
     }
-
-//
-//        override fun onPageSelected(position: Int) {
-//            super.onPageSelected(position)
-//            currentPosition = position
-//            binding.btnNext.text = if (position == 2) "완료하기" else "다음으로 넘어가기"
-//            binding.btnNext.isEnabled = position == 2
-//        }
-//    }
+    companion object {
+        const val SIGN_UP_FIRST_FRAGMENT = "SignUpFirstFragment"
+        const val SIGN_UP_SECOND_FRAGMENT = "SignUpSecondFragment"
+        const val SIGN_UP_THIRD_FRAGMENT = "SignUpThirdFragment"
+    }
 }

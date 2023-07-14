@@ -54,7 +54,7 @@ class SignUpThirdFragment : Fragment() {
 
     private fun setSpannableString() {
         val fullText = getString(R.string.sign_up_third_title)
-        val coloredText = "앨범 커버" // 색상을 변경하려는 특정 단어
+        val coloredText = "앨범 테마" // 색상을 변경하려는 특정 단어
         val splittedText = fullText.split(coloredText)
 
         val text = buildSpannedString {
