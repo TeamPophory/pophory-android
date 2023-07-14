@@ -25,6 +25,8 @@ class SignUpFirstFragment : Fragment() {
     private val binding by viewBinding(FragmentSignUpFirstBinding::bind)
     private val signUpViewModel by activityViewModels<SignUpViewModel>()
 
+    private val buttonState = !binding.editTvName.text.isNullOrEmpty() && !binding.tvErrorMessage.isVisible
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -42,7 +44,7 @@ class SignUpFirstFragment : Fragment() {
         setEditText()
         // edittext 삭제 버튼
         deleteAllEditText()
-        signUpViewModel.setButtonState(!binding.editTvName.text.isNullOrEmpty() && !binding.tvErrorMessage.isVisible)
+        signUpViewModel.setButtonState(buttonState)
     }
 
     private fun deleteAllEditText() {
@@ -66,7 +68,7 @@ class SignUpFirstFragment : Fragment() {
             doAfterTextChanged {
 
                 signUpViewModel.setRealName(it.toString())
-                signUpViewModel.setButtonState(!binding.editTvName.text.isNullOrEmpty() && !binding.tvErrorMessage.isVisible)
+                signUpViewModel.setButtonState(buttonState)
                 binding.btnDeleteEditText.isGone = it?.isEmpty() == true
                 // 글자 수 계산
                 binding.tvTextCount.text = "(${it.toString().length}/6)"

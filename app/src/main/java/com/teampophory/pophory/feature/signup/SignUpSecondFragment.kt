@@ -37,6 +37,7 @@ class SignUpSecondFragment : Fragment() {
         binding.tvErrorMessage.isVisible = false
         binding.btnDeleteEditText.isGone = true
         setEditText()
+        //edittext 삭제 버튼
         deleteAllEditText()
         setSpannableString()
 
@@ -70,21 +71,37 @@ class SignUpSecondFragment : Fragment() {
                 val textMatcher = HANGUL_REGEX.matcher(binding.editTvId.text)
                 if (!textMatcher.find()) {
                     binding.tvErrorMessage.text = "*올바른 형식의 아이디가 아닙니다"
-                    binding.editTvId.setBackgroundResource(R.drawable.bg_sign_up_edit_text_error)
-                    binding.tvErrorMessage.isVisible = true
-                    signUpViewModel.setButtonState(false)
+                    setEditTextState(
+                        R.drawable.bg_sign_up_edit_text_error,
+                        errorMessageState = true,
+                        buttonState = false
+                    )
                 } else if (it.toString().length < 4 || it.toString().length > 12) {
                     binding.tvErrorMessage.text = "4-12글자 이내로 작성해주세요."
-                    binding.editTvId.setBackgroundResource(R.drawable.bg_sign_up_edit_text_error)
-                    binding.tvErrorMessage.isVisible = true
-                    signUpViewModel.setButtonState(false)
+                    setEditTextState(
+                        R.drawable.bg_sign_up_edit_text_error,
+                        errorMessageState = true,
+                        buttonState = false
+                    )
                 } else {
-                    binding.editTvId.setBackgroundResource(R.drawable.bg_sign_up_edit_text_selected)
-                    binding.tvErrorMessage.isVisible = false
-                    signUpViewModel.setButtonState(true)
+                    setEditTextState(
+                        R.drawable.bg_sign_up_edit_text_selected,
+                        errorMessageState = false,
+                        buttonState = true
+                    )
                 }
             }
         }
+    }
+
+    private fun setEditTextState(
+        background: Int,
+        errorMessageState: Boolean,
+        buttonState: Boolean
+    ) {
+        binding.editTvId.setBackgroundResource(background)
+        binding.tvErrorMessage.isVisible = errorMessageState
+        signUpViewModel.setButtonState(buttonState)
     }
 
     private fun setSpannableString() {

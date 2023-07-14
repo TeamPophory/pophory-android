@@ -32,12 +32,14 @@ class SignUpThirdFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setAlbumCoverImage()
+        //앨범 커버 이미지 초기화
+        initAlbumCoverImage()
+        //앨범 커버 선택
         selectAlbumCover()
         setSpannableString()
     }
 
-    private fun setAlbumCoverImage() {
+    private fun initAlbumCoverImage() {
         //기본 앨범 커버 이미지
         binding.ivAlbumCover.setImageResource(R.drawable.ic_album_cover_friends)
 

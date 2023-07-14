@@ -2,21 +2,15 @@ package com.teampophory.pophory.feature.signup
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import androidx.activity.OnBackPressedCallback
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.commit
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
-import androidx.viewpager2.widget.ViewPager2
 import com.teampophory.pophory.R
 import com.teampophory.pophory.common.view.viewBinding
 import com.teampophory.pophory.databinding.ActivitySignUpBinding
-import com.teampophory.pophory.feature.home.HomeActivity
 import com.teampophory.pophory.feature.onboarding.OnBoardingActivity
-import com.teampophory.pophory.feature.signup.adapter.SignUpViewPagerAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -39,7 +33,7 @@ class SignUpActivity : AppCompatActivity() {
     }
 
     private fun setOnToolbarBackPressed() {
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_sign_up_fragment) as NavHostFragment
         val navController = navHostFragment.findNavController()
 
         binding.btnBack.setOnClickListener {
@@ -54,7 +48,7 @@ class SignUpActivity : AppCompatActivity() {
 
     private fun setOnClickNextButton() {
 
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_sign_up_fragment) as NavHostFragment
         val navController = navHostFragment.findNavController()
 
         binding.btnNext.setOnClickListener {
@@ -69,7 +63,7 @@ class SignUpActivity : AppCompatActivity() {
 
     private fun navigateToFragment(start: Int) {
         val navHostFragment =
-            supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+            supportFragmentManager.findFragmentById(R.id.nav_host_sign_up_fragment) as NavHostFragment
         val navController = navHostFragment.findNavController()
 
         when (start) {
