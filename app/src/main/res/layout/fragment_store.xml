@@ -27,38 +27,58 @@
         app:layout_constraintStart_toStartOf="@id/iv_store_logo"
         app:layout_constraintTop_toBottomOf="@id/iv_store_logo" />
 
+    <ImageView
+        android:id="@+id/iv_store_edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="98dp"
+        android:layout_marginEnd="20dp"
+        android:src="@drawable/ic_edit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/viewpager_store"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="28dp"
-        app:layout_constraintBottom_toTopOf="@id/tv_store_album_photoCount"
+        app:layout_constraintBottom_toTopOf="@id/seekBar_store"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_store_welcome" />
+        app:layout_constraintTop_toBottomOf="@id/tv_store_welcome" />'
+
+    <SeekBar
+        android:id="@+id/seekBar_store"
+        android:layout_width="0dp"
+        android:layout_height="38dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="46dp"
+        android:background="@null"
+        android:paddingVertical="16dp"
+        android:progressDrawable="@drawable/bg_seekbar_custom"
+        android:splitTrack="false"
+        android:thumb="@drawable/ic_thumb_default"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/tv_store_album_photoCount"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/viewpager_store" />
 
     <TextView
         android:id="@+id/tv_store_album_photoCount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="34dp"
-        android:layout_marginBottom="56dp"
-        android:background="@drawable/shape_store_bottom_text"
-        android:paddingHorizontal="14dp"
-        android:paddingVertical="8dp"
-        android:paddingStart="18dp"
-        android:paddingTop="8dp"
-        android:paddingEnd="18dp"
-        android:paddingBottom="8dp"
-        android:textAppearance="?textAppearancePopupButton2"
-        android:textColor="?colorOnPrimary"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginLeft="9dp"
+        android:layout_marginTop="27dp"
+        android:layout_marginEnd="46dp"
+        android:layout_marginBottom="30dp"
+        android:textAppearance="?textAppearanceHeadlineLarge"
+        android:textColor="?colorOnSurface50"
+        android:textSize="19sp"
+        app:layout_constraintBottom_toBottomOf="@id/seekBar_store"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/viewpager_store"
-        tools:text="3/30" />
+        app:layout_constraintTop_toTopOf="@id/seekBar_store"
+        tools:text="3/15" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
