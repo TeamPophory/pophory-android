@@ -68,6 +68,8 @@ dependencies {
     implementation(libs.constraintlayout)
     implementation(libs.coil.core)
     implementation(libs.flexbox)
+    implementation("androidx.navigation:navigation-fragment-ktx:2.6.0")
+    implementation("androidx.navigation:navigation-ui-ktx:2.6.0")
     debugImplementation(libs.bundles.flipper)
     implementation(libs.kakao.login)
     implementation(libs.startup)
