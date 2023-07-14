@@ -1,22 +1,25 @@
 package com.teampophory.pophory.data.repository.photo
 
 import com.teampophory.pophory.common.image.ContentUriRequestBody
-import com.teampophory.pophory.common.okhttp.toPlainRequestBody
+import com.teampophory.pophory.config.di.qualifier.Unsecured
 import com.teampophory.pophory.data.model.photo.Studio
 import com.teampophory.pophory.data.network.model.album.PhotoListResponse
+import com.teampophory.pophory.data.network.model.photo.PhotoRequest
 import com.teampophory.pophory.data.network.service.PhotoService
-import okhttp3.RequestBody
+import com.teampophory.pophory.domain.model.PhotoInfoFromS3
+import com.teampophory.pophory.domain.repository.photo.PhotoRepository
 import retrofit2.HttpException
 import javax.inject.Inject
 
 class DefaultPhotoRepository @Inject constructor(
-    private val photoService: PhotoService
+    private val photoService: PhotoService,
+    @Unsecured private val photoServiceNonToken: PhotoService
 ) : PhotoRepository {
     override suspend fun getPhotos(id: Int): Result<PhotoListResponse> {
         return runCatching { photoService.getPhotos(id) }
     }
 
-    override suspend fun deletePhoto(photoId: Long): Result<Unit> {
+    override suspend fun deletePhoto(photoId: Int): Result<Unit> {
         return runCatching {
             val response = photoService.deletePhoto(photoId)
             if (response.isSuccessful) {
@@ -31,19 +34,19 @@ class DefaultPhotoRepository @Inject constructor(
         return runCatching { photoService.fetchStudios().toStudios() }
     }
 
-    override suspend fun addPhoto(
+    override suspend fun addPhotoToPophory(
         albumId: Int,
         takenAt: String,
         studioId: Long,
-        photo: ContentUriRequestBody
+        fileName: String
     ): Result<Unit> {
-        val file = photo.toFormData("photo")
-        val request = HashMap<String, RequestBody>().apply {
-            put("albumId", albumId.toString().toPlainRequestBody())
-            put("takenAt", takenAt.toPlainRequestBody())
-            put("studioId", studioId.toString().toPlainRequestBody())
-        }
-        val response = photoService.addPhoto(file, request)
+        val request = PhotoRequest(
+            albumId = albumId,
+            takenAt = takenAt,
+            studioId = studioId,
+            fileName = fileName
+        )
+        val response = photoService.addPhotoToPophory(request)
         return runCatching {
             if (response.isSuccessful) {
                 response.body()
@@ -51,5 +54,21 @@ class DefaultPhotoRepository @Inject constructor(
                 throw HttpException(response)
             }
         }
+    }
+
+    override suspend fun addPhotoToS3(url: String, photo: ContentUriRequestBody): Result<Unit> {
+        val file = photo.toFormData("photo")
+        val response = photoServiceNonToken.addPhotoToS3(url, file)
+        return runCatching {
+            if (response.isSuccessful) {
+                response.body()
+            } else {
+                throw HttpException(response)
+            }
+        }
+    }
+
+    override suspend fun getPhotoInfoFromS3(): Result<PhotoInfoFromS3> {
+        return runCatching { photoService.getPhotoInfoFromS3().toPhotoInfoFromS3() }
     }
 }

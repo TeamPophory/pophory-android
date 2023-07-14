@@ -6,7 +6,8 @@ import androidx.lifecycle.viewModelScope
 import com.teampophory.pophory.common.image.ContentUriRequestBody
 import com.teampophory.pophory.common.time.systemNow
 import com.teampophory.pophory.data.model.photo.Studio
-import com.teampophory.pophory.data.repository.photo.PhotoRepository
+import com.teampophory.pophory.domain.model.PhotoInfoFromS3
+import com.teampophory.pophory.domain.repository.photo.PhotoRepository
 import com.teampophory.pophory.feature.home.photo.model.StudioUiModel
 import com.teampophory.pophory.feature.home.photo.model.toUiModel
 import com.teampophory.pophory.feature.home.store.model.AlbumItem
@@ -85,21 +86,49 @@ class AddPhotoViewModel @Inject constructor(
 
     fun onSubmit() {
         viewModelScope.launch {
-            photoRepository.addPhoto(
-                albumId = savedStateHandle.get<AlbumItem>("albumItem")?.id ?: -1,
-                studioId = currentStudio.value.firstOrNull()?.id ?: -1L,
-                takenAt = SimpleDateFormat(
-                    "yyyy.MM.dd",
-                    Locale.getDefault()
-                ).format(Date(createdAt.value)),
-                photo = imageRequestBody
-                    ?: throw IllegalStateException("Pophory: ImageRequestBody is null")
-            ).onSuccess {
-                _event.emit(AddPhotoEvent.ADD_SUCCESS)
+            getPhotoInfoFromS3()
+        }
+    }
+
+    private fun getPhotoInfoFromS3() {
+        viewModelScope.launch {
+            photoRepository.getPhotoInfoFromS3().onSuccess { photoInfo ->
+                addPhotoToS3(photoInfo)
             }.onFailure {
                 Timber.e(it)
                 _event.emit(AddPhotoEvent.REQUEST_ERROR)
             }
+        }
+    }
+
+    private fun addPhotoToS3(photoInfo: PhotoInfoFromS3) {
+        viewModelScope.launch {
+            photoRepository.addPhotoToS3(
+                photoInfo.preSignedUrl,
+                imageRequestBody ?: throw IllegalStateException("Pophory: ImageRequestBody is null")
+            ).onSuccess {
+                Timber.d("Pophory: addPhotoToS3 success")
+                addPhotoToPophory(photoInfo.fileName)
+            }.onFailure {
+                _event.emit(AddPhotoEvent.REQUEST_ERROR)
+            }
+        }
+    }
+
+    private suspend fun addPhotoToPophory(fileName: String) {
+        photoRepository.addPhotoToPophory(
+            albumId = savedStateHandle.get<AlbumItem>("albumItem")?.id ?: -1,
+            studioId = currentStudio.value.firstOrNull()?.id ?: -1L,
+            takenAt = SimpleDateFormat(
+                "yyyy.MM.dd",
+                Locale.getDefault()
+            ).format(Date(createdAt.value)),
+            fileName = fileName
+        ).onSuccess {
+            _event.emit(AddPhotoEvent.ADD_SUCCESS)
+        }.onFailure {
+            Timber.e(it)
+            _event.emit(AddPhotoEvent.REQUEST_ERROR)
         }
     }
 }

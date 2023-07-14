@@ -1,9 +1,10 @@
 package com.teampophory.pophory.config.di
 
 import com.teampophory.pophory.config.di.qualifier.Secured
+import com.teampophory.pophory.config.di.qualifier.Unsecured
 import com.teampophory.pophory.data.network.service.PhotoService
 import com.teampophory.pophory.data.repository.photo.DefaultPhotoRepository
-import com.teampophory.pophory.data.repository.photo.PhotoRepository
+import com.teampophory.pophory.domain.repository.photo.PhotoRepository
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -19,6 +20,12 @@ object PhotoModule {
     @Provides
     @Singleton
     fun providePhotoNetworkService(@Secured retrofit: Retrofit): PhotoService = retrofit.create()
+
+
+    @Provides
+    @Singleton
+    @Unsecured
+    fun providePhotoNetworkServiceNonToken(@Unsecured retrofit: Retrofit): PhotoService = retrofit.create()
 
     @Module
     @InstallIn(SingletonComponent::class)
