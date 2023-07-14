@@ -50,7 +50,7 @@
         android:id="@+id/btn_start_social_login"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:scaleType="centerCrop"
+        android:scaleType="fitXY"
         android:src="@drawable/kakao_login_button"
         android:layout_marginHorizontal="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
