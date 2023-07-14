@@ -37,11 +37,11 @@ class SignUpActivity : AppCompatActivity() {
         //TODO 수정 필요
         binding.btnNext.isEnabled = true
 
-        val finalHost = NavHostFragment.create(R.navigation.nav_signup_graph)
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.nav_host_fragment, finalHost)
-            .setPrimaryNavigationFragment(finalHost) // this is the equivalent to app:defaultNavHost="true"
-            .commit()
+//        val finalHost = NavHostFragment.create(R.navigation.nav_signup_graph)
+//        supportFragmentManager.beginTransaction()
+//            .replace(R.id.nav_host_fragment, finalHost)
+//            .setPrimaryNavigationFragment(finalHost) // this is the equivalent to app:defaultNavHost="true"
+//            .commit()
 
         //다음 버튼
         setOnClickNextButton()
