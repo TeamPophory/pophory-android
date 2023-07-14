@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.text.buildSpannedString
 import androidx.core.text.color
@@ -32,16 +33,15 @@ import kotlinx.coroutines.flow.onEach
 @AndroidEntryPoint
 class StoreFragment : Fragment() {
     private val binding by viewBinding(FragmentStoreBinding::bind)
-    private val albumListAddPhotoLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-        if (result.resultCode == RESULT_OK) {
-            viewModel.getAlbums()
-        }
-    }
-
     private var storeAdapter: StoreAdapter? = null
-
     private val viewModel by viewModels<StoreViewModel>()
     private val homeViewModel by activityViewModels<HomeViewModel>()
+    private val albumListAddPhotoLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == RESULT_OK) {
+                viewModel.getAlbums()
+            }
+        }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -55,7 +55,7 @@ class StoreFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         initStoreObserver()
         initHomeObserver()
-        setSpannableString()
+        setSpannableWelcomeString()
     }
 
     private fun initStoreObserver() {
@@ -64,6 +64,7 @@ class StoreFragment : Fragment() {
                 is StoreState.Uninitialized -> {
                     viewModel.getAlbums()
                     setupViewPager()
+                    setOnClickListener()
                 }
 
                 is StoreState.Loading -> {
@@ -88,11 +89,20 @@ class StoreFragment : Fragment() {
         }
     }
 
-
     private fun initHomeObserver() {
         homeViewModel.albumCountUpdate.flowWithLifecycle(viewLifeCycle).onEach {
             viewModel.getAlbums()
         }.launchIn(viewLifeCycleScope)
+    }
+
+    private fun setOnClickListener() {
+        with(binding) {
+            ivStoreEdit.setOnClickListener {
+                //TODO intent to eidt
+            }
+            //seekBar 터치 비활성화
+            seekBarStore.setOnTouchListener { _, _ -> true }
+        }
     }
 
     private fun setupViewPager() {
@@ -107,8 +117,21 @@ class StoreFragment : Fragment() {
                 androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback() {
                 override fun onPageSelected(position: Int) {
                     homeViewModel.onUpdateAlbumPosition(position)
-                    val photoCount = storeAdapter?.currentList?.getOrNull(position)?.photoCount.toString()
-                    binding.tvStoreAlbumPhotoCount.text = stringOf(R.string.store_photo_count_format, photoCount)
+                    val photoCount =
+                        storeAdapter?.currentList?.getOrNull(position)?.photoCount.toString()
+                    val maxPhoto = 15
+
+                    //사진 갯수 텍스트 색상변경
+                    setSpannableCountString(photoCount)
+
+                    //seekBar 게이지 설정
+                    binding.seekBarStore.progress =
+                        ((photoCount.toDouble() / maxPhoto) * 100).toInt()
+
+                    //앨범을 가득 채웠을 때 thumb 변경
+                    if (photoCount.toInt() == maxPhoto) {
+                        binding.seekBarStore.thumb = context.getDrawable(R.drawable.ic_thumb_full)
+                    }
                 }
             })
         }
@@ -118,22 +141,56 @@ class StoreFragment : Fragment() {
         val position = homeViewModel.currentAlbumPosition.value
         val photoCount =
             homeViewModel.currentAlbums.value?.getOrNull(position)?.photoCount.toString()
-        binding.tvStoreAlbumPhotoCount.text = stringOf(R.string.store_photo_count_format, photoCount)
+        setSpannableString(
+            stringOf(R.string.store_photo_count_format, photoCount),
+            photoCount,
+            binding.tvStoreAlbumPhotoCount,
+            R.color.pophory_purple,
+            R.style.TextAppearance_Pophory_HeadLineMedium
+        )
     }
 
-    private fun setSpannableString() {
+    private fun setSpannableWelcomeString() {
         val fullText = getString(R.string.store_welcome)
-        val coloredText = "포포리 앨범" // 색상을 변경하려는 특정 단어
+        val coloredText = "포포리 앨범"
+        setSpannableString(
+            fullText,
+            coloredText,
+            binding.tvStoreWelcome,
+            R.color.pophory_purple,
+            R.style.TextAppearance_Pophory_HeadLineBold
+        )
+    }
+
+    private fun setSpannableCountString(photoCount: String) {
+        val fullText = stringOf(R.string.store_photo_count_format, photoCount)
+        val coloredText = photoCount
+        setSpannableString(
+            fullText,
+            coloredText,
+            binding.tvStoreAlbumPhotoCount,
+            R.color.pophory_purple,
+            R.style.TextAppearance_Pophory_HeadLineMedium
+        )
+    }
+
+    private fun setSpannableString(
+        fullText: String,
+        coloredText: String,
+        textView: TextView,
+        color: Int,
+        style: Int
+    ) {
         val splitText = fullText.split(coloredText)
 
         buildSpannedString {
-            color(colorOf(R.color.pophory_purple)) {
-                textAppearance(requireContext(), R.style.TextAppearance_Pophory_HeadLineBold) {
+            color(colorOf(color)) {
+                textAppearance(requireContext(), style) {
                     append(coloredText)
                 }
             }
             append(splitText.getOrNull(1).orEmpty())
-        }.let { binding.tvStoreWelcome.text = it }
+        }.let { textView.text = it }
     }
 
     companion object {
