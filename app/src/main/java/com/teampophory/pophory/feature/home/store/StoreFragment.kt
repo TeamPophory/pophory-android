@@ -174,15 +174,8 @@ class StoreFragment : Fragment() {
         )
     }
 
-    private fun setSpannableString(
-        fullText: String,
-        coloredText: String,
-        textView: TextView,
-        color: Int,
-        style: Int
-    ) {
+    private fun setSpannableString(fullText: String, coloredText: String, textView: TextView, color: Int, style: Int) {
         val splitText = fullText.split(coloredText)
-
         buildSpannedString {
             color(colorOf(color)) {
                 textAppearance(requireContext(), style) {
