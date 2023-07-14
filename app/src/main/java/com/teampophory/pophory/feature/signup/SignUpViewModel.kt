@@ -32,9 +32,6 @@ class SignUpViewModel @Inject constructor(
     private val _buttonState: MutableLiveData<Boolean> = MutableLiveData()
     val buttonState: LiveData<Boolean> = _buttonState
 
-    private val _edittextState: MutableLiveData<String> = MutableLiveData()
-    val edittextState: LiveData<String> = _edittextState
-
     private val _realName: MutableLiveData<String> = MutableLiveData()
     var realName: LiveData<String> = _realName
 
@@ -46,10 +43,6 @@ class SignUpViewModel @Inject constructor(
 
     fun setButtonState(state: Boolean) {
         _buttonState.value = state
-    }
-
-    fun setEdittextState(state: String) {
-        _edittextState.value = state
     }
 
     fun setRealName(realName: String) {
