@@ -1,12 +1,14 @@
 package com.teampophory.pophory.feature.home.photo
 
+import android.util.Size
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.teampophory.pophory.common.image.ContentUriRequestBody
 import com.teampophory.pophory.common.time.systemNow
 import com.teampophory.pophory.data.model.photo.Studio
-import com.teampophory.pophory.data.repository.photo.PhotoRepository
+import com.teampophory.pophory.domain.model.S3Image
+import com.teampophory.pophory.domain.repository.photo.PhotoRepository
 import com.teampophory.pophory.feature.home.photo.model.StudioUiModel
 import com.teampophory.pophory.feature.home.photo.model.toUiModel
 import com.teampophory.pophory.feature.home.store.model.AlbumItem
@@ -39,6 +41,8 @@ class AddPhotoViewModel @Inject constructor(
     private val savedStateHandle: SavedStateHandle
 ) : ViewModel() {
     private var imageRequestBody: ContentUriRequestBody? = null
+    private var currentImageSize: Size? = null
+    private var currentFileName :String? = null
     private val _createdAt = MutableStateFlow(Instant.systemNow().toEpochMilliseconds())
     val createdAt = _createdAt.asStateFlow()
     private val allStudio = MutableStateFlow<List<Studio>>(emptyList())
@@ -79,27 +83,56 @@ class AddPhotoViewModel @Inject constructor(
         _currentStudio.value = setOf(new)
     }
 
-    fun onUpdateImage(imageRequestBody: ContentUriRequestBody) {
+    fun onUpdateImage(imageRequestBody: ContentUriRequestBody, imageSize: Size) {
         this.imageRequestBody = imageRequestBody
+        currentImageSize = imageSize
     }
 
     fun onSubmit() {
         viewModelScope.launch {
-            photoRepository.addPhoto(
-                albumId = savedStateHandle.get<AlbumItem>("albumItem")?.id ?: -1,
-                studioId = currentStudio.value.firstOrNull()?.id ?: -1L,
-                takenAt = SimpleDateFormat(
-                    "yyyy.MM.dd",
-                    Locale.getDefault()
-                ).format(Date(createdAt.value)),
-                photo = imageRequestBody
-                    ?: throw IllegalStateException("Pophory: ImageRequestBody is null")
-            ).onSuccess {
-                _event.emit(AddPhotoEvent.ADD_SUCCESS)
+            getPhotoInfoFromS3()
+        }
+    }
+
+    private fun getPhotoInfoFromS3() {
+        viewModelScope.launch {
+            photoRepository.getPhotoInfoFromS3().onSuccess { photoInfo ->
+                postPhotoToS3(photoInfo)
+                addPhotoToPophory(currentFileName, currentImageSize)
             }.onFailure {
                 Timber.e(it)
                 _event.emit(AddPhotoEvent.REQUEST_ERROR)
             }
+        }
+    }
+
+    private suspend fun postPhotoToS3(photoInfo: S3Image) {
+        photoRepository.postPhotoToS3(
+            photoInfo.preSignedUrl,
+            imageRequestBody ?: throw IllegalStateException("Pophory: ImageRequestBody is $imageRequestBody")
+        ).onSuccess {
+            currentFileName = photoInfo.fileName
+        }.onFailure {
+            _event.emit(AddPhotoEvent.REQUEST_ERROR)
+        }
+    }
+
+    private suspend fun addPhotoToPophory(fileName: String?, imageSize: Size?) {
+        photoRepository.addPhotoToPophory(
+            albumId = savedStateHandle.get<AlbumItem>("albumItem")?.id ?: -1,
+            studioId = currentStudio.value.firstOrNull()?.id ?: -1L,
+            takenAt = SimpleDateFormat(
+                "yyyy.MM.dd",
+                Locale.getDefault()
+            ).format(Date(createdAt.value)),
+            fileName = fileName ?:"",
+            width = imageSize?.width ?: 0,
+            height = imageSize?.height ?: 0
+        ).onSuccess {
+            _event.emit(AddPhotoEvent.ADD_SUCCESS)
+        }.onFailure {
+            Timber.e(it)
+            _event.emit(AddPhotoEvent.REQUEST_ERROR)
         }
     }
 }
