@@ -1,7 +1,7 @@
 package com.teampophory.pophory.data.network.service
 
 import com.teampophory.pophory.data.network.model.album.PhotoListResponse
-import com.teampophory.pophory.data.network.model.photo.PhotoInfoFromS3Response
+import com.teampophory.pophory.data.network.model.photo.S3ImageResponse
 import com.teampophory.pophory.data.network.model.photo.PhotoRequest
 import com.teampophory.pophory.data.network.model.photo.StudioResponse
 import okhttp3.MultipartBody
@@ -53,5 +53,5 @@ interface PhotoService {
     ): Response<Unit>
 
     @GET("api/v2/s3/photo")
-    suspend fun getPhotoInfoFromS3(): PhotoInfoFromS3Response
+    suspend fun getPhotoInfoFromS3(): S3ImageResponse
 }

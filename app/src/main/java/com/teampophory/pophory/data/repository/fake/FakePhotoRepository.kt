@@ -3,7 +3,7 @@ package com.teampophory.pophory.data.repository.fake
 import com.teampophory.pophory.common.image.ContentUriRequestBody
 import com.teampophory.pophory.data.model.photo.Studio
 import com.teampophory.pophory.data.network.model.album.PhotoListResponse
-import com.teampophory.pophory.domain.model.PhotoInfoFromS3
+import com.teampophory.pophory.domain.model.S3Image
 import com.teampophory.pophory.domain.repository.photo.PhotoRepository
 import kotlinx.coroutines.delay
 
@@ -84,8 +84,8 @@ class FakePhotoRepository : PhotoRepository {
         return runCatching { }
     }
 
-    override suspend fun getPhotoInfoFromS3(): Result<PhotoInfoFromS3> {
-        return runCatching { PhotoInfoFromS3("fileName", fakeImageUrl) }
+    override suspend fun getPhotoInfoFromS3(): Result<S3Image> {
+        return runCatching { S3Image("fileName", fakeImageUrl) }
     }
 
     override suspend fun postPhotoToS3(url: String, photo: ContentUriRequestBody): Result<Unit> {

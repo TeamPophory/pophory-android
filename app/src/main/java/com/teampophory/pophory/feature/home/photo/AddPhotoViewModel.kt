@@ -7,7 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.teampophory.pophory.common.image.ContentUriRequestBody
 import com.teampophory.pophory.common.time.systemNow
 import com.teampophory.pophory.data.model.photo.Studio
-import com.teampophory.pophory.domain.model.PhotoInfoFromS3
+import com.teampophory.pophory.domain.model.S3Image
 import com.teampophory.pophory.domain.repository.photo.PhotoRepository
 import com.teampophory.pophory.feature.home.photo.model.StudioUiModel
 import com.teampophory.pophory.feature.home.photo.model.toUiModel
@@ -106,7 +106,7 @@ class AddPhotoViewModel @Inject constructor(
         }
     }
 
-    private suspend fun postPhotoToS3(photoInfo: PhotoInfoFromS3) {
+    private suspend fun postPhotoToS3(photoInfo: S3Image) {
         photoRepository.postPhotoToS3(
             photoInfo.preSignedUrl,
             imageRequestBody ?: throw IllegalStateException("Pophory: ImageRequestBody is $imageRequestBody")

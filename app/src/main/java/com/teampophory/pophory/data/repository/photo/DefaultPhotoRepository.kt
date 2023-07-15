@@ -7,7 +7,7 @@ import com.teampophory.pophory.data.model.photo.Studio
 import com.teampophory.pophory.data.network.model.album.PhotoListResponse
 import com.teampophory.pophory.data.network.model.photo.PhotoRequest
 import com.teampophory.pophory.data.network.service.PhotoService
-import com.teampophory.pophory.domain.model.PhotoInfoFromS3
+import com.teampophory.pophory.domain.model.S3Image
 import com.teampophory.pophory.domain.repository.photo.PhotoRepository
 import javax.inject.Inject
 
@@ -56,7 +56,7 @@ class DefaultPhotoRepository @Inject constructor(
         }
     }
 
-    override suspend fun getPhotoInfoFromS3(): Result<PhotoInfoFromS3> {
-        return runCatching { photoService.getPhotoInfoFromS3().toPhotoInfoFromS3() }
+    override suspend fun getPhotoInfoFromS3(): Result<S3Image> {
+        return runCatching { photoService.getPhotoInfoFromS3().toS3Image() }
     }
 }
