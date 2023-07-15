@@ -13,7 +13,6 @@
         android:background="?colorSurface"
         app:layout_constraintBottom_toTopOf="@id/div_mypage"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -61,23 +60,24 @@
         android:background="#EBE8FF"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/div_mypage"
-        tools:text="임시로 영역을 잠아두는 tv"/>
+        tools:text="임시로 영역을 잠아두는 tv" />
 
     <ImageView
         android:id="@+id/iv_mypage_profile_background"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="132dp"
         android:src="@drawable/ic_profile_background"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/div_mypage"
-        tools:text="일러스트가 들어갈 공간"/>
+        tools:text="일러스트가 들어갈 공간" />
 
     <ImageView
         android:id="@+id/iv_mypage_profile"
         android:layout_width="72dp"
-        android:layout_height="72dp"
+        android:layout_height="0dp"
         android:layout_marginTop="66dp"
         android:src="@drawable/ic_profile"
+        app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/iv_mypage_profile_background" />
@@ -114,8 +114,9 @@
         android:layout_marginHorizontal="20dp"
         android:layout_marginTop="20dp"
         android:background="@drawable/bg_round_16dp_gray20"
-        android:paddingHorizontal="20dp"
+        android:paddingStart="20dp"
         android:paddingTop="20dp"
+        android:paddingEnd="15dp"
         android:paddingBottom="18dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -134,8 +135,9 @@
 
         <ImageView
             android:id="@+id/iv_mypage_share_ic"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="24dp"
+            android:layout_height="0dp"
+            app:layout_constraintDimensionRatio="1:1"
             android:src="@drawable/ic_chevron_right"
             app:layout_constraintBottom_toBottomOf="@id/tv_mypage_share_title"
             app:layout_constraintStart_toEndOf="@id/tv_mypage_share_title"
@@ -155,10 +157,9 @@
 
         <ImageView
             android:id="@+id/iv_mypage_share_image"
-            android:layout_width="114dp"
-            android:layout_height="103dp"
-            android:layout_marginTop="14dp"
-            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="bottom"
             android:scaleType="fitXY"
             android:src="@drawable/ic_share"
             android:textAppearance="?textAppearancePopupText1"
@@ -194,8 +195,9 @@
 
         <ImageView
             android:id="@+id/iv_mypage_story_ic"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="24dp"
+            android:layout_height="0dp"
+            app:layout_constraintDimensionRatio="1:1"
             android:src="@drawable/ic_chevron_right"
             app:layout_constraintBottom_toBottomOf="@id/tv_mypage_story_title"
             app:layout_constraintStart_toEndOf="@id/tv_mypage_story_title"

@@ -75,7 +75,6 @@ class MyPageFragment : Fragment() {
 
     private fun setOnClickListener() {
         with(binding) {
-            //setting 이동
             ivToolbarSetting.setOnClickListener {
                 startActivity(Intent(requireContext(), SettingActivity::class.java))
             }
