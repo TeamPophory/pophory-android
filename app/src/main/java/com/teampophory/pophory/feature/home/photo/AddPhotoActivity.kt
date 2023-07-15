@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.widget.SeekBar
 import androidx.activity.viewModels
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
@@ -19,7 +18,6 @@ import com.teampophory.pophory.common.context.snackBar
 import com.teampophory.pophory.common.context.toast
 import com.teampophory.pophory.common.image.ContentUriRequestBody
 import com.teampophory.pophory.common.image.getImageSize
-import com.teampophory.pophory.common.image.toImageContent
 import com.teampophory.pophory.common.intent.parcelableExtra
 import com.teampophory.pophory.common.intent.stringExtra
 import com.teampophory.pophory.common.time.systemNow
@@ -51,7 +49,7 @@ class AddPhotoActivity : BindingActivity<ActivityAddPhotoBinding>(R.layout.activ
     }
 
     private fun loadImage() {
-        val realImageUri = Uri.parse(imageUri)?.toImageContent(this)
+        val realImageUri = Uri.parse(imageUri)
         val imageSize = realImageUri?.getImageSize(this)
         imageSize?.let {
             val imageRequestBody = ContentUriRequestBody(this, Uri.parse(imageUri))
