@@ -1,11 +1,12 @@
 package com.teampophory.pophory.feature.album.list.adapter
 
 import android.app.Activity
-import android.app.ActivityOptions
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.core.app.ActivityOptionsCompat
 import androidx.recyclerview.widget.ListAdapter
 import com.teampophory.pophory.common.view.ItemDiffCallback
 import com.teampophory.pophory.databinding.ItemHorizontalPhotoBinding
@@ -16,7 +17,9 @@ import com.teampophory.pophory.feature.album.model.OrientType
 import com.teampophory.pophory.feature.album.model.PhotoDetail
 import com.teampophory.pophory.feature.album.model.PhotoItem
 
-class AlbumListAdapter : ListAdapter<PhotoItem, AlbumViewHolder>(
+class AlbumListAdapter(
+    private val onItemClicked: (Intent, ActivityOptionsCompat) -> Unit
+) : ListAdapter<PhotoItem, AlbumViewHolder>(
     ItemDiffCallback<PhotoItem>(
         onItemsTheSame = { old, new -> old == new },
         onContentsTheSame = { old, new -> old == new }
@@ -80,9 +83,9 @@ class AlbumListAdapter : ListAdapter<PhotoItem, AlbumViewHolder>(
     ) {
         val activity = context as? Activity ?: return
         val transitionAnimation =
-            ActivityOptions.makeSceneTransitionAnimation(activity, imageView, "thumb").toBundle()
+            ActivityOptionsCompat.makeSceneTransitionAnimation(activity, imageView, "thumb")
         val intent = AlbumDetailActivity.newIntent(context, photoDetail)
-        context.startActivity(intent, transitionAnimation)
+        onItemClicked(intent, transitionAnimation)
     }
 
     enum class AlbumViewType {
