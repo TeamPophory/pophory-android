@@ -16,7 +16,9 @@ interface PhotoRepository {
         albumId: Int,
         takenAt: String,
         studioId: Long,
-        fileName: String
+        fileName: String,
+        width: Int,
+        height: Int
     ): Result<Unit>
 
     suspend fun getPhotoInfoFromS3(): Result<PhotoInfoFromS3>

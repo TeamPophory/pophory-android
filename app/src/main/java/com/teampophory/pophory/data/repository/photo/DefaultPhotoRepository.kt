@@ -38,13 +38,17 @@ class DefaultPhotoRepository @Inject constructor(
         albumId: Int,
         takenAt: String,
         studioId: Long,
-        fileName: String
+        fileName: String,
+        width: Int,
+        height: Int
     ): Result<Unit> {
         val request = PhotoRequest(
             albumId = albumId,
             takenAt = takenAt,
             studioId = studioId,
-            fileName = fileName
+            fileName = fileName,
+            width = width,
+            height = height
         )
         val response = photoService.addPhotoToPophory(request)
         return runCatching {

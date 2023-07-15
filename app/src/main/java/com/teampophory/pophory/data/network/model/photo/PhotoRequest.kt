@@ -7,5 +7,7 @@ data class PhotoRequest(
     val albumId: Int,
     val takenAt: String,
     val studioId: Long,
-    val fileName: String
+    val fileName: String,
+    val width: Int,
+    val height: Int
 )

@@ -53,7 +53,8 @@ class AddPhotoActivity : BindingActivity<ActivityAddPhotoBinding>(R.layout.activ
         val realImageUri = Uri.parse(imageUri)?.toImageContent(this)
         val imageSize = realImageUri?.getImageSize(this)
         imageSize?.let {
-            viewModel.onUpdateImage(ContentUriRequestBody(this, Uri.parse(imageUri)))
+            val imageRequestBody = ContentUriRequestBody(this, Uri.parse(imageUri))
+            viewModel.onUpdateImage(imageRequestBody, it)
             if (it.width >= it.height) {
                 binding.imgBackground.setImageResource(R.drawable.img_background_width)
                 binding.imgHorizontal.load(realImageUri) {
