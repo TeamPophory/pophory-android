@@ -12,14 +12,14 @@ import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.teampophory.pophory.R
-import com.teampophory.pophory.feature.album.albumsort.AlbumSortBottomSheet
-import com.teampophory.pophory.feature.album.albumsort.AlbumSortType
 import com.teampophory.pophory.common.activity.hideLoading
 import com.teampophory.pophory.common.activity.showLoading
 import com.teampophory.pophory.common.context.stringOf
 import com.teampophory.pophory.common.intent.parcelableExtra
 import com.teampophory.pophory.common.view.viewBinding
 import com.teampophory.pophory.databinding.ActivityAlbumListBinding
+import com.teampophory.pophory.feature.album.albumsort.AlbumSortBottomSheet
+import com.teampophory.pophory.feature.album.albumsort.AlbumSortType
 import com.teampophory.pophory.feature.album.list.adapter.AlbumListAdapter
 import com.teampophory.pophory.feature.home.photo.AddPhotoActivity
 import com.teampophory.pophory.feature.home.store.model.AlbumItem
@@ -31,25 +31,29 @@ import timber.log.Timber
 @AndroidEntryPoint
 class AlbumListActivity : AppCompatActivity() {
 
-    private val albumListAdapter = AlbumListAdapter()
+    private val albumListAdapter = AlbumListAdapter { intent, activityOptionsCompat ->
+        photoCountRefreshLauncher.launch(intent, activityOptionsCompat)
+    }
     private val viewModel by viewModels<AlbumListViewModel>()
     private val binding by viewBinding(ActivityAlbumListBinding::inflate)
     private val albumItem by parcelableExtra<AlbumItem>()
 
-    private val addAlbumActivityLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-        if (result.resultCode == RESULT_OK) {
-            setResult(RESULT_OK)
-            finish()
+    private val photoCountRefreshLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == RESULT_OK) {
+                setResult(RESULT_OK)
+                finish()
+            }
         }
-    }
 
-    private val imagePicker = registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
-        val currentAlbum = viewModel.albumItem.value
-        val intent = currentAlbum?.let { albumItem ->
-            AddPhotoActivity.getIntent(this, uri.toString(), albumItem)
+    private val imagePicker =
+        registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
+            val currentAlbum = viewModel.albumItem.value
+            val intent = currentAlbum?.let { albumItem ->
+                AddPhotoActivity.getIntent(this, uri.toString(), albumItem)
+            }
+            photoCountRefreshLauncher.launch(intent)
         }
-        addAlbumActivityLauncher.launch(intent)
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
