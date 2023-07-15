@@ -31,16 +31,15 @@ interface PhotoService {
         @PartMap request: HashMap<String, RequestBody>
     ): Response<Unit>
 
-    @POST("api/v2/photos")
+    @POST("api/v2/photo")
     suspend fun addPhotoToPophory(
         @Body request: PhotoRequest
     ): Response<Unit>
 
     @PUT
-    @Multipart
-    suspend fun addPhotoToS3(
+    suspend fun postPhotoToS3(
         @Url url: String,
-        @Part photo: MultipartBody.Part
+        @Body photo: RequestBody
     ): Response<Unit>
 
     @GET("api/v1/albums/{albumId}/photos")
@@ -50,7 +49,7 @@ interface PhotoService {
 
     @DELETE("api/v1/photo/{photoId}")
     suspend fun deletePhoto(
-        @Path("photoId") photoId: Int
+        @Path("photoId") photoId: Long
     ): Response<Unit>
 
     @GET("api/v2/s3/photo")

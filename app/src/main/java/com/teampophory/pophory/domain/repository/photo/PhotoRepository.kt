@@ -8,7 +8,7 @@ import com.teampophory.pophory.domain.model.PhotoInfoFromS3
 interface PhotoRepository {
     suspend fun getPhotos(id: Int): Result<PhotoListResponse>
 
-    suspend fun deletePhoto(photoId: Int): Result<Unit>
+    suspend fun deletePhoto(photoId: Long): Result<Unit>
 
     suspend fun getStudios(): Result<List<Studio>>
 
@@ -23,7 +23,7 @@ interface PhotoRepository {
 
     suspend fun getPhotoInfoFromS3(): Result<PhotoInfoFromS3>
 
-    suspend fun addPhotoToS3(
+    suspend fun postPhotoToS3(
         url: String,
         photo: ContentUriRequestBody
     ): Result<Unit>

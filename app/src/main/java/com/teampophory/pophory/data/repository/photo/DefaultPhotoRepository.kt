@@ -1,6 +1,7 @@
 package com.teampophory.pophory.data.repository.photo
 
 import com.teampophory.pophory.common.image.ContentUriRequestBody
+import com.teampophory.pophory.common.okhttp.getResponseBodyOrThrow
 import com.teampophory.pophory.config.di.qualifier.Unsecured
 import com.teampophory.pophory.data.model.photo.Studio
 import com.teampophory.pophory.data.network.model.album.PhotoListResponse
@@ -8,7 +9,6 @@ import com.teampophory.pophory.data.network.model.photo.PhotoRequest
 import com.teampophory.pophory.data.network.service.PhotoService
 import com.teampophory.pophory.domain.model.PhotoInfoFromS3
 import com.teampophory.pophory.domain.repository.photo.PhotoRepository
-import retrofit2.HttpException
 import javax.inject.Inject
 
 class DefaultPhotoRepository @Inject constructor(
@@ -19,14 +19,9 @@ class DefaultPhotoRepository @Inject constructor(
         return runCatching { photoService.getPhotos(id) }
     }
 
-    override suspend fun deletePhoto(photoId: Int): Result<Unit> {
+    override suspend fun deletePhoto(photoId: Long): Result<Unit> {
         return runCatching {
-            val response = photoService.deletePhoto(photoId)
-            if (response.isSuccessful) {
-                response.body()
-            } else {
-                throw HttpException(response)
-            }
+            photoService.deletePhoto(photoId).getResponseBodyOrThrow()
         }
     }
 
@@ -50,25 +45,14 @@ class DefaultPhotoRepository @Inject constructor(
             width = width,
             height = height
         )
-        val response = photoService.addPhotoToPophory(request)
         return runCatching {
-            if (response.isSuccessful) {
-                response.body()
-            } else {
-                throw HttpException(response)
-            }
+            photoService.addPhotoToPophory(request).getResponseBodyOrThrow()
         }
     }
 
-    override suspend fun addPhotoToS3(url: String, photo: ContentUriRequestBody): Result<Unit> {
-        val file = photo.toFormData("photo")
-        val response = photoServiceNonToken.addPhotoToS3(url, file)
+    override suspend fun postPhotoToS3(url: String, photo: ContentUriRequestBody): Result<Unit> {
         return runCatching {
-            if (response.isSuccessful) {
-                response.body()
-            } else {
-                throw HttpException(response)
-            }
+            photoServiceNonToken.postPhotoToS3(url, photo).getResponseBodyOrThrow()
         }
     }
 

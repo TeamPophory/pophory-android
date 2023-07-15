@@ -42,7 +42,7 @@ class AddPhotoViewModel @Inject constructor(
 ) : ViewModel() {
     private var imageRequestBody: ContentUriRequestBody? = null
     private var currentImageSize: Size? = null
-    private var currentFileName = MutableStateFlow("")
+    private var currentFileName :String? = null
     private val _createdAt = MutableStateFlow(Instant.systemNow().toEpochMilliseconds())
     val createdAt = _createdAt.asStateFlow()
     private val allStudio = MutableStateFlow<List<Studio>>(emptyList())
@@ -97,8 +97,8 @@ class AddPhotoViewModel @Inject constructor(
     private fun getPhotoInfoFromS3() {
         viewModelScope.launch {
             photoRepository.getPhotoInfoFromS3().onSuccess { photoInfo ->
-                addPhotoToS3(photoInfo)
-                addPhotoToPophory(currentFileName.value, currentImageSize)
+                postPhotoToS3(photoInfo)
+                addPhotoToPophory(currentFileName, currentImageSize)
             }.onFailure {
                 Timber.e(it)
                 _event.emit(AddPhotoEvent.REQUEST_ERROR)
@@ -106,18 +106,18 @@ class AddPhotoViewModel @Inject constructor(
         }
     }
 
-    private suspend fun addPhotoToS3(photoInfo: PhotoInfoFromS3) {
-        photoRepository.addPhotoToS3(
+    private suspend fun postPhotoToS3(photoInfo: PhotoInfoFromS3) {
+        photoRepository.postPhotoToS3(
             photoInfo.preSignedUrl,
-            imageRequestBody ?: throw IllegalStateException("Pophory: ImageRequestBody is null")
+            imageRequestBody ?: throw IllegalStateException("Pophory: ImageRequestBody is $imageRequestBody")
         ).onSuccess {
-            currentFileName.emit(photoInfo.fileName)
+            currentFileName = photoInfo.fileName
         }.onFailure {
             _event.emit(AddPhotoEvent.REQUEST_ERROR)
         }
     }
 
-    private suspend fun addPhotoToPophory(fileName: String, imageSize: Size?) {
+    private suspend fun addPhotoToPophory(fileName: String?, imageSize: Size?) {
         photoRepository.addPhotoToPophory(
             albumId = savedStateHandle.get<AlbumItem>("albumItem")?.id ?: -1,
             studioId = currentStudio.value.firstOrNull()?.id ?: -1L,
@@ -125,7 +125,7 @@ class AddPhotoViewModel @Inject constructor(
                 "yyyy.MM.dd",
                 Locale.getDefault()
             ).format(Date(createdAt.value)),
-            fileName = fileName,
+            fileName = fileName ?:"",
             width = imageSize?.width ?: 0,
             height = imageSize?.height ?: 0
         ).onSuccess {

@@ -29,7 +29,7 @@ class AlbumDetailViewModel @Inject constructor(
     }
 
     fun deleteAlbum() {
-        val albumId = photoDetail.value?.id ?: 0
+        val albumId = photoDetail.value?.id?.toLong() ?: 0
         viewModelScope.launch {
             photoRepository.deletePhoto(albumId).onSuccess {
                 _albumDetailState.value = AlbumDetailState.SuccessDeleteAlbum
