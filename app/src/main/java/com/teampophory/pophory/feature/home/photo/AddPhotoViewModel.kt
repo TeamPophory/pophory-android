@@ -4,7 +4,6 @@ import android.util.Size
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.teampophory.pophory.common.image.ContentUriRequestBody
 import com.teampophory.pophory.common.time.systemNow
 import com.teampophory.pophory.data.model.photo.Studio
 import com.teampophory.pophory.domain.model.S3Image
@@ -22,6 +21,7 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import kotlinx.datetime.Instant
+import okhttp3.RequestBody
 import timber.log.Timber
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -40,7 +40,7 @@ class AddPhotoViewModel @Inject constructor(
     private val photoRepository: PhotoRepository,
     private val savedStateHandle: SavedStateHandle
 ) : ViewModel() {
-    private var imageRequestBody: ContentUriRequestBody? = null
+    private var imageRequestBody: RequestBody? = null
     private var currentImageSize: Size? = null
     private var currentFileName :String? = null
     private val _createdAt = MutableStateFlow(Instant.systemNow().toEpochMilliseconds())
@@ -83,7 +83,7 @@ class AddPhotoViewModel @Inject constructor(
         _currentStudio.value = setOf(new)
     }
 
-    fun onUpdateImage(imageRequestBody: ContentUriRequestBody, imageSize: Size) {
+    fun onUpdateImage(imageRequestBody: RequestBody, imageSize: Size) {
         this.imageRequestBody = imageRequestBody
         currentImageSize = imageSize
     }

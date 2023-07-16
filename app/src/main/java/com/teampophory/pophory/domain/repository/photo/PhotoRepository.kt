@@ -1,9 +1,9 @@
 package com.teampophory.pophory.domain.repository.photo
 
-import com.teampophory.pophory.common.image.ContentUriRequestBody
 import com.teampophory.pophory.data.model.photo.Studio
 import com.teampophory.pophory.data.network.model.album.PhotoListResponse
 import com.teampophory.pophory.domain.model.S3Image
+import okhttp3.RequestBody
 
 interface PhotoRepository {
     suspend fun getPhotos(id: Int): Result<PhotoListResponse>
@@ -25,6 +25,6 @@ interface PhotoRepository {
 
     suspend fun postPhotoToS3(
         url: String,
-        photo: ContentUriRequestBody
+        photo: RequestBody
     ): Result<Unit>
 }
