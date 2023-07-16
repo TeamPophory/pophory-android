@@ -153,7 +153,7 @@ class StoreFragment : Fragment() {
 
     private fun setSpannableWelcomeString() {
         val fullText = getString(R.string.store_welcome)
-        val coloredText = "포포리 앨범"
+        val coloredText = POPHORY_STORE_TEXT
         setSpannableString(
             fullText,
             coloredText,
@@ -195,6 +195,7 @@ class StoreFragment : Fragment() {
     }
 
     companion object {
+        const val POPHORY_STORE_TEXT = "포포리 앨범"
         fun newInstance() = StoreFragment()
     }
 }
