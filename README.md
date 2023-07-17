@@ -1,7 +1,7 @@
+# Pophory <img src="https://github.com/TeamPophory/pophory-server/assets/65678579/e7fcdd42-556e-4291-9032-070f5093ca42" align=left width=100>
+짱 쉽게 공유하고 짱 쉽게 보관하는 모바일 네컷앨범 서비스, 포포리
+
 <div align="center">
-  <h1>Pophory</h1> 
-  
-  **짱 쉽게 공유하고 짱 쉽게 보관하는 We are 포포리**
   
   <p align="center">
     <img src="https://img.shields.io/badge/Kotlin-1.8.22-7F52FF?style=for-the-badge&logo=Kotlin&logoColor=white"/>
@@ -11,6 +11,9 @@
   </p>
   <br />
 </div>
+
+<br>
+<img src="https://github.com/TeamPophory/pophory-server/assets/65678579/c2223c52-3eff-428c-9e2f-c8c4d33bc043">
 
 <h2>Tech Stack</h2>
 
