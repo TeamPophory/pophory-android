@@ -2,7 +2,6 @@ package com.teampophory.pophory.feature.home.photo
 
 import android.content.Context
 import android.content.Intent
-import android.graphics.ImageDecoder
 import android.net.Uri
 import android.os.Bundle
 import androidx.activity.viewModels
@@ -17,8 +16,7 @@ import com.teampophory.pophory.common.activity.BindingActivity
 import com.teampophory.pophory.common.context.colorOf
 import com.teampophory.pophory.common.context.snackBar
 import com.teampophory.pophory.common.context.toast
-import com.teampophory.pophory.common.image.BitmapRequestBody
-import com.teampophory.pophory.common.image.getAllocatedByte
+import com.teampophory.pophory.common.image.ContentUriRequestBody
 import com.teampophory.pophory.common.image.getImageSize
 import com.teampophory.pophory.common.intent.parcelableExtra
 import com.teampophory.pophory.common.intent.stringExtra
@@ -54,17 +52,7 @@ class AddPhotoActivity : BindingActivity<ActivityAddPhotoBinding>(R.layout.activ
         val realImageUri = Uri.parse(imageUri)
         val imageSize = realImageUri?.getImageSize(this)
         imageSize?.let {
-            val imageBytes = realImageUri.getAllocatedByte(this)
-            val imageMB = imageBytes / (1024 * 1024.0)
-            val imageSource = ImageDecoder.createSource(contentResolver, realImageUri)
-            val bitmap = ImageDecoder.decodeBitmap(imageSource)
-            val imageRequestBody = if (imageMB >= 3) {
-                // Get compress rate of image from uri, compress rate is current 3MB / image byte
-                val compressRate = ((3 / imageMB) * 100).toInt()
-                BitmapRequestBody(bitmap, imageBytes, compressRate)
-            } else {
-                BitmapRequestBody(bitmap, imageBytes)
-            }
+            val imageRequestBody = ContentUriRequestBody(this, realImageUri)
             viewModel.onUpdateImage(imageRequestBody, it)
             if (it.width >= it.height) {
                 binding.imgBackground.setImageResource(R.drawable.img_background_width)
@@ -171,7 +159,5 @@ class AddPhotoActivity : BindingActivity<ActivityAddPhotoBinding>(R.layout.activ
                 putExtra("imageUri", imageUri)
                 putExtra("albumItem", albumItem)
             }
-
-        private const val BYTE_UNIT = 4L
     }
 }

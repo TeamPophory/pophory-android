@@ -1,6 +1,8 @@
 package com.teampophory.pophory.common.image
 
 import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.net.Uri
 import android.provider.MediaStore
 import okhttp3.MediaType
@@ -8,7 +10,7 @@ import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import okio.BufferedSink
-import okio.source
+import java.io.ByteArrayOutputStream
 
 class ContentUriRequestBody(
     context: Context,
@@ -18,6 +20,7 @@ class ContentUriRequestBody(
 
     private var fileName = ""
     private var size = -1L
+    private lateinit var compressedImage: ByteArray
 
     init {
         if (uri != null) {
@@ -35,6 +38,27 @@ class ContentUriRequestBody(
                         cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DISPLAY_NAME))
                 }
             }
+
+            // Compress bitmap
+            val originalBitmap = BitmapFactory.decodeStream(contentResolver.openInputStream(uri))
+            val outputStream = ByteArrayOutputStream()
+            val imageSizeMb = size / (1024f * 1024f)
+            if (imageSizeMb >= 3) {
+                val compressRate = ((3 / imageSizeMb) * 100).toInt()
+                originalBitmap.compress(
+                    Bitmap.CompressFormat.JPEG,
+                    compressRate,
+                    outputStream
+                )
+            } else {
+                originalBitmap.compress(
+                    Bitmap.CompressFormat.JPEG,
+                    100,
+                    outputStream
+                )
+            }
+            compressedImage = outputStream.toByteArray()
+            size = compressedImage.size.toLong()
         }
     }
 
@@ -46,11 +70,7 @@ class ContentUriRequestBody(
         uri?.let { contentResolver.getType(it)?.toMediaTypeOrNull() }
 
     override fun writeTo(sink: BufferedSink) {
-        uri?.let {
-            contentResolver.openInputStream(it)?.source()?.use { source ->
-                sink.writeAll(source)
-            }
-        }
+        sink.write(compressedImage)
     }
 
     fun toFormData(name: String) = MultipartBody.Part.createFormData(name, getFileName(), this)
