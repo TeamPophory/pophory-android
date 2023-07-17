@@ -1,11 +1,9 @@
 package com.teampophory.pophory.config.di
 
 import com.teampophory.pophory.config.di.qualifier.Secured
+import com.teampophory.pophory.data.network.service.StoreSerivce
 import com.teampophory.pophory.data.repository.store.DefaultStoreRepository
 import com.teampophory.pophory.data.repository.store.StoreRepository
-import com.teampophory.pophory.network.StoreNetworkDataSource
-import com.teampophory.pophory.network.retrofit.store.RetrofitStoreNetwork
-import com.teampophory.pophory.network.retrofit.store.RetrofitStoreNetworkApi
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -20,7 +18,7 @@ import javax.inject.Singleton
 object StoreModule {
     @Provides
     @Singleton
-    fun provideStoreNetworkService(@Secured retrofit: Retrofit): RetrofitStoreNetworkApi = retrofit.create()
+    fun provideStoreNetworkService(@Secured retrofit: Retrofit): StoreSerivce = retrofit.create()
 
     @Module
     @InstallIn(SingletonComponent::class)
@@ -28,9 +26,5 @@ object StoreModule {
         @Binds
         @Singleton
         fun bindStoreRepository(defaultStoreRepository: DefaultStoreRepository): StoreRepository
-
-        @Binds
-        @Singleton
-        fun bindStoreNetworkDataSource(retrofitStoreNetwork: RetrofitStoreNetwork): StoreNetworkDataSource
     }
 }
