@@ -20,7 +20,7 @@ class ContentUriRequestBody(
 
     private var fileName = ""
     private var size = -1L
-    private lateinit var compressedImage: ByteArray
+    private var compressedImage: ByteArray? = null
 
     init {
         if (uri != null) {
@@ -40,25 +40,24 @@ class ContentUriRequestBody(
             }
 
             // Compress bitmap
+            compressBitmap()
+        }
+    }
+
+    private fun compressBitmap() {
+        if (uri != null) {
             val originalBitmap = BitmapFactory.decodeStream(contentResolver.openInputStream(uri))
             val outputStream = ByteArrayOutputStream()
             val imageSizeMb = size / (1024f * 1024f)
-            if (imageSizeMb >= 3) {
+            outputStream.use {
                 val compressRate = ((3 / imageSizeMb) * 100).toInt()
                 originalBitmap.compress(
                     Bitmap.CompressFormat.JPEG,
-                    compressRate,
-                    outputStream
-                )
-            } else {
-                originalBitmap.compress(
-                    Bitmap.CompressFormat.JPEG,
-                    100,
-                    outputStream
+                    if (imageSizeMb >= 3) compressRate else 100,
+                    it
                 )
             }
             compressedImage = outputStream.toByteArray()
-            size = compressedImage.size.toLong()
         }
     }
 
@@ -70,7 +69,7 @@ class ContentUriRequestBody(
         uri?.let { contentResolver.getType(it)?.toMediaTypeOrNull() }
 
     override fun writeTo(sink: BufferedSink) {
-        sink.write(compressedImage)
+        compressedImage?.let(sink::write)
     }
 
     fun toFormData(name: String) = MultipartBody.Part.createFormData(name, getFileName(), this)
