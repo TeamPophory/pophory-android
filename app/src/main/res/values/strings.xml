@@ -43,6 +43,9 @@
     <string name="sort_oldest">과거에 찍은 순</string>
     <string name="select_sort">정렬 선택하기</string>
 
+    <!-- share -->
+    <string name="share_title">네컷사진 공유하기</string>
+
     <!-- story -->
     <string name="story_title">포릿 이야기</string>
 </resources>
