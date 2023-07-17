@@ -1,9 +1,8 @@
 package com.teampophory.pophory.feature.share.adapter
 
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat.startActivity
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
@@ -12,7 +11,8 @@ import com.teampophory.pophory.databinding.ItemSharePhotoBinding
 import com.teampophory.pophory.feature.share.model.PhotoItem
 
 class ShareAdapter(
-    private val onItemClicked: (PhotoItem) -> Unit,
+    private val onItemClicked: (PhotoItem, Int) -> Unit,
+    private val onShareSheetDismissed: () -> Unit
 ) : ListAdapter<PhotoItem, ShareAdapter.ShareViewHolder>(
     ItemDiffCallback<PhotoItem>(
         onItemsTheSame = { old, new -> old.hashCode() == new.hashCode() },
@@ -26,18 +26,25 @@ class ShareAdapter(
     }
 
     class ShareViewHolder(
-        private val binding: ItemSharePhotoBinding,
-        private val onItemClicked: (PhotoItem) -> Unit,
+        val binding: ItemSharePhotoBinding,
+        private val onItemClicked: (PhotoItem, Int) -> Unit,
     ) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(photoItem: PhotoItem) {
+        fun bind(photoItem: PhotoItem,position: Int) {
             binding.ivSharePhoto.load(photoItem.imageUrl)
             itemView.setOnClickListener {
-                onItemClicked(photoItem)
+                onItemClicked(photoItem,position)
+                binding.ivSharePhotoSelected.isVisible = true
             }
         }
     }
 
     override fun onBindViewHolder(holder: ShareViewHolder, position: Int) {
-        holder.bind(getItem(position))
+        holder.bind(getItem(position),position)
+    }
+
+    override fun onViewRecycled(holder: ShareViewHolder) {
+        super.onViewRecycled(holder)
+        holder.binding.ivSharePhotoSelected.isVisible = false
+        onShareSheetDismissed()
     }
 }

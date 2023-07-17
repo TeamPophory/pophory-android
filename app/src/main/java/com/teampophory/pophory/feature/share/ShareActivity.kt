@@ -1,9 +1,12 @@
 package com.teampophory.pophory.feature.share
 
+import android.content.Intent
 import android.os.Bundle
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
+import com.teampophory.pophory.R
 import com.teampophory.pophory.common.activity.hideLoading
 import com.teampophory.pophory.common.activity.showLoading
 import com.teampophory.pophory.common.view.GridSpacingItemDecoration
@@ -21,6 +24,13 @@ class ShareActivity : AppCompatActivity() {
     private var shareAdapter: ShareAdapter? = null
 
     private val viewModel by viewModels<ShareViewModel>()
+
+    private var selectedPosition: Int? = null
+
+    private val startForResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        selectedPosition?.let { shareAdapter?.notifyItemChanged(it) }
+        selectedPosition = null
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,9 +68,21 @@ class ShareActivity : AppCompatActivity() {
         val gridLayoutManager =
             GridLayoutManager(this, 3, GridLayoutManager.VERTICAL, false)
 
-        shareAdapter = ShareAdapter { photos ->
-            //TODO new intent for 의진
-        }
+        shareAdapter = ShareAdapter(
+            onItemClicked = { photoItem, position ->
+                selectedPosition = position
+                val shareIntent = Intent().apply {
+                    action = Intent.ACTION_SEND
+                    putExtra(Intent.EXTRA_STREAM, photoItem.imageUrl)
+                    putExtra(Intent.EXTRA_TEXT, "URL 룰루랄라") // Assuming 'id' is the property of PhotoItem for the id
+                    type = "text/plain"
+                }
+                startForResult.launch(Intent.createChooser(shareIntent, "외부 공유하기"))
+            },
+            onShareSheetDismissed = {
+                selectedPosition = null
+            }
+        )
 
         binding.rvShare.apply {
             layoutManager = gridLayoutManager
