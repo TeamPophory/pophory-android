@@ -59,7 +59,6 @@ class MyPageFragment : Fragment() {
                     hideLoading()
                     with(binding) {
                         val profile = myPageInfoState.data
-                        toast(myPageInfoState.data.toString())
                         tvMypageToolbarNickname.text = profile.nickname
                         tvMypageName.text = profile.realName
                         tvMypagePictureCount.text = setSpannableString(profile.photoCount)
