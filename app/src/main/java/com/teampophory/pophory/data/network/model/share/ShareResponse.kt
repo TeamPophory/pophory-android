@@ -12,7 +12,7 @@ data class ShareResponse(
     @Serializable
     data class Photo(
         @SerialName("id")
-        val id: Int,
+        val id: Long,
         @SerialName("studio")
         val studio: String,
         @SerialName("takenAt")
