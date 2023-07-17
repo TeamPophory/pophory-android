@@ -8,7 +8,6 @@ plugins {
     alias(libs.plugins.google.services)
     alias(libs.plugins.app.distribution)
     alias(libs.plugins.crashlytics)
-    alias(libs.plugins.kotlin.android)
 }
 
 val properties = Properties().apply {
@@ -69,8 +68,6 @@ dependencies {
     implementation(libs.constraintlayout)
     implementation(libs.coil.core)
     implementation(libs.flexbox)
-    implementation(libs.appcompat)
-    implementation(libs.material)
     debugImplementation(libs.bundles.flipper)
     implementation(libs.kakao.login)
     implementation(libs.startup)
