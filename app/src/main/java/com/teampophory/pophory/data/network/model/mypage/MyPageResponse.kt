@@ -1,4 +1,4 @@
-package com.teampophory.pophory.network.model
+package com.teampophory.pophory.data.network.model.mypage
 
 import com.teampophory.pophory.feature.home.mypage.model.Profile
 import kotlinx.serialization.SerialName
