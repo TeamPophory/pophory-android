@@ -5,7 +5,7 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class AlbumItem(
-    val id: Int,
+    val id: Long,
     val title: String,
     val albumCover: Int,
     val photoCount: Int

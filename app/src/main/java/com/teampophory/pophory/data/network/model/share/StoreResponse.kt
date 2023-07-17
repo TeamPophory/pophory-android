@@ -12,7 +12,7 @@ data class StoreResponse(
     @Serializable
     data class Album(
             @SerialName("id")
-            val id: Int,
+            val id: Long,
             @SerialName("title")
             val title: String,
             @SerialName("albumCover")
