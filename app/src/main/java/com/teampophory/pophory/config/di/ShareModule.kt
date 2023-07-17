@@ -3,9 +3,8 @@ package com.teampophory.pophory.config.di
 import com.teampophory.pophory.config.di.qualifier.Secured
 import com.teampophory.pophory.data.repository.share.DefaultShareRepository
 import com.teampophory.pophory.data.repository.share.ShareRepository
-import com.teampophory.pophory.network.ShareNetworkDataSource
-import com.teampophory.pophory.network.retrofit.share.RetrofitShareNetwork
-import com.teampophory.pophory.network.retrofit.share.RetrofitShareNetworkApi
+import com.teampophory.pophory.data.network.service.RetrofitShareNetwork
+import com.teampophory.pophory.data.network.service.RetrofitShareNetworkApi
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -29,10 +28,6 @@ object ShareModule {
         @Binds
         @Singleton
         fun bindShareRepository(defaultShareRepository: DefaultShareRepository): ShareRepository
-
-        @Binds
-        @Singleton
-        fun bindShareNetworkDataSource(retrofitShareNetwork: RetrofitShareNetwork): ShareNetworkDataSource
 
     }
 }

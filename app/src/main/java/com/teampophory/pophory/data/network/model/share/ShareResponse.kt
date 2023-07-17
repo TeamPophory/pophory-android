@@ -1,4 +1,4 @@
-package com.teampophory.pophory.network.model
+package com.teampophory.pophory.data.network.model.share
 
 import com.teampophory.pophory.feature.share.model.PhotoItem
 import kotlinx.serialization.SerialName

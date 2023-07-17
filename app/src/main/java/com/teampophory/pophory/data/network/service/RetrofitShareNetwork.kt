@@ -1,7 +1,6 @@
-package com.teampophory.pophory.network.retrofit.share
+package com.teampophory.pophory.data.network.service
 
-import com.teampophory.pophory.network.ShareNetworkDataSource
-import com.teampophory.pophory.network.model.ShareResponse
+import com.teampophory.pophory.data.network.model.share.ShareResponse
 import retrofit2.http.GET
 import retrofit2.http.Path
 import javax.inject.Inject
@@ -15,8 +14,8 @@ interface RetrofitShareNetworkApi {
 
 class RetrofitShareNetwork @Inject constructor(
     private val networkApi: RetrofitShareNetworkApi
-) : ShareNetworkDataSource {
-    override suspend fun getPhotos(): ShareResponse {
+) {
+    suspend fun getPhotos(): ShareResponse {
         return networkApi.getPhoto()
     }
 }
