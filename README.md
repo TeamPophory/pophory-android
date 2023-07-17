@@ -1,8 +1,8 @@
 # Pophory <img src="https://github.com/TeamPophory/pophory-server/assets/65678579/e7fcdd42-556e-4291-9032-070f5093ca42" align=left width=100>
-짱 쉽게 공유하고 짱 쉽게 보관하는 모바일 네컷앨범 서비스, 포포리
 
+짱 쉽게 공유하고 짱 쉽게 보관하는 모바일 네컷앨범 서비스, 포포리
+<br/>
 <div align="center">
-  
   <p align="center">
     <img src="https://img.shields.io/badge/Kotlin-1.8.22-7F52FF?style=for-the-badge&logo=Kotlin&logoColor=white"/>
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
@@ -12,7 +12,6 @@
   <br />
 </div>
 
-<br>
 <img src="https://github.com/TeamPophory/pophory-server/assets/65678579/c2223c52-3eff-428c-9e2f-c8c4d33bc043">
 
 <h2>Tech Stack</h2>
@@ -22,7 +21,8 @@
 - [Kotlin Coroutines](https://kotlinlang.org/docs/coroutines-overview.html), [Flow](https://kotlinlang.org/docs/flow.html)
 - [Jetpack Compose](https://developer.android.com/jetpack/compose)
 - [Material 3](https://m3.material.io/)
-- [Gradle Version Catalog](https://docs.gradle.org/current/userguide/platforms.html) and [Custom Convention Plugins](https://docs.gradle.org/current/samples/sample_convention_plugins.html)
+- [Gradle Version Catalog](https://docs.gradle.org/current/userguide/platforms.html)
+  and [Custom Convention Plugins](https://docs.gradle.org/current/samples/sample_convention_plugins.html)
 
 <h2>Activity Graph</h2>
 
