@@ -1,6 +1,5 @@
 package com.teampophory.pophory.data.repository.photo
 
-import com.teampophory.pophory.common.image.ContentUriRequestBody
 import com.teampophory.pophory.common.okhttp.getResponseBodyOrThrow
 import com.teampophory.pophory.config.di.qualifier.Unsecured
 import com.teampophory.pophory.data.model.photo.Studio
@@ -9,6 +8,7 @@ import com.teampophory.pophory.data.network.model.photo.PhotoRequest
 import com.teampophory.pophory.data.network.service.PhotoService
 import com.teampophory.pophory.domain.model.S3Image
 import com.teampophory.pophory.domain.repository.photo.PhotoRepository
+import okhttp3.RequestBody
 import javax.inject.Inject
 
 class DefaultPhotoRepository @Inject constructor(
@@ -50,10 +50,8 @@ class DefaultPhotoRepository @Inject constructor(
         }
     }
 
-    override suspend fun postPhotoToS3(url: String, photo: ContentUriRequestBody): Result<Unit> {
-        return runCatching {
-            photoServiceNonToken.postPhotoToS3(url, photo).getResponseBodyOrThrow()
-        }
+    override suspend fun postPhotoToS3(url: String, photo: RequestBody) {
+        photoServiceNonToken.postPhotoToS3(url, photo).getResponseBodyOrThrow()
     }
 
     override suspend fun getPhotoInfoFromS3(): Result<S3Image> {
