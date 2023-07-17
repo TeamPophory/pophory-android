@@ -48,7 +48,7 @@ class ContentUriRequestBody(
         if (uri != null) {
             val originalBitmap = BitmapFactory.decodeStream(contentResolver.openInputStream(uri))
             val outputStream = ByteArrayOutputStream()
-            val imageSizeMb = size / (1024f * 1024f)
+            val imageSizeMb = size / (1024 * 1024.toDouble())
             outputStream.use {
                 val compressRate = ((3 / imageSizeMb) * 100).toInt()
                 originalBitmap.compress(
@@ -58,6 +58,7 @@ class ContentUriRequestBody(
                 )
             }
             compressedImage = outputStream.toByteArray()
+            size = compressedImage?.size?.toLong() ?: -1L
         }
     }
 
