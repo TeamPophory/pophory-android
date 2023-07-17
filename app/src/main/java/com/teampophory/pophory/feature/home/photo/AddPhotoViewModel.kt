@@ -13,6 +13,7 @@ import com.teampophory.pophory.feature.home.photo.model.StudioUiModel
 import com.teampophory.pophory.feature.home.photo.model.toUiModel
 import com.teampophory.pophory.feature.home.store.model.AlbumItem
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -27,6 +28,7 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 import javax.inject.Inject
+import kotlin.coroutines.coroutineContext
 
 enum class AddPhotoEvent {
     DATE,
@@ -42,7 +44,7 @@ class AddPhotoViewModel @Inject constructor(
 ) : ViewModel() {
     private var imageRequestBody: ContentUriRequestBody? = null
     private var currentImageSize: Size? = null
-    private var currentFileName :String? = null
+    private var currentFileName: String? = null
     private val _createdAt = MutableStateFlow(Instant.systemNow().toEpochMilliseconds())
     val createdAt = _createdAt.asStateFlow()
     private val allStudio = MutableStateFlow<List<Studio>>(emptyList())
@@ -109,10 +111,12 @@ class AddPhotoViewModel @Inject constructor(
     private suspend fun postPhotoToS3(photoInfo: S3Image) {
         photoRepository.postPhotoToS3(
             photoInfo.preSignedUrl,
-            imageRequestBody ?: throw IllegalStateException("Pophory: ImageRequestBody is $imageRequestBody")
+            imageRequestBody
+                ?: throw IllegalStateException("Pophory: ImageRequestBody is $imageRequestBody")
         ).onSuccess {
             currentFileName = photoInfo.fileName
         }.onFailure {
+            coroutineContext.cancel()
             _event.emit(AddPhotoEvent.REQUEST_ERROR)
         }
     }
@@ -125,7 +129,7 @@ class AddPhotoViewModel @Inject constructor(
                 "yyyy.MM.dd",
                 Locale.getDefault()
             ).format(Date(createdAt.value)),
-            fileName = fileName ?:"",
+            fileName = fileName ?: "",
             width = imageSize?.width ?: 0,
             height = imageSize?.height ?: 0
         ).onSuccess {
