@@ -11,7 +11,7 @@ class FakePhotoRepository : PhotoRepository {
     private val fakeImageUrl =
         "https://images.unsplash.com/photo-1687023956422-117d5c47029d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=3432&q=80"
 
-    override suspend fun getPhotos(id: Int): Result<PhotoListResponse> {
+    override suspend fun getPhotos(id: Long): Result<PhotoListResponse> {
         delay(300)
         return runCatching {
             PhotoListResponse(
@@ -74,7 +74,7 @@ class FakePhotoRepository : PhotoRepository {
     }
 
     override suspend fun addPhotoToPophory(
-        albumId: Int,
+        albumId: Long,
         takenAt: String,
         studioId: Long,
         fileName: String,
