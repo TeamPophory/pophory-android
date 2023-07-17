@@ -6,7 +6,7 @@ import retrofit2.http.GET
 import javax.inject.Inject
 
 interface RetrofitStoreNetworkApi {
-    @GET("api/v1/albums")
+    @GET("api/v2/albums")
     suspend fun getAlbum(): StoreResponse
 }
 
