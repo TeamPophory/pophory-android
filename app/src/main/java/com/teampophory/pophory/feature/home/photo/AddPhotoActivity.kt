@@ -18,6 +18,7 @@ import com.teampophory.pophory.common.context.colorOf
 import com.teampophory.pophory.common.context.snackBar
 import com.teampophory.pophory.common.context.toast
 import com.teampophory.pophory.common.image.BitmapRequestBody
+import com.teampophory.pophory.common.image.getAllocatedByte
 import com.teampophory.pophory.common.image.getImageSize
 import com.teampophory.pophory.common.intent.parcelableExtra
 import com.teampophory.pophory.common.intent.stringExtra
@@ -53,12 +54,12 @@ class AddPhotoActivity : BindingActivity<ActivityAddPhotoBinding>(R.layout.activ
         val realImageUri = Uri.parse(imageUri)
         val imageSize = realImageUri?.getImageSize(this)
         imageSize?.let {
+            val imageMB = realImageUri.getAllocatedByte(this) / (1024 * 1024.0)
             val imageSource = ImageDecoder.createSource(contentResolver, realImageUri)
             val bitmap = ImageDecoder.decodeBitmap(imageSource)
-            val sizeInMB = it.width * it.height * BYTE_UNIT / (1024 * 1024.0)
-            val imageRequestBody = if (sizeInMB >= 3) {
-                // Get compress rate of image from uri, compress rate is current image byte / 3MB
-                val compressRate = ((3 / sizeInMB) * 100).toInt()
+            val imageRequestBody = if (imageMB >= 3) {
+                // Get compress rate of image from uri, compress rate is current 3MB / image byte
+                val compressRate = ((3 / imageMB) * 100).toInt()
                 BitmapRequestBody(bitmap, compressRate)
             } else {
                 BitmapRequestBody(bitmap)
