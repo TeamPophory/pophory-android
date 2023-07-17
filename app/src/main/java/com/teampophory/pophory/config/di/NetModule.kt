@@ -20,6 +20,7 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Converter
 import retrofit2.Retrofit
+import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
 @Module
@@ -68,6 +69,9 @@ object NetModule {
         .addInterceptor(logInterceptor)
         .addInterceptor(authInterceptor)
         .authenticator(authenticator)
+        .connectTimeout(60, TimeUnit.SECONDS)
+        .readTimeout(30, TimeUnit.SECONDS)
+        .writeTimeout(15, TimeUnit.SECONDS)
         .apply { FlipperInitializer.initOkHttpClient(this) }
         .build()
 
@@ -78,6 +82,9 @@ object NetModule {
         @Log logInterceptor: Interceptor
     ): OkHttpClient = OkHttpClient.Builder()
         .addInterceptor(logInterceptor)
+        .connectTimeout(60, TimeUnit.SECONDS)
+        .readTimeout(30, TimeUnit.SECONDS)
+        .writeTimeout(15, TimeUnit.SECONDS)
         .apply { FlipperInitializer.initOkHttpClient(this) }
         .build()
 
