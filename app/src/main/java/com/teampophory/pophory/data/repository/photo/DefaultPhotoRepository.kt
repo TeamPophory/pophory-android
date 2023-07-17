@@ -50,10 +50,8 @@ class DefaultPhotoRepository @Inject constructor(
         }
     }
 
-    override suspend fun postPhotoToS3(url: String, photo: RequestBody): Result<Unit> {
-        return runCatching {
-            photoServiceNonToken.postPhotoToS3(url, photo).getResponseBodyOrThrow()
-        }
+    override suspend fun postPhotoToS3(url: String, photo: RequestBody) {
+        photoServiceNonToken.postPhotoToS3(url, photo).getResponseBodyOrThrow()
     }
 
     override suspend fun getPhotoInfoFromS3(): Result<S3Image> {

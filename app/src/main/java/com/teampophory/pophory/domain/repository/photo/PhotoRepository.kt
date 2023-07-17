@@ -23,8 +23,5 @@ interface PhotoRepository {
 
     suspend fun getPhotoInfoFromS3(): Result<S3Image>
 
-    suspend fun postPhotoToS3(
-        url: String,
-        photo: RequestBody
-    ): Result<Unit>
+    suspend fun postPhotoToS3(url: String, photo: RequestBody)
 }

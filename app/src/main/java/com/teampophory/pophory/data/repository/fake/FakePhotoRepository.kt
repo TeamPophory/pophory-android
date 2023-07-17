@@ -88,9 +88,7 @@ class FakePhotoRepository : PhotoRepository {
         return runCatching { S3Image("fileName", fakeImageUrl) }
     }
 
-    override suspend fun postPhotoToS3(url: String, photo: RequestBody): Result<Unit> {
-        return runCatching { delay(300) }
-    }
+    override suspend fun postPhotoToS3(url: String, photo: RequestBody) = Unit
 
     override suspend fun deletePhoto(photoId: Long): Result<Unit> {
         delay(300)
