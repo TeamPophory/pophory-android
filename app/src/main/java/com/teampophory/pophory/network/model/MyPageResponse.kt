@@ -6,34 +6,18 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class MyPageResponse(
+    @SerialName("id")
+    val id: Long,
     @SerialName("realName")
     val realName: String,
     @SerialName("nickname")
     val nickname: String,
-    @SerialName("profileImage")
-    val profileImage: String?,
+    @SerialName("profileImageUrl")
+    val profileImageUrl: String?,
     @SerialName("photoCount")
-    val photoCount: Int,
-    @SerialName("photos")
-    val photos: List<Photo>?
+    val photoCount: Int
 ) {
-    @Serializable
-    data class Photo(
-        @SerialName("id")
-        val id: Int,
-        @SerialName("imageUrl")
-        val imageUrl: String,
-        @SerialName("studio")
-        val studio: String,
-        @SerialName("takenAt")
-        val takenAt: String,
-        @SerialName("width")
-        val width: Int,
-        @SerialName("height")
-        val height: Int
-    )
-
     fun toProfile(): Profile {
-        return Profile(realName, nickname, photoCount)
+        return Profile(id,realName, nickname, profileImageUrl,photoCount)
     }
 }

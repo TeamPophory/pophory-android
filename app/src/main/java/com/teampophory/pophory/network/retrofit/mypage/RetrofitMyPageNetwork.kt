@@ -6,7 +6,7 @@ import retrofit2.http.GET
 import javax.inject.Inject
 
 interface RetrofitMyPageNetworkApi {
-    @GET("api/v1/member")
+    @GET("api/v2/member")
     suspend fun getMyPageInfo(): MyPageResponse
 }
 

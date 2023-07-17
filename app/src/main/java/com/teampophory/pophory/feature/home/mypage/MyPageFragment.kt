@@ -14,6 +14,7 @@ import androidx.fragment.app.viewModels
 import com.teampophory.pophory.R
 import com.teampophory.pophory.common.fragment.hideLoading
 import com.teampophory.pophory.common.fragment.showLoading
+import com.teampophory.pophory.common.fragment.toast
 import com.teampophory.pophory.common.view.viewBinding
 import com.teampophory.pophory.databinding.FragmentMypageBinding
 import com.teampophory.pophory.feature.setting.SettingActivity
@@ -58,7 +59,8 @@ class MyPageFragment : Fragment() {
                     hideLoading()
                     with(binding) {
                         val profile = myPageInfoState.data
-                        tvMypageToolbarNickname.text = "@${profile.nickname}"
+                        toast(myPageInfoState.data.toString())
+                        tvMypageToolbarNickname.text = profile.nickname
                         tvMypageName.text = profile.realName
                         tvMypagePictureCount.text = setSpannableString(profile.photoCount)
                     }
@@ -79,11 +81,11 @@ class MyPageFragment : Fragment() {
                 startActivity(Intent(requireContext(), SettingActivity::class.java))
             }
             //share 이동
-            layoutMypageShare.setOnClickListener{
+            layoutMypageShare.setOnClickListener {
                 //TODO Intent to Share
             }
             //stroy 이동
-            layoutMypageStory.setOnClickListener{
+            layoutMypageStory.setOnClickListener {
                 //TODO Intent to Story
             }
         }
