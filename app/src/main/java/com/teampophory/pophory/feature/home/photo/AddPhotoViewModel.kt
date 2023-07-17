@@ -109,11 +109,8 @@ class AddPhotoViewModel @Inject constructor(
             photoInfo.preSignedUrl,
             imageRequestBody
                 ?: throw IllegalStateException("Pophory: ImageRequestBody is $imageRequestBody")
-        ).onSuccess {
-            currentFileName = photoInfo.fileName
-        }.onFailure {
-            _event.emit(AddPhotoEvent.REQUEST_ERROR)
-        }
+        )
+        currentFileName = photoInfo.fileName
     }
 
     private suspend fun addPhotoToPophory(fileName: String?, imageSize: Size?) {
