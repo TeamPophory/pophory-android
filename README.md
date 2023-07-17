@@ -11,7 +11,6 @@
   </p>
   <br />
 </div>
-
 <img src="https://github.com/TeamPophory/pophory-server/assets/65678579/c2223c52-3eff-428c-9e2f-c8c4d33bc043">
 
 <h2>Tech Stack</h2>
