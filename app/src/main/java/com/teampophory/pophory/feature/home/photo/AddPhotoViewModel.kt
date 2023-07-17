@@ -42,7 +42,7 @@ class AddPhotoViewModel @Inject constructor(
 ) : ViewModel() {
     private var imageRequestBody: RequestBody? = null
     private var currentImageSize: Size? = null
-    private var currentFileName :String? = null
+    private var currentFileName: String? = null
     private val _createdAt = MutableStateFlow(Instant.systemNow().toEpochMilliseconds())
     val createdAt = _createdAt.asStateFlow()
     private val allStudio = MutableStateFlow<List<Studio>>(emptyList())
@@ -94,22 +94,21 @@ class AddPhotoViewModel @Inject constructor(
         }
     }
 
-    private fun getPhotoInfoFromS3() {
-        viewModelScope.launch {
-            photoRepository.getPhotoInfoFromS3().onSuccess { photoInfo ->
-                postPhotoToS3(photoInfo)
-                addPhotoToPophory(currentFileName, currentImageSize)
-            }.onFailure {
-                Timber.e(it)
-                _event.emit(AddPhotoEvent.REQUEST_ERROR)
-            }
+    private suspend fun getPhotoInfoFromS3() {
+        photoRepository.getPhotoInfoFromS3().onSuccess { photoInfo ->
+            postPhotoToS3(photoInfo)
+            addPhotoToPophory(currentFileName, currentImageSize)
+        }.onFailure {
+            Timber.e(it)
+            _event.emit(AddPhotoEvent.REQUEST_ERROR)
         }
     }
 
     private suspend fun postPhotoToS3(photoInfo: S3Image) {
         photoRepository.postPhotoToS3(
             photoInfo.preSignedUrl,
-            imageRequestBody ?: throw IllegalStateException("Pophory: ImageRequestBody is $imageRequestBody")
+            imageRequestBody
+                ?: throw IllegalStateException("Pophory: ImageRequestBody is $imageRequestBody")
         ).onSuccess {
             currentFileName = photoInfo.fileName
         }.onFailure {
@@ -125,7 +124,7 @@ class AddPhotoViewModel @Inject constructor(
                 "yyyy.MM.dd",
                 Locale.getDefault()
             ).format(Date(createdAt.value)),
-            fileName = fileName ?:"",
+            fileName = fileName ?: "",
             width = imageSize?.width ?: 0,
             height = imageSize?.height ?: 0
         ).onSuccess {

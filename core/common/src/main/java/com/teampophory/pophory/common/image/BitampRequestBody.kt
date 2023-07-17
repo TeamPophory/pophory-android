@@ -8,8 +8,10 @@ import okio.BufferedSink
 
 class BitmapRequestBody(
     private val bitmap: Bitmap,
+    private val bytes: Long,
     private val compressRate: Int = 100
 ) : RequestBody() {
+    override fun contentLength() = bytes
     override fun contentType(): MediaType = "image/jpeg".toMediaType()
 
     override fun writeTo(sink: BufferedSink) {

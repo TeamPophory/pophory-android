@@ -54,15 +54,16 @@ class AddPhotoActivity : BindingActivity<ActivityAddPhotoBinding>(R.layout.activ
         val realImageUri = Uri.parse(imageUri)
         val imageSize = realImageUri?.getImageSize(this)
         imageSize?.let {
-            val imageMB = realImageUri.getAllocatedByte(this) / (1024 * 1024.0)
+            val imageBytes = realImageUri.getAllocatedByte(this)
+            val imageMB = imageBytes / (1024 * 1024.0)
             val imageSource = ImageDecoder.createSource(contentResolver, realImageUri)
             val bitmap = ImageDecoder.decodeBitmap(imageSource)
             val imageRequestBody = if (imageMB >= 3) {
                 // Get compress rate of image from uri, compress rate is current 3MB / image byte
                 val compressRate = ((3 / imageMB) * 100).toInt()
-                BitmapRequestBody(bitmap, compressRate)
+                BitmapRequestBody(bitmap, imageBytes, compressRate)
             } else {
-                BitmapRequestBody(bitmap)
+                BitmapRequestBody(bitmap, imageBytes)
             }
             viewModel.onUpdateImage(imageRequestBody, it)
             if (it.width >= it.height) {
