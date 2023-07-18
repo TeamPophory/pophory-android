@@ -79,7 +79,8 @@ class AlbumDetailActivity : AppCompatActivity() {
             tvAlbumTakenAt.text = photoDetailInfo?.takenAt.orEmpty()
             tvStudio.text = photoDetailInfo?.studio.orEmpty()
 
-            if (photoDetailInfo?.studio.orEmpty() == "noStudio") {
+            // 사진관이 없을 경우
+            if (photoDetailInfo?.studio.orEmpty() == "NONE") {
                 tvStudio.isVisible = false
             }
         }
