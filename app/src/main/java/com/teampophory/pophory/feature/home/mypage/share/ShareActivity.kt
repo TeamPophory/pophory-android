@@ -1,4 +1,4 @@
-package com.teampophory.pophory.feature.share
+package com.teampophory.pophory.feature.home.mypage.share
 
 import android.content.Intent
 import android.os.Bundle
@@ -13,7 +13,7 @@ import com.teampophory.pophory.common.view.GridSpacingItemDecoration
 import com.teampophory.pophory.common.view.dp
 import com.teampophory.pophory.common.view.viewBinding
 import com.teampophory.pophory.databinding.ActivityShareBinding
-import com.teampophory.pophory.feature.share.adapter.ShareAdapter
+import com.teampophory.pophory.feature.home.mypage.share.adapter.ShareAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
