@@ -1,4 +1,4 @@
-package com.teampophory.pophory.feature.home.mypage.story
+package com.teampophory.pophory.feature.story
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
