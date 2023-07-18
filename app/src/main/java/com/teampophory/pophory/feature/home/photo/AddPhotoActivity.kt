@@ -2,8 +2,10 @@ package com.teampophory.pophory.feature.home.photo
 
 import android.content.Context
 import android.content.Intent
+import android.media.ExifInterface
 import android.net.Uri
 import android.os.Bundle
+import android.util.Size
 import androidx.activity.viewModels
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
@@ -50,23 +52,55 @@ class AddPhotoActivity : BindingActivity<ActivityAddPhotoBinding>(R.layout.activ
 
     private fun loadImage() {
         val realImageUri = Uri.parse(imageUri)
-        val imageSize = realImageUri?.getImageSize(this)
-        imageSize?.let {
-            val imageRequestBody = ContentUriRequestBody(this, realImageUri)
-            viewModel.onUpdateImage(imageRequestBody, it)
-            if (it.width >= it.height) {
-                binding.imgBackground.setImageResource(R.drawable.img_background_width)
-                binding.imgHorizontal.load(realImageUri) {
-                    crossfade(true)
-                }
-                return
+
+        // ExifInterface 생성
+        val exifInterface = realImageUri?.let { uri ->
+            contentResolver.openInputStream(uri)?.use { inputStream ->
+                ExifInterface(inputStream)
             }
-            binding.imgBackground.setImageResource(R.drawable.img_background_height)
-            binding.imgVertical.load(realImageUri) {
-                crossfade(true)
+        }
+
+        // 회전 정보
+        val rotation = exifInterface?.getAttributeInt(
+            ExifInterface.TAG_ORIENTATION,
+            ExifInterface.ORIENTATION_NORMAL
+        ) ?: ExifInterface.ORIENTATION_NORMAL
+
+        val imageSize = realImageUri?.getImageSize(this)
+        imageSize?.let { size ->
+            val adjustedSize = adjustSizeWithRotation(size, rotation)
+
+            val imageRequestBody = ContentUriRequestBody(this, realImageUri)
+            viewModel.onUpdateImage(imageRequestBody, Size(adjustedSize.width, adjustedSize.height))
+
+            loadImageWithAdjustedSize(realImageUri, adjustedSize)
+        }
+    }
+
+    private fun adjustSizeWithRotation(size: Size, rotation: Int): Size {
+        return when (rotation) {
+            ExifInterface.ORIENTATION_ROTATE_90, ExifInterface.ORIENTATION_ROTATE_270 -> {
+                // 사진이 회전시 사진 가로,세로 사이즈 변경
+                Size(size.height, size.width)
+            }
+            else -> {
+                Size(size.width, size.height)
             }
         }
     }
+
+    private fun loadImageWithAdjustedSize(realImageUri: Uri, adjustedSize: Size) {
+        val (backgroundResource, imageView) = if (adjustedSize.width >= adjustedSize.height) {
+            Pair(R.drawable.img_background_width, binding.imgHorizontal)
+        } else {
+            Pair(R.drawable.img_background_height, binding.imgVertical)
+        }
+        binding.imgBackground.setImageResource(backgroundResource)
+        imageView.load(realImageUri) {
+            crossfade(true)
+        }
+    }
+
 
     private fun initView() {
         binding.toolbarAddPhoto.btnBack.setOnClickListener {

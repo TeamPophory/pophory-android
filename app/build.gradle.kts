@@ -74,6 +74,7 @@ dependencies {
     implementation(libs.fragment.ktx)
     implementation(libs.security)
     implementation(libs.splash.screen)
+    implementation(libs.exifInterface)
 
     // Google
     implementation(libs.google.android.gms)

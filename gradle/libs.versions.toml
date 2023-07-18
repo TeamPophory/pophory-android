@@ -28,6 +28,7 @@ dagger-hilt-navigation-compose = "1.0.0"
 flexbox = "3.0.0"
 fragment-ktx = "1.6.0"
 activity-compose = "1.7.2"
+exifInterface = "1.3.6"
 
 # material + google
 material = "1.9.0"
@@ -95,6 +96,7 @@ desugarLibs = { module = "com.android.tools:desugar_jdk_libs", version.ref = "de
 constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
 flexbox = { group = "com.google.android.flexbox", name = "flexbox", version.ref = "flexbox" }
 fragment-ktx = { module = "androidx.fragment:fragment-ktx", version.ref = "fragment-ktx" }
+exifInterface = { module = "androidx.exifinterface:exifinterface", version.ref = "exifInterface" }
 
 # compose
 compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "compose-bom" }
@@ -124,6 +126,7 @@ firebase = { module = "com.google.firebase:firebase-bom", version.ref = "firebas
 firebase-analytics = { module = "com.google.firebase:firebase-analytics-ktx" }
 firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics-ktx" }
 firebase-messaging = { module = "com.google.firebase:firebase-messaging-ktx" }
+firebase-dynamiclink = { module = "com.google.firebase:firebase-dynamic-links-ktx" }
 accompanist-systemuicontroller = { module = "com.google.accompanist:accompanist-systemuicontroller", version.ref = "accompanist" }
 accompanist-webview = { module = "com.google.accompanist:accompanist-webview", version.ref = "accompanist" }
 google-android-gms = { group = "com.google.android.gms", name = "play-services-ads", version.ref = "admob" }
