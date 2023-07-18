@@ -2,7 +2,6 @@ package com.teampophory.pophory.data.network.model.album
 
 import com.teampophory.pophory.feature.album.model.OrientType
 import com.teampophory.pophory.feature.album.model.PhotoDetail
-import com.teampophory.pophory.feature.album.model.PhotoItem
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -23,7 +22,9 @@ data class PhotoListResponse(
         @SerialName("width")
         val width: Int? = null,
         @SerialName("height")
-        val height: Int? = null
+        val height: Int? = null,
+        @SerialName("shareId")
+        val shareId: String? = null
     )
 
     fun mapPhotosToPhotoItems(): List<PhotoDetail> {

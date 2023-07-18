@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import coil.load
 import com.teampophory.pophory.common.context.toast
 import com.teampophory.pophory.common.view.showAllowingStateLoss
@@ -77,6 +78,10 @@ class AlbumDetailActivity : AppCompatActivity() {
             ivMainDetailAlbum.load(photoDetailInfo?.imageUrl)
             tvAlbumTakenAt.text = photoDetailInfo?.takenAt.orEmpty()
             tvStudio.text = photoDetailInfo?.studio.orEmpty()
+
+            if (photoDetailInfo?.studio.orEmpty() == "noStudio") {
+                tvStudio.isVisible = false
+            }
         }
     }
 
