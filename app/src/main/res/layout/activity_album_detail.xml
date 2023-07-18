@@ -39,9 +39,10 @@
 
         <ImageView
             android:id="@+id/ivAlbumDelete"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_marginEnd="14dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginEnd="2dp"
+            android:padding="12dp"
             android:src="@drawable/ic_bin_empty"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/ivAlbumShare"
@@ -49,9 +50,10 @@
 
         <ImageView
             android:id="@+id/ivAlbumShare"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_marginEnd="20dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginEnd="8dp"
+            android:padding="12dp"
             android:src="@drawable/ic_share"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -83,8 +85,8 @@
     <View
         android:id="@+id/vBottomLine"
         android:layout_width="0dp"
-        android:layout_marginHorizontal="20dp"
         android:layout_height="1dp"
+        android:layout_marginHorizontal="20dp"
         android:layout_marginTop="20dp"
         android:background="#E0E1E5"
         app:layout_constraintEnd_toEndOf="parent"
@@ -107,8 +109,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="20dp"
-        android:fontFamily="?textAppearanceText1"
         android:background="@drawable/shape_rect_radius_20_white"
+        android:fontFamily="?textAppearanceText1"
         android:paddingHorizontal="24dp"
         android:paddingVertical="10dp"
         android:textColor="@color/black"
