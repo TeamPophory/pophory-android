@@ -2,32 +2,27 @@ package com.teampophory.pophory.feature.home.mypage
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.Spannable
+import android.text.SpannableStringBuilder
+import android.text.style.ForegroundColorSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.recyclerview.widget.GridLayoutManager
 import com.teampophory.pophory.R
 import com.teampophory.pophory.common.fragment.hideLoading
 import com.teampophory.pophory.common.fragment.showLoading
-import com.teampophory.pophory.common.view.dp
+import com.teampophory.pophory.common.fragment.toast
 import com.teampophory.pophory.common.view.viewBinding
 import com.teampophory.pophory.databinding.FragmentMypageBinding
-import com.teampophory.pophory.feature.album.detail.AlbumDetailActivity
-import com.teampophory.pophory.feature.home.mypage.adapter.MyPageAdapter
-import com.teampophory.pophory.feature.home.mypage.adapter.MyPageAdapter.Companion.VIEW_TYPE_EMPTY
-import com.teampophory.pophory.feature.home.mypage.adapter.MyPageAdapter.Companion.VIEW_TYPE_PHOTO
-import com.teampophory.pophory.feature.home.mypage.adapter.MyPageAdapter.Companion.VIEW_TYPE_PROFILE
-import com.teampophory.pophory.feature.home.mypage.util.GridSpacingCustomDecoration
 import com.teampophory.pophory.feature.setting.SettingActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MyPageFragment : Fragment() {
     private val binding by viewBinding(FragmentMypageBinding::bind)
-
-    private var myPageAdapter: MyPageAdapter? = null
 
     private val viewModel by viewModels<MyPageViewModel>()
 
@@ -47,7 +42,6 @@ class MyPageFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        myPageAdapter = null
     }
 
     private fun initObserver() {
@@ -55,7 +49,6 @@ class MyPageFragment : Fragment() {
             when (myPageInfoState) {
                 is MyPageInfoState.Uninitialized -> {
                     viewModel.getMyPageInfo()
-                    initRecyclerView()
                 }
 
                 is MyPageInfoState.Loading -> {
@@ -64,22 +57,11 @@ class MyPageFragment : Fragment() {
 
                 is MyPageInfoState.SuccessMyPageInfo -> {
                     hideLoading()
-                    val photoItems =
-                        myPageInfoState.data.filterIsInstance<MyPageDisplayItem.Photo>()
-                    val isEmpty = photoItems.isEmpty()
-
-                    val myPageInfoData = if (isEmpty) {
-                        myPageInfoState.data.toMutableList()
-                            .also { it.add(MyPageDisplayItem.Empty) }
-                    } else {
-                        myPageInfoState.data
-                    }
-
                     with(binding) {
-                        val profileItem =
-                            myPageInfoState.data.firstOrNull { it is MyPageDisplayItem.Profile } as? MyPageDisplayItem.Profile
-                        tvMypageToolbarNickname.text = "@${profileItem?.nickname}"
-                        myPageAdapter?.submitList(myPageInfoData)
+                        val profile = myPageInfoState.data
+                        tvMypageToolbarNickname.text = profile.nickname
+                        tvMypageName.text = profile.realName
+                        tvMypagePictureCount.text = setSpannableString(profile.photoCount)
                     }
                 }
 
@@ -92,39 +74,45 @@ class MyPageFragment : Fragment() {
         }
     }
 
-    private fun initRecyclerView() {
-        val gridLayoutManager =
-            GridLayoutManager(requireContext(), 3, GridLayoutManager.VERTICAL, false)
-
-        myPageAdapter = MyPageAdapter { photos ->
-            val photoList = viewModel.myPageInfo.value
-            if (photoList is MyPageInfoState.SuccessMyPageInfo) {
-                AlbumDetailActivity.newIntent(requireContext(), photos.photo).let(::startActivity)
+    private fun setOnClickListener() {
+        with(binding) {
+            ivToolbarSetting.setOnClickListener {
+                startActivity(Intent(requireContext(), SettingActivity::class.java))
+            }
+            //share 이동
+            layoutMypageShare.setOnClickListener {
+                //TODO Intent to Share
+            }
+            //stroy 이동
+            layoutMypageStory.setOnClickListener {
+                //TODO Intent to Story
             }
         }
-
-        gridLayoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
-            override fun getSpanSize(position: Int): Int {
-                return when (myPageAdapter?.getItemViewType(position)) {
-                    VIEW_TYPE_PROFILE -> 3
-                    VIEW_TYPE_PHOTO -> 1
-                    VIEW_TYPE_EMPTY -> 3
-                    else -> 1
-                }
-            }
-        }
-
-        binding.rvMypage.apply {
-            layoutManager = gridLayoutManager
-            adapter = myPageAdapter
-            isNestedScrollingEnabled = false
-        }.addItemDecoration(GridSpacingCustomDecoration(3, 2.dp, false))
     }
 
-    private fun setOnClickListener() {
-        binding.ivToolbarSetting.setOnClickListener {
-            startActivity(Intent(requireContext(), SettingActivity::class.java))
+    private fun setSpannableString(myPageInfoDataPhotoCount: Int): SpannableStringBuilder {
+        val fullText =
+            requireContext().getString(R.string.mypage_picture_count, myPageInfoDataPhotoCount)
+        val coloredText = myPageInfoDataPhotoCount.toString()
+
+        val spannableStringBuilder = SpannableStringBuilder(fullText)
+        val start = fullText.indexOf(coloredText)
+        val end = start + coloredText.length
+
+        if (start != -1) {
+            spannableStringBuilder.setSpan(
+                ForegroundColorSpan(
+                    ContextCompat.getColor(
+                        requireContext(),
+                        R.color.pophory_purple
+                    )
+                ),
+                start,
+                end,
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+            )
         }
+        return spannableStringBuilder
     }
 
     companion object {

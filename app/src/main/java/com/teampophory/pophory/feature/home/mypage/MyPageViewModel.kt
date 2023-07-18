@@ -24,7 +24,7 @@ class MyPageViewModel @Inject constructor(
             myPageRepository.getMyPageInfo()
                 .onSuccess {
                     _myPageUserInfo.value =
-                        MyPageInfoState.SuccessMyPageInfo(it.toItems())
+                        MyPageInfoState.SuccessMyPageInfo(it.toProfile())
                 }.onFailure {
                     _myPageUserInfo.value = MyPageInfoState.Error(it)
                 }
