@@ -161,7 +161,7 @@
             android:layout_height="wrap_content"
             android:gravity="bottom"
             android:scaleType="fitXY"
-            android:src="@drawable/ic_share"
+            android:src="@drawable/ic_share_photo"
             android:textAppearance="?textAppearancePopupText1"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
