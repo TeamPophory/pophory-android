@@ -30,7 +30,7 @@ class ShareAdapter(
         private val onItemClicked: (PhotoItem, Int) -> Unit,
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(photoItem: PhotoItem, position: Int) {
-            binding.ivSharePhoto.load(photoItem.imageUrl)
+            binding.ivSharePhoto.load(photoItem.photoUrl)
             itemView.setOnClickListener {
                 onItemClicked(photoItem,position)
                 binding.ivSharePhotoSelected.isVisible = true

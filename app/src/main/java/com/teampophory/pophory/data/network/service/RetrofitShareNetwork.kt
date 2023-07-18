@@ -7,10 +7,8 @@ import retrofit2.http.Path
 import javax.inject.Inject
 
 interface RetrofitShareNetworkApi {
-    @GET("api/v2/albums/{albumId}/photo")
-    suspend fun getPhoto(
-        @Path(value = "albumId") albumId: Int = 1
-    ): ShareResponse
+    @GET("api/v2/photo")
+    suspend fun getPhoto(): ShareResponse
 }
 
 class RetrofitShareNetwork @Inject constructor(

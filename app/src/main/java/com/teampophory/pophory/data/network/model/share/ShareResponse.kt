@@ -11,25 +11,17 @@ data class ShareResponse(
 ) {
     @Serializable
     data class Photo(
-        @SerialName("id")
-        val id: Long,
-        @SerialName("studio")
-        val studio: String,
-        @SerialName("takenAt")
-        val takenAt: String,
-        @SerialName("imageUrl")
-        val imageUrl: String,
-        @SerialName("width")
-        val width: Int,
-        @SerialName("height")
-        val height: Int
+        @SerialName("photoId")
+        val photoId: Long,
+        @SerialName("photoUrl")
+        val photoUrl: String,
     )
 
     fun toPhotos(): List<PhotoItem> {
         return photos.map { photo ->
             PhotoItem(
-                id = photo.id,
-                imageUrl = photo.imageUrl
+                photoId = photo.photoId,
+                photoUrl = photo.photoUrl
             )
         }
     }

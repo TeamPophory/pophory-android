@@ -1,6 +1,6 @@
 package com.teampophory.pophory.feature.share.model
 
 data class PhotoItem(
-    val id: Long,
-    val imageUrl: String
+    val photoId: Long,
+    val photoUrl: String
 )
