@@ -7,14 +7,15 @@
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/iv_store_pager"
         android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_marginHorizontal="45dp"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="46dp"
         android:contentDescription="pager item image"
-        android:scaleType="centerCrop"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:scaleType="fitCenter"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintDimensionRatio="3:4"
         app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.Pophory.ShapeableImageView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

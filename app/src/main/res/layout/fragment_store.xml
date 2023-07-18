@@ -51,8 +51,9 @@
         android:id="@+id/seekBar_store"
         android:layout_width="0dp"
         android:layout_height="38dp"
-        android:layout_marginLeft="32dp"
+        android:layout_marginStart="30dp"
         android:layout_marginTop="20dp"
+        android:layout_marginEnd="2dp"
         android:layout_marginBottom="46dp"
         android:background="@null"
         android:paddingVertical="16dp"
@@ -68,17 +69,19 @@
         android:id="@+id/tv_store_album_photoCount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="9dp"
+        android:layout_marginStart="5dp"
         android:layout_marginTop="27dp"
         android:layout_marginEnd="46dp"
         android:layout_marginBottom="30dp"
         android:textAppearance="?textAppearanceHeadlineLarge"
         android:textColor="?colorOnSurface50"
         android:textSize="19sp"
+        app:layout_constraintStart_toEndOf="@id/seekBar_store"
         app:layout_constraintBottom_toBottomOf="@id/seekBar_store"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/seekBar_store"
         tools:text="3/15" />
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
