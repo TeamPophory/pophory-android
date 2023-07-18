@@ -1,6 +1,7 @@
 package com.teampophory.pophory.config.di
 
 import com.teampophory.pophory.config.di.qualifier.Secured
+import com.teampophory.pophory.data.network.ShareNetworkDataSource
 import com.teampophory.pophory.data.repository.share.DefaultShareRepository
 import com.teampophory.pophory.data.repository.share.ShareRepository
 import com.teampophory.pophory.data.network.service.RetrofitShareNetwork
@@ -19,8 +20,7 @@ import javax.inject.Singleton
 object ShareModule {
     @Provides
     @Singleton
-    fun provideShareNetworkService(@Secured retrofit: Retrofit): RetrofitShareNetworkApi =
-        retrofit.create()
+    fun provideShareNetworkService(@Secured retrofit: Retrofit): RetrofitShareNetworkApi = retrofit.create()
 
     @Module
     @InstallIn(SingletonComponent::class)
@@ -29,6 +29,9 @@ object ShareModule {
         @Singleton
         fun bindShareRepository(defaultShareRepository: DefaultShareRepository): ShareRepository
 
+        @Binds
+        @Singleton
+        fun bindShareNetworkDataSource(retrofitShareNetwork: RetrofitShareNetwork) : ShareNetworkDataSource
     }
 }
 

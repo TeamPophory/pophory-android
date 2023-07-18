@@ -1,13 +1,14 @@
 package com.teampophory.pophory.data.repository.share
 
+import com.teampophory.pophory.data.network.ShareNetworkDataSource
 import com.teampophory.pophory.data.network.model.share.ShareResponse
 import com.teampophory.pophory.data.network.service.RetrofitShareNetworkApi
 import javax.inject.Inject
 
 class DefaultShareRepository @Inject constructor(
-    private val retrofitShareNetworkApi: RetrofitShareNetworkApi
+    private val shareNetworkDataSource: ShareNetworkDataSource
 ) : ShareRepository {
     override suspend fun getPhotos(): Result<ShareResponse> {
-        return runCatching { retrofitShareNetworkApi.getPhoto() }
+        return runCatching { shareNetworkDataSource.getPhotos() }
     }
 }
