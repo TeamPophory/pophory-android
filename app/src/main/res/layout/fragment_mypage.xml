@@ -58,7 +58,7 @@
     <ImageView
         android:id="@+id/iv_mypage_profile_background"
         android:layout_width="match_parent"
-        android:layout_height="132dp"
+        android:layout_height="124dp"
         android:scaleType="centerCrop"
         android:src="@drawable/ic_profile_backgorund"
         app:layout_constraintStart_toStartOf="parent"
