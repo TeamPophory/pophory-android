@@ -122,7 +122,7 @@ class SignUpSecondFragment : Fragment() {
     }
 
     companion object {
-        private const val HANGUL_PATTERN = "^[a-zA-Z0-9._]{4,12}\$"
+        private const val HANGUL_PATTERN = "^[a-zA-Z0-9._]*\$"
         val HANGUL_REGEX: Pattern = Pattern.compile(HANGUL_PATTERN)
     }
 }
