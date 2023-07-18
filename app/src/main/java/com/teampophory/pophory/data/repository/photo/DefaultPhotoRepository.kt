@@ -15,7 +15,7 @@ class DefaultPhotoRepository @Inject constructor(
     private val photoService: PhotoService,
     @Unsecured private val photoServiceNonToken: PhotoService
 ) : PhotoRepository {
-    override suspend fun getPhotos(id: Int): Result<PhotoListResponse> {
+    override suspend fun getPhotos(id: Long): Result<PhotoListResponse> {
         return runCatching { photoService.getPhotos(id) }
     }
 
@@ -30,7 +30,7 @@ class DefaultPhotoRepository @Inject constructor(
     }
 
     override suspend fun addPhotoToPophory(
-        albumId: Int,
+        albumId: Long,
         takenAt: String,
         studioId: Long,
         fileName: String,

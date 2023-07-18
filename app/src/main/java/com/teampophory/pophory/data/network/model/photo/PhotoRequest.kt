@@ -6,7 +6,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class PhotoRequest(
     @SerialName("albumId")
-    val albumId: Int,
+    val albumId: Long,
     @SerialName("takenAt")
     val takenAt: String,
     @SerialName("studioId")

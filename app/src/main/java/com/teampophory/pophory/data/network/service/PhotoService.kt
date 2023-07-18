@@ -44,7 +44,7 @@ interface PhotoService {
 
     @GET("api/v1/albums/{albumId}/photos")
     suspend fun getPhotos(
-        @Path("albumId") albumId: Int
+        @Path("albumId") albumId: Long
     ): PhotoListResponse
 
     @DELETE("api/v1/photo/{photoId}")

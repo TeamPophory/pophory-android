@@ -1,4 +1,4 @@
-package com.teampophory.pophory.network.model
+package com.teampophory.pophory.data.network.model.share
 
 import com.teampophory.pophory.feature.home.store.model.AlbumItem
 import kotlinx.serialization.SerialName
@@ -12,13 +12,15 @@ data class StoreResponse(
     @Serializable
     data class Album(
             @SerialName("id")
-            val id: Int,
+            val id: Long,
             @SerialName("title")
             val title: String,
             @SerialName("albumCover")
             val albumCover: Int,
             @SerialName("photoCount")
-            val photoCount: Int
+            val photoCount: Int,
+            @SerialName("photoLimit")
+            val photoLimit: Int
     )
     fun toAlbums(): List<AlbumItem> {
         return albums.map { album ->
@@ -26,7 +28,8 @@ data class StoreResponse(
                     id = album.id,
                     title = album.title,
                     albumCover = album.albumCover,
-                    photoCount = album.photoCount
+                    photoCount = album.photoCount,
+                    photoLimit = album.photoLimit
             )
         }
     }
