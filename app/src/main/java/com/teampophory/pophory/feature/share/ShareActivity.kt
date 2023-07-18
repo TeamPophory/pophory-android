@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.GridLayoutManager
 import com.teampophory.pophory.common.activity.hideLoading
 import com.teampophory.pophory.common.activity.showLoading
@@ -84,6 +85,12 @@ class ShareActivity : AppCompatActivity() {
             },
             onShareSheetDismissed = {
                 viewModel.selectedPosition = null
+            },
+            onViewRecycled = { position ->
+                val viewHolder = binding.rvShare.findViewHolderForAdapterPosition(position)
+                if (viewHolder is ShareAdapter.ShareViewHolder) {
+                    viewHolder.binding.ivSharePhotoSelected.isVisible = false
+                }
             }
         )
 
