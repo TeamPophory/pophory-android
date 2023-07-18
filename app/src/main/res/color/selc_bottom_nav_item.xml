@@ -1,4 +1,4 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:color="?colorPrimary" android:state_checked="true" /> <!-- 선택되었을 때의 색상 -->
-    <item android:color="?colorOnSurface50" /> <!-- 선택되지 않았을 때의 색상 -->
+    <item android:color="?colorOnSurface40" /> <!-- 선택되지 않았을 때의 색상 -->
 </selector>
