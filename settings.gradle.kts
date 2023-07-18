@@ -22,6 +22,7 @@ rootProject.name = "pophory"
 include(":app")
 include(":bottomnavigation")
 include(":core:common")
+include(":core:analytics")
 include(":core:designsystem")
 include(":domain:auth")
 include(":data:auth")
