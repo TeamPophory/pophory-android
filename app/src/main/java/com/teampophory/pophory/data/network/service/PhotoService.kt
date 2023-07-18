@@ -42,12 +42,12 @@ interface PhotoService {
         @Body photo: RequestBody
     ): Response<Unit>
 
-    @GET("api/v1/albums/{albumId}/photos")
+    @GET("api/v2/album/{albumId}/photo")
     suspend fun getPhotos(
         @Path("albumId") albumId: Long
     ): PhotoListResponse
 
-    @DELETE("api/v1/photo/{photoId}")
+    @DELETE("api/v2/photo/{photoId}")
     suspend fun deletePhoto(
         @Path("photoId") photoId: Long
     ): Response<Unit>
