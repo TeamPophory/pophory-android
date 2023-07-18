@@ -109,6 +109,6 @@
             android:name=".feature.home.photo.AddPhotoActivity"
             android:exported="false" />
         <activity android:name=".feature.story.StoryActivity"
-            android:exported="true" />
+            android:exported="false" />
     </application>
 </manifest>
