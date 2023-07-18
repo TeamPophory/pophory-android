@@ -114,6 +114,21 @@
             android:exported="false" />
         <activity android:name=".feature.story.StoryActivity"
             android:exported="false" />
+        <activity
+            android:name=".feature.album.share.ReceiveSharedImageActivity"
+            android:exported="true">
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="pophory.page.link"
+                    android:pathPrefix="/share"
+                    android:scheme="https" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
