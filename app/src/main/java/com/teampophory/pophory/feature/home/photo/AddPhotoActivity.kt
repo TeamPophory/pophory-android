@@ -68,35 +68,36 @@ class AddPhotoActivity : BindingActivity<ActivityAddPhotoBinding>(R.layout.activ
 
         val imageSize = realImageUri?.getImageSize(this)
         imageSize?.let { size ->
-            val width: Int
-            val height: Int
-
-            when (rotation) {
-                ExifInterface.ORIENTATION_ROTATE_90, ExifInterface.ORIENTATION_ROTATE_270 -> {
-                    // 사진이 회전시 사진 가로,세로 사이즈 변경
-                    width = size.height
-                    height = size.width
-                }
-                else -> {
-                    width = size.width
-                    height = size.height
-                }
-            }
+            val adjustedSize = adjustSizeWithRotation(size, rotation)
 
             val imageRequestBody = ContentUriRequestBody(this, realImageUri)
-            viewModel.onUpdateImage(imageRequestBody, Size(width, height))
+            viewModel.onUpdateImage(imageRequestBody, Size(adjustedSize.width, adjustedSize.height))
 
-            if (width >= height) {
-                binding.imgBackground.setImageResource(R.drawable.img_background_width)
-                binding.imgHorizontal.load(realImageUri) {
-                    crossfade(true)
-                }
-            } else {
-                binding.imgBackground.setImageResource(R.drawable.img_background_height)
-                binding.imgVertical.load(realImageUri) {
-                    crossfade(true)
-                }
+            loadImageWithAdjustedSize(realImageUri, adjustedSize)
+        }
+    }
+
+    private fun adjustSizeWithRotation(size: Size, rotation: Int): Size {
+        return when (rotation) {
+            ExifInterface.ORIENTATION_ROTATE_90, ExifInterface.ORIENTATION_ROTATE_270 -> {
+                // 사진이 회전시 사진 가로,세로 사이즈 변경
+                Size(size.height, size.width)
             }
+            else -> {
+                Size(size.width, size.height)
+            }
+        }
+    }
+
+    private fun loadImageWithAdjustedSize(realImageUri: Uri, adjustedSize: Size) {
+        val (backgroundResource, imageView) = if (adjustedSize.width >= adjustedSize.height) {
+            Pair(R.drawable.img_background_width, binding.imgHorizontal)
+        } else {
+            Pair(R.drawable.img_background_height, binding.imgVertical)
+        }
+        binding.imgBackground.setImageResource(backgroundResource)
+        imageView.load(realImageUri) {
+            crossfade(true)
         }
     }
 
