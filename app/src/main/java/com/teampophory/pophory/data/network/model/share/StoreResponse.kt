@@ -18,7 +18,9 @@ data class StoreResponse(
             @SerialName("albumCover")
             val albumCover: Int,
             @SerialName("photoCount")
-            val photoCount: Int
+            val photoCount: Int,
+            @SerialName("photoLimit")
+            val photoLimit: Int
     )
     fun toAlbums(): List<AlbumItem> {
         return albums.map { album ->
@@ -26,7 +28,8 @@ data class StoreResponse(
                     id = album.id,
                     title = album.title,
                     albumCover = album.albumCover,
-                    photoCount = album.photoCount
+                    photoCount = album.photoCount,
+                    photoLimit = album.photoLimit
             )
         }
     }

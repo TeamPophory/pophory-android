@@ -120,10 +120,12 @@ class StoreFragment : Fragment() {
                     homeViewModel.onUpdateAlbumPosition(position)
                     val photoCount =
                         storeAdapter?.currentList?.getOrNull(position)?.photoCount.toString()
+                    val photoLimit =
+                        storeAdapter?.currentList?.getOrNull(position)?.photoLimit.toString()
                     val maxPhoto = 15
 
                     //사진 갯수 텍스트 색상변경
-                    setSpannableCountString(photoCount)
+                    setSpannableCountString(photoCount,photoLimit)
 
                     //seekBar 게이지 설정
                     binding.seekBarStore.progress =
@@ -142,8 +144,10 @@ class StoreFragment : Fragment() {
         val position = homeViewModel.currentAlbumPosition.value
         val photoCount =
             homeViewModel.currentAlbums.value?.getOrNull(position)?.photoCount.toString()
+        val photoLimit =
+            homeViewModel.currentAlbums.value?.getOrNull(position)?.photoLimit.toString()
         setSpannableString(
-            stringOf(R.string.store_photo_count_format, photoCount),
+            "$photoCount/$photoLimit",
             photoCount,
             binding.tvStoreAlbumPhotoCount,
             R.color.pophory_purple,
@@ -163,8 +167,8 @@ class StoreFragment : Fragment() {
         )
     }
 
-    private fun setSpannableCountString(photoCount: String) {
-        val fullText = stringOf(R.string.store_photo_count_format, photoCount)
+    private fun setSpannableCountString(photoCount: String,photoLimit: String) {
+        val fullText = "$photoCount/$photoLimit"
         val coloredText = photoCount
         setSpannableString(
             fullText,
