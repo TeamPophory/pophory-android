@@ -53,14 +53,14 @@ class AddPhotoActivity : BindingActivity<ActivityAddPhotoBinding>(R.layout.activ
     private fun loadImage() {
         val realImageUri = Uri.parse(imageUri)
 
-        //ExifInterface 생성
+        // ExifInterface 생성
         val exifInterface = realImageUri?.let { uri ->
             contentResolver.openInputStream(uri)?.use { inputStream ->
                 ExifInterface(inputStream)
             }
         }
 
-        //회전 정보
+        // 회전 정보
         val rotation = exifInterface?.getAttributeInt(
             ExifInterface.TAG_ORIENTATION,
             ExifInterface.ORIENTATION_NORMAL
