@@ -17,6 +17,7 @@ import com.teampophory.pophory.common.fragment.showLoading
 import com.teampophory.pophory.common.view.viewBinding
 import com.teampophory.pophory.databinding.FragmentMypageBinding
 import com.teampophory.pophory.feature.setting.SettingActivity
+import com.teampophory.pophory.feature.share.ShareActivity
 import com.teampophory.pophory.feature.story.StoryActivity
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -79,11 +80,9 @@ class MyPageFragment : Fragment() {
             ivToolbarSetting.setOnClickListener {
                 startActivity(Intent(requireContext(), SettingActivity::class.java))
             }
-            //share 이동
             layoutMypageShare.setOnClickListener {
-                //TODO Intent to Share
+                startActivity(Intent(requireContext(), ShareActivity::class.java))
             }
-            //stroy 이동
             layoutMypageStory.setOnClickListener {
                 startActivity(Intent(requireContext(), StoryActivity::class.java))
             }

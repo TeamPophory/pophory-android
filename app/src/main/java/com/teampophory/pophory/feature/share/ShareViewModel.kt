@@ -18,6 +18,8 @@ class ShareViewModel @Inject constructor(
     private val _photos = MutableLiveData<ShareState>(ShareState.Uninitialized)
     val photos: LiveData<ShareState> get() = _photos
 
+    var selectedPosition: Int? = null
+
     fun getPhotos() {
         viewModelScope.launch {
             _photos.value = ShareState.Loading
