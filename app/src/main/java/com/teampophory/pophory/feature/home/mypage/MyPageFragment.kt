@@ -14,10 +14,10 @@ import androidx.fragment.app.viewModels
 import com.teampophory.pophory.R
 import com.teampophory.pophory.common.fragment.hideLoading
 import com.teampophory.pophory.common.fragment.showLoading
-import com.teampophory.pophory.common.fragment.toast
 import com.teampophory.pophory.common.view.viewBinding
 import com.teampophory.pophory.databinding.FragmentMypageBinding
 import com.teampophory.pophory.feature.setting.SettingActivity
+import com.teampophory.pophory.feature.story.StoryActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -85,7 +85,7 @@ class MyPageFragment : Fragment() {
             }
             //stroy 이동
             layoutMypageStory.setOnClickListener {
-                //TODO Intent to Story
+                startActivity(Intent(requireContext(), StoryActivity::class.java))
             }
         }
     }
