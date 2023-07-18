@@ -1,6 +1,6 @@
-package com.teampophory.pophory.feature.home.mypage.share
+package com.teampophory.pophory.feature.share
 
-import com.teampophory.pophory.feature.home.mypage.share.model.PhotoItem
+import com.teampophory.pophory.feature.share.model.PhotoItem
 
 sealed class ShareState {
     object Uninitialized : ShareState()

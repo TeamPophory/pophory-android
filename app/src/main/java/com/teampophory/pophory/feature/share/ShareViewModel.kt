@@ -1,4 +1,4 @@
-package com.teampophory.pophory.feature.home.mypage.share
+package com.teampophory.pophory.feature.share
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

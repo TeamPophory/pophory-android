@@ -1,4 +1,4 @@
-package com.teampophory.pophory.feature.home.mypage.share.model
+package com.teampophory.pophory.feature.share.model
 
 data class PhotoItem(
     val id: Long,

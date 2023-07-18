@@ -1,4 +1,4 @@
-package com.teampophory.pophory.feature.home.mypage.share.adapter
+package com.teampophory.pophory.feature.share.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.teampophory.pophory.common.view.ItemDiffCallback
 import com.teampophory.pophory.databinding.ItemSharePhotoBinding
-import com.teampophory.pophory.feature.home.mypage.share.model.PhotoItem
+import com.teampophory.pophory.feature.share.model.PhotoItem
 
 class ShareAdapter(
     private val onItemClicked: (PhotoItem, Int) -> Unit,
