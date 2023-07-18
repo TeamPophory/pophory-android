@@ -25,6 +25,7 @@ internal fun Project.configureAndroidCommonPlugin() {
         defaultConfig {
             val kakaoApiKey = properties["kakaoApiKey"] as? String ?: ""
             val pophoryBaseUrl = properties["pophoryBaseUrl"] as? String ?: ""
+            val amplitudeKey = properties["amplitudeKey"] as? String ?: ""
 
             manifestPlaceholders["sentryDsn"] = properties["sentryDsn"] as String
             manifestPlaceholders["kakaoApiKey"] = properties["kakaoApiKey"] as String
@@ -32,6 +33,7 @@ internal fun Project.configureAndroidCommonPlugin() {
 
             buildConfigField("String", "KAKAO_API_KEY", "\"${kakaoApiKey}\"")
             buildConfigField("String", "POPHORY_BASE_URL", "\"${pophoryBaseUrl}\"")
+            buildConfigField("String", "AMPLITUDE_KEY", "\"${amplitudeKey}\"")
         }
         buildFeatures.apply {
             viewBinding = true
