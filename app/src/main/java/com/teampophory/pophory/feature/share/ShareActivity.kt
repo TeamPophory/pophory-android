@@ -102,7 +102,6 @@ class ShareActivity : AppCompatActivity() {
                     androidParameters("com.teampophory.pophory") {}
                 }.await()
             }.onSuccess { link ->
-                Timber.d("Pophory dynamicLink $link shortLink ${link.shortLink}")
                 Intent().apply {
                     action = Intent.ACTION_SEND
                     type = "text/plain"
