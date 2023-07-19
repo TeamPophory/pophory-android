@@ -1,10 +1,17 @@
 package com.teampophory.pophory.feature.share
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
+import com.google.firebase.dynamiclinks.FirebaseDynamicLinks
+import com.google.firebase.dynamiclinks.ktx.androidParameters
+import com.google.firebase.dynamiclinks.ktx.dynamicLinks
+import com.google.firebase.dynamiclinks.ktx.shortLinkAsync
+import com.google.firebase.ktx.Firebase
 import com.teampophory.pophory.common.activity.hideLoading
 import com.teampophory.pophory.common.activity.showLoading
 import com.teampophory.pophory.common.view.GridSpacingItemDecoration
@@ -14,6 +21,9 @@ import com.teampophory.pophory.databinding.ActivityShareBinding
 import com.teampophory.pophory.feature.share.adapter.ShareAdapter
 import com.teampophory.pophory.feature.share.model.PhotoItem
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
+import timber.log.Timber
 
 @AndroidEntryPoint
 class ShareActivity : AppCompatActivity() {
@@ -84,18 +94,30 @@ class ShareActivity : AppCompatActivity() {
     }
 
     private fun photoSharing(photoItem: PhotoItem) {
-        Intent().apply {
-            action = Intent.ACTION_SEND
-            type = "text/plain"
-            putExtra(Intent.EXTRA_TEXT, "https://pophory.page.link/share?u=${photoItem.shareId}")
-        }.also {
-            startActivity(
-                Intent.createChooser(
-                    it,
-                    "https://pophory.page.link/share?u=${photoItem.shareId}"
-                )
-            )
+        lifecycleScope.launch {
+            runCatching {
+                Firebase.dynamicLinks.shortLinkAsync {
+                    link = Uri.parse("https://pophory.page.link/share?u=${photoItem.shareId}")
+                    domainUriPrefix = "https://pophory.page.link"
+                    androidParameters("com.teampophory.pophory") {}
+                }.await()
+            }.onSuccess { link ->
+                Timber.d("Pophory dynamicLink $link shortLink ${link.shortLink}")
+                Intent().apply {
+                    action = Intent.ACTION_SEND
+                    type = "text/plain"
+                    putExtra(Intent.EXTRA_TEXT, link.shortLink.toString())
+                }.also {
+                    startActivity(
+                        Intent.createChooser(
+                            it,
+                            link.shortLink.toString()
+                        )
+                    )
+                }
+            }
         }
+
     }
 
     private fun setOnClickListener() {
