@@ -2,8 +2,8 @@ package com.teampophory.pophory.feature.album.list
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.teampophory.pophory.feature.album.albumsort.AlbumSortType
 import com.teampophory.pophory.domain.repository.photo.PhotoRepository
+import com.teampophory.pophory.feature.album.albumsort.AlbumSortType
 import com.teampophory.pophory.feature.album.model.OrientType
 import com.teampophory.pophory.feature.album.model.PhotoDetail
 import com.teampophory.pophory.feature.album.model.PhotoItem
@@ -21,8 +21,7 @@ class AlbumListViewModel @Inject constructor(
     private val photoRepository: PhotoRepository
 ) : ViewModel() {
 
-    private val _albumItem = MutableStateFlow<AlbumItem?>(null)
-    val albumItem: StateFlow<AlbumItem?> = _albumItem
+    private var albumItem: AlbumItem? = null
 
     private val _albumSortType = MutableStateFlow(AlbumSortType.NEWEST)
     val albumSortType: StateFlow<AlbumSortType> get() = _albumSortType
@@ -31,13 +30,13 @@ class AlbumListViewModel @Inject constructor(
     val albumListState: StateFlow<AlbumListState> get() = _albumListState
 
     fun setAlbumItem(albumItem: AlbumItem) {
-        _albumItem.value = albumItem
+        this.albumItem = albumItem
     }
 
     fun getAlbums() {
         viewModelScope.launch {
             _albumListState.emit(AlbumListState.Loading)
-            photoRepository.getPhotos(albumItem.value?.id ?: 0)
+            photoRepository.getPhotos(albumItem?.id ?: 0)
                 .onSuccess {
                     val photoItems = it.mapPhotosToPhotoItems()
                     _albumListState.emit(
