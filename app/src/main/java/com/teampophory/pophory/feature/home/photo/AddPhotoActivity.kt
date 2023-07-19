@@ -20,13 +20,11 @@ import com.teampophory.pophory.common.context.snackBar
 import com.teampophory.pophory.common.context.toast
 import com.teampophory.pophory.common.image.ContentUriRequestBody
 import com.teampophory.pophory.common.image.getImageSize
-import com.teampophory.pophory.common.intent.parcelableExtra
 import com.teampophory.pophory.common.intent.stringExtra
 import com.teampophory.pophory.common.time.systemNow
 import com.teampophory.pophory.common.view.setOnSingleClickListener
 import com.teampophory.pophory.databinding.ActivityAddPhotoBinding
 import com.teampophory.pophory.feature.home.store.model.AlbumItem
-import com.teampophory.pophory.util.toCoverDrawable
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -40,7 +38,6 @@ import java.util.TimeZone
 class AddPhotoActivity : BindingActivity<ActivityAddPhotoBinding>(R.layout.activity_add_photo) {
     private val viewModel: AddPhotoViewModel by viewModels()
     private val imageUri by stringExtra()
-    private val albumItem by parcelableExtra<AlbumItem>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -83,6 +80,7 @@ class AddPhotoActivity : BindingActivity<ActivityAddPhotoBinding>(R.layout.activ
                 // 사진이 회전시 사진 가로,세로 사이즈 변경
                 Size(size.height, size.width)
             }
+
             else -> {
                 Size(size.width, size.height)
             }
@@ -113,8 +111,6 @@ class AddPhotoActivity : BindingActivity<ActivityAddPhotoBinding>(R.layout.activ
         binding.layoutStudio.setOnClickListener {
             viewModel.onStudioPressed()
         }
-        albumItem?.albumCover?.toCoverDrawable()
-            ?.let { binding.imgAlbumCover.setImageResource(it) }
         binding.btnSubmit.setOnSingleClickListener {
             viewModel.onSubmit()
         }

@@ -32,6 +32,12 @@
         <item name="lineHeight">17sp</item>
     </style>
 
+    <style name="TextAppearance.Pophory.HeadLine03">
+        <item name="android:textFontWeight">600</item>
+        <item name="android:textSize">17sp</item>
+        <item name="lineHeight">17sp</item>
+    </style>
+
     <style name="TextAppearance.Pophory.TitleLarge">
         <item name="android:textFontWeight">700</item>
         <item name="android:textSize">20sp</item>

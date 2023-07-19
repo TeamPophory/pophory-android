@@ -33,6 +33,7 @@
         <item name="textAppearanceHeadlineMedium">@style/TextAppearance.Pophory.HeadLineMedium
         </item>
         <item name="textAppearanceHeadlineSmall">@style/TextAppearance.Pophory.HeadLineSmall</item>
+        <item name="textAppearanceHeadline3">@style/TextAppearance.Pophory.HeadLine03</item>
         <!-- Title -->
         <!-- Modal Title -->
         <item name="textAppearanceTitleLarge">@style/TextAppearance.Pophory.TitleLarge</item>

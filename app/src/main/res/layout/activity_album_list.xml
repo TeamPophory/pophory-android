@@ -119,6 +119,4 @@
             app:layout_constraintTop_toBottomOf="@id/ivEmptyFeed" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>
