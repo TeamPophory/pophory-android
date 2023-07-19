@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.DrawableRes
 import androidx.core.text.buildSpannedString
 import androidx.core.text.color
 import androidx.core.view.isGone
@@ -97,7 +98,7 @@ class SignUpFirstFragment : Fragment() {
     }
 
     private fun setEditTextState(
-        background: Int,
+        @DrawableRes background: Int,
         errorMessageState: Boolean,
         buttonState: Boolean
     ) {
