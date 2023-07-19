@@ -22,13 +22,11 @@ class ShareActivity : AppCompatActivity() {
 
     private val binding by viewBinding(ActivityShareBinding::inflate)
 
-    private var shareAdapter: ShareAdapter? = null
-
     private val viewModel by viewModels<ShareViewModel>()
 
     private val startForResult =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-            viewModel.selectedPosition?.let { shareAdapter?.notifyItemChanged(it) }
+            viewModel.selectedPosition?.let { binding.rvShare.adapter?.notifyItemChanged(it) }
             viewModel.selectedPosition = null
         }
 
@@ -54,7 +52,7 @@ class ShareActivity : AppCompatActivity() {
 
                 is ShareState.SuccessPhoto -> {
                     hideLoading()
-                    shareAdapter?.submitList(shareState.data)
+                    ((binding.rvShare.adapter) as? ShareAdapter)?.submitList(shareState.data)
                 }
 
                 is ShareState.Error -> {
@@ -78,7 +76,7 @@ class ShareActivity : AppCompatActivity() {
     }
 
     private fun setupAdapter() {
-        shareAdapter = ShareAdapter(
+        val shareAdapter = ShareAdapter(
             onItemClicked = { photoItem, position ->
                 viewModel.selectedPosition = position
                 photoSharing(photoItem)
