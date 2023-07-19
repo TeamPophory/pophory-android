@@ -36,16 +36,6 @@ class HomeActivity : AppCompatActivity() {
             val currentAlbumPosition = viewModel.currentAlbumPosition.value
             val albumItem = viewModel.currentAlbums.value?.getOrNull(currentAlbumPosition)
             if (uri != null && albumItem != null) {
-                if (albumItem.photoLimit <= albumItem.photoCount) {
-                    DialogUtil.showOneButtonDialog(
-                        supportFragmentManager = supportFragmentManager,
-                        title = stringOf(R.string.dialog_title_photo_limit),
-                        description = stringOf(R.string.dialog_message_photo_limit),
-                        buttonText = stringOf(R.string.ok),
-                        imageResId = R.drawable.ic_customizing_done
-                    )
-                    return@registerForActivityResult
-                }
                 val intent = AddPhotoActivity.getIntent(this, uri.toString(), albumItem)
                 addPhotoResultLauncher.launch(intent)
             }
