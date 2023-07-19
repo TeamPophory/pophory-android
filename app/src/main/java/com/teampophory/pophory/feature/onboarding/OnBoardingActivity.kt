@@ -104,7 +104,7 @@ class OnBoardingActivity : AppCompatActivity() {
                 OnBoardingData(R.drawable.img_onboarding01),
                 OnBoardingData(R.drawable.img_onboarding02),
                 OnBoardingData(R.drawable.img_onboarding03),
-                OnBoardingData(R.drawable.img_onboarding01)
+                OnBoardingData(R.drawable.img_onboarding04)
             )
         )
         binding.viewpagerOnboarding.adapter = adapter
