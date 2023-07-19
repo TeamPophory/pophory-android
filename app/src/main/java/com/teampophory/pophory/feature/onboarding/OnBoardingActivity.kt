@@ -1,5 +1,6 @@
 package com.teampophory.pophory.feature.onboarding
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -109,5 +110,12 @@ class OnBoardingActivity : AppCompatActivity() {
         )
         binding.viewpagerOnboarding.adapter = adapter
         binding.viewpagerOnboarding.registerOnPageChangeCallback(pageChangeCallback)
+    }
+
+    companion object {
+        @JvmStatic
+        fun newInstance(context: Context) = Intent(context, OnBoardingActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        }
     }
 }

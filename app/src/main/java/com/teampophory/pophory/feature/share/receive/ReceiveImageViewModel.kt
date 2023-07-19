@@ -4,6 +4,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.teampophory.pophory.config.di.qualifier.Secured
 import com.teampophory.pophory.config.di.qualifier.Unsecured
+import com.teampophory.pophory.data.local.PophoryDataStore
+import com.teampophory.pophory.data.network.model.share.AcceptShareResponse
 import com.teampophory.pophory.data.network.model.share.SharePhotoResponse
 import com.teampophory.pophory.data.network.service.ShareService
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -32,15 +34,24 @@ sealed interface ReceiveImageUiState {
         }
     }
 
-    data object Accepted : ReceiveImageUiState
+    data class Accepted(
+        val albumId: Long
+    ) : ReceiveImageUiState {
+        companion object {
+            fun of(response: AcceptShareResponse) = Accepted(response.albumId)
+        }
+    }
 
-    data object Error : ReceiveImageUiState
+    data object SignUp : ReceiveImageUiState
+
+    data class Error(val exception: Throwable) : ReceiveImageUiState
 }
 
 @HiltViewModel
 class ReceiveImageViewModel @Inject constructor(
     @Secured private val authorizedService: ShareService,
-    @Unsecured private val unAuthorizedService: ShareService
+    @Unsecured private val unAuthorizedService: ShareService,
+    private val dataStore: PophoryDataStore
 ) : ViewModel() {
     private val _uiState: MutableStateFlow<ReceiveImageUiState> =
         MutableStateFlow(ReceiveImageUiState.Init)
@@ -55,7 +66,7 @@ class ReceiveImageViewModel @Inject constructor(
                 _uiState.value = ReceiveImageUiState.Photo.of(it)
             }.onFailure {
                 Timber.e(it)
-                _uiState.value = ReceiveImageUiState.Error
+                _uiState.value = ReceiveImageUiState.Error(it)
             }
         }
     }
@@ -64,15 +75,17 @@ class ReceiveImageViewModel @Inject constructor(
         if (uiState.value !is ReceiveImageUiState.Photo) {
             return
         }
+        if (dataStore.accessToken.isEmpty()) {
+            _uiState.value = ReceiveImageUiState.SignUp
+        }
         val photoState = uiState.value as ReceiveImageUiState.Photo
         viewModelScope.launch {
-
             runCatching {
                 authorizedService.acceptShare(photoState.photoId)
             }.onSuccess {
-                _uiState.value = ReceiveImageUiState.Accepted
+                _uiState.value = ReceiveImageUiState.Accepted.of(it)
             }.onFailure {
-                _uiState.value = ReceiveImageUiState.Error
+                _uiState.value = ReceiveImageUiState.Error(it)
             }
         }
     }

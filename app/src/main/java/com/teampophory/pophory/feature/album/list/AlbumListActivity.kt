@@ -150,5 +150,11 @@ class AlbumListActivity : AppCompatActivity() {
             Intent(context, AlbumListActivity::class.java).apply {
                 putExtra("albumItem", albumItem)
             }
+
+        @JvmStatic
+        fun newInstance(context: Context, albumId: Long): Intent =
+            Intent(context, AlbumListActivity::class.java).apply {
+                putExtra("albumId", albumId)
+            }
     }
 }

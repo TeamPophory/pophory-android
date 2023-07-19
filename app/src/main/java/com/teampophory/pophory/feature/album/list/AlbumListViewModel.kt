@@ -1,5 +1,6 @@
 package com.teampophory.pophory.feature.album.list
 
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.teampophory.pophory.domain.repository.photo.PhotoRepository
@@ -18,7 +19,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class AlbumListViewModel @Inject constructor(
-    private val photoRepository: PhotoRepository
+    private val photoRepository: PhotoRepository,
+    private val savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
     private var albumItem: AlbumItem? = null
@@ -36,7 +38,7 @@ class AlbumListViewModel @Inject constructor(
     fun getAlbums() {
         viewModelScope.launch {
             _albumListState.emit(AlbumListState.Loading)
-            photoRepository.getPhotos(albumItem?.id ?: 0)
+            photoRepository.getPhotos(albumItem?.id ?: savedStateHandle.get<Long>("albumId") ?: -1L)
                 .onSuccess {
                     val photoItems = it.mapPhotosToPhotoItems()
                     _albumListState.emit(
