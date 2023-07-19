@@ -81,7 +81,7 @@
             android:id="@+id/iv_album_cover_1"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:src="@drawable/ic_selector_friends"
+            android:src="@drawable/ic_selector_theme_friends"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/iv_album_cover_2"
             app:layout_constraintStart_toStartOf="parent"
@@ -103,7 +103,7 @@
             android:id="@+id/iv_album_cover_2"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:src="@drawable/ic_selector_love"
+            android:src="@drawable/ic_selector_theme_love"
             app:layout_constraintEnd_toStartOf="@id/iv_album_cover_3"
             app:layout_constraintStart_toEndOf="@id/iv_album_cover_1"
             app:layout_constraintTop_toTopOf="@id/iv_album_cover_1" />
@@ -123,7 +123,7 @@
             android:id="@+id/iv_album_cover_3"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:src="@drawable/ic_selector_myalbum"
+            android:src="@drawable/ic_selector_theme_me"
             app:layout_constraintEnd_toStartOf="@id/iv_album_cover_4"
             app:layout_constraintStart_toEndOf="@id/iv_album_cover_2"
             app:layout_constraintTop_toTopOf="@id/iv_album_cover_1" />
@@ -143,7 +143,7 @@
             android:id="@+id/iv_album_cover_4"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:src="@drawable/ic_selector_collect_book"
+            android:src="@drawable/ic_selector_theme_family"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/iv_album_cover_3"
             app:layout_constraintTop_toTopOf="@id/iv_album_cover_1" />
