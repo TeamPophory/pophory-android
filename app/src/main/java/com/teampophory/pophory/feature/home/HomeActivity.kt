@@ -34,7 +34,7 @@ class HomeActivity : AppCompatActivity() {
             val currentAlbumPosition = viewModel.currentAlbumPosition.value
             val albumItem = viewModel.currentAlbums.value?.getOrNull(currentAlbumPosition)
             if (uri != null && albumItem != null) {
-                val intent = AddPhotoActivity.getIntent(this, uri.toString())
+                val intent = AddPhotoActivity.getIntent(this, uri.toString(), albumItem)
                 addPhotoResultLauncher.launch(intent)
             }
         }
