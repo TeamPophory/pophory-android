@@ -70,6 +70,7 @@ class SignUpViewModel @Inject constructor(
                 response: Response<SignUpResponse>
             ) {
                 if (response.isSuccessful) {
+                    autoLoginConfigureUseCase(true)
                     _signUpResult.value = response.body()
                 } else {
                     Timber.e(response.errorBody()?.string())
@@ -93,7 +94,6 @@ class SignUpViewModel @Inject constructor(
                 response: Response<NicknameResponse>
             ) {
                 if (response.isSuccessful) {
-                    autoLoginConfigureUseCase(true)
                     _nicknameCheckResult.value = response.body()
                 } else {
                     Timber.e(response.errorBody()?.string())
