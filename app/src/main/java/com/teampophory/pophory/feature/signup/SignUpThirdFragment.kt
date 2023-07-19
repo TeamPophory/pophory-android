@@ -52,6 +52,7 @@ class SignUpThirdFragment : Fragment() {
             ivAlbumSelect3.isVisible = number == 3
             ivAlbumSelect4.isVisible = number == 4
         }
+        signUpViewModel.setAlbumCover(number)
     }
 
     private fun setSpannableString() {
@@ -79,22 +80,18 @@ class SignUpThirdFragment : Fragment() {
 
         binding.ivAlbumCover1.setOnClickListener {
             setAlbumSelectState(1)
-            signUpViewModel.setAlbumCover(1)
             binding.ivAlbumCover.setImageResource(R.drawable.ic_album_cover_friends)
         }
         binding.ivAlbumCover2.setOnClickListener {
             setAlbumSelectState(2)
-            signUpViewModel.setAlbumCover(2)
             binding.ivAlbumCover.setImageResource(R.drawable.ic_album_cover_love)
         }
         binding.ivAlbumCover3.setOnClickListener {
             setAlbumSelectState(3)
-            signUpViewModel.setAlbumCover(3)
             binding.ivAlbumCover.setImageResource(R.drawable.ic_album_cover_myalbum)
         }
         binding.ivAlbumCover4.setOnClickListener {
             setAlbumSelectState(4)
-            signUpViewModel.setAlbumCover(4)
             binding.ivAlbumCover.setImageResource(R.drawable.ic_album_cover_collectbook)
         }
     }
