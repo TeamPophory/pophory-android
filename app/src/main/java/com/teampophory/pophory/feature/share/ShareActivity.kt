@@ -1,11 +1,9 @@
 package com.teampophory.pophory.feature.share
 
-import android.content.Intent
 import android.os.Bundle
-import androidx.activity.result.contract.ActivityResultContracts
+import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.isVisible
 import androidx.recyclerview.widget.GridLayoutManager
 import com.teampophory.pophory.common.activity.hideLoading
 import com.teampophory.pophory.common.activity.showLoading
@@ -24,12 +22,6 @@ class ShareActivity : AppCompatActivity() {
 
     private val viewModel by viewModels<ShareViewModel>()
 
-    private val startForResult =
-        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-            viewModel.selectedPosition?.let { binding.rvShare.adapter?.notifyItemChanged(it) }
-            viewModel.selectedPosition = null
-        }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
@@ -42,6 +34,7 @@ class ShareActivity : AppCompatActivity() {
                 is ShareState.Uninitialized -> {
                     initRecyclerView()
                     setOnClickListener()
+                    viewModel.getPhotos()
                 }
 
                 is ShareState.Loading -> {
@@ -81,12 +74,6 @@ class ShareActivity : AppCompatActivity() {
             },
             onShareSheetDismissed = {
                 viewModel.selectedPosition = null
-            },
-            onViewRecycled = { position ->
-                val viewHolder = binding.rvShare.findViewHolderForAdapterPosition(position)
-                if (viewHolder is ShareAdapter.ShareViewHolder) {
-                    viewHolder.binding.ivSharePhotoSelected.isVisible = false
-                }
             }
         )
 
@@ -97,12 +84,7 @@ class ShareActivity : AppCompatActivity() {
     }
 
     private fun photoSharing(photoItem: PhotoItem) {
-        val shareIntent = Intent().apply {
-            action = Intent.ACTION_SEND
-            putExtra(Intent.EXTRA_TEXT, "${photoItem.photoId}")
-            type = "text/plain"
-        }
-        startForResult.launch(Intent.createChooser(shareIntent, "외부 공유하기"))
+        // TODO by Nunu
     }
 
     private fun setOnClickListener() {

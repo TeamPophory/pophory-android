@@ -12,8 +12,7 @@ import com.teampophory.pophory.feature.share.model.PhotoItem
 
 class ShareAdapter(
     private val onItemClicked: (PhotoItem, Int) -> Unit,
-    private val onShareSheetDismissed: () -> Unit,
-    private val onViewRecycled: (Int) -> Unit
+    private val onShareSheetDismissed: () -> Unit
 ) : ListAdapter<PhotoItem, ShareAdapter.ShareViewHolder>(
     ItemDiffCallback<PhotoItem>(
         onItemsTheSame = { old, new -> old.hashCode() == new.hashCode() },
@@ -27,25 +26,27 @@ class ShareAdapter(
     }
 
     class ShareViewHolder(
-        val binding: ItemSharePhotoBinding,
+        private val binding: ItemSharePhotoBinding,
         private val onItemClicked: (PhotoItem, Int) -> Unit,
     ) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(photoItem: PhotoItem, position: Int) {
+        fun bind(photoItem: PhotoItem) {
             binding.ivSharePhoto.load(photoItem.photoUrl)
             itemView.setOnClickListener {
-                onItemClicked(photoItem,position)
+                onItemClicked(photoItem, adapterPosition)
                 binding.ivSharePhotoSelected.isVisible = true
             }
         }
+        fun clear() {
+            binding.ivSharePhotoSelected.isVisible = false
+        }
     }
-
     override fun onBindViewHolder(holder: ShareViewHolder, position: Int) {
-        holder.bind(getItem(position),position)
+        holder.bind(getItem(position))
     }
 
     override fun onViewRecycled(holder: ShareViewHolder) {
         super.onViewRecycled(holder)
-        onViewRecycled(holder.adapterPosition) // 위치를 넘겨주며 리스너를 호출합니다.
+        holder.clear()
         onShareSheetDismissed()
     }
 }

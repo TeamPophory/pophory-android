@@ -20,9 +20,6 @@ class ShareViewModel @Inject constructor(
 
     var selectedPosition: Int? = null
 
-    init {
-        getPhotos()
-    }
 
     fun getPhotos() {
         viewModelScope.launch {
