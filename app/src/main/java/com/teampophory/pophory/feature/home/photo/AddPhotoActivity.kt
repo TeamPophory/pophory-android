@@ -24,7 +24,6 @@ import com.teampophory.pophory.common.intent.stringExtra
 import com.teampophory.pophory.common.time.systemNow
 import com.teampophory.pophory.common.view.setOnSingleClickListener
 import com.teampophory.pophory.databinding.ActivityAddPhotoBinding
-import com.teampophory.pophory.feature.home.store.model.AlbumItem
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -184,10 +183,9 @@ class AddPhotoActivity : BindingActivity<ActivityAddPhotoBinding>(R.layout.activ
 
     companion object {
         @JvmStatic
-        fun getIntent(context: Context, imageUri: String, albumItem: AlbumItem): Intent =
+        fun getIntent(context: Context, imageUri: String): Intent =
             Intent(context, AddPhotoActivity::class.java).apply {
                 putExtra("imageUri", imageUri)
-                putExtra("albumItem", albumItem)
             }
     }
 }
