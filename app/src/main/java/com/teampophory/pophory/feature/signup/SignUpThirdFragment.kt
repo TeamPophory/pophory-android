@@ -41,16 +41,16 @@ class SignUpThirdFragment : Fragment() {
 
     private fun initAlbumCoverImage() {
         //기본 앨범 커버 이미지
-        binding.ivAlbumCover.setImageResource(R.drawable.ic_album_cover_friends)
+        binding.ivAlbumCover.setImageResource(R.drawable.ic_album_cover_friends_1)
 
     }
 
     private fun setAlbumSelectState(number: Int){
         with(binding){
             ivAlbumSelect1.isVisible = number == 1
-            ivAlbumSelect2.isVisible = number == 2
-            ivAlbumSelect3.isVisible = number == 3
-            ivAlbumSelect4.isVisible = number == 4
+            ivAlbumSelect2.isVisible = number == 3
+            ivAlbumSelect3.isVisible = number == 5
+            ivAlbumSelect4.isVisible = number == 7
         }
         signUpViewModel.setAlbumCover(number)
     }
@@ -80,19 +80,19 @@ class SignUpThirdFragment : Fragment() {
 
         binding.ivAlbumCover1.setOnClickListener {
             setAlbumSelectState(1)
-            binding.ivAlbumCover.setImageResource(R.drawable.ic_album_cover_friends)
+            binding.ivAlbumCover.setImageResource(R.drawable.ic_album_cover_friends_1)
         }
         binding.ivAlbumCover2.setOnClickListener {
-            setAlbumSelectState(2)
-            binding.ivAlbumCover.setImageResource(R.drawable.ic_album_cover_love)
+            setAlbumSelectState(3)
+            binding.ivAlbumCover.setImageResource(R.drawable.ic_album_cover_love_1)
         }
         binding.ivAlbumCover3.setOnClickListener {
-            setAlbumSelectState(3)
-            binding.ivAlbumCover.setImageResource(R.drawable.ic_album_cover_myalbum)
+            setAlbumSelectState(5)
+            binding.ivAlbumCover.setImageResource(R.drawable.ic_album_cover_me_1)
         }
         binding.ivAlbumCover4.setOnClickListener {
-            setAlbumSelectState(4)
-            binding.ivAlbumCover.setImageResource(R.drawable.ic_album_cover_collectbook)
+            setAlbumSelectState(7)
+            binding.ivAlbumCover.setImageResource(R.drawable.ic_album_cover_family_1)
         }
     }
 }
