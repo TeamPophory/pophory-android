@@ -62,6 +62,7 @@ class OnBoardingActivity : AppCompatActivity() {
             binding.dotIndicatorFirst.isSelected = position == 0
             binding.dotIndicatorSecond.isSelected = position == 1
             binding.dotIndicatorThird.isSelected = position == 2
+            binding.dotIndicatorFourth.isSelected = position == 3
         }
     }
 
@@ -102,7 +103,8 @@ class OnBoardingActivity : AppCompatActivity() {
             mutableListOf(
                 OnBoardingData(R.drawable.img_onboarding01),
                 OnBoardingData(R.drawable.img_onboarding02),
-                OnBoardingData(R.drawable.img_onboarding03)
+                OnBoardingData(R.drawable.img_onboarding03),
+                OnBoardingData(R.drawable.img_onboarding01)
             )
         )
         binding.viewpagerOnboarding.adapter = adapter

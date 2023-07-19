@@ -7,22 +7,29 @@
     android:background="@color/white"
     tools:context=".feature.onboarding.OnBoardingActivity">
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/viewpager_onboarding"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+
     <ImageView
         android:id="@+id/dot_indicator_first"
         android:layout_width="9dp"
         android:layout_height="9dp"
-        android:layout_marginEnd="9dp"
         android:background="@drawable/round_dot_indicator"
         app:layout_constraintEnd_toStartOf="@id/dot_indicator_second"
-        app:layout_constraintTop_toBottomOf="@id/viewpager_onboarding" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/dot_indicator_second"
         android:layout_width="9dp"
         android:layout_height="9dp"
+        android:layout_marginStart="9dp"
         android:background="@drawable/round_dot_indicator"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@id/dot_indicator_first"
         app:layout_constraintTop_toTopOf="@id/dot_indicator_first" />
 
     <ImageView
@@ -34,14 +41,25 @@
         app:layout_constraintStart_toEndOf="@id/dot_indicator_second"
         app:layout_constraintTop_toTopOf="@id/dot_indicator_first" />
 
+    <ImageView
+        android:id="@+id/dot_indicator_fourth"
+        android:layout_width="9dp"
+        android:layout_height="9dp"
+        android:layout_marginStart="9dp"
+        android:background="@drawable/round_dot_indicator"
+        app:layout_constraintStart_toEndOf="@id/dot_indicator_third"
+        app:layout_constraintTop_toTopOf="@id/dot_indicator_first" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/viewpager_onboarding"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="48dp"
         android:layout_marginBottom="22dp"
-        app:layout_constraintDimensionRatio="0.75"
         app:layout_constraintBottom_toTopOf="@id/btn_start_social_login"
+        app:layout_constraintDimensionRatio="0.75"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -50,11 +68,12 @@
         android:id="@+id/btn_start_social_login"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginBottom="21dp"
         android:scaleType="fitXY"
         android:src="@drawable/kakao_login_button"
-        android:layout_marginHorizontal="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginBottom="21dp"/>
+        app:layout_constraintStart_toStartOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
