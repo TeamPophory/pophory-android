@@ -23,7 +23,6 @@ class SignUpActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        binding.btnNext.isEnabled = true
 
         observeEvent()
         //다음 버튼
@@ -52,8 +51,7 @@ class SignUpActivity : AppCompatActivity() {
         val navController = navHostFragment.findNavController()
 
         binding.btnNext.setOnClickListener {
-            val currentFragment = navController.currentDestination?.label
-            when (currentFragment) {
+            when (navController.currentDestination?.label) {
                 SIGN_UP_FIRST_FRAGMENT -> navigateToFragment(1)
                 SIGN_UP_SECOND_FRAGMENT -> viewModel.nicknameCheck()
                 SIGN_UP_THIRD_FRAGMENT -> viewModel.signUp()
