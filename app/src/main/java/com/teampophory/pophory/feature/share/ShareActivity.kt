@@ -1,7 +1,7 @@
 package com.teampophory.pophory.feature.share
 
+import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
@@ -84,7 +84,18 @@ class ShareActivity : AppCompatActivity() {
     }
 
     private fun photoSharing(photoItem: PhotoItem) {
-        // TODO by Nunu
+        Intent().apply {
+            action = Intent.ACTION_SEND
+            type = "text/plain"
+            putExtra(Intent.EXTRA_TEXT, "https://pophory.page.link/share?u=${photoItem.shareId}")
+        }.also {
+            startActivity(
+                Intent.createChooser(
+                    it,
+                    "https://pophory.page.link/share?u=${photoItem.shareId}"
+                )
+            )
+        }
     }
 
     private fun setOnClickListener() {
