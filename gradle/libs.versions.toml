@@ -189,7 +189,7 @@ junit5 = { id = "de.mannodermaus.android-junit5", version.ref = "junit5-plugin" 
 app-distribution = { id = "com.google.firebase.appdistribution", version.ref = "app-distribution" }
 
 [bundles]
-firebase = ["firebase-analytics", "firebase-crashlytics"]
+firebase = ["firebase-analytics", "firebase-crashlytics", "firebase-dynamiclink"]
 flipper = ["flipper", "soloader", "flipper-network"]
 lifecycle = ["lifecycle", "lifecycle-viewmodel", "lifecycle-livedata"]
 compose = ["ui", "ui-graphics", "ui-tooling", "ui-tooling-preview", "material3-compose", "coil-compose", "ui-foundation", "activity-compose", "lifecycle-compose"]
