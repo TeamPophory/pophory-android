@@ -2,7 +2,6 @@ package com.teampophory.pophory.feature.home.photo
 
 import android.content.Context
 import android.content.Intent
-import android.media.ExifInterface
 import android.net.Uri
 import android.os.Bundle
 import android.util.Size
@@ -19,7 +18,7 @@ import com.teampophory.pophory.common.context.colorOf
 import com.teampophory.pophory.common.context.snackBar
 import com.teampophory.pophory.common.context.toast
 import com.teampophory.pophory.common.image.ContentUriRequestBody
-import com.teampophory.pophory.common.image.getImageSize
+import com.teampophory.pophory.common.image.getAdjustedSize
 import com.teampophory.pophory.common.intent.stringExtra
 import com.teampophory.pophory.common.time.systemNow
 import com.teampophory.pophory.common.view.setOnSingleClickListener
@@ -49,42 +48,12 @@ class AddPhotoActivity : BindingActivity<ActivityAddPhotoBinding>(R.layout.activ
 
     private fun loadImage() {
         val realImageUri = Uri.parse(imageUri)
+        val adjustedSize = realImageUri.getAdjustedSize(this)
 
-        // ExifInterface 생성
-        val exifInterface = realImageUri?.let { uri ->
-            contentResolver.openInputStream(uri)?.use { inputStream ->
-                ExifInterface(inputStream)
-            }
-        }
+        val imageRequestBody = ContentUriRequestBody(this, realImageUri)
+        viewModel.onUpdateImage(imageRequestBody, adjustedSize)
 
-        // 회전 정보
-        val rotation = exifInterface?.getAttributeInt(
-            ExifInterface.TAG_ORIENTATION,
-            ExifInterface.ORIENTATION_NORMAL
-        ) ?: ExifInterface.ORIENTATION_NORMAL
-
-        val imageSize = realImageUri?.getImageSize(this)
-        imageSize?.let { size ->
-            val adjustedSize = adjustSizeWithRotation(size, rotation)
-
-            val imageRequestBody = ContentUriRequestBody(this, realImageUri)
-            viewModel.onUpdateImage(imageRequestBody, Size(adjustedSize.width, adjustedSize.height))
-
-            loadImageWithAdjustedSize(realImageUri, adjustedSize)
-        }
-    }
-
-    private fun adjustSizeWithRotation(size: Size, rotation: Int): Size {
-        return when (rotation) {
-            ExifInterface.ORIENTATION_ROTATE_90, ExifInterface.ORIENTATION_ROTATE_270 -> {
-                // 사진이 회전시 사진 가로,세로 사이즈 변경
-                Size(size.height, size.width)
-            }
-
-            else -> {
-                Size(size.width, size.height)
-            }
-        }
+        loadImageWithAdjustedSize(realImageUri, adjustedSize)
     }
 
     private fun loadImageWithAdjustedSize(realImageUri: Uri, adjustedSize: Size) {

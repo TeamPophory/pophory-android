@@ -116,7 +116,7 @@
             android:name=".feature.story.StoryActivity"
             android:exported="false" />
         <activity
-            android:name=".feature.album.share.ReceiveSharedImageActivity"
+            android:name=".feature.share.receive.ReceiveSharedImageActivity"
             android:exported="true">
             <intent-filter android:autoVerify="true">
                 <action android:name="android.intent.action.VIEW" />
