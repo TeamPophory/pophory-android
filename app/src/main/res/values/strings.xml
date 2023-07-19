@@ -1,5 +1,8 @@
 <resources>
-    <string name="app_name">Pophory</string>
+    <string name="app_name">Pophory</string>인
+
+    <!-- common -->
+    <string name="ok">확인</string>
 
     <!-- home_bottomAppBar -->
     <string name="menu_bottom_my_drawer">내서랍</string>
@@ -42,10 +45,14 @@
     <string name="sort_newest">최근에 찍은 순</string>
     <string name="sort_oldest">과거에 찍은 순</string>
     <string name="select_sort">정렬 선택하기</string>
+    <string name="dialog_title_photo_limit">포포리 앨범이 가득찼어요</string>
+    <string name="dialog_message_photo_limit">아쉽지만,\n다음 업데이트에서 만나요!</string>
+
 
     <!-- share -->
     <string name="share_title">네컷사진 공유하기</string>
 
     <!-- story -->
     <string name="story_title">포릿 이야기</string>
+
 </resources>

@@ -57,7 +57,7 @@
         android:layout_marginTop="32dp"
         android:scaleType="centerCrop"
         app:layout_constraintDimensionRatio="0.73"
-        android:src="@drawable/ic_album_cover_friends"
+        android:src="@drawable/ic_album_cover_friends_1"
         app:layout_constraintBottom_toTopOf="@id/layout_select_cover"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

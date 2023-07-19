@@ -1,5 +1,7 @@
 package com.teampophory.pophory.util.dialog
 
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +10,8 @@ import androidx.annotation.DrawableRes
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.DialogFragment
+import com.teampophory.pophory.R
+import com.teampophory.pophory.common.context.dialogWidthPercent
 import com.teampophory.pophory.common.view.setOnSingleClickListener
 import com.teampophory.pophory.common.view.viewBinding
 import com.teampophory.pophory.databinding.DialogCommonOneButtonBinding
@@ -23,13 +27,21 @@ class OneButtonCommonDialog : DialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        return binding.root
+        return inflater.inflate(R.layout.dialog_common_one_button, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initViews()
         initButtonListener()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        context?.dialogWidthPercent(dialog)
+        dialog?.window?.run {
+            setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        }
     }
 
     fun setButtonClickListener(buttonClickListener: () -> Unit) {
@@ -61,15 +73,16 @@ class OneButtonCommonDialog : DialogFragment() {
     }
 
     companion object {
+        const val TAG = "OneButtonCommonDialog"
         fun newInstance(
-            text: String,
+            title: String,
             description: String,
             @DrawableRes imageResId: Int,
             buttonText: String
         ): OneButtonCommonDialog {
             OneButtonCommonDialog().apply {
                 arguments = Bundle().apply {
-                    putString("title", text)
+                    putString("title", title)
                     putString("description", description)
                     putInt("imageResId", imageResId)
                     putString("buttonText", buttonText)

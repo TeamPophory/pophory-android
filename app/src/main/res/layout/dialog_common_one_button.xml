@@ -18,7 +18,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:visibility="visible"
-        tools:src="@drawable/icon_customizing_done" />
+        tools:src="@drawable/ic_customizing_done" />
 
     <TextView
         android:id="@+id/tvDialogTitle"

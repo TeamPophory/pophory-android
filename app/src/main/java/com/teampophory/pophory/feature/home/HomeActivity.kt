@@ -10,12 +10,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import com.teampophory.pophory.R
+import com.teampophory.pophory.common.context.stringOf
 import com.teampophory.pophory.common.view.viewBinding
 import com.teampophory.pophory.databinding.ActivityHomeBinding
 import com.teampophory.pophory.feature.HomeViewModel
 import com.teampophory.pophory.feature.home.mypage.MyPageFragment
 import com.teampophory.pophory.feature.home.photo.AddPhotoActivity
 import com.teampophory.pophory.feature.home.store.StoreFragment
+import com.teampophory.pophory.util.dialog.DialogUtil
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -34,7 +36,17 @@ class HomeActivity : AppCompatActivity() {
             val currentAlbumPosition = viewModel.currentAlbumPosition.value
             val albumItem = viewModel.currentAlbums.value?.getOrNull(currentAlbumPosition)
             if (uri != null && albumItem != null) {
-                val intent = AddPhotoActivity.getIntent(this, uri.toString())
+                if (albumItem.photoLimit <= albumItem.photoCount) {
+                    DialogUtil.showOneButtonDialog(
+                        supportFragmentManager = supportFragmentManager,
+                        title = stringOf(R.string.dialog_title_photo_limit),
+                        description = stringOf(R.string.dialog_message_photo_limit),
+                        buttonText = stringOf(R.string.ok),
+                        imageResId = R.drawable.ic_customizing_done
+                    )
+                    return@registerForActivityResult
+                }
+                val intent = AddPhotoActivity.getIntent(this, uri.toString(), albumItem)
                 addPhotoResultLauncher.launch(intent)
             }
         }
@@ -60,6 +72,20 @@ class HomeActivity : AppCompatActivity() {
         binding.homeBottomNav.setOnItemReselectedListener { }
 
         binding.bottomNavFav.setOnClickListener {
+            val currentAlbumPosition = viewModel.currentAlbumPosition.value
+            val albumItem = viewModel.currentAlbums.value?.getOrNull(currentAlbumPosition)
+            if (albumItem != null) {
+                if (albumItem.photoLimit <= albumItem.photoCount) {
+                    DialogUtil.showOneButtonDialog(
+                        supportFragmentManager = supportFragmentManager,
+                        title = stringOf(R.string.dialog_title_photo_limit),
+                        description = stringOf(R.string.dialog_message_photo_limit),
+                        buttonText = stringOf(R.string.ok),
+                        imageResId = R.drawable.ic_customizing_done
+                    )
+                    return@setOnClickListener
+                }
+            }
             imagePicker.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
         }
     }
