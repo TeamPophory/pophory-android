@@ -33,17 +33,15 @@ class ShareActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-
         initObserver()
-        initRecyclerView()
-        setOnClickListener()
     }
 
     private fun initObserver() {
         viewModel.photos.observe(this) { shareState ->
             when (shareState) {
                 is ShareState.Uninitialized -> {
-                    viewModel.getPhotos()
+                    initRecyclerView()
+                    setOnClickListener()
                 }
 
                 is ShareState.Loading -> {
