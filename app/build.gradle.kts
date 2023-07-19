@@ -68,6 +68,8 @@ dependencies {
     implementation(libs.constraintlayout)
     implementation(libs.coil.core)
     implementation(libs.flexbox)
+    implementation(libs.navigation.fragment)
+    implementation(libs.navigation.ui)
     debugImplementation(libs.bundles.flipper)
     implementation(libs.kakao.login)
     implementation(libs.startup)

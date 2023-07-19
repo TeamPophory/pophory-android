@@ -96,6 +96,8 @@ desugarLibs = { module = "com.android.tools:desugar_jdk_libs", version.ref = "de
 constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
 flexbox = { group = "com.google.android.flexbox", name = "flexbox", version.ref = "flexbox" }
 fragment-ktx = { module = "androidx.fragment:fragment-ktx", version.ref = "fragment-ktx" }
+navigation_fragment = { module = "androidx.navigation:navigation-fragment-ktx", version.ref = "navigation" }
+navigation_ui = { module = "androidx.navigation:navigation-ui-ktx", version.ref = "navigation" }
 exifInterface = { module = "androidx.exifinterface:exifinterface", version.ref = "exifInterface" }
 
 # compose

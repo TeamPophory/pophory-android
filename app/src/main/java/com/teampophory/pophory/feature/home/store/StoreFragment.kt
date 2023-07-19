@@ -122,17 +122,16 @@ class StoreFragment : Fragment() {
                         storeAdapter?.currentList?.getOrNull(position)?.photoCount.toString()
                     val photoLimit =
                         storeAdapter?.currentList?.getOrNull(position)?.photoLimit.toString()
-                    val maxPhoto = 15
 
                     //사진 갯수 텍스트 색상변경
                     setSpannableCountString(photoCount,photoLimit)
 
                     //seekBar 게이지 설정
                     binding.seekBarStore.progress =
-                        ((photoCount.toDouble() / maxPhoto) * 100).toInt()
+                        ((photoCount.toDouble() / photoLimit.toInt()) * 100).toInt()
 
                     //앨범을 가득 채웠을 때 thumb 변경
-                    if (photoCount.toInt() == maxPhoto) {
+                    if (photoCount.toInt() == photoLimit.toInt()) {
                         binding.seekBarStore.thumb = context.getDrawable(R.drawable.ic_thumb_full)
                     }
                 }

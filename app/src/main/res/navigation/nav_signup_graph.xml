@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_signup_graph"
+    app:startDestination="@id/signUpFirstFragment">
+
+    <fragment
+        android:id="@+id/signUpFirstFragment"
+        android:name="com.teampophory.pophory.feature.signup.SignUpFirstFragment"
+        android:label="SignUpFirstFragment" >
+        <action
+            android:id="@+id/action_signUpFirstFragment_to_signUpSecondFragment"
+            app:destination="@id/signUpSecondFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/signUpSecondFragment"
+        android:name="com.teampophory.pophory.feature.signup.SignUpSecondFragment"
+        android:label="SignUpSecondFragment" >
+        <action
+            android:id="@+id/action_signUpSecondFragment_to_signUpThirdFragment"
+            app:destination="@id/signUpThirdFragment" />
+        <action
+            android:id="@+id/action_signUpSecondFragment_to_signUpFirstFragment"
+            app:destination="@id/signUpFirstFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/signUpThirdFragment"
+        android:name="com.teampophory.pophory.feature.signup.SignUpThirdFragment"
+        android:label="SignUpThirdFragment" >
+        <action
+            android:id="@+id/action_signUpThirdFragment_to_signUpSecondFragment"
+            app:destination="@id/signUpSecondFragment" />
+    </fragment>
+</navigation>

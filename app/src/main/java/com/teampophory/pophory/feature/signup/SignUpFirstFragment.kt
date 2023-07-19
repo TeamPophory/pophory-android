@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.DrawableRes
 import androidx.core.text.buildSpannedString
 import androidx.core.text.color
 import androidx.core.view.isGone
@@ -23,7 +24,6 @@ import java.util.regex.Pattern
 class SignUpFirstFragment : Fragment() {
 
     private val binding by viewBinding(FragmentSignUpFirstBinding::bind)
-    private var buttonState: OnButtonStateChangeListener? = null
     private val signUpViewModel by activityViewModels<SignUpViewModel>()
 
     override fun onCreateView(
@@ -43,6 +43,7 @@ class SignUpFirstFragment : Fragment() {
         setEditText()
         // edittext 삭제 버튼
         deleteAllEditText()
+        signUpViewModel.setButtonState(false)
     }
 
     private fun deleteAllEditText() {
@@ -66,34 +67,44 @@ class SignUpFirstFragment : Fragment() {
             doAfterTextChanged {
 
                 signUpViewModel.setRealName(it.toString())
-
                 binding.btnDeleteEditText.isGone = it?.isEmpty() == true
                 // 글자 수 계산
                 binding.tvTextCount.text = "(${it.toString().length}/6)"
 
-                // 에러 메시지 : 현재 한국어만 지원함!
                 val matcher = HANGUL_REGEX.matcher(binding.editTvName.text)
                 if (!matcher.find()) {
                     binding.tvErrorMessage.text = "현재 한국어만 지원하고 있어요."
-                    binding.editTvName.setBackgroundResource(R.drawable.bg_sign_up_edit_text_error)
-                    binding.tvErrorMessage.isVisible = true
-                    buttonState?.onChange(false)
-                } else if (it.toString().length < 2) {
+                    setEditTextState(
+                        R.drawable.bg_sign_up_edit_text_error,
+                        errorMessageState = true,
+                        buttonState = false
+                    )
+                } else if (it.toString().length < 2 || it.toString().length > 6) {
                     binding.tvErrorMessage.text = "2-6글자 이내로 작성해주세요."
-                    binding.editTvName.setBackgroundResource(R.drawable.bg_sign_up_edit_text_error)
-                    binding.tvErrorMessage.isVisible = true
-                    buttonState?.onChange(false)
+                    setEditTextState(
+                        R.drawable.bg_sign_up_edit_text_error,
+                        errorMessageState = true,
+                        buttonState = false
+                    )
                 } else {
-                    binding.editTvName.setBackgroundResource(R.drawable.bg_sign_up_edit_text_selected)
-                    binding.tvErrorMessage.isVisible = false
-                    buttonState?.onChange(true)
+                    setEditTextState(
+                        R.drawable.bg_sign_up_edit_text_selected,
+                        errorMessageState = false,
+                        buttonState = true
+                    )
                 }
             }
         }
     }
 
-    fun setSignUpButtonInterface(buttonState: OnButtonStateChangeListener) {
-        this.buttonState = buttonState
+    private fun setEditTextState(
+        @DrawableRes background: Int,
+        errorMessageState: Boolean,
+        buttonState: Boolean
+    ) {
+        binding.editTvName.setBackgroundResource(background)
+        binding.tvErrorMessage.isVisible = errorMessageState
+        signUpViewModel.setButtonState(buttonState)
     }
 
     private fun setSpannableString() {

@@ -32,12 +32,14 @@ class SignUpThirdFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setAlbumCoverImage()
+        //앨범 커버 이미지 초기화
+        initAlbumCoverImage()
+        //앨범 커버 선택
         selectAlbumCover()
         setSpannableString()
     }
 
-    private fun setAlbumCoverImage() {
+    private fun initAlbumCoverImage() {
         //기본 앨범 커버 이미지
         binding.ivAlbumCover.setImageResource(R.drawable.ic_album_cover_friends)
 
@@ -50,11 +52,12 @@ class SignUpThirdFragment : Fragment() {
             ivAlbumSelect3.isVisible = number == 3
             ivAlbumSelect4.isVisible = number == 4
         }
+        signUpViewModel.setAlbumCover(number)
     }
 
     private fun setSpannableString() {
         val fullText = getString(R.string.sign_up_third_title)
-        val coloredText = "앨범 커버" // 색상을 변경하려는 특정 단어
+        val coloredText = "앨범 테마" // 색상을 변경하려는 특정 단어
         val splittedText = fullText.split(coloredText)
 
         val text = buildSpannedString {
@@ -77,22 +80,18 @@ class SignUpThirdFragment : Fragment() {
 
         binding.ivAlbumCover1.setOnClickListener {
             setAlbumSelectState(1)
-            signUpViewModel.setAlbumCover(1)
             binding.ivAlbumCover.setImageResource(R.drawable.ic_album_cover_friends)
         }
         binding.ivAlbumCover2.setOnClickListener {
             setAlbumSelectState(2)
-            signUpViewModel.setAlbumCover(2)
             binding.ivAlbumCover.setImageResource(R.drawable.ic_album_cover_love)
         }
         binding.ivAlbumCover3.setOnClickListener {
             setAlbumSelectState(3)
-            signUpViewModel.setAlbumCover(3)
             binding.ivAlbumCover.setImageResource(R.drawable.ic_album_cover_myalbum)
         }
         binding.ivAlbumCover4.setOnClickListener {
             setAlbumSelectState(4)
-            signUpViewModel.setAlbumCover(4)
             binding.ivAlbumCover.setImageResource(R.drawable.ic_album_cover_collectbook)
         }
     }

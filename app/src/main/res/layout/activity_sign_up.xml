@@ -43,44 +43,15 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.appcompat.widget.Toolbar>
 
-    <ImageView
-        android:id="@+id/tab_first"
-        android:layout_width="0dp"
-        android:layout_height="3dp"
-        android:layout_marginStart="11dp"
-        android:background="@drawable/selector_sign_up_tab"
-        app:layout_constraintEnd_toStartOf="@+id/tab_second"
-        app:layout_constraintHorizontal_chainStyle="spread"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar" />
-
-    <ImageView
-        android:id="@+id/tab_second"
-        android:layout_width="0dp"
-        android:layout_height="3dp"
-        android:layout_marginHorizontal="4dp"
-        android:background="@drawable/selector_sign_up_tab"
-        app:layout_constraintEnd_toStartOf="@id/tab_third"
-        app:layout_constraintStart_toEndOf="@id/tab_first"
-        app:layout_constraintTop_toBottomOf="@id/toolbar" />
-
-    <ImageView
-        android:id="@+id/tab_third"
-        android:layout_width="0dp"
-        android:layout_height="3dp"
-        android:background="@drawable/selector_sign_up_tab"
-        android:layout_marginEnd="11dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/tab_second"
-        app:layout_constraintTop_toBottomOf="@id/toolbar" />
-
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/viewpager"
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/nav_host_sign_up_fragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="3dp"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
         app:layout_constraintBottom_toTopOf="@id/btn_next"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        app:defaultNavHost="true"
+        app:navGraph="@navigation/nav_signup_graph"/>
 
     <TextView
         android:id="@+id/btn_next"
@@ -99,6 +70,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/viewpager" />
+        app:layout_constraintTop_toBottomOf="@id/nav_host_sign_up_fragment" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
