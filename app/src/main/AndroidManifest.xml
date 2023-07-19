@@ -18,6 +18,9 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".feature.share.ShareActivity"
+            android:exported="false" />
+        <activity
             android:name=".feature.signup.StartPophoryActivity"
             android:exported="false"
             android:theme="@style/Theme.App.StartPophory" />
@@ -85,7 +88,6 @@
         <activity
             android:name=".feature.setting.webview.WebViewActivity"
             android:exported="false" />
-
         <activity
             android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
             android:exported="true">
@@ -103,7 +105,8 @@
         <activity
             android:name=".feature.album.list.AlbumListActivity"
             android:exported="false" />
-        <activity android:name=".feature.album.detail.AlbumDetailActivity"
+        <activity
+            android:name=".feature.album.detail.AlbumDetailActivity"
             android:exported="false" />
         <activity
             android:name=".feature.home.photo.AddPhotoActivity"
@@ -111,4 +114,5 @@
         <activity android:name=".feature.story.StoryActivity"
             android:exported="false" />
     </application>
+
 </manifest>

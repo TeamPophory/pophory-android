@@ -10,7 +10,7 @@
 
     <!-- home_stroe -->
     <string name="store_logo_contentDescription">앱의 로고 입니다.</string>
-    <string name="store_welcome">"포포리 앨범에\n소중한 추억을 보관해봐!"</string>
+    <string name="store_welcome">"에\n소중한 추억을 보관해봐!"</string>
 
     <!-- home_mypage -->
     <string name="mypage_name_default">포포리</string>
@@ -42,6 +42,9 @@
     <string name="sort_newest">최근에 찍은 순</string>
     <string name="sort_oldest">과거에 찍은 순</string>
     <string name="select_sort">정렬 선택하기</string>
+
+    <!-- share -->
+    <string name="share_title">네컷사진 공유하기</string>
 
     <!-- story -->
     <string name="story_title">포릿 이야기</string>
