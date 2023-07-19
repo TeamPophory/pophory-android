@@ -156,10 +156,10 @@ class StoreFragment : Fragment() {
     }
 
     private fun setSpannableWelcomeString() {
-        val fullText = getString(R.string.store_welcome)
+        val notColoredText = getString(R.string.store_welcome)
         val coloredText = POPHORY_STORE_TEXT
         setSpannableString(
-            fullText,
+            notColoredText,
             coloredText,
             binding.tvStoreWelcome,
             R.color.pophory_purple,
@@ -168,10 +168,10 @@ class StoreFragment : Fragment() {
     }
 
     private fun setSpannableCountString(photoCount: String,photoLimit: String) {
-        val fullText = "$photoCount/$photoLimit"
+        val notColoredText= "/$photoLimit"
         val coloredText = photoCount
         setSpannableString(
-            fullText,
+            notColoredText,
             coloredText,
             binding.tvStoreAlbumPhotoCount,
             R.color.pophory_purple,
@@ -179,20 +179,14 @@ class StoreFragment : Fragment() {
         )
     }
 
-    private fun setSpannableString(fullText: String, coloredText: String, textView: TextView, color: Int, style: Int) {
-        val splitText = fullText.split(coloredText)
+    private fun setSpannableString(notColoredText: String, coloredText: String, textView: TextView, color: Int, style: Int) {
         buildSpannedString {
             color(colorOf(color)) {
                 textAppearance(requireContext(), style) {
                     append(coloredText)
                 }
             }
-            append(splitText.getOrNull(1).orEmpty())
-
-            //15일경우 예외상황 처리
-            if(coloredText.equals("15")) {
-                append("15")
-            }
+            append(notColoredText)
         }.let {
             textView.text = it
         }
