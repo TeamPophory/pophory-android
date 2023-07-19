@@ -7,9 +7,9 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
-import com.google.firebase.dynamiclinks.FirebaseDynamicLinks
 import com.google.firebase.dynamiclinks.ktx.androidParameters
 import com.google.firebase.dynamiclinks.ktx.dynamicLinks
+import com.google.firebase.dynamiclinks.ktx.iosParameters
 import com.google.firebase.dynamiclinks.ktx.shortLinkAsync
 import com.google.firebase.ktx.Firebase
 import com.teampophory.pophory.common.activity.hideLoading
@@ -23,7 +23,6 @@ import com.teampophory.pophory.feature.share.model.PhotoItem
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
-import timber.log.Timber
 
 @AndroidEntryPoint
 class ShareActivity : AppCompatActivity() {
@@ -100,6 +99,9 @@ class ShareActivity : AppCompatActivity() {
                     link = Uri.parse("https://pophory.page.link/share?u=${photoItem.shareId}")
                     domainUriPrefix = "https://pophory.page.link"
                     androidParameters("com.teampophory.pophory") {}
+                    iosParameters("Team.pophory-iOS") {
+                        appStoreId = "6451004060"
+                    }
                 }.await()
             }.onSuccess { link ->
                 Intent().apply {
