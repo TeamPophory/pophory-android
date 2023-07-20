@@ -65,15 +65,19 @@ class AlbumCoverEditActivity : AppCompatActivity() {
     }
 
     private fun initViews() {
-        initEditButton()
+        initButton()
         initAlbumCoverViewPager()
         initSelectorClickListener()
         setAlbumCoverData()
     }
 
-    private fun initEditButton() {
+    private fun initButton() {
         binding.tvEditButton.setOnClickListener {
             viewModel.patchAlbumCover(albumId)
+        }
+
+        binding.ivBack.setOnClickListener {
+            finish()
         }
     }
 
