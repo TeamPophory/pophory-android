@@ -29,7 +29,7 @@
         android:gravity="center"
         tools:text="포포리 앨범이 가득찼어요"
         android:textAppearance="?textAppearancePopupMenuHeader"
-        android:textColor="?colorOnSurface50"
+        android:textColor="?colorOnSurface100"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/ivDialogIcon" />

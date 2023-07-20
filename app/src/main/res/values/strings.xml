@@ -17,8 +17,8 @@
 
     <!-- home_mypage -->
     <string name="mypage_name_default">포포리</string>
-    <string name="mypage_picture_count_default">그동안 찍은사진 n장</string>
-    <string name="mypage_picture_count">그동안 찍은사진 %d장</string>
+    <string name="mypage_picture_count_default">그동안 찍은 사진 n장</string>
+    <string name="mypage_picture_count">그동안 찍은 사진 %d장</string>
     <string name="mypage_feed_title">네컷사진 모아보기</string>
     <string name="mypage_feed_empty">네컷 사진을 추가해볼까?</string>
 
