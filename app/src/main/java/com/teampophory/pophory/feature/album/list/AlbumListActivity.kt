@@ -48,7 +48,7 @@ class AlbumListActivity : AppCompatActivity() {
 
     private val imagePicker =
         registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
-            val intent = AddPhotoActivity.getIntent(this, uri.toString())
+            val intent = albumItem?.let { AddPhotoActivity.getIntent(this, uri.toString(), it) }
             photoCountRefreshLauncher.launch(intent)
         }
 
@@ -149,6 +149,12 @@ class AlbumListActivity : AppCompatActivity() {
         fun newInstance(context: Context, albumItem: AlbumItem): Intent =
             Intent(context, AlbumListActivity::class.java).apply {
                 putExtra("albumItem", albumItem)
+            }
+
+        @JvmStatic
+        fun newInstance(context: Context, albumId: Long): Intent =
+            Intent(context, AlbumListActivity::class.java).apply {
+                putExtra("albumId", albumId)
             }
     }
 }

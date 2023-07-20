@@ -15,13 +15,16 @@ data class ShareResponse(
         val photoId: Long,
         @SerialName("photoUrl")
         val photoUrl: String,
+        @SerialName("shareId")
+        val shareId: String
     )
 
     fun toPhotos(): List<PhotoItem> {
         return photos.map { photo ->
             PhotoItem(
                 photoId = photo.photoId,
-                photoUrl = photo.photoUrl
+                photoUrl = photo.photoUrl,
+                shareId = photo.shareId
             )
         }
     }

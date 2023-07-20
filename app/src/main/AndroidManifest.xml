@@ -72,7 +72,7 @@
         <activity
             android:name=".feature.signup.SignUpActivity"
             android:exported="false"
-            android:windowSoftInputMode="adjustResize"/>
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".feature.onboarding.OnBoardingActivity"
             android:exported="true"
@@ -112,8 +112,24 @@
         <activity
             android:name=".feature.home.photo.AddPhotoActivity"
             android:exported="false" />
-        <activity android:name=".feature.story.StoryActivity"
+        <activity
+            android:name=".feature.story.StoryActivity"
             android:exported="false" />
+        <activity
+            android:name=".feature.share.receive.ReceiveSharedImageActivity"
+            android:exported="true">
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="pophory.page.link"
+                    android:path="/share"
+                    android:scheme="https" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

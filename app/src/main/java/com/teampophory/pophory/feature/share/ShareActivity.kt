@@ -1,10 +1,17 @@
 package com.teampophory.pophory.feature.share
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
+import com.google.firebase.dynamiclinks.ktx.androidParameters
+import com.google.firebase.dynamiclinks.ktx.dynamicLinks
+import com.google.firebase.dynamiclinks.ktx.iosParameters
+import com.google.firebase.dynamiclinks.ktx.shortLinkAsync
+import com.google.firebase.ktx.Firebase
 import com.teampophory.pophory.common.activity.hideLoading
 import com.teampophory.pophory.common.activity.showLoading
 import com.teampophory.pophory.common.view.GridSpacingItemDecoration
@@ -14,6 +21,8 @@ import com.teampophory.pophory.databinding.ActivityShareBinding
 import com.teampophory.pophory.feature.share.adapter.ShareAdapter
 import com.teampophory.pophory.feature.share.model.PhotoItem
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
 
 @AndroidEntryPoint
 class ShareActivity : AppCompatActivity() {
@@ -84,7 +93,31 @@ class ShareActivity : AppCompatActivity() {
     }
 
     private fun photoSharing(photoItem: PhotoItem) {
-        // TODO by Nunu
+        lifecycleScope.launch {
+            runCatching {
+                Firebase.dynamicLinks.shortLinkAsync {
+                    link = Uri.parse("https://pophory.page.link/share?u=${photoItem.shareId}")
+                    domainUriPrefix = "https://pophory.page.link"
+                    androidParameters("com.teampophory.pophory") {}
+                    iosParameters("Team.pophory-iOS") {
+                        appStoreId = "6451004060"
+                    }
+                }.await()
+            }.onSuccess { link ->
+                Intent().apply {
+                    action = Intent.ACTION_SEND
+                    type = "text/plain"
+                    putExtra(Intent.EXTRA_TEXT, link.shortLink.toString())
+                }.also {
+                    startActivity(
+                        Intent.createChooser(
+                            it,
+                            link.shortLink.toString()
+                        )
+                    )
+                }
+            }
+        }
     }
 
     private fun setOnClickListener() {
