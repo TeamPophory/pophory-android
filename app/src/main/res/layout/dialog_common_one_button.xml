@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/bg_round_30dp_white"
+    android:paddingHorizontal="16dp"
+    android:paddingTop="36dp"
+    android:paddingBottom="24dp">
+
+    <ImageView
+        android:id="@+id/ivDialogIcon"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible"
+        tools:src="@drawable/ic_customizing_done" />
+
+    <TextView
+        android:id="@+id/tvDialogTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="12dp"
+        android:layout_marginTop="28dp"
+        android:gravity="center"
+        tools:text="포포리 앨범이 가득찼어요"
+        android:textAppearance="?textAppearancePopupMenuHeader"
+        android:textColor="?colorOnSurface50"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ivDialogIcon" />
+
+    <TextView
+        android:id="@+id/tvDialogDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="12dp"
+        android:layout_marginTop="12dp"
+        android:gravity="center"
+        tools:text="아쉽지만,\n다음 업데이트에서 만나요!"
+        android:textAppearance="?textAppearancePopupText1"
+        android:textColor="?colorOnSurface50"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvDialogTitle" />
+
+
+    <TextView
+        android:id="@+id/tvButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/bg_round_100dp_black"
+        android:gravity="center"
+        android:paddingVertical="14dp"
+        android:textAppearance="?textAppearancePopupText1"
+        android:textColor="?colorOnSurface"
+        tools:text="확인"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvDialogDescription" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
