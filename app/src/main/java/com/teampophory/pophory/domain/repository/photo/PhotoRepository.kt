@@ -1,6 +1,7 @@
 package com.teampophory.pophory.domain.repository.photo
 
 import com.teampophory.pophory.data.model.photo.Studio
+import com.teampophory.pophory.data.network.model.album.AlbumCoverChangeRequest
 import com.teampophory.pophory.data.network.model.album.PhotoListResponse
 import com.teampophory.pophory.domain.model.S3Image
 import okhttp3.RequestBody
@@ -24,4 +25,8 @@ interface PhotoRepository {
     suspend fun getPhotoInfoFromS3(): Result<S3Image>
 
     suspend fun postPhotoToS3(url: String, photo: RequestBody)
+    suspend fun patchAlbumCover(
+        albumCoverId: Long,
+        albumCoverChangeRequest: AlbumCoverChangeRequest
+    ): Result<Unit>
 }

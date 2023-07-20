@@ -130,6 +130,9 @@
                     android:scheme="https" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".feature.album.cover.AlbumCoverEditActivity"
+            android:exported="false" />
     </application>
 
 </manifest>

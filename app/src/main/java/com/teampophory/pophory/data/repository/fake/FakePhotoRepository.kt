@@ -1,6 +1,7 @@
 package com.teampophory.pophory.data.repository.fake
 
 import com.teampophory.pophory.data.model.photo.Studio
+import com.teampophory.pophory.data.network.model.album.AlbumCoverChangeRequest
 import com.teampophory.pophory.data.network.model.album.PhotoListResponse
 import com.teampophory.pophory.domain.model.S3Image
 import com.teampophory.pophory.domain.repository.photo.PhotoRepository
@@ -89,6 +90,12 @@ class FakePhotoRepository : PhotoRepository {
     }
 
     override suspend fun postPhotoToS3(url: String, photo: RequestBody) = Unit
+    override suspend fun patchAlbumCover(
+        albumCoverId: Long,
+        albumCoverChangeRequest: AlbumCoverChangeRequest
+    ): Result<Unit> {
+        return runCatching { }
+    }
 
     override suspend fun deletePhoto(photoId: Long): Result<Unit> {
         delay(300)
