@@ -68,7 +68,7 @@ class OnBoardingActivity : AppCompatActivity() {
     }
 
     private fun setOnLoginPressed() {
-        binding.btnStartSocialLogin.setOnClickListener {
+        binding.layoutBtnKakao.setOnClickListener {
             lifecycleScope.launch {
                 runCatching {
                     kakaoAuthService.login()
