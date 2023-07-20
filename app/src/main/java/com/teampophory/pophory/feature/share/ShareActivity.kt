@@ -118,7 +118,6 @@ class ShareActivity : AppCompatActivity() {
                 }
             }
         }
-
     }
 
     private fun setOnClickListener() {
