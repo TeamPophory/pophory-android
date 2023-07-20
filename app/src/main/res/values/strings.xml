@@ -13,7 +13,7 @@
 
     <!-- home_stroe -->
     <string name="store_logo_contentDescription">앱의 로고 입니다.</string>
-    <string name="store_welcome">"에\n소중한 추억을 보관해봐!"</string>
+    <string name="store_welcome">"에\n소중한 추억을 보관해 봐!"</string>
 
     <!-- home_mypage -->
     <string name="mypage_name_default">포포리</string>
@@ -35,7 +35,7 @@
     <string name="sign_up_second_count">(0/12)</string>
     <string name="sign_up_first_count">(0/6)</string>
     <string name="sign_up_third_title">마음에 쏙 드는\n앨범 테마를 선택해줘!</string>
-    <string name="start_pophory_text">포릿만을 위한\n앨범을 만들었어!</string>
+    <string name="start_pophory_text">포릿만을 위한\n앨범이 준비됐어!</string>
     <string name="start_pophory">포포리 시작하기</string>
     <string name="sign_up_id_popup_content">이미 있는 아이디에요\n다른 아이디를 입력해주세요!</string>
     <string name="sign_up_popup_button">돌아가기</string>

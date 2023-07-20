@@ -8,47 +8,48 @@
     tools:context=".feature.onboarding.OnBoardingActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/viewpager_onboarding"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/viewpager_onboarding">
 
 
-    <ImageView
-        android:id="@+id/dot_indicator_first"
-        android:layout_width="9dp"
-        android:layout_height="9dp"
-        android:background="@drawable/round_dot_indicator"
-        app:layout_constraintEnd_toStartOf="@id/dot_indicator_second"
-        app:layout_constraintTop_toTopOf="parent" />
+        <ImageView
+            android:id="@+id/dot_indicator_first"
+            android:layout_width="9dp"
+            android:layout_height="9dp"
+            android:background="@drawable/round_dot_indicator"
+            app:layout_constraintEnd_toStartOf="@id/dot_indicator_second"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/dot_indicator_second"
-        android:layout_width="9dp"
-        android:layout_height="9dp"
-        android:layout_marginStart="9dp"
-        android:background="@drawable/round_dot_indicator"
-        app:layout_constraintStart_toEndOf="@id/dot_indicator_first"
-        app:layout_constraintTop_toTopOf="@id/dot_indicator_first" />
+        <ImageView
+            android:id="@+id/dot_indicator_second"
+            android:layout_width="9dp"
+            android:layout_height="9dp"
+            android:layout_marginStart="9dp"
+            android:background="@drawable/round_dot_indicator"
+            app:layout_constraintStart_toEndOf="@id/dot_indicator_first"
+            app:layout_constraintTop_toTopOf="@id/dot_indicator_first" />
 
-    <ImageView
-        android:id="@+id/dot_indicator_third"
-        android:layout_width="9dp"
-        android:layout_height="9dp"
-        android:layout_marginStart="9dp"
-        android:background="@drawable/round_dot_indicator"
-        app:layout_constraintStart_toEndOf="@id/dot_indicator_second"
-        app:layout_constraintTop_toTopOf="@id/dot_indicator_first" />
+        <ImageView
+            android:id="@+id/dot_indicator_third"
+            android:layout_width="9dp"
+            android:layout_height="9dp"
+            android:layout_marginStart="9dp"
+            android:background="@drawable/round_dot_indicator"
+            app:layout_constraintStart_toEndOf="@id/dot_indicator_second"
+            app:layout_constraintTop_toTopOf="@id/dot_indicator_first" />
 
-    <ImageView
-        android:id="@+id/dot_indicator_fourth"
-        android:layout_width="9dp"
-        android:layout_height="9dp"
-        android:layout_marginStart="9dp"
-        android:background="@drawable/round_dot_indicator"
-        app:layout_constraintStart_toEndOf="@id/dot_indicator_third"
-        app:layout_constraintTop_toTopOf="@id/dot_indicator_first" />
+        <ImageView
+            android:id="@+id/dot_indicator_fourth"
+            android:layout_width="9dp"
+            android:layout_height="9dp"
+            android:layout_marginStart="9dp"
+            android:background="@drawable/round_dot_indicator"
+            app:layout_constraintStart_toEndOf="@id/dot_indicator_third"
+            app:layout_constraintTop_toTopOf="@id/dot_indicator_first" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -58,22 +59,43 @@
         android:layout_height="0dp"
         android:layout_marginTop="48dp"
         android:layout_marginBottom="22dp"
-        app:layout_constraintBottom_toTopOf="@id/btn_start_social_login"
+        app:layout_constraintBottom_toTopOf="@id/layout_btn_kakao"
         app:layout_constraintDimensionRatio="0.75"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/btn_start_social_login"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_btn_kakao"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
         android:layout_marginHorizontal="20dp"
-        android:layout_marginBottom="21dp"
-        android:scaleType="fitXY"
-        android:src="@drawable/kakao_login_button"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/bg_kakao_login_btn"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <ImageView
+            android:id="@+id/img_kakao"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:src="@drawable/ic_kakao"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/txt_kakao_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Kakao로 시작하기"
+            android:textAppearance="?textAppearanceTitleSmall"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
