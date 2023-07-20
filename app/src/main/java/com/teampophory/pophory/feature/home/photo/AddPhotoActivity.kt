@@ -134,7 +134,7 @@ class AddPhotoActivity : BindingActivity<ActivityAddPhotoBinding>(R.layout.activ
             .onEach {
                 binding.txtDate.text =
                     SimpleDateFormat(
-                        "yyyy.MM.dd(EEEEE)",
+                        "yyyy.MM.dd",
                         Locale.getDefault()
                     ).format(Date(it))
             }.launchIn(lifecycleScope)
