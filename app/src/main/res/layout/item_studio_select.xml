@@ -13,7 +13,7 @@
         android:paddingVertical="10dp"
         android:textAlignment="center"
         android:textAppearance="?textAppearanceText1"
-        android:textColor="?colorOnSurface"
+        android:textColor="@color/color_studio_item_text"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="인생네컷" />
 </androidx.constraintlayout.widget.ConstraintLayout>
