@@ -29,7 +29,7 @@ class AlbumDetailViewModel @Inject constructor(
     }
 
     fun deleteAlbum() {
-        val albumId = photoDetail.value?.id?.toLong() ?: 0
+        val albumId = photoDetail.value?.id ?: 0
         viewModelScope.launch {
             photoRepository.deletePhoto(albumId).onSuccess {
                 _albumDetailState.value = AlbumDetailState.SuccessDeleteAlbum
@@ -40,10 +40,11 @@ class AlbumDetailViewModel @Inject constructor(
     }
 
     private fun setData() {
-        val id = savedStateHandle.get<Int>("photoId") ?: 0
+        val id = savedStateHandle.get<Long>("photoId") ?: 0
         val studio = savedStateHandle.get<String>("studio").orEmpty()
         val takenAt = savedStateHandle.get<String>("takenAt").orEmpty()
         val imageUrl = savedStateHandle.get<String>("imageUrl").orEmpty()
-        _photoDetail.value = PhotoRaw(id, studio, takenAt, imageUrl)
+        val shareId = savedStateHandle.get<String>("shareId").orEmpty()
+        _photoDetail.value = PhotoRaw(id, studio, takenAt, imageUrl, shareId)
     }
 }

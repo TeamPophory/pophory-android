@@ -12,7 +12,7 @@ data class PhotoListResponse(
     @Serializable
     data class Photo(
         @SerialName("id")
-        val id: Int? = null,
+        val id: Long,
         @SerialName("studio")
         val studio: String? = null,
         @SerialName("takenAt")
@@ -24,26 +24,25 @@ data class PhotoListResponse(
         @SerialName("height")
         val height: Int? = null,
         @SerialName("shareId")
-        val shareId: String? = null
+        val shareId: String
     )
 
     fun mapPhotosToPhotoItems(): List<PhotoDetail> {
         val photoDetails = mutableListOf<PhotoDetail>()
-        photos.orEmpty().forEach { photo ->
-            val id = photo.id ?: return photoDetails
-            val studio = photo.studio ?: return photoDetails
-            val takenAt = photo.takenAt ?: return photoDetails
-            val imageUrl = photo.imageUrl ?: return photoDetails
-            val width = photo.width ?: return photoDetails
-            val height = photo.height ?: return photoDetails
-            val orientationType = when {
-                (width >= height) -> OrientType.HORIZONTAL
-                else -> OrientType.VERTICAL
-            }
-            photoDetails.add(
-                PhotoDetail(id, studio, takenAt, imageUrl, width, height, orientationType)
+        return photos.orEmpty().map { photo ->
+            PhotoDetail(
+                id = photo.id,
+                studio = photo.studio ?: return photoDetails,
+                takenAt = photo.takenAt ?: return photoDetails,
+                imageUrl = photo.imageUrl ?: return photoDetails,
+                width = photo.width ?: return photoDetails,
+                height = photo.height ?: return photoDetails,
+                orientType = when {
+                    (photo.width >= photo.height) -> OrientType.HORIZONTAL
+                    else -> OrientType.VERTICAL
+                },
+                shareId = photo.shareId
             )
         }
-        return photoDetails
     }
 }

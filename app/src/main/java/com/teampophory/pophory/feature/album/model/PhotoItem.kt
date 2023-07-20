@@ -7,13 +7,14 @@ sealed class PhotoItem {
 }
 
 data class PhotoDetail(
-    val id: Int,
+    val id: Long,
     val studio: String,
     val takenAt: String,
     val imageUrl: String,
     val width: Int,
     val height: Int,
-    val orientType: OrientType
+    val orientType: OrientType,
+    val shareId: String
 )
 
 fun List<PhotoItem>.mapPhotoItemsToPhotoDetails(): List<PhotoDetail> {

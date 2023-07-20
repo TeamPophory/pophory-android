@@ -2,17 +2,27 @@ package com.teampophory.pophory.feature.album.detail
 
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
+import androidx.lifecycle.lifecycleScope
 import coil.load
+import com.google.firebase.dynamiclinks.ktx.androidParameters
+import com.google.firebase.dynamiclinks.ktx.dynamicLinks
+import com.google.firebase.dynamiclinks.ktx.iosParameters
+import com.google.firebase.dynamiclinks.ktx.shortLinkAsync
+import com.google.firebase.ktx.Firebase
 import com.teampophory.pophory.common.context.toast
+import com.teampophory.pophory.common.view.setOnSingleClickListener
 import com.teampophory.pophory.common.view.showAllowingStateLoss
 import com.teampophory.pophory.common.view.viewBinding
 import com.teampophory.pophory.databinding.ActivityAlbumDetailBinding
 import com.teampophory.pophory.feature.album.model.PhotoDetail
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
 
 @AndroidEntryPoint
 class AlbumDetailActivity : AppCompatActivity() {
@@ -31,7 +41,7 @@ class AlbumDetailActivity : AppCompatActivity() {
     }
 
     override fun onDestroy() {
-        supportFinishAfterTransition();
+        supportFinishAfterTransition()
         super.onDestroy()
     }
 
@@ -78,10 +88,36 @@ class AlbumDetailActivity : AppCompatActivity() {
             ivMainDetailAlbum.load(photoDetailInfo?.imageUrl)
             tvAlbumTakenAt.text = photoDetailInfo?.takenAt.orEmpty()
             tvStudio.text = photoDetailInfo?.studio.orEmpty()
-
-            // 사진관이 없을 경우
             if (photoDetailInfo?.studio.orEmpty() == "NONE") {
                 tvStudio.isVisible = false
+            }
+            ivAlbumShare.setOnSingleClickListener {
+                lifecycleScope.launch {
+                    runCatching {
+                        Firebase.dynamicLinks.shortLinkAsync {
+                            link =
+                                Uri.parse("https://pophory.page.link/share?u=${photoDetailInfo?.shareId}")
+                            domainUriPrefix = "https://pophory.page.link"
+                            androidParameters("com.teampophory.pophory") {}
+                            iosParameters("Team.pophory-iOS") {
+                                appStoreId = "6451004060"
+                            }
+                        }.await()
+                    }.onSuccess { link ->
+                        Intent().apply {
+                            action = Intent.ACTION_SEND
+                            type = "text/plain"
+                            putExtra(Intent.EXTRA_TEXT, link.shortLink.toString())
+                        }.also {
+                            startActivity(
+                                Intent.createChooser(
+                                    it,
+                                    link.shortLink.toString()
+                                )
+                            )
+                        }
+                    }
+                }
             }
         }
     }
@@ -93,6 +129,7 @@ class AlbumDetailActivity : AppCompatActivity() {
                 putExtra("studio", photoDetail.studio)
                 putExtra("takenAt", photoDetail.takenAt)
                 putExtra("imageUrl", photoDetail.imageUrl)
+                putExtra("shareId", photoDetail.shareId)
             }
         }
     }

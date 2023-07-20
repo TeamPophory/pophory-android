@@ -1,8 +1,9 @@
 package com.teampophory.pophory.feature.album.model
 
 data class PhotoRaw(
-    var id: Int,
-    var studio: String,
-    var takenAt: String,
-    var imageUrl: String
+    val id: Long,
+    val studio: String,
+    val takenAt: String,
+    val imageUrl: String,
+    val shareId: String
 )
