@@ -5,9 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/bg_round_30dp_white"
-    android:paddingHorizontal="16dp"
-    android:paddingTop="16dp"
-    android:paddingBottom="24dp"
     tools:context=".feature.album.detail.AlbumDeleteDialogFragment">
 
     <TextView

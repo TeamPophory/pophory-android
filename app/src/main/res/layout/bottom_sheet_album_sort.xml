@@ -36,7 +36,6 @@
         android:paddingEnd="20dp"
         android:text="@string/sort_newest"
         android:textAppearance="?textAppearanceHeadlineMedium"
-        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
