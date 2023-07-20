@@ -48,8 +48,10 @@ class AlbumListActivity : AppCompatActivity() {
 
     private val imagePicker =
         registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
-            val intent = albumItem?.let { AddPhotoActivity.getIntent(this, uri.toString(), it) }
-            photoCountRefreshLauncher.launch(intent)
+            if (uri != null) {
+                val intent = albumItem?.let { AddPhotoActivity.getIntent(this, uri.toString(), it) }
+                photoCountRefreshLauncher.launch(intent)
+            }
         }
 
     override fun onCreate(savedInstanceState: Bundle?) {
