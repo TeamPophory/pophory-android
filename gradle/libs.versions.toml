@@ -40,6 +40,8 @@ crashlytics = "2.9.7"
 firebase = "32.2.0"
 app-distribution = "4.0.0"
 admob = "22.2.0"
+oss-plugin = "0.10.6"
+oss = "17.0.1"
 
 # test
 junit = "4.13.2"
@@ -132,6 +134,8 @@ firebase-dynamiclink = { module = "com.google.firebase:firebase-dynamic-links-kt
 accompanist-systemuicontroller = { module = "com.google.accompanist:accompanist-systemuicontroller", version.ref = "accompanist" }
 accompanist-webview = { module = "com.google.accompanist:accompanist-webview", version.ref = "accompanist" }
 google-android-gms = { group = "com.google.android.gms", name = "play-services-ads", version.ref = "admob" }
+oss-plugin = { group = "com.google.android.gms", name = "oss-licenses-plugin", version.ref = "oss-plugin" }
+oss = { group = "com.google.android.gms", name = "play-services-oss-licenses", version.ref = "oss" }
 
 # test
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -187,6 +191,7 @@ kotlinx-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", vers
 sentry = { id = "io.sentry.android.gradle", version.ref = "sentry" }
 junit5 = { id = "de.mannodermaus.android-junit5", version.ref = "junit5-plugin" }
 app-distribution = { id = "com.google.firebase.appdistribution", version.ref = "app-distribution" }
+oss = { id = "com.google.android.gms.oss-licenses-plugin", version.ref = "oss-plugin" }
 
 [bundles]
 firebase = ["firebase-analytics", "firebase-crashlytics", "firebase-dynamiclink"]
