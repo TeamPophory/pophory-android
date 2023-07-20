@@ -30,7 +30,7 @@
         android:background="@drawable/bg_round_30dp_black"
         android:gravity="center"
         android:paddingVertical="14dp"
-        android:text="@string/sign_up_popup_button"
+        android:text="@string/ok"
         android:textAppearance="@style/TextAppearance.Pophory.PopupButton1"
         android:textColor="?colorOnSurface"
         app:layout_constraintBottom_toBottomOf="parent"
