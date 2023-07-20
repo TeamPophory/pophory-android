@@ -3,6 +3,8 @@ package com.teampophory.pophory.feature.share
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
@@ -31,9 +33,17 @@ class ShareActivity : AppCompatActivity() {
 
     private val viewModel by viewModels<ShareViewModel>()
 
+    private lateinit var shareResultLauncher: ActivityResultLauncher<Intent>
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+
+        shareResultLauncher =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+                clearSelectedPosition()
+            }
+
         initObserver()
     }
 
@@ -109,13 +119,25 @@ class ShareActivity : AppCompatActivity() {
                     type = "text/plain"
                     putExtra(Intent.EXTRA_TEXT, link.shortLink.toString())
                 }.also {
-                    startActivity(
+                    shareResultLauncher.launch(
                         Intent.createChooser(
                             it,
                             link.shortLink.toString()
                         )
                     )
                 }
+            }
+        }
+    }
+
+    private fun clearSelectedPosition() {
+        (binding.rvShare.adapter as? ShareAdapter)?.let { adapter ->
+            val position = viewModel.selectedPosition
+            viewModel.selectedPosition = null
+            if (position != null) {
+                val holder =
+                    binding.rvShare.findViewHolderForAdapterPosition(position) as? ShareAdapter.ShareViewHolder
+                holder?.clear()
             }
         }
     }
