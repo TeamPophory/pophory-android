@@ -21,25 +21,29 @@ class FakePhotoRepository : PhotoRepository {
                         id = 1,
                         studio = "studio1",
                         takenAt = "2021-01-01",
-                        imageUrl = fakeImageUrl
+                        imageUrl = fakeImageUrl,
+                        shareId = "shareId"
                     ),
                     PhotoListResponse.Photo(
                         id = 2,
                         studio = "studio2",
                         takenAt = "2021-01-02",
-                        imageUrl = fakeImageUrl
+                        imageUrl = fakeImageUrl,
+                        shareId = "shareId"
                     ),
                     PhotoListResponse.Photo(
                         id = 3,
                         studio = "studio3",
                         takenAt = "2021-01-03",
-                        imageUrl = fakeImageUrl
+                        imageUrl = fakeImageUrl,
+                        shareId = "shareId"
                     ),
                     PhotoListResponse.Photo(
                         id = 4,
                         studio = "studio4",
                         takenAt = "2021-01-04",
-                        imageUrl = fakeImageUrl
+                        imageUrl = fakeImageUrl,
+                        shareId = "shareId"
                     )
                 )
             )

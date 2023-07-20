@@ -113,7 +113,7 @@ class AlbumListViewModel @Inject constructor(
     }
 
     private fun createEmptyPhotoDetail(): PhotoDetail {
-        return PhotoDetail(0, "", "", "", 0, 0, OrientType.NONE)
+        return PhotoDetail(0, "", "", "", 0, 0, OrientType.NONE, "")
     }
 
 }
