@@ -1,9 +1,9 @@
-package com.teampophory.pophory.network.retrofit.signup
+package com.teampophory.pophory.data.network.service
 
-import com.teampophory.pophory.network.model.NicknameRequest
-import com.teampophory.pophory.network.model.NicknameResponse
-import com.teampophory.pophory.network.model.SignUpRequest
-import com.teampophory.pophory.network.model.SignUpResponse
+import com.teampophory.pophory.data.network.model.auth.NicknameRequest
+import com.teampophory.pophory.data.network.model.auth.NicknameResponse
+import com.teampophory.pophory.data.network.model.auth.SignUpRequest
+import com.teampophory.pophory.data.network.model.auth.SignUpResponse
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.PATCH
