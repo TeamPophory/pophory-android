@@ -46,7 +46,7 @@ fun LogoutDialog(
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
-                    text = "로그아웃 하실건가요?",
+                    text = "로그아웃 하실 건가요?",
                     style = PophoryTheme.typography.popupTitle,
                     color = PophoryTheme.colors.onSurface100,
                 )
@@ -82,13 +82,13 @@ fun LogoutDialog(
                         .height(48.dp),
                     shape = RoundedCornerShape(30.dp),
                     colors = ButtonDefaults.buttonColors(
-                        containerColor = PophoryTheme.colors.onSurface40
+                        containerColor = PophoryTheme.colors.onSurface20
                     )
                 ) {
                     Text(
                         text = "로그아웃하기",
                         style = PophoryTheme.typography.popupButton1,
-                        color = PophoryTheme.colors.white,
+                        color = PophoryTheme.colors.onSurface50,
                     )
                 }
             }

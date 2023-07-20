@@ -53,7 +53,7 @@ fun WithdrawDialog(
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
-                    text = "잠깐! 정말 탈퇴하려는거야?",
+                    text = "정말 탈퇴하실 건가요?",
                     style = PophoryTheme.typography.popupTitle,
                     color = PophoryTheme.colors.onSurface100,
                 )
@@ -75,7 +75,7 @@ fun WithdrawDialog(
                     )
                 ) {
                     Text(
-                        text = "포포리 계속 이용할래",
+                        text = "돌아가기",
                         modifier = Modifier.padding(vertical = 4.dp),
                         color = PophoryTheme.colors.white,
                         style = PophoryTheme.typography.popupButton1,
@@ -83,7 +83,7 @@ fun WithdrawDialog(
                 }
                 Spacer(modifier = Modifier.height(10.dp))
                 Text(
-                    text = "아쉽지만, 탈퇴할래",
+                    text = "아쉽지만, 탈퇴하기",
                     color = PophoryTheme.colors.onSurface50,
                     textDecoration = TextDecoration.Underline,
                     modifier = Modifier.clickable { onWithdraw() },

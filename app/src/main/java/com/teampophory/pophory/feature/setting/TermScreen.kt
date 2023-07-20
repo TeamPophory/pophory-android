@@ -37,7 +37,7 @@ fun TermScreen(
             CenterAlignedTopAppBar(
                 title = {
                     Text(
-                        text = "설정",
+                        text = "약관 및 정책",
                         textAlign = TextAlign.Center,
                         modifier = Modifier.fillMaxWidth(),
                         style = PophoryTheme.typography.headline2
