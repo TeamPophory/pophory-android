@@ -21,15 +21,11 @@ import com.teampophory.pophory.R
 import com.teampophory.pophory.common.compose.DefaultPreview
 import com.teampophory.pophory.common.compose.bottomBorder
 import com.teampophory.pophory.design.PophoryTheme
-import com.teampophory.pophory.feature.setting.component.SettingItem
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TermScreen(
-    navController: NavController,
-    onNavigatePersonalTerms: () -> Unit = {},
-    onNavigateTerm: () -> Unit = {},
-    onNavigateOss: () -> Unit = {}
+fun TeamScreen(
+    navController: NavController
 ) {
     Scaffold(
         modifier = Modifier.fillMaxSize(),
@@ -37,7 +33,7 @@ fun TermScreen(
             CenterAlignedTopAppBar(
                 title = {
                     Text(
-                        text = "설정",
+                        text = "포포리팀",
                         textAlign = TextAlign.Center,
                         modifier = Modifier.fillMaxWidth(),
                         style = PophoryTheme.typography.headline2
@@ -60,18 +56,16 @@ fun TermScreen(
                 .padding(it)
                 .fillMaxSize()
         ) {
-            SettingItem(title = "개인정보 처리방침", onClick = onNavigatePersonalTerms)
-            SettingItem(title = "이용 약관", onClick = onNavigateTerm)
-            SettingItem(title = "오픈소스 라이선스", onClick = onNavigateOss)
+            /* TODO by Nunu 팀 소개 사진 넣기 */
         }
     }
 }
 
 @DefaultPreview
 @Composable
-private fun TermScreenPreview() {
+private fun TeamScreenPreview() {
     PophoryTheme {
         val navController = rememberNavController()
-        TermScreen(navController)
+        TeamScreen(navController)
     }
 }

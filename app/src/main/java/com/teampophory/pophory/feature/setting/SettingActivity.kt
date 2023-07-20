@@ -14,6 +14,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
 import com.jakewharton.processphoenix.ProcessPhoenix
 import com.teampophory.pophory.config.di.qualifier.Kakao
 import com.teampophory.pophory.design.PophoryTheme
@@ -43,6 +44,7 @@ class SettingActivity : AppCompatActivity() {
                 NavHost(navController = navController, startDestination = "setting") {
                     composable("setting") {
                         SettingScreen(
+                            navController = navController,
                             message = message,
                             onNavigateHome = { finish() },
                             onNavigateNotice = {
@@ -59,6 +61,7 @@ class SettingActivity : AppCompatActivity() {
                     }
                     composable("term") {
                         TermScreen(
+                            navController = navController,
                             onNavigatePersonalTerms = {
                                 startActivity(
                                     WebViewActivity.newIntent(
@@ -75,7 +78,19 @@ class SettingActivity : AppCompatActivity() {
                                     )
                                 )
                             },
+                            onNavigateOss = {
+                                OssLicensesMenuActivity.setActivityTitle("Open Source Licenses")
+                                startActivity(
+                                    Intent(
+                                        this@SettingActivity,
+                                        OssLicensesMenuActivity::class.java
+                                    )
+                                )
+                            }
                         )
+                    }
+                    composable("team") {
+                        TeamScreen(navController)
                     }
                 }
             }

@@ -21,6 +21,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
+import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.teampophory.pophory.R
 import com.teampophory.pophory.common.compose.DefaultPreview
@@ -33,17 +34,16 @@ import com.teampophory.pophory.feature.setting.component.LogoutDialog
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SettingScreen(
+    navController: NavController,
     message: String,
     onNavigateHome: () -> Unit = {},
     onNavigateNotice: () -> Unit = {},
     onLogout: () -> Unit = {},
     onWithdrawal: () -> Unit = {},
-    onNavigateTeam: () -> Unit = {},
 ) {
     val snackbarHostState = remember { SnackbarHostState() }
     var isWithdrawalDialogVisible by remember { mutableStateOf(false) }
     var isLogoutDialogVisible by remember { mutableStateOf(false) }
-    val navController = rememberNavController()
 
     LaunchedEffect(message) {
         if (message.isNotEmpty()) {
@@ -84,7 +84,7 @@ fun SettingScreen(
             SettingItem(title = "약관 및 정책", onClick = { navController.navigate("term") })
             SettingItem(title = "로그아웃", onClick = { isLogoutDialogVisible = true })
             SettingItem(title = "회원탈퇴", onClick = { isWithdrawalDialogVisible = true })
-            SettingItem(title = "포포리팀", onClick = onNavigateTeam)
+            SettingItem(title = "포포리팀", onClick = { navController.navigate("team") })
         }
         if (isLogoutDialogVisible) {
             LogoutDialog(
@@ -115,6 +115,7 @@ fun SettingScreen(
 @Composable
 private fun SettingScreenPreview() {
     PophoryTheme {
-        SettingScreen("")
+        val navController = rememberNavController()
+        SettingScreen(navController, "")
     }
 }
