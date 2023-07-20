@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clAppbar"
+        android:layout_width="0dp"
+        android:layout_height="66dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/ivBack"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:padding="12dp"
+            android:src="@drawable/ic_back"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="앨범 테마"
+            android:textAppearance="@style/TextAppearance.Pophory.HeadLineLarge"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/vBottomLine"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:background="@color/gray_30"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <ImageView
+        android:id="@+id/ivAlbumFriend"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="52dp"
+        android:src="@drawable/ic_selector_friends"
+        app:layout_constraintEnd_toStartOf="@id/ivAlbumLove"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/clAppbar" />
+
+    <ImageView
+        android:id="@+id/ivAlbumSelectFriend"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:src="@drawable/round_album_select"
+        app:layout_constraintBottom_toBottomOf="@id/ivAlbumFriend"
+        app:layout_constraintEnd_toEndOf="@id/ivAlbumFriend"
+        app:layout_constraintStart_toStartOf="@id/ivAlbumFriend"
+        app:layout_constraintTop_toTopOf="@id/ivAlbumFriend" />
+
+
+    <ImageView
+        android:id="@+id/ivAlbumLove"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:src="@drawable/ic_selector_love"
+        app:layout_constraintEnd_toStartOf="@id/ivAlbumMyAlbum"
+        app:layout_constraintStart_toEndOf="@id/ivAlbumFriend"
+        app:layout_constraintTop_toTopOf="@id/ivAlbumFriend" />
+
+    <ImageView
+        android:id="@+id/ivAlbumSelectLove"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:src="@drawable/round_album_select"
+        app:layout_constraintBottom_toBottomOf="@id/ivAlbumLove"
+        app:layout_constraintEnd_toEndOf="@id/ivAlbumLove"
+        app:layout_constraintStart_toStartOf="@id/ivAlbumLove"
+        app:layout_constraintTop_toTopOf="@id/ivAlbumLove" />
+
+    <ImageView
+        android:id="@+id/ivAlbumMyAlbum"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:src="@drawable/ic_selector_myalbum"
+        app:layout_constraintEnd_toStartOf="@id/ivAlbumCollectBook"
+        app:layout_constraintStart_toEndOf="@id/ivAlbumLove"
+        app:layout_constraintTop_toTopOf="@id/ivAlbumFriend" />
+
+    <ImageView
+        android:id="@+id/ivAlbumSelectMyAlbum"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:src="@drawable/round_album_select"
+        app:layout_constraintBottom_toBottomOf="@id/ivAlbumMyAlbum"
+        app:layout_constraintEnd_toEndOf="@id/ivAlbumMyAlbum"
+        app:layout_constraintStart_toStartOf="@id/ivAlbumMyAlbum"
+        app:layout_constraintTop_toTopOf="@id/ivAlbumMyAlbum" />
+
+    <ImageView
+        android:id="@+id/ivAlbumCollectBook"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:src="@drawable/ic_selector_theme_family"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/ivAlbumMyAlbum"
+        app:layout_constraintTop_toTopOf="@id/ivAlbumFriend" />
+
+    <ImageView
+        android:id="@+id/ivAlbumSelectCollectBook"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:src="@drawable/round_album_select"
+        app:layout_constraintBottom_toBottomOf="@id/ivAlbumCollectBook"
+        app:layout_constraintEnd_toEndOf="@id/ivAlbumCollectBook"
+        app:layout_constraintStart_toStartOf="@id/ivAlbumCollectBook"
+        app:layout_constraintTop_toTopOf="@id/ivAlbumCollectBook" />
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/vpAlbumCover"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="35dp"
+        app:layout_constraintBottom_toTopOf="@id/tvEditButton"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ivAlbumFriend" />
+
+    <TextView
+        android:id="@+id/tvEditButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:background="@drawable/bg_round_100dp_black"
+        android:gravity="center_horizontal"
+        android:paddingVertical="14dp"
+        android:text="@string/edit"
+        android:textAppearance="@style/TextAppearance.Pophory.PopupButton1"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/vpAlbumCover" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

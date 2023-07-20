@@ -3,6 +3,7 @@ package com.teampophory.pophory.data.repository.photo
 import com.teampophory.pophory.common.okhttp.getResponseBodyOrThrow
 import com.teampophory.pophory.config.di.qualifier.Unsecured
 import com.teampophory.pophory.data.model.photo.Studio
+import com.teampophory.pophory.data.network.model.album.AlbumCoverChangeRequest
 import com.teampophory.pophory.data.network.model.album.PhotoListResponse
 import com.teampophory.pophory.data.network.model.photo.PhotoRequest
 import com.teampophory.pophory.data.network.service.PhotoService
@@ -56,5 +57,15 @@ class DefaultPhotoRepository @Inject constructor(
 
     override suspend fun getPhotoInfoFromS3(): Result<S3Image> {
         return runCatching { photoService.getPhotoInfoFromS3().toS3Image() }
+    }
+
+    override suspend fun patchAlbumCover(
+        albumCoverId: Long,
+        albumCoverChangeRequest: AlbumCoverChangeRequest
+    ): Result<Unit> {
+        return runCatching {
+            photoService.patchAlbumCover(albumCoverId, albumCoverChangeRequest)
+                .getResponseBodyOrThrow()
+        }
     }
 }

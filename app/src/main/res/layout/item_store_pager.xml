@@ -8,7 +8,6 @@
         android:id="@+id/iv_store_pager"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginHorizontal="46dp"
         android:contentDescription="pager item image"
         android:scaleType="fitCenter"
         app:layout_constraintStart_toStartOf="parent"
