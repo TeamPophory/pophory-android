@@ -8,6 +8,7 @@ plugins {
     alias(libs.plugins.google.services)
     alias(libs.plugins.app.distribution)
     alias(libs.plugins.crashlytics)
+    id("com.google.android.gms.oss-licenses-plugin")
 }
 
 val properties = Properties().apply {
@@ -82,6 +83,7 @@ dependencies {
     implementation(libs.google.android.gms)
     implementation(libs.flexbox)
     implementation(libs.accompanist.webview)
+    implementation(libs.oss)
 
     // Third Party
     implementation(libs.dot.indicator)
@@ -92,7 +94,7 @@ dependencies {
 
     debugImplementation(libs.bundles.flipper)
 
-    //Firebase
+    // Firebase
     implementation(platform(libs.firebase))
     implementation(libs.bundles.firebase)
 }

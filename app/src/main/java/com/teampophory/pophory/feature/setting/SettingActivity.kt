@@ -11,6 +11,10 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
 import com.jakewharton.processphoenix.ProcessPhoenix
 import com.teampophory.pophory.config.di.qualifier.Kakao
 import com.teampophory.pophory.design.PophoryTheme
@@ -35,37 +39,60 @@ class SettingActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             val message by viewModel.message.collectAsStateWithLifecycle("")
+            val navController = rememberNavController()
             PophoryTheme {
-                SettingScreen(
-                    message = message,
-                    onNavigateHome = { finish() },
-                    onNavigateNotice = {
-                        startActivity(
-                            WebViewActivity.newIntent(
-                                this,
-                                "https://pophoryofficial.wixsite.com/pophory/notice"
-                            )
+                NavHost(navController = navController, startDestination = "setting") {
+                    composable("setting") {
+                        SettingScreen(
+                            navController = navController,
+                            message = message,
+                            onNavigateHome = { finish() },
+                            onNavigateNotice = {
+                                startActivity(
+                                    WebViewActivity.newIntent(
+                                        this@SettingActivity,
+                                        "https://pophoryofficial.wixsite.com/pophory/notice"
+                                    )
+                                )
+                            },
+                            onLogout = ::logout,
+                            onWithdrawal = ::withdrawal
                         )
-                    },
-                    onNavigatePersonalTerms = {
-                        startActivity(
-                            WebViewActivity.newIntent(
-                                this,
-                                "https://pophoryofficial.wixsite.com/pophory/%EC%A0%95%EC%B1%85#policy2"
-                            )
+                    }
+                    composable("term") {
+                        TermScreen(
+                            navController = navController,
+                            onNavigatePersonalTerms = {
+                                startActivity(
+                                    WebViewActivity.newIntent(
+                                        this@SettingActivity,
+                                        "https://pophoryofficial.wixsite.com/pophory/%EC%A0%95%EC%B1%85#policy2"
+                                    )
+                                )
+                            },
+                            onNavigateTerm = {
+                                startActivity(
+                                    WebViewActivity.newIntent(
+                                        this@SettingActivity,
+                                        "https://pophoryofficial.wixsite.com/pophory/%EC%A0%95%EC%B1%85#policy1"
+                                    )
+                                )
+                            },
+                            onNavigateOss = {
+                                OssLicensesMenuActivity.setActivityTitle("Open Source Licenses")
+                                startActivity(
+                                    Intent(
+                                        this@SettingActivity,
+                                        OssLicensesMenuActivity::class.java
+                                    )
+                                )
+                            }
                         )
-                    },
-                    onNavigateTerm = {
-                        startActivity(
-                            WebViewActivity.newIntent(
-                                this,
-                                "https://pophoryofficial.wixsite.com/pophory/%EC%A0%95%EC%B1%85#policy1"
-                            )
-                        )
-                    },
-                    onLogout = ::logout,
-                    onWithdrawal = ::withdrawal
-                )
+                    }
+                    composable("team") {
+                        TeamScreen(navController)
+                    }
+                }
             }
         }
         viewModel.event
