@@ -47,7 +47,7 @@ class AlbumDetailActivity : AppCompatActivity() {
                         ?.let { fragment ->
                             (fragment as? AlbumDeleteDialogFragment)?.dismissAllowingStateLoss()
                         }
-                    toast("앨범이 삭제되었습니다.")
+                    toast("사진이 삭제되었습니다.")
                     setResult(RESULT_OK)
                     finish()
                 }
