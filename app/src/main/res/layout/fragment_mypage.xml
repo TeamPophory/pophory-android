@@ -202,7 +202,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="포릿이 너의 네컷사진을 전달해줄게!"
+            android:text="포릿이가 들려주는 ‘포포리’ 이야기, 들어볼래?"
             android:textAppearance="?textAppearanceCaption1"
             android:textColor="?colorOnSurface50"
             android:textSize="13sp"
