@@ -13,7 +13,6 @@ import com.teampophory.pophory.R
 import com.teampophory.pophory.common.context.stringOf
 import com.teampophory.pophory.common.view.viewBinding
 import com.teampophory.pophory.databinding.ActivityHomeBinding
-import com.teampophory.pophory.feature.HomeViewModel
 import com.teampophory.pophory.feature.home.mypage.MyPageFragment
 import com.teampophory.pophory.feature.home.photo.AddPhotoActivity
 import com.teampophory.pophory.feature.home.store.StoreFragment
