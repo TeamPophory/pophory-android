@@ -92,5 +92,4 @@ class OneButtonCommonDialog : DialogFragment() {
             }
         }
     }
-
 }
