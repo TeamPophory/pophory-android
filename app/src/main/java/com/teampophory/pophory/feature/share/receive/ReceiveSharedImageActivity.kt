@@ -72,7 +72,7 @@ class ReceiveSharedImageActivity : AppCompatActivity() {
                     is ReceiveImageUiState.Photo -> {
                         hideLoading()
                         binding.txtName.text = it.realName
-                        binding.txtNickname.text = it.nickName
+                        binding.txtNickname.text = "@${it.nickName}"
                         val request = ImageRequest.Builder(this)
                             .data(it.imageUrl)
                             .crossfade(true)
