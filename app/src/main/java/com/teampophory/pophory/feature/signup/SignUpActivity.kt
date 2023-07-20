@@ -25,20 +25,27 @@ class SignUpActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         observeEvent()
-        //다음 버튼
+        // 다음 버튼
         setOnClickNextButton()
-        //툴바 뒤로 가기 버튼
+        // 툴바 뒤로 가기 버튼
         setOnToolbarBackPressed()
     }
 
     private fun setOnToolbarBackPressed() {
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_sign_up_fragment) as NavHostFragment
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.nav_host_sign_up_fragment) as NavHostFragment
         val navController = navHostFragment.findNavController()
 
         binding.btnBack.setOnClickListener {
             val currentFragment = navController.currentDestination?.label
             when (currentFragment) {
-                SIGN_UP_FIRST_FRAGMENT -> startActivity(Intent(this, OnBoardingActivity::class.java))
+                SIGN_UP_FIRST_FRAGMENT -> startActivity(
+                    Intent(
+                        this,
+                        OnBoardingActivity::class.java
+                    )
+                )
+
                 SIGN_UP_SECOND_FRAGMENT -> navController.popBackStack()
                 SIGN_UP_THIRD_FRAGMENT -> navController.popBackStack()
             }
@@ -46,8 +53,8 @@ class SignUpActivity : AppCompatActivity() {
     }
 
     private fun setOnClickNextButton() {
-
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_sign_up_fragment) as NavHostFragment
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.nav_host_sign_up_fragment) as NavHostFragment
         val navController = navHostFragment.findNavController()
 
         binding.btnNext.setOnClickListener {
@@ -56,6 +63,10 @@ class SignUpActivity : AppCompatActivity() {
                 SIGN_UP_SECOND_FRAGMENT -> viewModel.nicknameCheck()
                 SIGN_UP_THIRD_FRAGMENT -> viewModel.signUp()
             }
+        }
+        binding.btnNext.text = when (navController.currentDestination?.label) {
+            SIGN_UP_FIRST_FRAGMENT, SIGN_UP_SECOND_FRAGMENT -> "다음으로 넘어가기"
+            else -> "완료하기"
         }
     }
 
@@ -89,6 +100,7 @@ class SignUpActivity : AppCompatActivity() {
             binding.btnNext.isEnabled = it
         }
     }
+
     companion object {
         const val SIGN_UP_FIRST_FRAGMENT = "SignUpFirstFragment"
         const val SIGN_UP_SECOND_FRAGMENT = "SignUpSecondFragment"
