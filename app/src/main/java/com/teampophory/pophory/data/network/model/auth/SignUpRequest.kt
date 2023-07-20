@@ -1,4 +1,4 @@
-package com.teampophory.pophory.network.model
+package com.teampophory.pophory.data.network.model.auth
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

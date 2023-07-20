@@ -7,7 +7,7 @@ import com.teampophory.pophory.data.network.service.AuthService
 import com.teampophory.pophory.data.network.service.RefreshApi
 import com.teampophory.pophory.data.repository.auth.AuthRepository
 import com.teampophory.pophory.data.repository.auth.DefaultAuthRepository
-import com.teampophory.pophory.network.retrofit.signup.RetrofitSignUpNetwork
+import com.teampophory.pophory.data.network.service.RetrofitSignUpNetwork
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
