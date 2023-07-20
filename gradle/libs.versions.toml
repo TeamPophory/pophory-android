@@ -115,6 +115,7 @@ material3-compose = { group = "androidx.compose.material3", name = "material3" }
 coil-compose = { group = "io.coil-kt", name = "coil-compose", version.ref = "coil" }
 activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activity" }
 lifecycle-compose = { group = "androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "lifecycle" }
+navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigation" }
 
 # dagger-hilt
 hilt = { module = "com.google.dagger:hilt-android", version.ref = "dagger-hilt" }
@@ -197,5 +198,5 @@ oss = { id = "com.google.android.gms.oss-licenses-plugin", version.ref = "oss-pl
 firebase = ["firebase-analytics", "firebase-crashlytics", "firebase-dynamiclink"]
 flipper = ["flipper", "soloader", "flipper-network"]
 lifecycle = ["lifecycle", "lifecycle-viewmodel", "lifecycle-livedata"]
-compose = ["ui", "ui-graphics", "ui-tooling", "ui-tooling-preview", "material3-compose", "coil-compose", "ui-foundation", "activity-compose", "lifecycle-compose"]
+compose = ["ui", "ui-graphics", "ui-tooling", "ui-tooling-preview", "material3-compose", "coil-compose", "ui-foundation", "activity-compose", "lifecycle-compose", "navigation-compose"]
 retrofit = ["retrofit", "retrofit-kotlin-serialization-converter"]
