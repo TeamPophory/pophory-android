@@ -79,6 +79,7 @@ class ReceiveImageViewModel @Inject constructor(
             _uiState.value = ReceiveImageUiState.SignUp
         }
         val photoState = uiState.value as ReceiveImageUiState.Photo
+        _uiState.value = ReceiveImageUiState.Loading
         viewModelScope.launch {
             runCatching {
                 authorizedService.acceptShare(photoState.photoId)
