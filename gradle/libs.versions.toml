@@ -78,6 +78,7 @@ dot-indicator = "5.0"
 kakao = "2.15.0"
 splash-screen = "1.0.1"
 javax-inject = "1"
+semver = "1.3.0"
 
 
 [libraries]
@@ -190,6 +191,8 @@ kakao-login = { group = "com.kakao.sdk", name = "v2-user", version.ref = "kakao"
 javax-inject = { group = "javax.inject", name = "javax.inject", version.ref = "javax-inject" }
 
 sentry = { module = "io.sentry:sentry", version.ref = "sentry-android" }
+
+semver = { module = "net.swiftzer.semver:semver", version.ref = "semver" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
