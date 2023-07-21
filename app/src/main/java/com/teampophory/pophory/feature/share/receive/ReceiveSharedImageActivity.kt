@@ -15,6 +15,7 @@ import com.google.firebase.ktx.Firebase
 import com.teampophory.pophory.common.activity.hideLoading
 import com.teampophory.pophory.common.activity.showLoading
 import com.teampophory.pophory.common.context.snackBar
+import com.teampophory.pophory.common.context.toast
 import com.teampophory.pophory.common.view.setOnSingleClickListener
 import com.teampophory.pophory.common.view.viewBinding
 import com.teampophory.pophory.databinding.ActivityReceiveSharedImageBinding
@@ -129,33 +130,39 @@ class ReceiveSharedImageActivity : AppCompatActivity() {
                                     "사진 등록 시 네트워크에 문제가 발생했습니다."
                                 }
                             } else {
-                                val errorBody = parseErrorBody(httpException)
-                                val parsedBody = Json.parseToJsonElement(errorBody).jsonObject
-                                if (!parsedBody.containsKey("code")) {
-                                    snackBar(binding.root) {
-                                        "사진 등록 시 네트워크에 문제가 발생했습니다."
-                                    }
-                                } else {
-                                    val errorCode = parsedBody["code"]?.jsonPrimitive?.intOrNull
-                                    when (errorCode) {
-                                        ALBUM_LIMIT_EXCEPTION_CODE -> {
-                                            snackBar(binding.root) {
-                                                "앨범에 사진을 바운 이후 다시 이용해주세요."
-                                            }
+                                runCatching {
+                                    val errorBody = parseErrorBody(httpException)
+                                    Json.parseToJsonElement(errorBody).jsonObject
+                                }.onSuccess { parsedBody ->
+                                    if (!parsedBody.containsKey("code")) {
+                                        snackBar(binding.root) {
+                                            "사진 등록 시 네트워크에 문제가 발생했습니다."
                                         }
+                                    } else {
+                                        val errorCode = parsedBody["code"]?.jsonPrimitive?.intOrNull
+                                        when (errorCode) {
+                                            ALBUM_LIMIT_EXCEPTION_CODE -> {
+                                                snackBar(binding.root) {
+                                                    "앨범에 사진을 바운 이후 다시 이용해주세요."
+                                                }
+                                            }
 
-                                        SELF_APPROVE_EXCEPTION_CODE -> {
-                                            snackBar(binding.root) {
-                                                "이미 내 앨범에 있는 사진이에요."
+                                            SELF_APPROVE_EXCEPTION_CODE -> {
+                                                snackBar(binding.root) {
+                                                    "이미 내 앨범에 있는 사진이에요."
+                                                }
                                             }
-                                        }
 
-                                        else -> {
-                                            snackBar(binding.root) {
-                                                "앨범에 사진 등록 시 네트워크에 문제가 발생했습니다."
+                                            else -> {
+                                                snackBar(binding.root) {
+                                                    "앨범에 사진 등록 시 네트워크에 문제가 발생했습니다."
+                                                }
                                             }
                                         }
                                     }
+                                }.onFailure {
+                                    toast("사진 정보를 가져올 때 문제가 발생했습니다.")
+                                    finish()
                                 }
                             }
                         }
