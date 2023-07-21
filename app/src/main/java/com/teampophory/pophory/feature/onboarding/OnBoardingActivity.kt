@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.lifecycleScope
 import androidx.viewpager2.widget.ViewPager2
+import com.teampophory.pophory.BuildConfig
 import com.teampophory.pophory.R
 import com.teampophory.pophory.auth.entity.UserAccountState
 import com.teampophory.pophory.auth.usecase.AuthUseCase
@@ -22,6 +23,7 @@ import com.teampophory.pophory.feature.signup.SignUpActivity
 import com.teampophory.pophory.network.datastore.PophoryDataStore
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import net.swiftzer.semver.SemVer
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -48,6 +50,7 @@ class OnBoardingActivity : AppCompatActivity() {
         if (dataStore.autoLoginConfigured) {
             startActivity(HomeActivity.getIntent(this@OnBoardingActivity))
         }
+        val version = SemVer.parse(BuildConfig.VERSION_NAME)
         setContentView(binding.root)
         setViewPager()
         setOnLoginPressed()
