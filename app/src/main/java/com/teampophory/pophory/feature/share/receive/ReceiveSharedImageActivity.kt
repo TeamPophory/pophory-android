@@ -121,13 +121,30 @@ class ReceiveSharedImageActivity : AppCompatActivity() {
                             } else {
                                 val errorBody = parseErrorBody(httpException)
                                 val parsedBody = Json.parseToJsonElement(errorBody).jsonObject
-                                if (parsedBody.containsKey("code") && parsedBody["code"]?.jsonPrimitive?.intOrNull == 442) {
+                                if (!parsedBody.containsKey("code")) {
                                     snackBar(binding.root) {
-                                        "앨범에 사진을 바운 이후 다시 이용해주세요."
+                                        "사진 등록 시 네트워크에 문제가 발생했습니다."
                                     }
                                 } else {
-                                    snackBar(binding.root) {
-                                        "앨범에 사진 등록 시 네트워크에 문제가 발생했습니다."
+                                    val errorCode = parsedBody["code"]?.jsonPrimitive?.intOrNull
+                                    when (errorCode) {
+                                        ALBUM_LIMIT_EXCEPTION_CODE -> {
+                                            snackBar(binding.root) {
+                                                "앨범에 사진을 바운 이후 다시 이용해주세요."
+                                            }
+                                        }
+
+                                        SELF_APPROVE_EXCEPTION_CODE -> {
+                                            snackBar(binding.root) {
+                                                "이미 내 앨범에 있는 사진이에요."
+                                            }
+                                        }
+
+                                        else -> {
+                                            snackBar(binding.root) {
+                                                "앨범에 사진 등록 시 네트워크에 문제가 발생했습니다."
+                                            }
+                                        }
                                     }
                                 }
                             }
@@ -139,5 +156,10 @@ class ReceiveSharedImageActivity : AppCompatActivity() {
 
     private fun parseErrorBody(exception: HttpException): String {
         return exception.response()?.errorBody()?.string() ?: ""
+    }
+
+    private companion object {
+        const val ALBUM_LIMIT_EXCEPTION_CODE = 442
+        const val SELF_APPROVE_EXCEPTION_CODE = 4423
     }
 }
