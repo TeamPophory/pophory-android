@@ -26,8 +26,7 @@ class StartPophoryActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.btnStartPophory.setOnClickListener {
-            val intent = Intent(this, HomeActivity::class.java)
-            startActivity(intent)
+            startActivity(HomeActivity.getIntent(this))
         }
 
         this.onBackPressedDispatcher.addCallback(this, callback)
