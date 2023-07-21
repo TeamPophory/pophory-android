@@ -17,8 +17,8 @@
 
 <div align="center">
   <p align="center">
-    <img src="https://github.com/TeamPophory/pophory-android/assets/54518925/dbc1cb59-80c8-4968-942f-74a64415025e" width="60%" />
-    <img src="https://github.com/TeamPophory/pophory-android/assets/54518925/738a65b8-8e82-4ee7-94ed-6e42d688b37e" width="60%" />
+    <img src="https://github.com/TeamPophory/pophory-android/assets/54518925/dbc1cb59-80c8-4968-942f-74a64415025e"/>
+    <img src="https://github.com/TeamPophory/pophory-android/assets/54518925/738a65b8-8e82-4ee7-94ed-6e42d688b37e" />
   </p>
 </div>
 
