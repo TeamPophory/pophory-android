@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.TaskStackBuilder
+import androidx.core.view.isVisible
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import coil.imageLoader
@@ -84,7 +85,16 @@ class ReceiveSharedImageActivity : AppCompatActivity() {
                                 } else {
                                     binding.imgVertical
                                 }
-                                imageView.load(image)
+                                val invisibleImageView = if (width >= height) {
+                                    binding.imgVertical
+                                } else {
+                                    binding.imgHorizontal
+                                }
+                                with(imageView) {
+                                    isVisible = true
+                                    load(image)
+                                }
+                                invisibleImageView.isVisible = false
                             }.build()
                         imageLoader.enqueue(request)
                     }
