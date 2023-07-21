@@ -1,5 +1,6 @@
 package com.teampophory.pophory.feature.setting
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -56,7 +57,10 @@ fun TeamScreen(
                 .padding(it)
                 .fillMaxSize()
         ) {
-            /* TODO by Nunu 팀 소개 사진 넣기 */
+            Image(
+                painter = painterResource(id = R.drawable.img_team),
+                contentDescription = "Team Image"
+            )
         }
     }
 }
