@@ -77,6 +77,7 @@ class ReceiveImageViewModel @Inject constructor(
         }
         if (dataStore.accessToken.isEmpty()) {
             _uiState.value = ReceiveImageUiState.SignUp
+            return
         }
         val photoState = uiState.value as ReceiveImageUiState.Photo
         _uiState.value = ReceiveImageUiState.Loading
