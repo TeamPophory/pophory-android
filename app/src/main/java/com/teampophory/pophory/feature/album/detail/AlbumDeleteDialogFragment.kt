@@ -10,6 +10,7 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
 import com.teampophory.pophory.R
 import com.teampophory.pophory.common.context.dialogWidthPercent
+import com.teampophory.pophory.common.view.setOnSingleClickListener
 import com.teampophory.pophory.common.view.viewBinding
 import com.teampophory.pophory.databinding.FragmentAlbumDeleteDialogBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -47,7 +48,7 @@ class AlbumDeleteDialogFragment : DialogFragment() {
             tvReturnButton.setOnClickListener {
                 dismissAllowingStateLoss()
             }
-            tvDeleteButton.setOnClickListener {
+            tvDeleteButton.setOnSingleClickListener {
                 viewModel.deleteAlbum()
             }
         }

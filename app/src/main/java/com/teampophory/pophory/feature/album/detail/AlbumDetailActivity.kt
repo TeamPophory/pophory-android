@@ -74,7 +74,7 @@ class AlbumDetailActivity : AppCompatActivity() {
             finish()
         }
 
-        binding.ivAlbumDelete.setOnClickListener {
+        binding.ivAlbumDelete.setOnSingleClickListener {
             AlbumDeleteDialogFragment.newInstance().apply {
                 showAllowingStateLoss(supportFragmentManager, AlbumDeleteDialogFragment.TAG)
             }
