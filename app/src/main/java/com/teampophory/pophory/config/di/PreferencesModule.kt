@@ -13,6 +13,8 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import java.security.GeneralSecurityException
+import java.security.KeyStore
 import javax.inject.Singleton
 
 @Module
@@ -28,9 +30,33 @@ object PreferencesModule {
     ): SharedPreferences = if (BuildConfig.DEBUG) {
         context.getSharedPreferences(DEBUG_APP_PREFERNCES_NAME, Context.MODE_PRIVATE)
     } else {
-        EncryptedSharedPreferences.create(
+        try {
+            createEncryptedSharedPreferences(APP_PREFERENCES_NAME, context)
+        } catch (e: GeneralSecurityException) {
+            deleteMasterKeyEntry()
+            deleteExistingPref(APP_PREFERENCES_NAME, context)
+            createEncryptedSharedPreferences(APP_PREFERENCES_NAME, context)
+        }
+    }
+
+    private fun deleteExistingPref(fileName: String, context: Context) {
+        context.deleteSharedPreferences(fileName)
+    }
+
+    private fun deleteMasterKeyEntry() {
+        KeyStore.getInstance("AndroidKeyStore").apply {
+            load(null)
+            deleteEntry(MasterKey.DEFAULT_MASTER_KEY_ALIAS)
+        }
+    }
+
+    private fun createEncryptedSharedPreferences(
+        fileName: String,
+        context: Context
+    ): SharedPreferences {
+        return EncryptedSharedPreferences.create(
             context,
-            APP_PREFERENCES_NAME,
+            fileName,
             MasterKey.Builder(context, MasterKey.DEFAULT_MASTER_KEY_ALIAS)
                 .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
                 .build(),
