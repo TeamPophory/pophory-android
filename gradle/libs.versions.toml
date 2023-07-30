@@ -55,7 +55,7 @@ androidx-uiautomator = "2.3.0-alpha03"
 androidx-test = "1.5.2"
 
 # gradle
-agp = "8.0.2"
+agp = "8.1.0"
 kspplugin = "1.9.0-1.0.12"
 
 # third party
