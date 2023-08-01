@@ -4,6 +4,7 @@ import java.util.Properties
 plugins {
     pophory("application")
     pophory("compose")
+    pophory("junit5")
     alias(libs.plugins.sentry)
     alias(libs.plugins.google.services)
     alias(libs.plugins.app.distribution)
@@ -17,8 +18,10 @@ val properties = Properties().apply {
 
 android {
     namespace = "com.teampophory.pophory"
+    useLibrary("android.test.runner")
 
     defaultConfig {
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         applicationId = "com.teampophory.pophory"
         versionCode = libs.versions.versionCode.get().toInt()
         versionName = libs.versions.appVersion.get()
@@ -97,4 +100,20 @@ dependencies {
     // Firebase
     implementation(platform(libs.firebase))
     implementation(libs.bundles.firebase)
+
+    // Espresso
+    androidTestImplementation(libs.androidx.test.espresso)
+    androidTestImplementation(libs.androidx.test.espresso.intents)
+
+    // Core library
+    androidTestImplementation(libs.androidx.test.core)
+
+    // AndroidJUnitRunner and JUnit Rules
+    androidTestImplementation (libs.androidx.test.runner)
+    androidTestImplementation(libs.androidx.test.junit.ktx)
+    androidTestImplementation (libs.androidx.test.rules)
+
+    // Assertions
+    androidTestImplementation (libs.androidx.test.junit)
+    androidTestImplementation (libs.androidx.test.truth)
 }

@@ -14,7 +14,7 @@ class JUnit5Plugin : Plugin<Project> {
         val libs = extensions.getByType<VersionCatalogsExtension>().named("libs")
 
         dependencies {
-            "testImplementation"(libs.findBundle("junit5.test").get())
+            "testImplementation"(libs.findBundle("junit5").get())
             "androidTestImplementation"(libs.findLibrary("junit5").get())
             "androidTestImplementation"(libs.findLibrary("junit5.params").get())
             "androidTestImplementation"(libs.findLibrary("junit5.android.test.core").get())
