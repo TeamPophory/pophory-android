@@ -36,7 +36,7 @@ class SignUpActivityTest {
 
         // when
         onView(withId(R.id.edit_tv_name))
-            .perform(typeText("0"), closeSoftKeyboard())
+            .perform(typeText(input), closeSoftKeyboard())
 
         // then
         onView(withId(R.id.tv_error_message))
