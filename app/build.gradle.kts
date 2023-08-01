@@ -109,11 +109,11 @@ dependencies {
     androidTestImplementation(libs.androidx.test.core)
 
     // AndroidJUnitRunner and JUnit Rules
-    androidTestImplementation (libs.androidx.test.runner)
+    androidTestImplementation(libs.androidx.test.runner)
     androidTestImplementation(libs.androidx.test.junit.ktx)
-    androidTestImplementation (libs.androidx.test.rules)
+    androidTestImplementation(libs.androidx.test.rules)
 
     // Assertions
-    androidTestImplementation (libs.androidx.test.junit)
-    androidTestImplementation (libs.androidx.test.truth)
+    androidTestImplementation(libs.androidx.test.junit)
+    androidTestImplementation(libs.androidx.test.truth)
 }
