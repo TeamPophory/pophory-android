@@ -8,35 +8,37 @@ import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.espresso.matcher.ViewMatchers.withEffectiveVisibility
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withText
-import androidx.test.ext.junit.rules.activityScenarioRule
-import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.teampophory.pophory.feature.signup.SignUpActivity
+import de.mannodermaus.junit5.ActivityScenarioExtension
 import org.hamcrest.CoreMatchers.not
-import org.junit.Rule
-import org.junit.Test
 import org.junit.jupiter.api.DisplayName
-import org.junit.runner.RunWith
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.extension.RegisterExtension
 
-@RunWith(AndroidJUnit4::class)
-class UiTestSample {
-    @get:Rule var activityScenarioRule = activityScenarioRule<SignUpActivity>()
+class SignUpActivityTest {
+
+    @JvmField
+    @RegisterExtension
+    val activityScenario = ActivityScenarioExtension.launch<SignUpActivity>()
 
     @Test
-    @DisplayName("입력한 텍스트가 tv_text_count에 표시되는지 확인합니다.")
+    @DisplayName("TextInput 하단에는 항상 카운터가 표시된다.")
     fun testCheckTextCount() {
-        // tv_text_count가 보이는지 확인합니다.
         onView(withId(R.id.tv_text_count))
             .check(matches(not(withText("(0/6)~"))))
     }
 
     @Test
-    @DisplayName("입력한 텍스트가 에러메세지를 발생시키는지 체크합니다.")
+    @DisplayName("2자 이하의 텍스트를 입력하면 에러가 발생한다")
     fun checkErrorMessageVisibilityAfterInputLongText() {
-        // 2자 이하의 텍스트를 입력합니다.
+        // given
+        val input = "0"
+
+        // when
         onView(withId(R.id.edit_tv_name))
             .perform(typeText("0"), closeSoftKeyboard())
 
-        // tv_error_message가 보이는지 확인합니다.
+        // then
         onView(withId(R.id.tv_error_message))
             .check(matches(withEffectiveVisibility(ViewMatchers.Visibility.VISIBLE)))
     }
