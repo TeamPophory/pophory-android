@@ -32,7 +32,6 @@ class AndroidTestPlugin: Plugin<Project> {
 
         dependencies {
             "testImplementation"(libs.findLibrary("junit").get())
-            "testImplementation"(libs.findLibrary("espresso").get())
             "debugImplementation"(libs.findLibrary("truth").get())
             "testImplementation"(libs.findLibrary("robolectric").get())
             "androidTestImplementation"(libs.findBundle("androidx.android.test").get())
