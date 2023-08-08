@@ -17,7 +17,7 @@ import androidx.navigation.compose.rememberNavController
 import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
 import com.jakewharton.processphoenix.ProcessPhoenix
 import com.teampophory.pophory.config.di.qualifier.Kakao
-import com.teampophory.pophory.design.PophoryTheme
+import com.teampophory.pophory.designsystem.PophoryTheme
 import com.teampophory.pophory.feature.auth.social.OAuthService
 import com.teampophory.pophory.feature.onboarding.OnBoardingActivity
 import com.teampophory.pophory.feature.setting.webview.WebViewActivity

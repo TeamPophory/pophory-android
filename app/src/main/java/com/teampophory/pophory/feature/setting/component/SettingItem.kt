@@ -18,7 +18,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.teampophory.pophory.R
 import com.teampophory.pophory.common.compose.DefaultPreview
-import com.teampophory.pophory.design.PophoryTheme
+import com.teampophory.pophory.designsystem.PophoryTheme
 
 @Composable
 fun SettingItem(

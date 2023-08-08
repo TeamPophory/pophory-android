@@ -1,4 +1,4 @@
-package com.teampophory.pophory.design
+package com.teampophory.pophory.designsystem
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
@@ -10,7 +10,6 @@ import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
-import com.teampophory.pophory.R
 
 val PretendardBold = FontFamily(Font(R.font.pretendard_bold, FontWeight.Bold))
 val PretendardMedium = FontFamily(Font(R.font.pretendard_medium, FontWeight.Medium))

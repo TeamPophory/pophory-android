@@ -6,7 +6,7 @@ import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import com.teampophory.pophory.common.intent.stringExtra
-import com.teampophory.pophory.design.PophoryTheme
+import com.teampophory.pophory.designsystem.PophoryTheme
 
 class WebViewActivity : AppCompatActivity() {
     private val url by stringExtra("")
