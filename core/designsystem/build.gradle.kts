@@ -7,3 +7,7 @@ plugins {
 android {
     namespace = "com.teampophory.pophory.designsystem"
 }
+
+dependencies {
+    implementation(libs.splash.screen)
+}
