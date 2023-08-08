@@ -143,10 +143,10 @@ class AddPhotoActivity : BindingActivity<ActivityAddPhotoBinding>(R.layout.activ
             .onEach {
                 if (it.isNotEmpty()) {
                     binding.txtStudio.text = it.joinToString { studio -> studio.name }
-                    binding.txtStudio.setTextColor(colorOf(R.color.pophory_black))
+                    binding.txtStudio.setTextColor(colorOf(com.teampophory.pophory.designsystem.R.color.pophory_black))
                 } else {
                     binding.txtStudio.text = "사진관을 선택해주세요"
-                    binding.txtStudio.setTextColor(colorOf(R.color.gray_40))
+                    binding.txtStudio.setTextColor(colorOf(com.teampophory.pophory.designsystem.R.color.gray_40))
                 }
             }.launchIn(lifecycleScope)
     }

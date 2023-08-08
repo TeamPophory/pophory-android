@@ -111,8 +111,8 @@ class SignUpSecondFragment : Fragment() {
 
         val text = buildSpannedString {
             append(splittedText.getOrNull(0))
-            color(colorOf(R.color.pophory_purple)) {
-                textAppearance(requireContext(), R.style.TextAppearance_Pophory_HeadLineBold) {
+            color(colorOf(com.teampophory.pophory.designsystem.R.color.pophory_purple)) {
+                textAppearance(requireContext(), com.teampophory.pophory.designsystem.R.style.TextAppearance_Pophory_HeadLineBold) {
                     append(coloredText)
                 }
             }

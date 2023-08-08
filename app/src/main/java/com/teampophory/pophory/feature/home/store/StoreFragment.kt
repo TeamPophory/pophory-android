@@ -157,8 +157,8 @@ class StoreFragment : Fragment() {
             "/$photoLimit",
             photoCount.toString(),
             binding.tvStoreAlbumPhotoCount,
-            R.color.pophory_purple,
-            R.style.TextAppearance_Pophory_HeadLineMedium
+            com.teampophory.pophory.designsystem.R.color.pophory_purple,
+            com.teampophory.pophory.designsystem.R.style.TextAppearance_Pophory_HeadLineMedium
         )
 
         updateSeekBar(photoCount = photoCount, photoLimit = photoLimit)
@@ -180,8 +180,8 @@ class StoreFragment : Fragment() {
             notColoredText,
             coloredText,
             binding.tvStoreWelcome,
-            R.color.pophory_purple,
-            R.style.TextAppearance_Pophory_HeadLineBold
+            com.teampophory.pophory.designsystem.R.color.pophory_purple,
+            com.teampophory.pophory.designsystem.R.style.TextAppearance_Pophory_HeadLineBold
         )
     }
 
@@ -191,8 +191,8 @@ class StoreFragment : Fragment() {
             notColoredText,
             photoCount,
             binding.tvStoreAlbumPhotoCount,
-            R.color.pophory_purple,
-            R.style.TextAppearance_Pophory_HeadLineMedium
+            com.teampophory.pophory.designsystem.R.color.pophory_purple,
+            com.teampophory.pophory.designsystem.R.style.TextAppearance_Pophory_HeadLineMedium
         )
     }
 
