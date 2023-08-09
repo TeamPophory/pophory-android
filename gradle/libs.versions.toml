@@ -77,6 +77,7 @@ constraintlayout = "2.1.4"
 dot-indicator = "5.0"
 kakao = "2.15.0"
 splash-screen = "1.0.1"
+javax-inject = "1"
 
 
 [libraries]
@@ -120,6 +121,7 @@ coil-compose = { group = "io.coil-kt", name = "coil-compose", version.ref = "coi
 activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activity" }
 lifecycle-compose = { group = "androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "lifecycle" }
 navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigation" }
+splash-screen = { module = "androidx.core:core-splashscreen", version.ref = "splash-screen" }
 
 # dagger-hilt
 hilt = { module = "com.google.dagger:hilt-android", version.ref = "dagger-hilt" }
@@ -185,7 +187,7 @@ dot-indicator = { module = "com.tbuonomo:dotsindicator", version.ref = "dot-indi
 
 kakao-login = { group = "com.kakao.sdk", name = "v2-user", version.ref = "kakao" }
 
-splash-screen = { module = "androidx.core:core-splashscreen", version.ref = "splash-screen" }
+javax-inject = { group = "javax.inject", name = "javax.inject", version.ref = "javax-inject" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
