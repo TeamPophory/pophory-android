@@ -1,10 +1,9 @@
 package com.teampophory.pophory.network.authenticator
 
 import android.content.Context
-import android.content.Intent
 import com.jakewharton.processphoenix.ProcessPhoenix
 import com.kakao.sdk.user.UserApiClient
-import com.teampophory.pophory.feature.onboarding.OnBoardingActivity
+import com.teampophory.pophory.common.navigation.NavigationProvider
 import com.teampophory.pophory.network.api.RefreshApi
 import com.teampophory.pophory.network.datastore.PophoryDataStore
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -21,7 +20,8 @@ import javax.inject.Singleton
 class PophoryAuthenticator @Inject constructor(
     private val dataStore: PophoryDataStore,
     private val api: RefreshApi,
-    @ApplicationContext private val context: Context
+    @ApplicationContext private val context: Context,
+    private val navigationProvider: NavigationProvider
 ) : Authenticator {
     override fun authenticate(route: Route?, response: Response): Request? {
         if (response.request.header("Authorization") == null) {
@@ -43,10 +43,7 @@ class PophoryAuthenticator @Inject constructor(
                     UserApiClient.instance.logout { error ->
                         Timber.e(error)
                         dataStore.clear()
-                        ProcessPhoenix.triggerRebirth(
-                            context,
-                            Intent(context, OnBoardingActivity::class.java)
-                        )
+                        ProcessPhoenix.triggerRebirth(context, navigationProvider.toOnboarding())
                     }
                 }
             }.getOrThrow()
