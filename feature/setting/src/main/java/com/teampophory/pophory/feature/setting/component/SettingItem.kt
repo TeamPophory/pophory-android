@@ -16,7 +16,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.teampophory.pophory.R
 import com.teampophory.pophory.common.compose.DefaultPreview
 import com.teampophory.pophory.designsystem.PophoryTheme
 
@@ -24,7 +23,7 @@ import com.teampophory.pophory.designsystem.PophoryTheme
 fun SettingItem(
     modifier: Modifier = Modifier,
     title: String,
-    @DrawableRes right: Int = R.drawable.ic_chevron_right,
+    @DrawableRes right: Int = com.teampophory.pophory.designsystem.R.drawable.ic_chevron_right,
     onClick: () -> Unit = {},
 ) {
     Column {

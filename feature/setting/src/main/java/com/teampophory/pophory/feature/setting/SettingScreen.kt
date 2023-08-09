@@ -23,7 +23,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.teampophory.pophory.R
 import com.teampophory.pophory.common.compose.DefaultPreview
 import com.teampophory.pophory.common.compose.bottomBorder
 import com.teampophory.pophory.designsystem.PophoryTheme
@@ -66,7 +65,7 @@ fun SettingScreen(
                 navigationIcon = {
                     IconButton(onClick = onNavigateHome) {
                         Icon(
-                            painter = painterResource(id = R.drawable.ic_chevron_left),
+                            painter = painterResource(id = com.teampophory.pophory.designsystem.R.drawable.ic_chevron_left),
                             contentDescription = "Back To Home"
                         )
                     }

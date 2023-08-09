@@ -1,6 +1,5 @@
 package com.teampophory.pophory.feature.setting
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
@@ -14,12 +13,11 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
 import com.jakewharton.processphoenix.ProcessPhoenix
+import com.teampophory.pophory.common.navigation.NavigationProvider
 import com.teampophory.pophory.common.qualifier.Kakao
 import com.teampophory.pophory.designsystem.PophoryTheme
 import com.teampophory.pophory.feature.auth.social.OAuthService
-import com.teampophory.pophory.feature.onboarding.OnBoardingActivity
 import com.teampophory.pophory.feature.setting.webview.WebViewActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
@@ -32,6 +30,9 @@ class SettingActivity : AppCompatActivity() {
     @Inject
     @Kakao
     lateinit var kakaoAuthService: OAuthService
+
+    @Inject
+    lateinit var navigationProvider: NavigationProvider
 
     private val viewModel by viewModels<SettingViewModel>()
 
@@ -79,13 +80,7 @@ class SettingActivity : AppCompatActivity() {
                                 )
                             },
                             onNavigateOss = {
-                                OssLicensesMenuActivity.setActivityTitle("Open Source Licenses")
-                                startActivity(
-                                    Intent(
-                                        this@SettingActivity,
-                                        OssLicensesMenuActivity::class.java
-                                    )
-                                )
+                                startActivity(navigationProvider.toLicense())
                             }
                         )
                     }
@@ -98,7 +93,7 @@ class SettingActivity : AppCompatActivity() {
         viewModel.event
             .flowWithLifecycle(lifecycle)
             .onEach {
-                ProcessPhoenix.triggerRebirth(this, Intent(this, OnBoardingActivity::class.java))
+                ProcessPhoenix.triggerRebirth(this, navigationProvider.toOnboarding())
             }.launchIn(lifecycleScope)
     }
 

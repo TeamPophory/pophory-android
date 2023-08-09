@@ -1,6 +1,5 @@
 package com.teampophory.pophory.feature.setting
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -18,15 +17,18 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.teampophory.pophory.R
 import com.teampophory.pophory.common.compose.DefaultPreview
 import com.teampophory.pophory.common.compose.bottomBorder
 import com.teampophory.pophory.designsystem.PophoryTheme
+import com.teampophory.pophory.feature.setting.component.SettingItem
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TeamScreen(
-    navController: NavController
+fun TermScreen(
+    navController: NavController,
+    onNavigatePersonalTerms: () -> Unit = {},
+    onNavigateTerm: () -> Unit = {},
+    onNavigateOss: () -> Unit = {}
 ) {
     Scaffold(
         modifier = Modifier.fillMaxSize(),
@@ -34,7 +36,7 @@ fun TeamScreen(
             CenterAlignedTopAppBar(
                 title = {
                     Text(
-                        text = "포포리팀",
+                        text = "약관 및 정책",
                         textAlign = TextAlign.Center,
                         modifier = Modifier.fillMaxWidth(),
                         style = PophoryTheme.typography.headline2
@@ -43,7 +45,7 @@ fun TeamScreen(
                 navigationIcon = {
                     IconButton(onClick = { navController.popBackStack() }) {
                         Icon(
-                            painter = painterResource(id = R.drawable.ic_chevron_left),
+                            painter = painterResource(id = com.teampophory.pophory.designsystem.R.drawable.ic_chevron_left),
                             contentDescription = "Back To Home"
                         )
                     }
@@ -57,19 +59,18 @@ fun TeamScreen(
                 .padding(it)
                 .fillMaxSize()
         ) {
-            Image(
-                painter = painterResource(id = R.drawable.img_team),
-                contentDescription = "Team Image"
-            )
+            SettingItem(title = "개인정보 처리방침", onClick = onNavigatePersonalTerms)
+            SettingItem(title = "이용 약관", onClick = onNavigateTerm)
+            SettingItem(title = "오픈소스 라이선스", onClick = onNavigateOss)
         }
     }
 }
 
 @DefaultPreview
 @Composable
-private fun TeamScreenPreview() {
+private fun TermScreenPreview() {
     PophoryTheme {
         val navController = rememberNavController()
-        TeamScreen(navController)
+        TermScreen(navController)
     }
 }
