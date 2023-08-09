@@ -8,18 +8,18 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.lifecycleScope
 import androidx.viewpager2.widget.ViewPager2
 import com.teampophory.pophory.R
+import com.teampophory.pophory.auth.entity.UserAccountState
+import com.teampophory.pophory.auth.usecase.AuthUseCase
+import com.teampophory.pophory.auth.usecase.AutoLoginConfigureUseCase
 import com.teampophory.pophory.common.context.snackBar
+import com.teampophory.pophory.common.qualifier.Kakao
 import com.teampophory.pophory.common.view.viewBinding
-import com.teampophory.pophory.config.di.qualifier.Kakao
-import com.teampophory.pophory.data.local.PophoryDataStore
-import com.teampophory.pophory.data.model.auth.UserAccountState
 import com.teampophory.pophory.databinding.ActivityOnBoardingBinding
-import com.teampophory.pophory.domain.AuthUseCase
-import com.teampophory.pophory.domain.AutoLoginConfigureUseCase
 import com.teampophory.pophory.feature.auth.social.OAuthService
 import com.teampophory.pophory.feature.home.HomeActivity
 import com.teampophory.pophory.feature.onboarding.adapter.OnBoardingViewPagerAdapter
 import com.teampophory.pophory.feature.signup.SignUpActivity
+import com.teampophory.pophory.network.datastore.PophoryDataStore
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import timber.log.Timber
@@ -82,9 +82,9 @@ class OnBoardingActivity : AppCompatActivity() {
                                 }
 
                                 UserAccountState.UNREGISTERED -> {
-                                    val intent =
+                                    startActivity(
                                         Intent(this@OnBoardingActivity, SignUpActivity::class.java)
-                                    startActivity(intent)
+                                    )
                                 }
                             }
                         }

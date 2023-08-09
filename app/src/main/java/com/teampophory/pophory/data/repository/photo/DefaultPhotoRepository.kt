@@ -1,7 +1,7 @@
 package com.teampophory.pophory.data.repository.photo
 
 import com.teampophory.pophory.common.okhttp.getResponseBodyOrThrow
-import com.teampophory.pophory.config.di.qualifier.Unsecured
+import com.teampophory.pophory.common.qualifier.Unsecured
 import com.teampophory.pophory.data.model.photo.Studio
 import com.teampophory.pophory.data.network.model.album.AlbumCoverChangeRequest
 import com.teampophory.pophory.data.network.model.album.PhotoListResponse

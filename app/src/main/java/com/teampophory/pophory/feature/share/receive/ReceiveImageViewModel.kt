@@ -2,12 +2,12 @@ package com.teampophory.pophory.feature.share.receive
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.teampophory.pophory.config.di.qualifier.Secured
-import com.teampophory.pophory.config.di.qualifier.Unsecured
-import com.teampophory.pophory.data.local.PophoryDataStore
+import com.teampophory.pophory.common.qualifier.Secured
+import com.teampophory.pophory.common.qualifier.Unsecured
 import com.teampophory.pophory.data.network.model.share.AcceptShareResponse
 import com.teampophory.pophory.data.network.model.share.SharePhotoResponse
 import com.teampophory.pophory.data.network.service.ShareService
+import com.teampophory.pophory.network.datastore.PophoryDataStore
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow

@@ -1,8 +1,8 @@
 package com.teampophory.pophory.domain
 
-import com.teampophory.pophory.data.local.PophoryDataStore
-import com.teampophory.pophory.data.repository.my.MyPageRepository
 import com.teampophory.pophory.data.network.model.mypage.MyPageResponse
+import com.teampophory.pophory.data.repository.my.MyPageRepository
+import com.teampophory.pophory.network.datastore.PophoryDataStore
 import javax.inject.Inject
 
 class ConfigureMeUseCase @Inject constructor(

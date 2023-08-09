@@ -1,3 +1,5 @@
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
+
 pluginManagement {
     includeBuild("build-logic")
     repositories {
@@ -21,3 +23,7 @@ include(":app")
 include(":bottomnavigation")
 include(":core:common")
 include(":core:designsystem")
+include(":domain:auth")
+include(":data:auth")
+include(":core:network")
+include(":feature:auth")

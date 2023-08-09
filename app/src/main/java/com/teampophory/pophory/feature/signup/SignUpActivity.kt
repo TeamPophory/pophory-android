@@ -39,13 +39,7 @@ class SignUpActivity : AppCompatActivity() {
         binding.btnBack.setOnClickListener {
             val currentFragment = navController.currentDestination?.label
             when (currentFragment) {
-                SIGN_UP_FIRST_FRAGMENT -> startActivity(
-                    Intent(
-                        this,
-                        OnBoardingActivity::class.java
-                    )
-                )
-
+                SIGN_UP_FIRST_FRAGMENT -> finish()
                 SIGN_UP_SECOND_FRAGMENT -> navController.popBackStack()
                 SIGN_UP_THIRD_FRAGMENT -> navController.popBackStack()
             }
