@@ -1,7 +1,7 @@
-package com.teampophory.pophory.domain
+package com.teampophory.pophory.auth.usecase
 
-import com.teampophory.pophory.data.model.auth.UserAccountState
-import com.teampophory.pophory.data.repository.auth.AuthRepository
+import com.teampophory.pophory.auth.entity.UserAccountState
+import com.teampophory.pophory.auth.repository.AuthRepository
 import javax.inject.Inject
 
 class AuthUseCase @Inject constructor(

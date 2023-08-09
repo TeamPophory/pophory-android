@@ -1,6 +1,6 @@
-package com.teampophory.pophory.domain
+package com.teampophory.pophory.auth.usecase
 
-import com.teampophory.pophory.data.repository.auth.AuthRepository
+import com.teampophory.pophory.auth.repository.AuthRepository
 import javax.inject.Inject
 
 class AutoLoginConfigureUseCase @Inject constructor(

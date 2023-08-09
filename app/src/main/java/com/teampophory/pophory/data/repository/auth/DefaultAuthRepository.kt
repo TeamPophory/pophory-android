@@ -1,8 +1,7 @@
 package com.teampophory.pophory.data.repository.auth
 
 import com.teampophory.pophory.data.local.PophoryDataStore
-import com.teampophory.pophory.data.model.auth.Token
-import com.teampophory.pophory.data.model.auth.UserAuthentication
+import com.teampophory.pophory.auth.repository.AuthRepository
 import com.teampophory.pophory.data.network.model.auth.SocialType
 import com.teampophory.pophory.data.network.service.AuthService
 import io.sentry.Sentry
@@ -13,12 +12,12 @@ class DefaultAuthRepository @Inject constructor(
     private val dataStore: PophoryDataStore,
     private val service: AuthService
 ) : AuthRepository {
-    override suspend fun login(socialToken: String): UserAuthentication {
+    override suspend fun login(socialToken: String): com.teampophory.pophory.auth.entity.UserAuthentication {
         val authorization = "Bearer $socialToken"
         return service.login(authorization, SocialType("KAKAO")).toUserAuthentication()
     }
 
-    override fun save(token: Token) {
+    override fun save(token: com.teampophory.pophory.auth.entity.Token) {
         val (accessToken, refreshToken) = token
         dataStore.accessToken = accessToken
         dataStore.refreshToken = refreshToken

@@ -3,7 +3,7 @@ package com.teampophory.pophory.feature.signup
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.teampophory.pophory.domain.AutoLoginConfigureUseCase
+import com.teampophory.pophory.auth.usecase.AutoLoginConfigureUseCase
 import com.teampophory.pophory.data.network.model.auth.NicknameRequest
 import com.teampophory.pophory.data.network.model.auth.NicknameResponse
 import com.teampophory.pophory.data.network.model.auth.SignUpRequest

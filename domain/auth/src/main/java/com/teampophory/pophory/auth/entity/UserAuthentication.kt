@@ -1,4 +1,4 @@
-package com.teampophory.pophory.data.model.auth
+package com.teampophory.pophory.auth.entity
 
 data class UserAuthentication(
     val token: Token,

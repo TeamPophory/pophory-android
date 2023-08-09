@@ -5,7 +5,7 @@ import com.teampophory.pophory.config.di.qualifier.Unsecured
 import com.teampophory.pophory.data.network.authenticator.PophoryAuthenticator
 import com.teampophory.pophory.data.network.service.AuthService
 import com.teampophory.pophory.data.network.service.RefreshApi
-import com.teampophory.pophory.data.repository.auth.AuthRepository
+import com.teampophory.pophory.auth.repository.AuthRepository
 import com.teampophory.pophory.data.repository.auth.DefaultAuthRepository
 import com.teampophory.pophory.data.network.service.RetrofitSignUpNetwork
 import dagger.Binds

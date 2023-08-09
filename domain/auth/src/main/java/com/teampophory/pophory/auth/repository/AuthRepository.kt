@@ -1,7 +1,7 @@
-package com.teampophory.pophory.data.repository.auth
+package com.teampophory.pophory.auth.repository
 
-import com.teampophory.pophory.data.model.auth.Token
-import com.teampophory.pophory.data.model.auth.UserAuthentication
+import com.teampophory.pophory.auth.entity.Token
+import com.teampophory.pophory.auth.entity.UserAuthentication
 
 interface AuthRepository {
     suspend fun login(socialToken: String): UserAuthentication
