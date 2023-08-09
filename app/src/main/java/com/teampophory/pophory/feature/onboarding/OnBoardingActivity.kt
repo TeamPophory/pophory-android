@@ -8,6 +8,7 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.lifecycleScope
 import androidx.viewpager2.widget.ViewPager2
 import com.teampophory.pophory.R
+import com.teampophory.pophory.auth.entity.UserAccountState
 import com.teampophory.pophory.auth.usecase.AuthUseCase
 import com.teampophory.pophory.auth.usecase.AutoLoginConfigureUseCase
 import com.teampophory.pophory.common.context.snackBar
@@ -75,15 +76,15 @@ class OnBoardingActivity : AppCompatActivity() {
                     authUseCase(token.accessToken)
                         .onSuccess { state ->
                             when (state) {
-                                com.teampophory.pophory.auth.entity.UserAccountState.REGISTERED -> {
+                                UserAccountState.REGISTERED -> {
                                     autoLoginConfigureUseCase(true)
                                     startActivity(HomeActivity.getIntent(this@OnBoardingActivity))
                                 }
 
-                                com.teampophory.pophory.auth.entity.UserAccountState.UNREGISTERED -> {
-                                    val intent =
+                                UserAccountState.UNREGISTERED -> {
+                                    startActivity(
                                         Intent(this@OnBoardingActivity, SignUpActivity::class.java)
-                                    startActivity(intent)
+                                    )
                                 }
                             }
                         }
