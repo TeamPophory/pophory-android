@@ -65,7 +65,7 @@ android {
 }
 
 dependencies {
-    implementation(project(":bottomnavigation"))
+    implementation(projects.bottomnavigation)
 
     // domain
     implementation(projects.domain.auth)
