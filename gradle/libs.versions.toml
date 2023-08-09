@@ -189,6 +189,8 @@ kakao-login = { group = "com.kakao.sdk", name = "v2-user", version.ref = "kakao"
 
 javax-inject = { group = "javax.inject", name = "javax.inject", version.ref = "javax-inject" }
 
+sentry = { module = "io.sentry:sentry", version.ref = "sentry-android" }
+
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 android-library = { id = "com.android.library", version.ref = "agp" }

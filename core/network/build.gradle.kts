@@ -5,15 +5,16 @@ plugins {
 }
 
 android {
-    namespace = "com.teampophory.pophory.data.auth"
+    namespace = "com.teampophory.pophory.network"
 }
 
 dependencies {
-    implementation(projects.domain.auth)
     implementation(projects.core.common)
-    implementation(projects.core.network)
     implementation(libs.security)
     implementation(libs.bundles.retrofit)
+    implementation(platform(libs.okhttp.bom))
+    implementation(libs.okhttp.logging.interceptor)
+    implementation(libs.kakao.login)
     implementation(libs.process.phoenix)
-    implementation(libs.sentry)
+    debugImplementation(libs.bundles.flipper)
 }

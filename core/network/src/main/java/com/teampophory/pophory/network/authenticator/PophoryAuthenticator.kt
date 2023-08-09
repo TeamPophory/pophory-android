@@ -1,12 +1,12 @@
-package com.teampophory.pophory.data.network.authenticator
+package com.teampophory.pophory.network.authenticator
 
 import android.content.Context
 import android.content.Intent
 import com.jakewharton.processphoenix.ProcessPhoenix
 import com.kakao.sdk.user.UserApiClient
-import com.teampophory.pophory.auth.repository.PophoryDataStore
-import com.teampophory.pophory.data.auth.service.RefreshApi
 import com.teampophory.pophory.feature.onboarding.OnBoardingActivity
+import com.teampophory.pophory.network.api.RefreshApi
+import com.teampophory.pophory.network.datastore.PophoryDataStore
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.runBlocking
 import okhttp3.Authenticator

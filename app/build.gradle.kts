@@ -66,14 +66,17 @@ android {
 
 dependencies {
     implementation(project(":bottomnavigation"))
-    implementation(project(":core:common"))
-    implementation(project(":core:designsystem"))
 
     // domain
     implementation(projects.domain.auth)
 
     // data
     implementation(projects.data.auth)
+
+    // core
+    implementation(projects.core.common)
+    implementation(projects.core.network)
+    implementation(projects.core.designsystem)
 
     implementation(libs.constraintlayout)
     implementation(libs.coil.core)

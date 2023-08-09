@@ -1,6 +1,6 @@
-package com.teampophory.pophory.data.network.interceptor
+package com.teampophory.pophory.network.interceptor
 
-import com.teampophory.pophory.auth.repository.PophoryDataStore
+import com.teampophory.pophory.network.datastore.PophoryDataStore
 import okhttp3.Interceptor
 import okhttp3.Response
 import javax.inject.Inject

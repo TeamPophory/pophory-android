@@ -1,11 +1,11 @@
-package com.teampophory.pophory.data.auth.di
+package com.teampophory.pophory.network.di
 
 import android.content.Context
 import android.content.SharedPreferences
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKey
-import com.teampophory.pophory.auth.repository.PophoryDataStore
-import com.teampophory.pophory.data.auth.repository.DefaultPophoryDataStore
+import com.teampophory.pophory.network.datastore.DefaultPophoryDataStore
+import com.teampophory.pophory.network.datastore.PophoryDataStore
 import dagger.Binds
 import dagger.Module
 import dagger.Provides

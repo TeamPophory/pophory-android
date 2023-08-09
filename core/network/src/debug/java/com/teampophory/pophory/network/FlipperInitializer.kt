@@ -1,4 +1,4 @@
-package com.teampophory.pophory
+package com.teampophory.pophory.network
 
 import android.content.Context
 import com.facebook.flipper.android.AndroidFlipperClient

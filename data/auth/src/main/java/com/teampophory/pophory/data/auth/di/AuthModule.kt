@@ -5,7 +5,7 @@ import com.teampophory.pophory.common.qualifier.Secured
 import com.teampophory.pophory.common.qualifier.Unsecured
 import com.teampophory.pophory.data.auth.repository.DefaultAuthRepository
 import com.teampophory.pophory.data.auth.service.AuthService
-import com.teampophory.pophory.data.auth.service.RefreshApi
+import com.teampophory.pophory.network.api.RefreshApi
 import com.teampophory.pophory.data.auth.service.SignUpService
 import dagger.Binds
 import dagger.Module
@@ -28,10 +28,6 @@ object AuthModule {
     @Singleton
     fun provideSignUpService(@Secured retrofit: Retrofit): SignUpService =
         retrofit.create(SignUpService::class.java)
-
-    @Provides
-    @Singleton
-    fun provideRefreshApi(@Unsecured retrofit: Retrofit): RefreshApi = retrofit.create()
 
     @Module
     @InstallIn(SingletonComponent::class)

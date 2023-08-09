@@ -1,9 +1,9 @@
 package com.teampophory.pophory.data.auth.repository
 
-import com.teampophory.pophory.auth.repository.PophoryDataStore
 import com.teampophory.pophory.auth.repository.AuthRepository
-import com.teampophory.pophory.data.network.model.auth.SocialType
-import com.teampophory.pophory.data.network.service.AuthService
+import com.teampophory.pophory.data.auth.model.SocialType
+import com.teampophory.pophory.data.auth.service.AuthService
+import com.teampophory.pophory.network.datastore.PophoryDataStore
 import io.sentry.Sentry
 import javax.inject.Inject
 

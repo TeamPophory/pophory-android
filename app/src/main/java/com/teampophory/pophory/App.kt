@@ -5,6 +5,7 @@ import android.app.Application
 import android.content.pm.ActivityInfo
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatDelegate
+import com.teampophory.pophory.network.FlipperInitializer
 import dagger.hilt.android.HiltAndroidApp
 
 @HiltAndroidApp

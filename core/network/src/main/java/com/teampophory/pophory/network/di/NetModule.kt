@@ -1,13 +1,15 @@
-package com.teampophory.pophory.config.di
+package com.teampophory.pophory.network.di
 
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import com.teampophory.pophory.BuildConfig
-import com.teampophory.pophory.FlipperInitializer
 import com.teampophory.pophory.common.qualifier.Auth
 import com.teampophory.pophory.common.qualifier.Log
 import com.teampophory.pophory.common.qualifier.Secured
 import com.teampophory.pophory.common.qualifier.Unsecured
-import com.teampophory.pophory.data.network.interceptor.AuthInterceptor
+import com.teampophory.pophory.network.FlipperInitializer
+import com.teampophory.pophory.network.authenticator.PophoryAuthenticator
+import com.teampophory.pophory.network.interceptor.AuthInterceptor
+import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -111,4 +113,12 @@ object NetModule {
         .client(client)
         .addConverterFactory(converterFactory)
         .build()
+
+    @Module
+    @InstallIn(SingletonComponent::class)
+    interface Binder {
+        @Binds
+        @Singleton
+        fun provideAuthenticator(authenticator: PophoryAuthenticator): Authenticator
+    }
 }
