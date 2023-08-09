@@ -1,4 +1,4 @@
-package com.teampophory.pophory.data.network.model.auth
+package com.teampophory.pophory.data.auth.model
 
 import com.teampophory.pophory.auth.entity.Token
 import com.teampophory.pophory.auth.entity.UserAuthentication

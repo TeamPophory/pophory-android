@@ -10,8 +10,8 @@ import androidx.viewpager2.widget.ViewPager2
 import com.teampophory.pophory.R
 import com.teampophory.pophory.common.context.snackBar
 import com.teampophory.pophory.common.view.viewBinding
-import com.teampophory.pophory.config.di.qualifier.Kakao
-import com.teampophory.pophory.data.local.PophoryDataStore
+import com.teampophory.pophory.common.qualifier.Kakao
+import com.teampophory.pophory.auth.repository.PophoryDataStore
 import com.teampophory.pophory.databinding.ActivityOnBoardingBinding
 import com.teampophory.pophory.auth.usecase.AuthUseCase
 import com.teampophory.pophory.auth.usecase.AutoLoginConfigureUseCase

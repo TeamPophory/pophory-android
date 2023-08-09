@@ -1,7 +1,7 @@
 package com.teampophory.pophory.config.di
 
 import com.kakao.sdk.user.UserApiClient
-import com.teampophory.pophory.config.di.qualifier.Kakao
+import com.teampophory.pophory.common.qualifier.Kakao
 import com.teampophory.pophory.feature.auth.social.KakaoAuthService
 import com.teampophory.pophory.feature.auth.social.OAuthService
 import dagger.Binds

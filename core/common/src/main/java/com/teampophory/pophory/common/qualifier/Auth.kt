@@ -1,11 +1,11 @@
-package com.teampophory.pophory.config.di.qualifier
+package com.teampophory.pophory.common.qualifier
 
 import javax.inject.Qualifier
 
 @Qualifier
 @Retention(AnnotationRetention.BINARY)
-annotation class Log
+annotation class Secured
 
 @Qualifier
 @Retention(AnnotationRetention.BINARY)
-annotation class Auth
+annotation class Unsecured

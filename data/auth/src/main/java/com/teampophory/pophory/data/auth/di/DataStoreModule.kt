@@ -1,12 +1,11 @@
-package com.teampophory.pophory.config.di
+package com.teampophory.pophory.data.auth.di
 
 import android.content.Context
 import android.content.SharedPreferences
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKey
-import com.teampophory.pophory.BuildConfig
-import com.teampophory.pophory.data.local.DefaultPophoryDataStore
-import com.teampophory.pophory.data.local.PophoryDataStore
+import com.teampophory.pophory.auth.repository.PophoryDataStore
+import com.teampophory.pophory.data.auth.repository.DefaultPophoryDataStore
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -19,7 +18,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object PreferencesModule {
+object DataStoreModule {
     private const val DEBUG_APP_PREFERNCES_NAME = "pophory_debug"
     private const val APP_PREFERENCES_NAME = "pophory"
 

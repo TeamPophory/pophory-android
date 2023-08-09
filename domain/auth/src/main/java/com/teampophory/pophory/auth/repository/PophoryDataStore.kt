@@ -1,4 +1,4 @@
-package com.teampophory.pophory.data.local
+package com.teampophory.pophory.auth.repository
 
 interface PophoryDataStore {
     var accessToken: String

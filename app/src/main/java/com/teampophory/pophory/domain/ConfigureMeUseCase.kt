@@ -1,6 +1,6 @@
 package com.teampophory.pophory.domain
 
-import com.teampophory.pophory.data.local.PophoryDataStore
+import com.teampophory.pophory.auth.repository.PophoryDataStore
 import com.teampophory.pophory.data.repository.my.MyPageRepository
 import com.teampophory.pophory.data.network.model.mypage.MyPageResponse
 import javax.inject.Inject

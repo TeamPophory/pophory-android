@@ -1,7 +1,8 @@
-package com.teampophory.pophory.data.local
+package com.teampophory.pophory.data.auth.repository
 
 import android.content.SharedPreferences
 import androidx.core.content.edit
+import com.teampophory.pophory.auth.repository.PophoryDataStore
 import javax.inject.Inject
 import javax.inject.Singleton
 

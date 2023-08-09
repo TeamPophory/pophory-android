@@ -1,6 +1,6 @@
 package com.teampophory.pophory.config.di
 
-import com.teampophory.pophory.config.di.qualifier.Secured
+import com.teampophory.pophory.common.qualifier.Secured
 import com.teampophory.pophory.data.network.service.StoreSerivce
 import com.teampophory.pophory.data.repository.store.DefaultStoreRepository
 import com.teampophory.pophory.data.repository.store.StoreRepository

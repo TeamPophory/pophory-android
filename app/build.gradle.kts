@@ -68,7 +68,13 @@ dependencies {
     implementation(project(":bottomnavigation"))
     implementation(project(":core:common"))
     implementation(project(":core:designsystem"))
-    implementation(project(":domain:auth"))
+
+    // domain
+    implementation(projects.domain.auth)
+
+    // data
+    implementation(projects.data.auth)
+
     implementation(libs.constraintlayout)
     implementation(libs.coil.core)
     implementation(libs.flexbox)

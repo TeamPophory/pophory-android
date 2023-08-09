@@ -4,11 +4,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.teampophory.pophory.auth.usecase.AutoLoginConfigureUseCase
-import com.teampophory.pophory.data.network.model.auth.NicknameRequest
-import com.teampophory.pophory.data.network.model.auth.NicknameResponse
-import com.teampophory.pophory.data.network.model.auth.SignUpRequest
-import com.teampophory.pophory.data.network.model.auth.SignUpResponse
-import com.teampophory.pophory.data.network.service.RetrofitSignUpNetwork
+import com.teampophory.pophory.data.auth.model.NicknameRequest
+import com.teampophory.pophory.data.auth.model.NicknameResponse
+import com.teampophory.pophory.data.auth.model.SignUpRequest
+import com.teampophory.pophory.data.auth.model.SignUpResponse
+import com.teampophory.pophory.data.auth.service.SignUpService
 import dagger.hilt.android.lifecycle.HiltViewModel
 import retrofit2.Call
 import retrofit2.Callback
@@ -18,7 +18,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SignUpViewModel @Inject constructor(
-    private val signUpService: RetrofitSignUpNetwork,
+    private val signUpService: SignUpService,
     private val autoLoginConfigureUseCase: AutoLoginConfigureUseCase
 ) : ViewModel() {
 

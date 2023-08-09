@@ -1,7 +1,7 @@
-package com.teampophory.pophory.data.network.service
+package com.teampophory.pophory.data.auth.service
 
-import com.teampophory.pophory.data.network.model.auth.AuthResponse
-import com.teampophory.pophory.data.network.model.auth.SocialType
+import com.teampophory.pophory.data.auth.model.AuthResponse
+import com.teampophory.pophory.data.auth.model.SocialType
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.DELETE

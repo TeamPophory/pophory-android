@@ -1,6 +1,6 @@
-package com.teampophory.pophory.data.repository.auth
+package com.teampophory.pophory.data.auth.repository
 
-import com.teampophory.pophory.data.local.PophoryDataStore
+import com.teampophory.pophory.auth.repository.PophoryDataStore
 import com.teampophory.pophory.auth.repository.AuthRepository
 import com.teampophory.pophory.data.network.model.auth.SocialType
 import com.teampophory.pophory.data.network.service.AuthService

@@ -1,4 +1,4 @@
-package com.teampophory.pophory.config.di.qualifier
+package com.teampophory.pophory.common.qualifier
 
 import javax.inject.Qualifier
 

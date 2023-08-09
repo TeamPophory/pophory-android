@@ -4,8 +4,8 @@ import android.content.Context
 import android.content.Intent
 import com.jakewharton.processphoenix.ProcessPhoenix
 import com.kakao.sdk.user.UserApiClient
-import com.teampophory.pophory.data.local.PophoryDataStore
-import com.teampophory.pophory.data.network.service.RefreshApi
+import com.teampophory.pophory.auth.repository.PophoryDataStore
+import com.teampophory.pophory.data.auth.service.RefreshApi
 import com.teampophory.pophory.feature.onboarding.OnBoardingActivity
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.runBlocking
