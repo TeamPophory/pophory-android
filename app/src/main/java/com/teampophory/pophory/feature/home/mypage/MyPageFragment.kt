@@ -103,7 +103,7 @@ class MyPageFragment : Fragment() {
                 ForegroundColorSpan(
                     ContextCompat.getColor(
                         requireContext(),
-                        R.color.pophory_purple
+                        com.teampophory.pophory.designsystem.R.color.pophory_purple
                     )
                 ),
                 start,

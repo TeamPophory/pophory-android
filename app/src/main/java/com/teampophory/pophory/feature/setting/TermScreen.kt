@@ -20,7 +20,7 @@ import androidx.navigation.compose.rememberNavController
 import com.teampophory.pophory.R
 import com.teampophory.pophory.common.compose.DefaultPreview
 import com.teampophory.pophory.common.compose.bottomBorder
-import com.teampophory.pophory.design.PophoryTheme
+import com.teampophory.pophory.designsystem.PophoryTheme
 import com.teampophory.pophory.feature.setting.component.SettingItem
 
 @OptIn(ExperimentalMaterial3Api::class)

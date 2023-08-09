@@ -1,4 +1,4 @@
-package com.teampophory.pophory.design
+package com.teampophory.pophory.designsystem
 
 import androidx.compose.ui.graphics.Color
 
