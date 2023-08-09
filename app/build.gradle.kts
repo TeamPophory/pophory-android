@@ -78,6 +78,9 @@ dependencies {
     implementation(projects.core.network)
     implementation(projects.core.designsystem)
 
+    // feature
+    implementation(projects.feature.auth)
+
     implementation(libs.constraintlayout)
     implementation(libs.coil.core)
     implementation(libs.flexbox)

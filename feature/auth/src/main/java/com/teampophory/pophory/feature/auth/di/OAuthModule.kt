@@ -1,4 +1,4 @@
-package com.teampophory.pophory.config.di
+package com.teampophory.pophory.feature.auth.di
 
 import com.kakao.sdk.user.UserApiClient
 import com.teampophory.pophory.common.qualifier.Kakao

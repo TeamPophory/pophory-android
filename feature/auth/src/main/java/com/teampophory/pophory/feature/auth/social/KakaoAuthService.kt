@@ -4,7 +4,7 @@ import android.content.Context
 import com.kakao.sdk.common.model.ClientError
 import com.kakao.sdk.common.model.ClientErrorCause
 import com.kakao.sdk.user.UserApiClient
-import com.teampophory.pophory.feature.auth.model.OAuthToken
+import com.teampophory.pophory.auth.entity.OAuthToken
 import com.teampophory.pophory.feature.auth.model.toOAuthToken
 import dagger.hilt.android.qualifiers.ActivityContext
 import kotlinx.coroutines.suspendCancellableCoroutine
