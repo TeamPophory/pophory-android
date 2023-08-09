@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKey
+import com.teampophory.pophory.network.BuildConfig
 import com.teampophory.pophory.network.datastore.DefaultPophoryDataStore
 import com.teampophory.pophory.network.datastore.PophoryDataStore
 import dagger.Binds

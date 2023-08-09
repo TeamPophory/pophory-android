@@ -1,11 +1,11 @@
 package com.teampophory.pophory.network.di
 
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
-import com.teampophory.pophory.BuildConfig
 import com.teampophory.pophory.common.qualifier.Auth
 import com.teampophory.pophory.common.qualifier.Log
 import com.teampophory.pophory.common.qualifier.Secured
 import com.teampophory.pophory.common.qualifier.Unsecured
+import com.teampophory.pophory.network.BuildConfig
 import com.teampophory.pophory.network.FlipperInitializer
 import com.teampophory.pophory.network.authenticator.PophoryAuthenticator
 import com.teampophory.pophory.network.interceptor.AuthInterceptor
