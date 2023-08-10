@@ -80,14 +80,12 @@ dependencies {
 
     // feature
     implementation(projects.feature.auth)
+    implementation(projects.feature.setting)
 
     implementation(libs.constraintlayout)
-    implementation(libs.coil.core)
     implementation(libs.flexbox)
     implementation(libs.navigation.fragment)
     implementation(libs.navigation.ui)
-    debugImplementation(libs.bundles.flipper)
-    implementation(libs.kakao.login)
     implementation(libs.startup)
     implementation(libs.fragment.ktx)
     implementation(libs.security)
@@ -103,9 +101,8 @@ dependencies {
     // Third Party
     implementation(libs.dot.indicator)
     implementation(libs.coil.core)
-    implementation(libs.kakao.login)
     implementation(libs.bundles.retrofit)
-    implementation(libs.process.phoenix)
+    implementation(libs.kakao.login)
 
     debugImplementation(libs.bundles.flipper)
 

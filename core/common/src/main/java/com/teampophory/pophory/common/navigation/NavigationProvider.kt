@@ -4,4 +4,5 @@ import android.content.Intent
 
 interface NavigationProvider {
     fun toOnboarding(): Intent
+    fun toLicense(): Intent
 }

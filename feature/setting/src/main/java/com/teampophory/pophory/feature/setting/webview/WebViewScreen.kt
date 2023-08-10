@@ -27,7 +27,6 @@ import com.google.accompanist.web.AccompanistWebViewClient
 import com.google.accompanist.web.WebView
 import com.google.accompanist.web.rememberWebViewNavigator
 import com.google.accompanist.web.rememberWebViewState
-import com.teampophory.pophory.R
 import com.teampophory.pophory.common.compose.DefaultPreview
 import com.teampophory.pophory.common.compose.bottomBorder
 import com.teampophory.pophory.designsystem.PophoryTheme
@@ -64,7 +63,7 @@ fun WebViewScreen(
                         }
                     }) {
                         Icon(
-                            painter = painterResource(id = R.drawable.ic_chevron_left),
+                            painter = painterResource(id = com.teampophory.pophory.designsystem.R.drawable.ic_chevron_left),
                             contentDescription = "Back To Home"
                         )
                     }
