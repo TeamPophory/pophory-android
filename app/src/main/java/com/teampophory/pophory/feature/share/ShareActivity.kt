@@ -131,14 +131,12 @@ class ShareActivity : AppCompatActivity() {
     }
 
     private fun clearSelectedPosition() {
-        (binding.rvShare.adapter as? ShareAdapter)?.let { adapter ->
-            val position = viewModel.selectedPosition
-            viewModel.selectedPosition = null
-            if (position != null) {
-                val holder =
-                    binding.rvShare.findViewHolderForAdapterPosition(position) as? ShareAdapter.ShareViewHolder
-                holder?.clear()
-            }
+        val position = viewModel.selectedPosition
+        viewModel.selectedPosition = null
+        if (position != null) {
+            val holder =
+                binding.rvShare.findViewHolderForAdapterPosition(position) as? ShareAdapter.ShareViewHolder
+            holder?.clear()
         }
     }
 
