@@ -32,8 +32,8 @@ class HomeActivity : AppCompatActivity() {
 
     private val imagePicker =
         registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
-            val currentAlbumPosition = viewModel.currentAlbumPosition.value
-            val albumItem = viewModel.currentAlbums.value?.getOrNull(currentAlbumPosition)
+            val currentAlbumPosition = viewModel.homeState.value.currentAlbumPosition
+            val albumItem = viewModel.homeState.value.currentAlbums?.getOrNull(currentAlbumPosition)
             if (uri != null && albumItem != null) {
                 val intent = AddPhotoActivity.getIntent(this, uri.toString(), albumItem)
                 addPhotoResultLauncher.launch(intent)
@@ -61,8 +61,8 @@ class HomeActivity : AppCompatActivity() {
         binding.homeBottomNav.setOnItemReselectedListener { }
 
         binding.bottomNavFav.setOnClickListener {
-            val currentAlbumPosition = viewModel.currentAlbumPosition.value
-            val albumItem = viewModel.currentAlbums.value?.getOrNull(currentAlbumPosition)
+            val currentAlbumPosition = viewModel.homeState.value.currentAlbumPosition
+            val albumItem = viewModel.homeState.value.currentAlbums?.getOrNull(currentAlbumPosition)
             if (albumItem != null) {
                 if (albumItem.photoLimit <= albumItem.photoCount) {
                     DialogUtil.showOneButtonDialog(
