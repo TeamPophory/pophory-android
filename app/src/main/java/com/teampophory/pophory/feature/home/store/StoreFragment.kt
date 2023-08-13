@@ -117,10 +117,7 @@ class StoreFragment : Fragment() {
     }
 
     private fun initHomeObserver() {
-        homeViewModel.albumCountUpdateEvent.flowWithLifecycle(
-            viewLifeCycle,
-            Lifecycle.State.STARTED
-        ).onEach {
+        homeViewModel.albumCountUpdateEvent.flowWithLifecycle(viewLifeCycle).onEach {
             viewModel.getAlbums()
         }.launchIn(viewLifeCycleScope)
     }
