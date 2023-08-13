@@ -13,7 +13,6 @@ import androidx.core.text.color
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.flowWithLifecycle
 import androidx.viewpager2.widget.ViewPager2
 import com.teampophory.pophory.R
