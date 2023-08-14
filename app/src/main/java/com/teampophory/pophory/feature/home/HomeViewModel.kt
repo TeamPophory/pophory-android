@@ -41,7 +41,7 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    fun onUpdateAlbum(album: List<AlbumItem>?) {
+    fun onUpdateAlbum(album: List<AlbumItem>) {
         _homeState.value = _homeState.value.copy(currentAlbums = album)
     }
 
