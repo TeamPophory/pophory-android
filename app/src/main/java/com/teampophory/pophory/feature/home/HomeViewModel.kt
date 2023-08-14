@@ -11,6 +11,8 @@ import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -18,14 +20,14 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(
     private val configureMeUseCase: ConfigureMeUseCase
 ) : ViewModel() {
-    private val _currentAlbums = MutableStateFlow<List<AlbumItem>?>(null)
-    val currentAlbums: StateFlow<List<AlbumItem>?> get() = _currentAlbums
 
-    private val _currentAlbumPosition = MutableStateFlow(0)
-    val currentAlbumPosition: StateFlow<Int> get() = _currentAlbumPosition
+    private val _homeState = MutableStateFlow(HomeViewState())
+    val homeState: StateFlow<HomeViewState> = _homeState.asStateFlow()
 
-    private val _albumCountUpdate = MutableSharedFlow<Unit>()
-    val albumCountUpdate: SharedFlow<Unit> get() = _albumCountUpdate
+    private val _albumCountUpdateEvent: MutableSharedFlow<Unit> = MutableSharedFlow()
+
+    val albumCountUpdateEvent: SharedFlow<Unit> = _albumCountUpdateEvent.asSharedFlow()
+
 
     init {
         viewModelScope.launch {
@@ -39,21 +41,17 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    fun onUpdateAlbum(album: List<AlbumItem>?) {
-        viewModelScope.launch {
-            _currentAlbums.emit(album)
-        }
+    fun onUpdateAlbum(album: List<AlbumItem>) {
+        _homeState.value = _homeState.value.copy(currentAlbums = album)
     }
 
     fun onUpdateAlbumPosition(position: Int) {
-        viewModelScope.launch {
-            _currentAlbumPosition.emit(position)
-        }
+        _homeState.value = _homeState.value.copy(currentAlbumPosition = position)
     }
 
     fun eventAlbumCountUpdate() {
         viewModelScope.launch {
-            _albumCountUpdate.emit(Unit)
+            _albumCountUpdateEvent.emit(Unit)
         }
     }
 }

@@ -70,9 +70,9 @@ class StoreFragment : Fragment() {
         viewModel.albums.observe(viewLifecycleOwner) { storeState ->
             when (storeState) {
                 is StoreState.Uninitialized -> {
-                    viewModel.getAlbums()
                     intiViews()
                     setupViewPager()
+                    viewModel.getAlbums()
                 }
 
                 is StoreState.Loading -> {
@@ -101,7 +101,8 @@ class StoreFragment : Fragment() {
         binding.ivEditButton.setOnClickListener {
             if (viewModel.albums.value is StoreState.SuccessAlbums) {
                 val albumItems = (viewModel.albums.value as StoreState.SuccessAlbums).data
-                val albumItem = albumItems.getOrNull(homeViewModel.currentAlbumPosition.value)
+                val currentAlbumPosition = homeViewModel.homeState.value.currentAlbumPosition
+                val albumItem = albumItems.getOrNull(currentAlbumPosition)
                 val currentAlbumCoverId = albumItem?.albumCover ?: 1
                 val intent = AlbumCoverEditActivity.newIntent(
                     context = requireContext(),
@@ -115,7 +116,7 @@ class StoreFragment : Fragment() {
     }
 
     private fun initHomeObserver() {
-        homeViewModel.albumCountUpdate.flowWithLifecycle(viewLifeCycle).onEach {
+        homeViewModel.albumCountUpdateEvent.flowWithLifecycle(viewLifeCycle).onEach {
             viewModel.getAlbums()
         }.launchIn(viewLifeCycleScope)
     }
@@ -140,7 +141,6 @@ class StoreFragment : Fragment() {
 
                     //사진 갯수 텍스트 색상변경
                     setSpannableCountString(photoCount.toString(), photoLimit.toString())
-
                     updateSeekBar(photoCount = photoCount, photoLimit = photoLimit)
                 }
             })
@@ -148,11 +148,11 @@ class StoreFragment : Fragment() {
     }
 
     private fun updatePhotoCount() {
-        val position = homeViewModel.currentAlbumPosition.value
-        val photoCount =
-            homeViewModel.currentAlbums.value?.getOrNull(position)?.photoCount ?: 0
-        val photoLimit =
-            homeViewModel.currentAlbums.value?.getOrNull(position)?.photoLimit ?: 15
+        val homeStateValue = homeViewModel.homeState.value
+        val position = homeStateValue.currentAlbumPosition
+        val currentAlbums = homeStateValue.currentAlbums?.getOrNull(position)
+        val photoCount = currentAlbums?.photoCount ?: 0
+        val photoLimit = currentAlbums?.photoLimit ?: 15
         setSpannableString(
             "/$photoLimit",
             photoCount.toString(),
