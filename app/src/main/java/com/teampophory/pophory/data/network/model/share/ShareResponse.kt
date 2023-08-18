@@ -1,16 +1,16 @@
 package com.teampophory.pophory.data.network.model.share
 
-import com.teampophory.pophory.feature.share.model.PhotoItem
+import com.teampophory.pophory.share.entity.Photo
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
 data class ShareResponse(
     @SerialName("photos")
-    val photos: List<Photo>
+    val photoDetails: List<PhotoDetail>
 ) {
     @Serializable
-    data class Photo(
+    data class PhotoDetail(
         @SerialName("photoId")
         val photoId: Long,
         @SerialName("photoUrl")
@@ -19,9 +19,9 @@ data class ShareResponse(
         val shareId: String
     )
 
-    fun toPhotos(): List<PhotoItem> {
-        return photos.map { photo ->
-            PhotoItem(
+    fun toPhotos(): List<Photo> {
+        return photoDetails.map { photo ->
+            Photo(
                 photoId = photo.photoId,
                 photoUrl = photo.photoUrl,
                 shareId = photo.shareId

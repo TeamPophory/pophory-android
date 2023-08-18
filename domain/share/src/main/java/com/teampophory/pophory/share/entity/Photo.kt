@@ -1,6 +1,6 @@
-package com.teampophory.pophory.feature.share.model
+package com.teampophory.pophory.share.entity
 
-data class PhotoItem(
+data class Photo(
     val photoId: Long,
     val photoUrl: String,
     val shareId: String,

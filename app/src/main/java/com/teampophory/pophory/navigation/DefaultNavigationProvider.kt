@@ -4,6 +4,8 @@ import android.content.Context
 import android.content.Intent
 import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
 import com.teampophory.pophory.common.navigation.NavigationProvider
+import com.teampophory.pophory.feature.album.list.AlbumListActivity
+import com.teampophory.pophory.feature.home.HomeActivity
 import com.teampophory.pophory.feature.onboarding.OnBoardingActivity
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
@@ -15,5 +17,13 @@ class DefaultNavigationProvider @Inject constructor(
     override fun toLicense(): Intent {
         OssLicensesMenuActivity.setActivityTitle("Open Source Licenses")
         return Intent(context, OssLicensesMenuActivity::class.java)
+    }
+
+    override fun toHome(): Intent {
+        return HomeActivity.getIntent(context)
+    }
+
+    override fun toAlbumList(albumId: Long): Intent {
+        return AlbumListActivity.newInstance(context, albumId)
     }
 }

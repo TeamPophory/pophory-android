@@ -16,12 +16,10 @@ import com.teampophory.pophory.common.activity.hideLoading
 import com.teampophory.pophory.common.activity.showLoading
 import com.teampophory.pophory.common.context.snackBar
 import com.teampophory.pophory.common.context.toast
+import com.teampophory.pophory.common.navigation.NavigationProvider
 import com.teampophory.pophory.common.view.setOnSingleClickListener
 import com.teampophory.pophory.common.view.viewBinding
-import com.teampophory.pophory.databinding.ActivityReceiveSharedImageBinding
-import com.teampophory.pophory.feature.album.list.AlbumListActivity
-import com.teampophory.pophory.feature.home.HomeActivity
-import com.teampophory.pophory.feature.onboarding.OnBoardingActivity
+import com.teampophory.pophory.feature.share.databinding.ActivityReceiveSharedImageBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -33,11 +31,15 @@ import kotlinx.serialization.json.jsonObject
 import kotlinx.serialization.json.jsonPrimitive
 import retrofit2.HttpException
 import timber.log.Timber
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class ReceiveSharedImageActivity : AppCompatActivity() {
     private val binding by viewBinding(ActivityReceiveSharedImageBinding::inflate)
     private val viewModel by viewModels<ReceiveImageViewModel>()
+
+    @Inject
+    lateinit var navigationProvider: NavigationProvider
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -103,13 +105,8 @@ class ReceiveSharedImageActivity : AppCompatActivity() {
                     is ReceiveImageUiState.Accepted -> {
                         hideLoading()
                         TaskStackBuilder.create(this).apply {
-                            addNextIntent(HomeActivity.getIntent(this@ReceiveSharedImageActivity))
-                            addNextIntent(
-                                AlbumListActivity.newInstance(
-                                    this@ReceiveSharedImageActivity,
-                                    it.albumId
-                                )
-                            )
+                            addNextIntent(navigationProvider.toHome())
+                            addNextIntent(navigationProvider.toAlbumList(it.albumId))
                         }.also { stack ->
                             stack.startActivities()
                         }
@@ -117,7 +114,7 @@ class ReceiveSharedImageActivity : AppCompatActivity() {
 
                     is ReceiveImageUiState.SignUp -> {
                         hideLoading()
-                        startActivity(OnBoardingActivity.newInstance(this))
+                        startActivity(navigationProvider.toOnboarding())
                     }
 
                     is ReceiveImageUiState.Error -> {

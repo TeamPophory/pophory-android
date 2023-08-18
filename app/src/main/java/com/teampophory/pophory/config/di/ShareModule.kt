@@ -4,10 +4,10 @@ import com.teampophory.pophory.common.qualifier.Secured
 import com.teampophory.pophory.common.qualifier.Unsecured
 import com.teampophory.pophory.data.network.ShareNetworkDataSource
 import com.teampophory.pophory.data.repository.share.DefaultShareRepository
-import com.teampophory.pophory.data.repository.share.ShareRepository
 import com.teampophory.pophory.data.network.service.RetrofitShareNetwork
 import com.teampophory.pophory.data.network.service.RetrofitShareNetworkApi
 import com.teampophory.pophory.data.network.service.ShareService
+import com.teampophory.pophory.share.repository.ShareRepository
 import dagger.Binds
 import dagger.Module
 import dagger.Provides

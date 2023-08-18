@@ -19,8 +19,8 @@ import com.teampophory.pophory.common.activity.showLoading
 import com.teampophory.pophory.common.view.GridSpacingItemDecoration
 import com.teampophory.pophory.common.view.dp
 import com.teampophory.pophory.common.view.viewBinding
-import com.teampophory.pophory.databinding.ActivityShareBinding
 import com.teampophory.pophory.feature.share.adapter.ShareAdapter
+import com.teampophory.pophory.feature.share.databinding.ActivityShareBinding
 import com.teampophory.pophory.feature.share.model.PhotoItem
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch

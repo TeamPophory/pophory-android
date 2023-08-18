@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.teampophory.pophory.common.view.ItemDiffCallback
-import com.teampophory.pophory.databinding.ItemSharePhotoBinding
+import com.teampophory.pophory.feature.share.databinding.ItemSharePhotoBinding
 import com.teampophory.pophory.feature.share.model.PhotoItem
 
 class ShareAdapter(

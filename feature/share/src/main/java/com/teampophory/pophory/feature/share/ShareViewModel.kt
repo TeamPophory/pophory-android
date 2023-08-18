@@ -4,7 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.teampophory.pophory.data.repository.share.ShareRepository
+import com.teampophory.pophory.feature.share.model.toPhotoItems
+import com.teampophory.pophory.share.repository.ShareRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -27,7 +28,7 @@ class ShareViewModel @Inject constructor(
             shareRepository.getPhotos()
                 .onSuccess {
                     _photos.value =
-                        ShareState.SuccessPhoto(it.toPhotos())
+                        ShareState.SuccessPhoto(it.toPhotoItems())
                 }.onFailure {
                     _photos.value = ShareState.Error(it)
                 }
