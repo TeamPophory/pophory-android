@@ -2,12 +2,10 @@ package com.teampophory.pophory.feature.share.receive
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.teampophory.pophory.common.qualifier.Secured
-import com.teampophory.pophory.common.qualifier.Unsecured
-import com.teampophory.pophory.data.network.model.share.AcceptShareResponse
-import com.teampophory.pophory.data.network.model.share.SharePhotoResponse
-import com.teampophory.pophory.data.network.service.ShareService
 import com.teampophory.pophory.network.datastore.PophoryDataStore
+import com.teampophory.pophory.share.entity.AcceptShare
+import com.teampophory.pophory.share.entity.SharePhoto
+import com.teampophory.pophory.share.repository.ShareRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -25,7 +23,7 @@ sealed interface ReceiveImageUiState {
         val imageUrl: String
     ) : ReceiveImageUiState {
         companion object {
-            fun of(response: SharePhotoResponse) = Photo(
+            fun of(response: SharePhoto) = Photo(
                 realName = response.realName,
                 nickName = response.nickname,
                 photoId = response.photoId,
@@ -38,7 +36,7 @@ sealed interface ReceiveImageUiState {
         val albumId: Long
     ) : ReceiveImageUiState {
         companion object {
-            fun of(response: AcceptShareResponse) = Accepted(response.albumId)
+            fun of(response: AcceptShare) = Accepted(response.albumId)
         }
     }
 
@@ -49,8 +47,7 @@ sealed interface ReceiveImageUiState {
 
 @HiltViewModel
 class ReceiveImageViewModel @Inject constructor(
-    @Secured private val authorizedService: ShareService,
-    @Unsecured private val unAuthorizedService: ShareService,
+    private val shareRepository: ShareRepository,
     private val dataStore: PophoryDataStore
 ) : ViewModel() {
     private val _uiState: MutableStateFlow<ReceiveImageUiState> =
@@ -60,9 +57,7 @@ class ReceiveImageViewModel @Inject constructor(
     fun loadUiData(shareId: String) {
         viewModelScope.launch {
             _uiState.value = ReceiveImageUiState.Loading
-            runCatching {
-                unAuthorizedService.getPhotoInfo(shareId)
-            }.onSuccess {
+            shareRepository.getUnsecuredPhotoInfo(shareId).onSuccess {
                 _uiState.value = ReceiveImageUiState.Photo.of(it)
             }.onFailure {
                 Timber.e(it)
@@ -82,13 +77,12 @@ class ReceiveImageViewModel @Inject constructor(
         val photoState = uiState.value as ReceiveImageUiState.Photo
         _uiState.value = ReceiveImageUiState.Loading
         viewModelScope.launch {
-            runCatching {
-                authorizedService.acceptShare(photoState.photoId)
-            }.onSuccess {
-                _uiState.value = ReceiveImageUiState.Accepted.of(it)
-            }.onFailure {
-                _uiState.value = ReceiveImageUiState.Error(it)
-            }
+            shareRepository.acceptShare(photoState.photoId)
+                .onSuccess {
+                    _uiState.value = ReceiveImageUiState.Accepted.of(it)
+                }.onFailure {
+                    _uiState.value = ReceiveImageUiState.Error(it)
+                }
         }
     }
 }
