@@ -7,7 +7,7 @@ android {
     namespace = "com.teampophory.pophory.feature.share"
 
     buildFeatures {
-        dataBinding = true
+        viewBinding = true
     }
 }
 
