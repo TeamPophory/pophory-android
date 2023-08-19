@@ -1,5 +1,5 @@
 package com.teampophory.pophory.share.entity
 
-data class AcceptShare(
+data class AcceptedSharePhoto(
     val albumId: Long
 )

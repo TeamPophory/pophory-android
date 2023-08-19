@@ -73,6 +73,7 @@ dependencies {
 
     // data
     implementation(projects.data.auth)
+    implementation(projects.data.share)
 
     // core
     implementation(projects.core.common)

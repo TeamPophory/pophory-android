@@ -3,7 +3,7 @@ package com.teampophory.pophory.feature.share.receive
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.teampophory.pophory.network.datastore.PophoryDataStore
-import com.teampophory.pophory.share.entity.AcceptShare
+import com.teampophory.pophory.share.entity.AcceptedSharePhoto
 import com.teampophory.pophory.share.entity.SharePhoto
 import com.teampophory.pophory.share.repository.ShareRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -32,11 +32,11 @@ sealed interface ReceiveImageUiState {
         }
     }
 
-    data class Accepted(
+    data class AcceptedSharPhotoData(
         val albumId: Long
     ) : ReceiveImageUiState {
         companion object {
-            fun of(response: AcceptShare) = Accepted(response.albumId)
+            fun of(response: AcceptedSharePhoto) = AcceptedSharPhotoData(response.albumId)
         }
     }
 
@@ -79,7 +79,7 @@ class ReceiveImageViewModel @Inject constructor(
         viewModelScope.launch {
             shareRepository.acceptShare(photoState.photoId)
                 .onSuccess {
-                    _uiState.value = ReceiveImageUiState.Accepted.of(it)
+                    _uiState.value = ReceiveImageUiState.AcceptedSharPhotoData.of(it)
                 }.onFailure {
                     _uiState.value = ReceiveImageUiState.Error(it)
                 }

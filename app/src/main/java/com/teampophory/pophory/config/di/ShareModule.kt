@@ -2,11 +2,11 @@ package com.teampophory.pophory.config.di
 
 import com.teampophory.pophory.common.qualifier.Secured
 import com.teampophory.pophory.common.qualifier.Unsecured
-import com.teampophory.pophory.data.network.ShareNetworkDataSource
-import com.teampophory.pophory.data.repository.share.DefaultShareRepository
-import com.teampophory.pophory.data.network.service.RetrofitShareNetwork
-import com.teampophory.pophory.data.network.service.RetrofitShareNetworkApi
-import com.teampophory.pophory.data.network.service.ShareService
+import com.teampophory.pophory.data.share.repository.DefaultShareRepository
+import com.teampophory.pophory.data.share.service.RetrofitShareNetwork
+import com.teampophory.pophory.data.share.service.RetrofitShareNetworkApi
+import com.teampophory.pophory.data.share.service.ShareNetworkDataSource
+import com.teampophory.pophory.data.share.service.ShareService
 import com.teampophory.pophory.share.repository.ShareRepository
 import dagger.Binds
 import dagger.Module

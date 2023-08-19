@@ -1,13 +1,12 @@
-package com.teampophory.pophory.data.repository.share
+package com.teampophory.pophory.data.share.repository
 
 import com.teampophory.pophory.common.qualifier.Secured
 import com.teampophory.pophory.common.qualifier.Unsecured
-import com.teampophory.pophory.data.network.ShareNetworkDataSource
-import com.teampophory.pophory.data.network.model.share.ShareResponse
-import com.teampophory.pophory.data.network.model.share.toAcceptShare
-import com.teampophory.pophory.data.network.model.share.toSharePhoto
-import com.teampophory.pophory.data.network.service.ShareService
-import com.teampophory.pophory.share.entity.AcceptShare
+import com.teampophory.pophory.data.share.model.toAcceptShare
+import com.teampophory.pophory.data.share.model.toSharePhoto
+import com.teampophory.pophory.data.share.service.ShareNetworkDataSource
+import com.teampophory.pophory.data.share.service.ShareService
+import com.teampophory.pophory.share.entity.AcceptedSharePhoto
 import com.teampophory.pophory.share.entity.Photo
 import com.teampophory.pophory.share.entity.SharePhoto
 import com.teampophory.pophory.share.repository.ShareRepository
@@ -30,7 +29,7 @@ class DefaultShareRepository @Inject constructor(
         return runCatching { provideUnsecuredShareService.getPhotoInfo(shareId).toSharePhoto() }
     }
 
-    override suspend fun acceptShare(photoId: Long): Result<AcceptShare> {
+    override suspend fun acceptShare(photoId: Long): Result<AcceptedSharePhoto> {
         return runCatching { provideShareService.acceptShare(photoId).toAcceptShare() }
     }
 }

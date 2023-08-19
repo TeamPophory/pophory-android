@@ -1,9 +1,7 @@
-package com.teampophory.pophory.data.network.service
+package com.teampophory.pophory.data.share.service
 
-import com.teampophory.pophory.data.network.ShareNetworkDataSource
-import com.teampophory.pophory.data.network.model.share.ShareResponse
+import com.teampophory.pophory.data.share.model.ShareResponse
 import retrofit2.http.GET
-import retrofit2.http.Path
 import javax.inject.Inject
 
 interface RetrofitShareNetworkApi {

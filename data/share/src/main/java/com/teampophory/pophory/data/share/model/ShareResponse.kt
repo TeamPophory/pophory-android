@@ -1,8 +1,9 @@
-package com.teampophory.pophory.data.network.model.share
+package com.teampophory.pophory.data.share.model
 
 import com.teampophory.pophory.share.entity.Photo
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+
 
 @Serializable
 data class ShareResponse(
