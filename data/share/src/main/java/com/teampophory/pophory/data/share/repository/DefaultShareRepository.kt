@@ -14,22 +14,22 @@ import javax.inject.Inject
 
 class DefaultShareRepository @Inject constructor(
     private val shareNetworkDataSource: ShareNetworkDataSource,
-    @Secured private val provideShareService: ShareService,
-    @Unsecured private val provideUnsecuredShareService: ShareService
+    @Secured private val shareService: ShareService,
+    @Unsecured private val unsecuredShareService: ShareService
 ) : ShareRepository {
     override suspend fun getPhotos(): Result<List<Photo>> {
         return runCatching { shareNetworkDataSource.getPhotos().toPhotos() }
     }
 
     override suspend fun getPhotoInfo(shareId: String): Result<SharePhoto> {
-        return runCatching { provideShareService.getPhotoInfo(shareId).toSharePhoto() }
+        return runCatching { shareService.getPhotoInfo(shareId).toSharePhoto() }
     }
 
     override suspend fun getUnsecuredPhotoInfo(shareId: String): Result<SharePhoto> {
-        return runCatching { provideUnsecuredShareService.getPhotoInfo(shareId).toSharePhoto() }
+        return runCatching { unsecuredShareService.getPhotoInfo(shareId).toSharePhoto() }
     }
 
     override suspend fun acceptShare(photoId: Long): Result<AcceptedSharePhoto> {
-        return runCatching { provideShareService.acceptShare(photoId).toAcceptShare() }
+        return runCatching { shareService.acceptShare(photoId).toAcceptShare() }
     }
 }

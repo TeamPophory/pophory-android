@@ -102,7 +102,7 @@ class ReceiveSharedImageActivity : AppCompatActivity() {
                         imageLoader.enqueue(request)
                     }
 
-                    is ReceiveImageUiState.AcceptedSharPhotoData -> {
+                    is ReceiveImageUiState.AcceptedSharePhoto -> {
                         hideLoading()
                         TaskStackBuilder.create(this).apply {
                             addNextIntent(navigationProvider.toHome())
