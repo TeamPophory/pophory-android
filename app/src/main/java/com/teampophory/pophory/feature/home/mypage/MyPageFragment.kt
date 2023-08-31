@@ -78,7 +78,7 @@ class MyPageFragment : Fragment() {
     private fun setOnClickListener() {
         with(binding) {
             ivToolbarSetting.setOnClickListener {
-                startActivity(Intent(requireContext(), com.teampophory.pophory.feature.setting.SettingActivity::class.java))
+                startActivity(Intent(requireContext(), SettingActivity::class.java))
             }
             layoutMypageShare.setOnClickListener {
                 startActivity(Intent(requireContext(), ShareActivity::class.java))

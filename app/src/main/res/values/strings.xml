@@ -49,9 +49,6 @@
     <string name="dialog_message_photo_limit">아쉽지만,\n다음 업데이트에서 만나요!</string>
     <string name="edit">수정하기</string>
 
-    <!-- share -->
-    <string name="share_title">네컷사진 공유하기</string>
-
     <!-- story -->
     <string name="story_title">포릿 이야기</string>
 

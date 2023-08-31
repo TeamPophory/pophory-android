@@ -69,9 +69,11 @@ dependencies {
 
     // domain
     implementation(projects.domain.auth)
+    implementation(projects.domain.share)
 
     // data
     implementation(projects.data.auth)
+    implementation(projects.data.share)
 
     // core
     implementation(projects.core.common)
@@ -81,6 +83,7 @@ dependencies {
     // feature
     implementation(projects.feature.auth)
     implementation(projects.feature.setting)
+    implementation(projects.feature.share)
 
     implementation(libs.constraintlayout)
     implementation(libs.flexbox)
