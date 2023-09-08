@@ -25,11 +25,11 @@ import retrofit2.Retrofit
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
+private const val PophoryBaseUrl = BuildConfig.POPHORY_BASE_URL
+
 @Module
 @InstallIn(SingletonComponent::class)
 object NetModule {
-    private const val PophoryBaseUrl = BuildConfig.POPHORY_BASE_URL
-
     @Provides
     @Singleton
     fun provideJson(): Json = Json {
