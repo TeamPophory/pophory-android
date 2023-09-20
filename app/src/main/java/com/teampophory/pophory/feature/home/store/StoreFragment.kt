@@ -221,23 +221,21 @@ class StoreFragment : Fragment() {
 
     private fun checkAndLoadImageFromIntent() {
         activity?.intent?.let {
-            if (isImageSharedThroughSendAction(it)) {
-                val imageUri = it.getCompatibleParcelableExtra<Uri>(Intent.EXTRA_STREAM).toString()
+            val imageUri = it.getCompatibleParcelableExtra<Uri>(Intent.EXTRA_STREAM)
+            if (isImageSharedThroughSendAction(it, imageUri)) {
                 it.removeExtra(Intent.EXTRA_STREAM)
-
                 val albumItem = getCurrentAlbumItem() ?: return
                 AddPhotoActivity.getIntent(
                     context = requireContext(),
-                    imageUri = imageUri,
+                    imageUri = imageUri.toString(),
                     albumItem = albumItem
                 ).let(::startActivity)
             }
         }
     }
 
-    private fun isImageSharedThroughSendAction(intent: Intent): Boolean {
+    private fun isImageSharedThroughSendAction(intent: Intent, imageUri: Uri?): Boolean {
         with(intent) {
-            val imageUri = intent.getCompatibleParcelableExtra<Uri>(Intent.EXTRA_STREAM)
             return Intent.ACTION_SEND == action && AddPhotoActivity.IMAGE_MIME_TYPE == type && imageUri != null
         }
     }
