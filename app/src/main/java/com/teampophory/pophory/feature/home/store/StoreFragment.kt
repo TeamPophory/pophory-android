@@ -1,6 +1,8 @@
 package com.teampophory.pophory.feature.home.store
 
 import android.app.Activity.RESULT_OK
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -21,12 +23,14 @@ import com.teampophory.pophory.common.fragment.hideLoading
 import com.teampophory.pophory.common.fragment.showLoading
 import com.teampophory.pophory.common.fragment.viewLifeCycle
 import com.teampophory.pophory.common.fragment.viewLifeCycleScope
+import com.teampophory.pophory.common.intent.getCompatibleParcelableExtra
 import com.teampophory.pophory.common.primitive.textAppearance
 import com.teampophory.pophory.common.view.viewBinding
 import com.teampophory.pophory.databinding.FragmentStoreBinding
 import com.teampophory.pophory.feature.album.cover.AlbumCoverEditActivity
 import com.teampophory.pophory.feature.album.list.AlbumListActivity
 import com.teampophory.pophory.feature.home.HomeViewModel
+import com.teampophory.pophory.feature.home.photo.AddPhotoActivity
 import com.teampophory.pophory.feature.home.store.apdater.StoreAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
@@ -84,6 +88,7 @@ class StoreFragment : Fragment() {
                     homeViewModel.onUpdateAlbum(storeState.data)
                     storeAdapter?.submitList(storeState.data)
                     updatePhotoCount()
+                    checkAndLoadImageFromIntent()
                 }
 
                 is StoreState.Error -> {
@@ -213,6 +218,27 @@ class StoreFragment : Fragment() {
         }.let {
             textView.text = it
         }
+    }
+
+    private fun checkAndLoadImageFromIntent() {
+        activity?.intent?.let {
+            if (isImageSharedThroughSendAction(it)) {
+                val imageUri = it.getCompatibleParcelableExtra<Uri>(Intent.EXTRA_STREAM).toString()
+                val albumItems = (viewModel.albums.value as? StoreState.SuccessAlbums)?.data
+                val albumItem = albumItems?.firstOrNull() ?: return
+                AddPhotoActivity.getIntent(
+                    context = requireContext(),
+                    imageUri = imageUri,
+                    albumItem = albumItem
+                ).let(::startActivity)
+            }
+        }
+    }
+
+    private fun isImageSharedThroughSendAction(intent: Intent): Boolean {
+        val action = intent.action ?: ""
+        val type = intent.type
+        return Intent.ACTION_SEND == action && AddPhotoActivity.IMAGE_MIME_TYPE == type
     }
 
     companion object {

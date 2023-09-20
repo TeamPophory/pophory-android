@@ -152,11 +152,15 @@ class AddPhotoActivity : BindingActivity<ActivityAddPhotoBinding>(R.layout.activ
     }
 
     companion object {
+        const val IMAGE_URL_EXTRA = "imageUri"
+        const val ALBUM_ITEM_EXTRA = "albumItem"
+        const val IMAGE_MIME_TYPE = "image/*"
+
         @JvmStatic
         fun getIntent(context: Context, imageUri: String, albumItem: AlbumItem): Intent =
             Intent(context, AddPhotoActivity::class.java).apply {
-                putExtra("imageUri", imageUri)
-                putExtra("albumItem", albumItem)
+                putExtra(IMAGE_URL_EXTRA, imageUri)
+                putExtra(ALBUM_ITEM_EXTRA, albumItem)
             }
     }
 }

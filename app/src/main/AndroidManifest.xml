@@ -68,7 +68,13 @@
             android:exported="false" />
         <activity
             android:name=".feature.home.HomeActivity"
-            android:exported="false" />
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="image/*" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".feature.signup.SignUpActivity"
             android:exported="false"
@@ -111,13 +117,7 @@
             android:exported="false" />
         <activity
             android:name=".feature.home.photo.AddPhotoActivity"
-            android:exported="true" >
-            <intent-filter>
-                <action android:name="android.intent.action.SEND" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <data android:mimeType="image/*" />
-            </intent-filter>
-        </activity>
+            android:exported="false" />
         <activity
             android:name=".feature.story.StoryActivity"
             android:exported="false" />
