@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.teampophory.pophory.data.repository.store.StoreRepository
+import com.teampophory.pophory.feature.home.store.model.AlbumItem
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -27,5 +28,10 @@ class StoreViewModel @Inject constructor(
                     _albums.value = StoreState.Error(it)
                 }
         }
+    }
+
+    fun getCurrentAlbumItem(currentAlbumPosition: Int = 0): AlbumItem? {
+        val albumItems = (albums.value as? StoreState.SuccessAlbums)?.data
+        return albumItems?.getOrNull(currentAlbumPosition)
     }
 }

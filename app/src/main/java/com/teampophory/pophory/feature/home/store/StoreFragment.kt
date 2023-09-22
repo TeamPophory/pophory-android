@@ -32,7 +32,6 @@ import com.teampophory.pophory.feature.album.list.AlbumListActivity
 import com.teampophory.pophory.feature.home.HomeViewModel
 import com.teampophory.pophory.feature.home.photo.AddPhotoActivity
 import com.teampophory.pophory.feature.home.store.apdater.StoreAdapter
-import com.teampophory.pophory.feature.home.store.model.AlbumItem
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -106,7 +105,8 @@ class StoreFragment : Fragment() {
     private fun intiViews() {
         binding.ivEditButton.setOnClickListener {
             if (viewModel.albums.value is StoreState.SuccessAlbums) {
-                val albumItem = getCurrentAlbumItem()
+                val currentAlbumPosition = homeViewModel.homeState.value.currentAlbumPosition
+                val albumItem = viewModel.getCurrentAlbumItem(currentAlbumPosition)
                 val currentAlbumCoverId = albumItem?.albumCover ?: 1
                 val intent = AlbumCoverEditActivity.newIntent(
                     context = requireContext(),
@@ -224,12 +224,13 @@ class StoreFragment : Fragment() {
             val imageUri = it.getCompatibleParcelableExtra<Uri>(Intent.EXTRA_STREAM)
             if (isImageSharedThroughSendAction(it, imageUri)) {
                 it.removeExtra(Intent.EXTRA_STREAM)
-                val albumItem = getCurrentAlbumItem() ?: return
+                val currentAlbumPosition = homeViewModel.homeState.value.currentAlbumPosition
+                val albumItem = viewModel.getCurrentAlbumItem(currentAlbumPosition) ?: return
                 AddPhotoActivity.getIntent(
                     context = requireContext(),
                     imageUri = imageUri.toString(),
                     albumItem = albumItem
-                ).let(::startActivity)
+                ).let(albumListAddPhotoLauncher::launch)
             }
         }
     }
@@ -238,12 +239,6 @@ class StoreFragment : Fragment() {
         with(intent) {
             return Intent.ACTION_SEND == action && AddPhotoActivity.IMAGE_MIME_TYPE == type && imageUri != null
         }
-    }
-
-    private fun getCurrentAlbumItem(): AlbumItem? {
-        val albumItems = (viewModel.albums.value as StoreState.SuccessAlbums).data
-        val currentAlbumPosition = homeViewModel.homeState.value.currentAlbumPosition
-        return albumItems.getOrNull(currentAlbumPosition)
     }
 
     companion object {
