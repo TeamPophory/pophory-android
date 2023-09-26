@@ -75,7 +75,7 @@ sentry-android = "6.29.0"
 process-pheonix = "2.1.2"
 constraintlayout = "2.1.4"
 dot-indicator = "5.0"
-kakao = "2.16.0"
+kakao = "2.17.0"
 splash-screen = "1.0.1"
 javax-inject = "1"
 
