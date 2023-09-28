@@ -114,8 +114,9 @@ class AddPhotoViewModel @Inject constructor(
     }
 
     private suspend fun addPhotoToPophory(fileName: String?, imageSize: Size?) {
+        val albumItem = savedStateHandle.get<AlbumItem>(AddPhotoActivity.ALBUM_ITEM_EXTRA)
         photoRepository.addPhotoToPophory(
-            albumId = savedStateHandle.get<AlbumItem>("albumItem")?.id ?: -1,
+            albumId = albumItem?.id ?: -1,
             studioId = currentStudio.value.firstOrNull()?.id ?: -1L,
             takenAt = SimpleDateFormat(
                 "yyyy.MM.dd",

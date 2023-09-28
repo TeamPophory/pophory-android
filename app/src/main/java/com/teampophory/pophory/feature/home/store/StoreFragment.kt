@@ -1,6 +1,8 @@
 package com.teampophory.pophory.feature.home.store
 
 import android.app.Activity.RESULT_OK
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -21,12 +23,14 @@ import com.teampophory.pophory.common.fragment.hideLoading
 import com.teampophory.pophory.common.fragment.showLoading
 import com.teampophory.pophory.common.fragment.viewLifeCycle
 import com.teampophory.pophory.common.fragment.viewLifeCycleScope
+import com.teampophory.pophory.common.intent.getCompatibleParcelableExtra
 import com.teampophory.pophory.common.primitive.textAppearance
 import com.teampophory.pophory.common.view.viewBinding
 import com.teampophory.pophory.databinding.FragmentStoreBinding
 import com.teampophory.pophory.feature.album.cover.AlbumCoverEditActivity
 import com.teampophory.pophory.feature.album.list.AlbumListActivity
 import com.teampophory.pophory.feature.home.HomeViewModel
+import com.teampophory.pophory.feature.home.photo.AddPhotoActivity
 import com.teampophory.pophory.feature.home.store.apdater.StoreAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
@@ -84,6 +88,7 @@ class StoreFragment : Fragment() {
                     homeViewModel.onUpdateAlbum(storeState.data)
                     storeAdapter?.submitList(storeState.data)
                     updatePhotoCount()
+                    checkAndLoadImageFromIntent()
                 }
 
                 is StoreState.Error -> {
@@ -100,9 +105,8 @@ class StoreFragment : Fragment() {
     private fun intiViews() {
         binding.ivEditButton.setOnClickListener {
             if (viewModel.albums.value is StoreState.SuccessAlbums) {
-                val albumItems = (viewModel.albums.value as StoreState.SuccessAlbums).data
                 val currentAlbumPosition = homeViewModel.homeState.value.currentAlbumPosition
-                val albumItem = albumItems.getOrNull(currentAlbumPosition)
+                val albumItem = viewModel.getCurrentAlbumItem(currentAlbumPosition)
                 val currentAlbumCoverId = albumItem?.albumCover ?: 1
                 val intent = AlbumCoverEditActivity.newIntent(
                     context = requireContext(),
@@ -212,6 +216,28 @@ class StoreFragment : Fragment() {
             append(notColoredText)
         }.let {
             textView.text = it
+        }
+    }
+
+    private fun checkAndLoadImageFromIntent() {
+        activity?.intent?.let {
+            val imageUri = it.getCompatibleParcelableExtra<Uri>(Intent.EXTRA_STREAM)
+            if (isImageSharedThroughSendAction(it, imageUri)) {
+                it.removeExtra(Intent.EXTRA_STREAM)
+                val currentAlbumPosition = homeViewModel.homeState.value.currentAlbumPosition
+                val albumItem = viewModel.getCurrentAlbumItem(currentAlbumPosition) ?: return
+                AddPhotoActivity.getIntent(
+                    context = requireContext(),
+                    imageUri = imageUri.toString(),
+                    albumItem = albumItem
+                ).let(albumListAddPhotoLauncher::launch)
+            }
+        }
+    }
+
+    private fun isImageSharedThroughSendAction(intent: Intent, imageUri: Uri?): Boolean {
+        with(intent) {
+            return Intent.ACTION_SEND == action && AddPhotoActivity.IMAGE_MIME_TYPE == type && imageUri != null
         }
     }
 
