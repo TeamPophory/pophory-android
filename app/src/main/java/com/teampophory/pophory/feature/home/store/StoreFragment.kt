@@ -32,6 +32,7 @@ import com.teampophory.pophory.feature.album.list.AlbumListActivity
 import com.teampophory.pophory.feature.home.HomeViewModel
 import com.teampophory.pophory.feature.home.photo.AddPhotoActivity
 import com.teampophory.pophory.feature.home.store.apdater.StoreAdapter
+import com.teampophory.pophory.util.dialog.TwoButtonCommonDialog
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -104,19 +105,30 @@ class StoreFragment : Fragment() {
 
     private fun intiViews() {
         binding.ivEditButton.setOnClickListener {
-            if (viewModel.albums.value is StoreState.SuccessAlbums) {
-                val currentAlbumPosition = homeViewModel.homeState.value.currentAlbumPosition
-                val albumItem = viewModel.getCurrentAlbumItem(currentAlbumPosition)
-                val currentAlbumCoverId = albumItem?.albumCover ?: 1
-                val intent = AlbumCoverEditActivity.newIntent(
-                    context = requireContext(),
-                    albumCoverId = currentAlbumCoverId,
-                    albumId = albumItem?.id ?: 0
-                )
-                albumCoverChangeLauncher.launch(intent)
-            }
+            TwoButtonCommonDialog.newInstance(
+                title = "",
+                description = "",
+                imageResId = R.drawable.ic_album_cover,
+                confirmButtonText = "",
+                dismissButtonText = ""
+            )
+            moveToAlbumCoverEditActivity()
         }
         binding.seekBarStore.setOnTouchListener { _, _ -> true }
+    }
+
+    private fun moveToAlbumCoverEditActivity() {
+        if (viewModel.albums.value is StoreState.SuccessAlbums) {
+            val currentAlbumPosition = homeViewModel.homeState.value.currentAlbumPosition
+            val albumItem = viewModel.getCurrentAlbumItem(currentAlbumPosition)
+            val currentAlbumCoverId = albumItem?.albumCover ?: 1
+            val intent = AlbumCoverEditActivity.newIntent(
+                context = requireContext(),
+                albumCoverId = currentAlbumCoverId,
+                albumId = albumItem?.id ?: 0
+            )
+            albumCoverChangeLauncher.launch(intent)
+        }
     }
 
     private fun initHomeObserver() {
