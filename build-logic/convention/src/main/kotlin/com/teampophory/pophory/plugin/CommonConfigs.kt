@@ -28,6 +28,7 @@ internal fun Project.configureAndroidCommonPlugin() {
             manifestPlaceholders["sentryDsn"] = properties["sentryDsn"] as String
             manifestPlaceholders["kakaoApiKey"] = properties["kakaoApiKey"] as String
             manifestPlaceholders["pophoryBaseUrl"] = properties["pophoryBaseUrl"] as String
+            manifestPlaceholders["admobAppId"] = properties["admobAppId"] as String
 
             buildConfigField("String", "KAKAO_API_KEY", "\"${kakaoApiKey}\"")
             buildConfigField("String", "POPHORY_BASE_URL", "\"${pophoryBaseUrl}\"")

@@ -41,6 +41,7 @@ jobs:
           SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
           KAKAO_API_KEY: ${{ secrets.KAKAO_API_KEY }}
           POPHORY_BASE_URL: ${{ secrets.POPHORY_BASE_URL }}
+          ADMOB_APP_ID: ${{ secrets.ADMOB_APP_ID }}
           KEY_ALIAS: ${{ secrets.SENTRY_DSN }}
           KEY_PASSWORD: ${{ secrets.SENTRY_DSN }}
           STORE_PASSWORD: ${{ secrets.SENTRY_DSN }}
@@ -48,6 +49,7 @@ jobs:
           echo sentryDsn=\"$SENTRY_DSN\" >> ./local.properties
           echo kakaoApiKey=$KAKAO_API_KEY >> ./local.properties
           echo pophoryBaseUrl=$POPHORY_BASE_URL >> ./local.properties
+          echo admobAppId=$ADMOB_APP_ID >> ./local.properties
           echo keyAlias=$KEY_ALIAS >> ./local.properties
           echo keyPassword=KEY_PASSWORD >> ./local.properties
           echo storePassword=$STORE_PASSWORD >> ./local.properties
