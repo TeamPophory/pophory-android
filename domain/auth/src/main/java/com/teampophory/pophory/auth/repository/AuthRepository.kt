@@ -4,6 +4,7 @@ import com.teampophory.pophory.auth.entity.Token
 import com.teampophory.pophory.auth.entity.UserAuthentication
 
 interface AuthRepository {
+    fun isAutoLoginEnabled(): Boolean
     suspend fun login(socialToken: String): UserAuthentication
     fun save(token: Token)
     fun configureAutoLogin(value: Boolean)

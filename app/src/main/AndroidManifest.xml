@@ -80,7 +80,7 @@
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
         <activity
-            android:name=".feature.onboarding.OnBoardingActivity"
+            android:name="com.teampophory.pophory.onboarding.OnBoardingActivity"
             android:exported="true"
             android:theme="@style/Theme.App.Pophory.Starting">
             <intent-filter>

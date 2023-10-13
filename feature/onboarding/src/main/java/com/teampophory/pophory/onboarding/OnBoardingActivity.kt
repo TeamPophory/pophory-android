@@ -1,26 +1,25 @@
-package com.teampophory.pophory.feature.onboarding
+package com.teampophory.pophory.onboarding
 
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.viewpager2.widget.ViewPager2
-import com.teampophory.pophory.R
-import com.teampophory.pophory.auth.entity.UserAccountState
-import com.teampophory.pophory.auth.usecase.AuthUseCase
-import com.teampophory.pophory.auth.usecase.AutoLoginConfigureUseCase
 import com.teampophory.pophory.common.context.snackBar
+import com.teampophory.pophory.common.navigation.NavigationProvider
 import com.teampophory.pophory.common.qualifier.Kakao
 import com.teampophory.pophory.common.view.viewBinding
-import com.teampophory.pophory.databinding.ActivityOnBoardingBinding
 import com.teampophory.pophory.feature.auth.social.OAuthService
-import com.teampophory.pophory.feature.home.HomeActivity
-import com.teampophory.pophory.feature.onboarding.adapter.OnBoardingViewPagerAdapter
-import com.teampophory.pophory.feature.signup.SignUpActivity
-import com.teampophory.pophory.network.datastore.PophoryDataStore
+import com.teampophory.pophory.onboarding.adapter.OnBoardingViewPagerAdapter
+import com.teampophory.pophory.onboarding.databinding.ActivityOnBoardingBinding
+import com.teampophory.pophory.onboarding.model.OnBoardingData
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
@@ -28,29 +27,53 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class OnBoardingActivity : AppCompatActivity() {
     private val binding by viewBinding(ActivityOnBoardingBinding::inflate)
+    private val viewModel by viewModels<OnBoardingViewModel>()
 
     @Inject
     @Kakao
     lateinit var kakaoAuthService: OAuthService
 
     @Inject
-    lateinit var authUseCase: AuthUseCase
-
-    @Inject
-    lateinit var autoLoginConfigureUseCase: AutoLoginConfigureUseCase
-
-    @Inject
-    lateinit var dataStore: PophoryDataStore
+    lateinit var navigationProvider: NavigationProvider
 
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen()
         super.onCreate(savedInstanceState)
-        if (dataStore.autoLoginConfigured) {
-            startActivity(HomeActivity.getIntent(this@OnBoardingActivity))
-        }
+        collectState()
         setContentView(binding.root)
         setViewPager()
         setOnLoginPressed()
+        collectEvent()
+    }
+
+    private fun collectState() {
+        viewModel.state
+            .flowWithLifecycle(lifecycle)
+            .onEach {
+                if (it.isAutoLoginEnabled) {
+                    startActivity(navigationProvider.toHome())
+                }
+            }.launchIn(lifecycleScope)
+    }
+
+    private fun collectEvent() {
+        viewModel.event
+            .flowWithLifecycle(lifecycle)
+            .onEach {
+                when (it) {
+                    is Effect.Home -> {
+                        startActivity(navigationProvider.toHome())
+                    }
+
+                    is Effect.SignUp -> {
+                        startActivity(navigationProvider.toSignUp())
+                    }
+
+                    is Effect.Snackbar -> {
+                        snackBar(binding.root) { it.message }
+                    }
+                }
+            }.launchIn(lifecycleScope)
     }
 
     private val pageChangeCallback = object : ViewPager2.OnPageChangeCallback() {
@@ -73,25 +96,7 @@ class OnBoardingActivity : AppCompatActivity() {
                 runCatching {
                     kakaoAuthService.login()
                 }.onSuccess { token ->
-                    authUseCase(token.accessToken)
-                        .onSuccess { state ->
-                            when (state) {
-                                UserAccountState.REGISTERED -> {
-                                    autoLoginConfigureUseCase(true)
-                                    startActivity(HomeActivity.getIntent(this@OnBoardingActivity))
-                                }
-
-                                UserAccountState.UNREGISTERED -> {
-                                    startActivity(
-                                        Intent(this@OnBoardingActivity, SignUpActivity::class.java)
-                                    )
-                                }
-                            }
-                        }
-                        .onFailure {
-                            Timber.e(it)
-                            snackBar(binding.root) { "로그인에 실패했습니다." }
-                        }
+                    viewModel.onLogin(token.accessToken)
                 }.onFailure(Timber::e)
             }
         }

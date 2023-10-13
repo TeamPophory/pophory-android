@@ -1,6 +1,5 @@
 package com.teampophory.pophory.feature.signup
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -10,7 +9,6 @@ import androidx.navigation.fragment.findNavController
 import com.teampophory.pophory.R
 import com.teampophory.pophory.common.view.viewBinding
 import com.teampophory.pophory.databinding.ActivitySignUpBinding
-import com.teampophory.pophory.feature.onboarding.OnBoardingActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

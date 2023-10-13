@@ -7,4 +7,5 @@ interface NavigationProvider {
     fun toLicense(): Intent
     fun toHome(): Intent
     fun toAlbumList(albumId: Long): Intent
+    fun toSignUp(): Intent
 }
