@@ -6,7 +6,8 @@ import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
 import com.teampophory.pophory.common.navigation.NavigationProvider
 import com.teampophory.pophory.feature.album.list.AlbumListActivity
 import com.teampophory.pophory.feature.home.HomeActivity
-import com.teampophory.pophory.feature.onboarding.OnBoardingActivity
+import com.teampophory.pophory.feature.signup.SignUpActivity
+import com.teampophory.pophory.onboarding.OnBoardingActivity
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 
@@ -25,5 +26,9 @@ class DefaultNavigationProvider @Inject constructor(
 
     override fun toAlbumList(albumId: Long): Intent {
         return AlbumListActivity.newInstance(context, albumId)
+    }
+
+    override fun toSignUp(): Intent {
+        return Intent(context, SignUpActivity::class.java)
     }
 }

@@ -84,6 +84,7 @@ dependencies {
     implementation(projects.feature.auth)
     implementation(projects.feature.setting)
     implementation(projects.feature.share)
+    implementation(projects.feature.onboarding)
 
     implementation(libs.constraintlayout)
     implementation(libs.flexbox)
