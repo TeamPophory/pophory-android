@@ -4,6 +4,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="com.google.android.gms.permission.AD_ID" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:name=".App"
@@ -68,10 +69,12 @@
             android:exported="false" />
         <activity
             android:name=".feature.home.HomeActivity"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.SEND" />
+
                 <category android:name="android.intent.category.DEFAULT" />
+
                 <data android:mimeType="image/*" />
             </intent-filter>
         </activity>
@@ -80,7 +83,7 @@
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
         <activity
-            android:name="com.teampophory.pophory.onboarding.OnBoardingActivity"
+            android:name=".onboarding.OnBoardingActivity"
             android:exported="true"
             android:theme="@style/Theme.App.Pophory.Starting">
             <intent-filter>
