@@ -1,5 +1,6 @@
 package com.teampophory.pophory.feature.home.add
 
+import android.app.Activity.RESULT_CANCELED
 import android.app.Activity.RESULT_OK
 import android.content.Context
 import android.content.Intent
@@ -15,7 +16,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.teampophory.pophory.databinding.BottomSheetHomeAddPhotoBinding
 import com.teampophory.pophory.feature.home.HomeViewModel
 import com.teampophory.pophory.feature.home.photo.AddPhotoActivity
-
+import com.teampophory.pophory.feature.qr.QRActivity
 
 class AddPhotoBottomSheet : BottomSheetDialogFragment() {
 
@@ -24,6 +25,7 @@ class AddPhotoBottomSheet : BottomSheetDialogFragment() {
     private val viewModel by activityViewModels<HomeViewModel>()
     private lateinit var imagePicker: ActivityResultLauncher<PickVisualMediaRequest>
     private lateinit var addPhotoResultLauncher: ActivityResultLauncher<Intent>
+    private lateinit var qrActivityResultLauncher: ActivityResultLauncher<Intent>
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -46,6 +48,23 @@ class AddPhotoBottomSheet : BottomSheetDialogFragment() {
             }
         }
 
+        qrActivityResultLauncher =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+                if (it.resultCode == RESULT_OK) {
+                    val uriString = it.data?.getStringExtra("downloaded_image_uri")
+                    val currentAlbumPosition = viewModel.homeState.value.currentAlbumPosition
+                    val albumItem =
+                        viewModel.homeState.value.currentAlbums?.getOrNull(currentAlbumPosition)
+                    if (uriString != null && albumItem != null) {
+                        val intent = AddPhotoActivity.getIntent(context, uriString, albumItem)
+                        addPhotoResultLauncher.launch(intent)
+                    }
+                }
+                if (it.resultCode == RESULT_CANCELED) {
+                    dismiss()
+                }
+            }
+
         addPhotoResultLauncher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
                 if (it.resultCode == RESULT_OK) {
@@ -63,7 +82,8 @@ class AddPhotoBottomSheet : BottomSheetDialogFragment() {
     private fun initListMenuViews() {
         with(binding) {
             layoutQr.setOnClickListener {
-
+                val intent = Intent(context, QRActivity::class.java)
+                qrActivityResultLauncher.launch(intent)
             }
             layoutGallery.setOnClickListener {
                 imagePicker.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
