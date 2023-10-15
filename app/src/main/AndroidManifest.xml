@@ -19,6 +19,9 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".feature.qr.QRActivity"
+            android:exported="true" />
+        <activity
             android:name=".feature.share.ShareActivity"
             android:exported="false" />
         <activity
