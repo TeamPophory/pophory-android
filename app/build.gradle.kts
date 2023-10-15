@@ -40,10 +40,6 @@ android {
         }
     }
 
-    buildFeatures {
-        dataBinding = true
-    }
-
     buildTypes {
         debug {
             firebaseAppDistribution {

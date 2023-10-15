@@ -16,7 +16,6 @@ internal fun Project.configureAndroidCommonPlugin() {
     apply<AndroidKotlinPlugin>()
     apply<KotlinSerializationPlugin>()
     with(plugins) {
-        apply("kotlin-kapt")
         apply("kotlin-parcelize")
     }
     apply<AndroidHiltPlugin>()
