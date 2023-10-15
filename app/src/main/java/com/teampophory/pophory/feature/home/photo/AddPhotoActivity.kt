@@ -6,6 +6,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.util.Size
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import coil.load
@@ -13,7 +14,6 @@ import com.google.android.material.datepicker.CalendarConstraints
 import com.google.android.material.datepicker.DateValidatorPointBackward
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.teampophory.pophory.R
-import com.teampophory.pophory.common.activity.BindingActivity
 import com.teampophory.pophory.common.context.colorOf
 import com.teampophory.pophory.common.context.snackBar
 import com.teampophory.pophory.common.context.toast
@@ -22,6 +22,7 @@ import com.teampophory.pophory.common.image.getAdjustedSize
 import com.teampophory.pophory.common.intent.stringExtra
 import com.teampophory.pophory.common.time.systemNow
 import com.teampophory.pophory.common.view.setOnSingleClickListener
+import com.teampophory.pophory.common.view.viewBinding
 import com.teampophory.pophory.databinding.ActivityAddPhotoBinding
 import com.teampophory.pophory.feature.home.store.model.AlbumItem
 import dagger.hilt.android.AndroidEntryPoint
@@ -34,12 +35,14 @@ import java.util.Locale
 import java.util.TimeZone
 
 @AndroidEntryPoint
-class AddPhotoActivity : BindingActivity<ActivityAddPhotoBinding>(R.layout.activity_add_photo) {
+class AddPhotoActivity : AppCompatActivity() {
+    private val binding by viewBinding(ActivityAddPhotoBinding::inflate)
     private val viewModel: AddPhotoViewModel by viewModels()
     private val imageUri by stringExtra()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(binding.root)
         loadImage()
         initView()
         subscribeEvent()
@@ -152,7 +155,7 @@ class AddPhotoActivity : BindingActivity<ActivityAddPhotoBinding>(R.layout.activ
     }
 
     companion object {
-        const val IMAGE_URL_EXTRA = "imageUri"
+        private const val IMAGE_URL_EXTRA = "imageUri"
         const val ALBUM_ITEM_EXTRA = "albumItem"
         const val IMAGE_MIME_TYPE = "image/*"
 
