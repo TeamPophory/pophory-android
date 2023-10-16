@@ -66,10 +66,12 @@ dependencies {
     // domain
     implementation(projects.domain.auth)
     implementation(projects.domain.share)
+    implementation(projects.domain.ad)
 
     // data
     implementation(projects.data.auth)
     implementation(projects.data.share)
+    implementation(projects.data.ad)
 
     // core
     implementation(projects.core.common)

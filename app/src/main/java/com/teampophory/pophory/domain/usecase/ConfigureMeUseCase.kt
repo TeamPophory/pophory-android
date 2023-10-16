@@ -1,4 +1,4 @@
-package com.teampophory.pophory.domain
+package com.teampophory.pophory.domain.usecase
 
 import com.teampophory.pophory.data.network.model.mypage.MyPageResponse
 import com.teampophory.pophory.data.repository.my.MyPageRepository

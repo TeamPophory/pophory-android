@@ -2,7 +2,9 @@ package com.teampophory.pophory.feature.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.teampophory.pophory.domain.ConfigureMeUseCase
+import com.teampophory.pophory.BuildConfig
+import com.teampophory.pophory.ad.usecase.GetAdConstantUseCase
+import com.teampophory.pophory.domain.usecase.ConfigureMeUseCase
 import com.teampophory.pophory.feature.home.store.model.AlbumItem
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.sentry.Sentry
@@ -14,11 +16,14 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val configureMeUseCase: ConfigureMeUseCase
+    private val configureMeUseCase: ConfigureMeUseCase,
+    private val getAdConstantUseCase: GetAdConstantUseCase,
+    private val saveAdConstantUseCase: GetAdConstantUseCase
 ) : ViewModel() {
 
     private val _homeState = MutableStateFlow(HomeViewState())
@@ -37,6 +42,14 @@ class HomeViewModel @Inject constructor(
                     name = it.realName
                 }
                 Sentry.setUser(user)
+            }
+            getAdConstantUseCase("android", BuildConfig.VERSION_NAME).onSuccess {
+                it.forEach { adConstant ->
+                    Timber.d("adConstant: $adConstant")
+                    saveAdConstantUseCase(adConstant.adName, adConstant.adId)
+                }
+            }.onFailure {
+                Timber.e(it)
             }
         }
     }
