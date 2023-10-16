@@ -15,9 +15,15 @@ class DefaultAdRepository @Inject constructor(
         return runCatching { adService.getAdConstant(os, version).map { it.toAdConstant() } }
     }
 
-    override suspend fun saveAdConstant(adName: String, adId: String) {
+    override suspend fun setAdConstant(adName: String, adId: String) {
         sharedPreferences.edit {
             putString(adName, adId)
+        }
+    }
+
+    override suspend fun fetchAdConstant(adName: String): AdConstant? {
+        return sharedPreferences.getString(adName, null)?.let {
+            AdConstant(adName, it)
         }
     }
 }

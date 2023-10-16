@@ -32,7 +32,6 @@ import com.teampophory.pophory.feature.album.list.AlbumListActivity
 import com.teampophory.pophory.feature.home.HomeViewModel
 import com.teampophory.pophory.feature.home.photo.AddPhotoActivity
 import com.teampophory.pophory.feature.home.store.apdater.StoreAdapter
-import com.teampophory.pophory.util.dialog.TwoButtonCommonDialog
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -105,13 +104,6 @@ class StoreFragment : Fragment() {
 
     private fun intiViews() {
         binding.ivEditButton.setOnClickListener {
-            TwoButtonCommonDialog.newInstance(
-                title = "",
-                description = "",
-                imageResId = R.drawable.ic_album_cover,
-                confirmButtonText = "",
-                dismissButtonText = ""
-            )
             moveToAlbumCoverEditActivity()
         }
         binding.seekBarStore.setOnTouchListener { _, _ -> true }

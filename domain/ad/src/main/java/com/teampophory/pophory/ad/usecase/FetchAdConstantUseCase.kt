@@ -4,10 +4,10 @@ import com.teampophory.pophory.ad.entity.AdConstant
 import com.teampophory.pophory.ad.repository.AdRepository
 import javax.inject.Inject
 
-class SaveAdConstantUseCase @Inject constructor(
+class FetchAdConstantUseCase @Inject constructor(
     private val repository: AdRepository
-) {
-    suspend operator fun invoke(adName: String, adId: String) {
-        repository.saveAdConstant(adName, adId)
+){
+    suspend operator fun invoke(adName: String): AdConstant? {
+        return repository.fetchAdConstant(adName)
     }
 }

@@ -99,6 +99,17 @@ class AdmobRewardedAdService @AssistedInject constructor(
     }
 }
 
+open class DefaultAdmobRewardEvents : AdmobRewardedAdService.AdmobRewardEvents {
+    override fun onAdLoaded() {}
+    override fun onAdFailedToLoad(error: LoadAdError) {}
+    override fun onAdClicked() {}
+    override fun onAdDismissed() {}
+    override fun onAdFailedToShow(error: AdError) {}
+    override fun onAdImpression() {}
+    override fun onAdShowed() {}
+    override fun onUserEarnedReward(rewardItem: RewardItem) {}
+}
+
 @AssistedFactory
 interface AdmobRewardedAdFactory {
     fun create(adUnitId: String): AdmobRewardedAdService

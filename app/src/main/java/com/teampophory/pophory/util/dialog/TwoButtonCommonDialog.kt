@@ -10,7 +10,6 @@ import androidx.annotation.DrawableRes
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.DialogFragment
-import com.teampophory.pophory.R
 import com.teampophory.pophory.common.context.dialogWidthPercent
 import com.teampophory.pophory.common.view.setOnSingleClickListener
 import com.teampophory.pophory.common.view.viewBinding
@@ -28,7 +27,7 @@ class TwoButtonCommonDialog : DialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        return inflater.inflate(R.layout.dialog_common_one_button, container, false)
+        return DialogCommonTwoButtonBinding.inflate(inflater, container, false).root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -54,10 +53,11 @@ class TwoButtonCommonDialog : DialogFragment() {
     }
 
     private fun initViews() {
-        val title = arguments?.getString("title", "")
-        val description = arguments?.getString("description", "")
-        val imageResId = arguments?.getInt("imageResId")
-        val buttonText = arguments?.getString("buttonText", "")
+        val title = arguments?.getString(TITLE, "")
+        val description = arguments?.getString(DESCRIPTION, "")
+        val imageResId = arguments?.getInt(IMAGE_RES_ID)
+        val confirmButtonText = arguments?.getString(CONFIRM_BUTTON_TEXT, "")
+        val dismissButtonText = arguments?.getString(DISMISS_BUTTON_TEXT, "")
 
         with(binding) {
             tvDialogTitle.text = title
@@ -66,7 +66,8 @@ class TwoButtonCommonDialog : DialogFragment() {
                 ivDialogIcon.isVisible = true
                 ContextCompat.getDrawable(requireContext(), it)
             })
-            tvConfirmButton.text = buttonText
+            tvConfirmButton.text = confirmButtonText
+            tvDismissButton.text = dismissButtonText
         }
     }
 
