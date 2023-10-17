@@ -157,11 +157,6 @@ class AddPhotoActivity : BindingActivity<ActivityAddPhotoBinding>(R.layout.activ
             }.launchIn(lifecycleScope)
     }
 
-    override fun onBackPressed() {
-        setResult(Activity.RESULT_CANCELED)
-        super.onBackPressed()
-    }
-
     companion object {
         const val IMAGE_URL_EXTRA = "imageUri"
         const val ALBUM_ITEM_EXTRA = "albumItem"
