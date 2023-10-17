@@ -13,6 +13,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.teampophory.pophory.R
+import com.teampophory.pophory.common.activity.hideLoading
+import com.teampophory.pophory.common.activity.showLoading
 import com.teampophory.pophory.common.context.stringOf
 import com.teampophory.pophory.common.view.dp
 import com.teampophory.pophory.common.view.viewBinding
@@ -54,9 +56,16 @@ class QRActivity : AppCompatActivity() {
                     setupBarcodeScanner()
                 }
 
-                is QRState.Loading -> {}
-                is QRState.Success -> handleSuccessState(state.uri)
-                is QRState.Fail -> handleFailState()
+                is QRState.Loading -> showLoading()
+                is QRState.Success -> {
+                    hideLoading()
+                    handleSuccessState(state.uri)
+                }
+
+                is QRState.Fail -> {
+                    hideLoading()
+                    handleFailState()
+                }
             }
         }
     }
