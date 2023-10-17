@@ -1,10 +1,12 @@
 package com.teampophory.pophory.feature.home.photo
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.Size
+import androidx.activity.addCallback
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.flowWithLifecycle
@@ -85,6 +87,10 @@ class AddPhotoActivity : AppCompatActivity() {
         }
         binding.btnSubmit.setOnSingleClickListener {
             viewModel.onSubmit()
+        }
+        onBackPressedDispatcher.addCallback(this) {
+            setResult(Activity.RESULT_CANCELED)
+            finish()
         }
     }
 

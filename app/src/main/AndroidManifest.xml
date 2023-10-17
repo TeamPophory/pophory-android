@@ -4,6 +4,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="com.google.android.gms.permission.AD_ID" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:name=".App"
@@ -17,6 +18,9 @@
         android:theme="@style/Theme.Pophory"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
+        <activity
+            android:name=".feature.qr.QRActivity"
+            android:exported="false" />
         <activity
             android:name=".feature.share.ShareActivity"
             android:exported="false" />
@@ -68,7 +72,7 @@
             android:exported="false" />
         <activity
             android:name=".feature.home.HomeActivity"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.SEND" />
                 <category android:name="android.intent.category.DEFAULT" />
