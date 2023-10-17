@@ -3,8 +3,6 @@ package com.teampophory.pophory.feature.home
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import androidx.activity.result.PickVisualMediaRequest
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -13,8 +11,8 @@ import com.teampophory.pophory.R
 import com.teampophory.pophory.common.context.stringOf
 import com.teampophory.pophory.common.view.viewBinding
 import com.teampophory.pophory.databinding.ActivityHomeBinding
+import com.teampophory.pophory.feature.home.add.AddPhotoBottomSheet
 import com.teampophory.pophory.feature.home.mypage.MyPageFragment
-import com.teampophory.pophory.feature.home.photo.AddPhotoActivity
 import com.teampophory.pophory.feature.home.store.StoreFragment
 import com.teampophory.pophory.util.dialog.DialogUtil
 import dagger.hilt.android.AndroidEntryPoint
@@ -23,22 +21,6 @@ import dagger.hilt.android.AndroidEntryPoint
 class HomeActivity : AppCompatActivity() {
     private val binding: ActivityHomeBinding by viewBinding(ActivityHomeBinding::inflate)
     private val viewModel by viewModels<HomeViewModel>()
-    private val addPhotoResultLauncher =
-        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-            if (it.resultCode == RESULT_OK) {
-                viewModel.eventAlbumCountUpdate()
-            }
-        }
-
-    private val imagePicker =
-        registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
-            val currentAlbumPosition = viewModel.homeState.value.currentAlbumPosition
-            val albumItem = viewModel.homeState.value.currentAlbums?.getOrNull(currentAlbumPosition)
-            if (uri != null && albumItem != null) {
-                val intent = AddPhotoActivity.getIntent(this, uri.toString(), albumItem)
-                addPhotoResultLauncher.launch(intent)
-            }
-        }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -75,7 +57,8 @@ class HomeActivity : AppCompatActivity() {
                     return@setOnClickListener
                 }
             }
-            imagePicker.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
+            val modalBottomSheet = AddPhotoBottomSheet()
+            modalBottomSheet.show(supportFragmentManager, AddPhotoBottomSheet.TAG)
         }
     }
 
@@ -91,7 +74,6 @@ class HomeActivity : AppCompatActivity() {
             replace(R.id.home_fcv, fragment)
         }
     }
-
 
     companion object {
         @JvmStatic
