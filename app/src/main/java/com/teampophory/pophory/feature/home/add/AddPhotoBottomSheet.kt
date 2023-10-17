@@ -13,6 +13,7 @@ import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.activityViewModels
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.teampophory.pophory.R
 import com.teampophory.pophory.common.view.setOnSingleClickListener
 import com.teampophory.pophory.common.view.viewBinding
 import com.teampophory.pophory.databinding.BottomSheetHomeAddPhotoBinding
@@ -33,7 +34,7 @@ class AddPhotoBottomSheet : BottomSheetDialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        return binding.root
+        return inflater.inflate(R.layout.bottom_sheet_home_add_photo, container, false)
     }
 
     override fun onAttach(context: Context) {
