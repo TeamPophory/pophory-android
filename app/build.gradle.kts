@@ -10,7 +10,6 @@ plugins {
     alias(libs.plugins.app.distribution)
     alias(libs.plugins.crashlytics)
     id("com.google.android.gms.oss-licenses-plugin")
-    alias(libs.plugins.kotlin.android)
 }
 
 val properties = Properties().apply {
@@ -109,8 +108,6 @@ dependencies {
     implementation(libs.bundles.retrofit)
     implementation(libs.kakao.login)
     implementation(libs.zxing.android.embedded)
-    implementation(libs.appcompat)
-    implementation(libs.material)
 
     debugImplementation(libs.bundles.flipper)
 
