@@ -1,10 +1,12 @@
 package com.teampophory.pophory.feature.home.photo
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.Size
+import androidx.activity.addCallback
 import androidx.activity.viewModels
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
@@ -83,6 +85,10 @@ class AddPhotoActivity : BindingActivity<ActivityAddPhotoBinding>(R.layout.activ
         binding.btnSubmit.setOnSingleClickListener {
             viewModel.onSubmit()
         }
+        onBackPressedDispatcher.addCallback(this) {
+            setResult(Activity.RESULT_CANCELED)
+            finish()
+        }
     }
 
     private fun subscribeEvent() {
@@ -149,6 +155,11 @@ class AddPhotoActivity : BindingActivity<ActivityAddPhotoBinding>(R.layout.activ
                     binding.txtStudio.setTextColor(colorOf(com.teampophory.pophory.designsystem.R.color.gray_40))
                 }
             }.launchIn(lifecycleScope)
+    }
+
+    override fun onBackPressed() {
+        setResult(Activity.RESULT_CANCELED)
+        super.onBackPressed()
     }
 
     companion object {

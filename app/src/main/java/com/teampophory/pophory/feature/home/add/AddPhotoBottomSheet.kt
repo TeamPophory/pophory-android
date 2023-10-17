@@ -13,6 +13,7 @@ import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.activityViewModels
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.teampophory.pophory.common.view.viewBinding
 import com.teampophory.pophory.databinding.BottomSheetHomeAddPhotoBinding
 import com.teampophory.pophory.feature.home.HomeViewModel
 import com.teampophory.pophory.feature.home.photo.AddPhotoActivity
@@ -20,8 +21,7 @@ import com.teampophory.pophory.feature.qr.QRActivity
 
 class AddPhotoBottomSheet : BottomSheetDialogFragment() {
 
-    private var _binding: BottomSheetHomeAddPhotoBinding? = null
-    private val binding get() = _binding!!
+    private val binding by viewBinding(BottomSheetHomeAddPhotoBinding::bind)
     private val viewModel by activityViewModels<HomeViewModel>()
     private lateinit var imagePicker: ActivityResultLauncher<PickVisualMediaRequest>
     private lateinit var addPhotoResultLauncher: ActivityResultLauncher<Intent>
@@ -32,7 +32,6 @@ class AddPhotoBottomSheet : BottomSheetDialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = BottomSheetHomeAddPhotoBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -70,6 +69,8 @@ class AddPhotoBottomSheet : BottomSheetDialogFragment() {
                 if (it.resultCode == RESULT_OK) {
                     viewModel.eventAlbumCountUpdate()
                     dismiss()
+                } else if (it.resultCode == RESULT_CANCELED) {
+                    dismiss()
                 }
             }
     }
@@ -89,11 +90,6 @@ class AddPhotoBottomSheet : BottomSheetDialogFragment() {
                 imagePicker.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
             }
         }
-    }
-
-    override fun onDestroyView() {
-        _binding = null
-        super.onDestroyView()
     }
 
     companion object {
