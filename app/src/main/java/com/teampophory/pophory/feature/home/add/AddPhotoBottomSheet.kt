@@ -13,6 +13,7 @@ import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.activityViewModels
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.teampophory.pophory.common.view.setOnSingleClickListener
 import com.teampophory.pophory.common.view.viewBinding
 import com.teampophory.pophory.databinding.BottomSheetHomeAddPhotoBinding
 import com.teampophory.pophory.feature.home.HomeViewModel
@@ -82,11 +83,11 @@ class AddPhotoBottomSheet : BottomSheetDialogFragment() {
 
     private fun initListMenuViews() {
         with(binding) {
-            layoutQr.setOnClickListener {
+            layoutQr.setOnSingleClickListener {
                 val intent = Intent(context, QRActivity::class.java)
                 qrActivityResultLauncher.launch(intent)
             }
-            layoutGallery.setOnClickListener {
+            layoutGallery.setOnSingleClickListener {
                 imagePicker.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
             }
         }
