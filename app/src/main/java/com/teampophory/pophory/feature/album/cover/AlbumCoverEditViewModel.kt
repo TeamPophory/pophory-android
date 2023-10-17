@@ -3,6 +3,8 @@ package com.teampophory.pophory.feature.album.cover
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.teampophory.pophory.R
+import com.teampophory.pophory.ad.entity.AdIdentifier
+import com.teampophory.pophory.ad.usecase.FetchAdConstantUseCase
 import com.teampophory.pophory.data.network.model.album.AlbumCoverChangeRequest
 import com.teampophory.pophory.domain.repository.photo.PhotoRepository
 import com.teampophory.pophory.feature.album.cover.model.AlbumCoverItem
@@ -14,8 +16,10 @@ import javax.inject.Inject
 
 @HiltViewModel
 class AlbumCoverEditViewModel @Inject constructor(
-    private val photoRepository: PhotoRepository
-) : ViewModel() {
+    private val photoRepository: PhotoRepository,
+    private val fetchAdConstantUseCase: FetchAdConstantUseCase,
+
+    ) : ViewModel() {
 
     private val _albumEditState = MutableStateFlow<AlbumEditState>(AlbumEditState.Uninitialized)
     val albumEditState = _albumEditState.asStateFlow()
@@ -49,5 +53,9 @@ class AlbumCoverEditViewModel @Inject constructor(
 
     fun updateCurrentPosition(currentDesignId: Long) {
         this.currentDesignId = currentDesignId + 1
+    }
+
+    suspend fun fetchAdConstant(adName: String): AdIdentifier? {
+        return fetchAdConstantUseCase(adName)
     }
 }

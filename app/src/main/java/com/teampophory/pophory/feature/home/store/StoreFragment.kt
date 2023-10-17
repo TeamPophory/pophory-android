@@ -104,19 +104,24 @@ class StoreFragment : Fragment() {
 
     private fun intiViews() {
         binding.ivEditButton.setOnClickListener {
-            if (viewModel.albums.value is StoreState.SuccessAlbums) {
-                val currentAlbumPosition = homeViewModel.homeState.value.currentAlbumPosition
-                val albumItem = viewModel.getCurrentAlbumItem(currentAlbumPosition)
-                val currentAlbumCoverId = albumItem?.albumCover ?: 1
-                val intent = AlbumCoverEditActivity.newIntent(
-                    context = requireContext(),
-                    albumCoverId = currentAlbumCoverId,
-                    albumId = albumItem?.id ?: 0
-                )
-                albumCoverChangeLauncher.launch(intent)
-            }
+            moveToAlbumCoverEditActivity()
         }
         binding.seekBarStore.setOnTouchListener { _, _ -> true }
+    }
+
+    private fun moveToAlbumCoverEditActivity() {
+        if (viewModel.albums.value !is StoreState.SuccessAlbums) {
+            return
+        }
+        val currentAlbumPosition = homeViewModel.homeState.value.currentAlbumPosition
+        val albumItem = viewModel.getCurrentAlbumItem(currentAlbumPosition)
+        val currentAlbumCoverId = albumItem?.albumCover ?: 1
+        val intent = AlbumCoverEditActivity.newIntent(
+            context = requireContext(),
+            albumCoverId = currentAlbumCoverId,
+            albumId = albumItem?.id ?: 0
+        )
+        albumCoverChangeLauncher.launch(intent)
     }
 
     private fun initHomeObserver() {
