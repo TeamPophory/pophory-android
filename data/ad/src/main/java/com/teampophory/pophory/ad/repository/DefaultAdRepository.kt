@@ -3,7 +3,7 @@ package com.teampophory.pophory.ad.repository
 import android.content.SharedPreferences
 import androidx.core.content.edit
 import com.teampophory.pophory.ad.entity.AdIdentifier
-import com.teampophory.pophory.ad.model.toAdConstant
+import com.teampophory.pophory.ad.model.toAdIdentifier
 import com.teampophory.pophory.ad.service.AdService
 import javax.inject.Inject
 
@@ -12,7 +12,7 @@ class DefaultAdRepository @Inject constructor(
     private val sharedPreferences: SharedPreferences
 ) : AdRepository {
     override suspend fun getAdConstant(os: String, version: String): Result<List<AdIdentifier>> {
-        return runCatching { adService.getAdConstant(os, version).map { it.toAdConstant() } }
+        return runCatching { adService.getAdConstant(os, version).map { it.toAdIdentifier() } }
     }
 
     override suspend fun setAdConstant(adName: String, adId: String) {

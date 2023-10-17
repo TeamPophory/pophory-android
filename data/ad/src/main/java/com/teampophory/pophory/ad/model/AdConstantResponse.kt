@@ -13,7 +13,7 @@ data class AdConstantResponse(
 )
 
 
-fun AdConstantResponse.toAdConstant() = AdIdentifier(
-    id = adId ?: "",
-    name = adName ?: ""
+fun AdConstantResponse.toAdIdentifier() = AdIdentifier(
+    id = adId.orEmpty(),
+    name = adName.orEmpty()
 )
