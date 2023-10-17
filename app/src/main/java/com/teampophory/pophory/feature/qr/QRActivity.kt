@@ -153,10 +153,7 @@ class QRActivity : AppCompatActivity() {
     }
 
     private fun fetchImageUrlFromWebView() {
-        val jsScript = """(function() {
-        var imageElement = document.querySelector('img');
-        return imageElement ? imageElement.src : null;
-        })();"""
+        val jsScript = FIND_IMAGE_LOGIC
 
         webView.evaluateJavascript(jsScript) { result ->
             if (result == null || "null" == result) {
@@ -198,5 +195,31 @@ class QRActivity : AppCompatActivity() {
         // 권한 요청시 어떤 권한에 대한 요청인지 구분하기 위한 코드
         const val PERMISSION_REQUEST_CODE = 1000
         const val TEXT_MARGIN_TOP = 23
+
+        const val FIND_IMAGE_LOGIC = """(function() {
+        var images = document.querySelectorAll('img');
+        var downloadLinks = document.querySelectorAll('a[href*=".jpg"]');
+        var buttonImages = document.querySelectorAll('button[src*=".jpg"]');
+        var longestImage = null;
+        var longestHeight = 0;
+
+        // Find the tallest image from <img> tags
+        for (var i = 0; i < images.length; i++) {
+            if (images[i].naturalHeight > longestHeight) {
+                longestHeight = images[i].naturalHeight;
+                longestImage = images[i];
+            }
+        }
+
+        if (longestImage) {
+            return longestImage.src;
+        } else if (downloadLinks.length > 0) {
+            return downloadLinks[0].href;
+        } else if (buttonImages.length > 0) {
+            return buttonImages[0].src;
+        }
+
+        return null;
+        })();"""
     }
 }
