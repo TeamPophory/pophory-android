@@ -5,6 +5,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.activity.viewModels
@@ -12,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.teampophory.pophory.R
+import com.teampophory.pophory.common.context.stringOf
 import com.teampophory.pophory.common.view.dp
 import com.teampophory.pophory.common.view.viewBinding
 import com.teampophory.pophory.databinding.ActivityQrBinding
@@ -60,7 +62,7 @@ class QRActivity : AppCompatActivity() {
     }
 
     private fun initToolbar() {
-        binding.toolbarQr.txtToolbarTitle.text = getText(R.string.qr_toolbar_text)
+        binding.toolbarQr.txtToolbarTitle.text = stringOf(R.string.qr_toolbar_text)
         binding.toolbarQr.btnBack.setOnClickListener {
             setResult(RESULT_CANCELED)
             finish()
@@ -97,8 +99,7 @@ class QRActivity : AppCompatActivity() {
     }
 
     private fun setupWebView() {
-        webView = binding.webViewQr
-        webView.apply {
+        binding.webViewQr.apply {
             settings.apply {
                 javaScriptEnabled = true
                 useWideViewPort = true
@@ -162,11 +163,10 @@ class QRActivity : AppCompatActivity() {
                 val imageDownloader = ImageDownloader()
                 val imageUrl = result.replace("\"", "")
                 imageDownloader.downloadImageFromUrl(this@QRActivity, imageUrl) { uri ->
-                    if (uri != null) {
-                        viewModel.uiState.value = QRState.Success(uri)
+                    viewModel.uiState.value = if (uri != null) {
+                        QRState.Success(uri)
                     } else {
-                        viewModel.uiState.value =
-                            QRState.Fail(getString(R.string.qr_image_download_fail))
+                        QRState.Fail(getString(R.string.qr_image_download_fail))
                     }
                 }
             }
@@ -182,11 +182,16 @@ class QRActivity : AppCompatActivity() {
     }
 
     private fun handleFailState() {
-        val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(webView.url))
-        startActivity(browserIntent)
+        runCatching {
+            val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(binding.webViewQr.url))
+            startActivity(browserIntent)
+        }.onFailure { e ->
+            Log.e("QRActivity", "Failed to open browser with the given URL", e)
+        }
     }
 
     override fun onDestroy() {
+        ImageDownloader().unregisterReceiver(this)
         webView.destroy()
         super.onDestroy()
     }

@@ -11,6 +11,8 @@ import android.webkit.CookieManager
 import android.webkit.URLUtil
 
 class ImageDownloader() {
+    private var receiver: BroadcastReceiver? = null
+
     fun downloadImageFromUrl(context: Context, url: String, callback: (Uri?) -> Unit) {
         val request = createDownloadRequest(context, url)
         val downloadManager = context.getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
@@ -39,7 +41,7 @@ class ImageDownloader() {
         downloadID: Long,
         callback: (Uri?) -> Unit
     ) {
-        val receiver = object : BroadcastReceiver() {
+        receiver = object : BroadcastReceiver() {
             override fun onReceive(context: Context?, intent: Intent?) {
                 val id = intent?.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1)
                 if (downloadID == id) {
@@ -64,7 +66,12 @@ class ImageDownloader() {
                 }
             }
         }
-
         context.registerReceiver(receiver, IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE))
+    }
+
+    fun unregisterReceiver(context: Context) {
+        receiver?.let {
+            context.unregisterReceiver(it)
+        }
     }
 }
