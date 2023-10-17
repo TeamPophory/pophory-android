@@ -1,7 +1,7 @@
 package com.teampophory.pophory.ad.model
 
 
-import com.teampophory.pophory.ad.entity.AdConstant
+import com.teampophory.pophory.ad.entity.AdIdentifier
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 @Serializable
@@ -13,7 +13,7 @@ data class AdConstantResponse(
 )
 
 
-fun AdConstantResponse.toAdConstant() = AdConstant(
-    adId = adId ?: "",
-    adName = adName ?: ""
+fun AdConstantResponse.toAdConstant() = AdIdentifier(
+    id = adId ?: "",
+    name = adName ?: ""
 )

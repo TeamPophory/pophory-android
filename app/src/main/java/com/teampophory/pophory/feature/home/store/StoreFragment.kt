@@ -110,17 +110,18 @@ class StoreFragment : Fragment() {
     }
 
     private fun moveToAlbumCoverEditActivity() {
-        if (viewModel.albums.value is StoreState.SuccessAlbums) {
-            val currentAlbumPosition = homeViewModel.homeState.value.currentAlbumPosition
-            val albumItem = viewModel.getCurrentAlbumItem(currentAlbumPosition)
-            val currentAlbumCoverId = albumItem?.albumCover ?: 1
-            val intent = AlbumCoverEditActivity.newIntent(
-                context = requireContext(),
-                albumCoverId = currentAlbumCoverId,
-                albumId = albumItem?.id ?: 0
-            )
-            albumCoverChangeLauncher.launch(intent)
+        if (viewModel.albums.value !is StoreState.SuccessAlbums) {
+            return
         }
+        val currentAlbumPosition = homeViewModel.homeState.value.currentAlbumPosition
+        val albumItem = viewModel.getCurrentAlbumItem(currentAlbumPosition)
+        val currentAlbumCoverId = albumItem?.albumCover ?: 1
+        val intent = AlbumCoverEditActivity.newIntent(
+            context = requireContext(),
+            albumCoverId = currentAlbumCoverId,
+            albumId = albumItem?.id ?: 0
+        )
+        albumCoverChangeLauncher.launch(intent)
     }
 
     private fun initHomeObserver() {

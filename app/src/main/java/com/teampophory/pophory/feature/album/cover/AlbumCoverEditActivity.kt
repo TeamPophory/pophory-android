@@ -26,7 +26,6 @@ import com.teampophory.pophory.common.view.showAllowingStateLoss
 import com.teampophory.pophory.common.view.viewBinding
 import com.teampophory.pophory.config.ad.AdmobRewardedAdFactory
 import com.teampophory.pophory.config.ad.AdmobRewardedAdService
-import com.teampophory.pophory.config.ad.DefaultAdmobRewardEvents
 import com.teampophory.pophory.databinding.ActivityAlbumCoverEditBinding
 import com.teampophory.pophory.feature.album.cover.adapter.AlbumCoverEditAdapter
 import com.teampophory.pophory.feature.album.cover.model.AlbumCoverItem
@@ -211,9 +210,9 @@ class AlbumCoverEditActivity : AppCompatActivity() {
 
     private fun loadRewardAd() {
         lifecycleScope.launch {
-            val adConstant = viewModel.getAdConstant(AdName.ALBUM_EDIT_COVER_REWARD_01.adName)
+            val adConstant = viewModel.fetchAdConstant(AdName.ALBUM_EDIT_COVER_REWARD_01.adName)
             if (adConstant != null) {
-                getRewardService(adConstant.adName).loadAd()
+                getRewardService(adConstant.name).loadAd()
             } else {
                 viewModel.patchAlbumCover(albumId)
             }
@@ -222,7 +221,7 @@ class AlbumCoverEditActivity : AppCompatActivity() {
 
     private fun getRewardService(adName: String): AdmobRewardedAdService {
         return admobRewardedAdFactory.create(adUnitId = adName).apply {
-            setAdmobRewardEvents(object : DefaultAdmobRewardEvents() {
+            setAdmobRewardEvents(object : AdmobRewardedAdService.AdmobRewardEvents {
                 override fun onAdFailedToLoad(error: LoadAdError) {
                     viewModel.patchAlbumCover(albumId)
                 }

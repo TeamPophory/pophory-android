@@ -3,7 +3,7 @@ package com.teampophory.pophory.feature.album.cover
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.teampophory.pophory.R
-import com.teampophory.pophory.ad.entity.AdConstant
+import com.teampophory.pophory.ad.entity.AdIdentifier
 import com.teampophory.pophory.ad.usecase.FetchAdConstantUseCase
 import com.teampophory.pophory.data.network.model.album.AlbumCoverChangeRequest
 import com.teampophory.pophory.domain.repository.photo.PhotoRepository
@@ -55,7 +55,7 @@ class AlbumCoverEditViewModel @Inject constructor(
         this.currentDesignId = currentDesignId + 1
     }
 
-    suspend fun getAdConstant(adName: String): AdConstant? {
+    suspend fun fetchAdConstant(adName: String): AdIdentifier? {
         return fetchAdConstantUseCase(adName)
     }
 }

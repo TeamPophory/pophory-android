@@ -88,26 +88,15 @@ class AdmobRewardedAdService @AssistedInject constructor(
     }
 
     interface AdmobRewardEvents {
-        fun onAdLoaded()
-        fun onAdFailedToLoad(error: LoadAdError)
-        fun onAdClicked()
-        fun onAdDismissed()
-        fun onAdFailedToShow(error: AdError)
-        fun onAdImpression()
-        fun onAdShowed()
-        fun onUserEarnedReward(rewardItem: RewardItem)
+        fun onAdLoaded() {}
+        fun onAdFailedToLoad(error: LoadAdError) {}
+        fun onAdClicked() {}
+        fun onAdDismissed() {}
+        fun onAdFailedToShow(error: AdError) {}
+        fun onAdImpression() {}
+        fun onAdShowed() {}
+        fun onUserEarnedReward(rewardItem: RewardItem) {}
     }
-}
-
-open class DefaultAdmobRewardEvents : AdmobRewardedAdService.AdmobRewardEvents {
-    override fun onAdLoaded() {}
-    override fun onAdFailedToLoad(error: LoadAdError) {}
-    override fun onAdClicked() {}
-    override fun onAdDismissed() {}
-    override fun onAdFailedToShow(error: AdError) {}
-    override fun onAdImpression() {}
-    override fun onAdShowed() {}
-    override fun onUserEarnedReward(rewardItem: RewardItem) {}
 }
 
 @AssistedFactory
