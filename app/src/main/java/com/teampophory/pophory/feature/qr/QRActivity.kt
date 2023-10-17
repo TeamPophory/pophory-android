@@ -12,6 +12,8 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.DefaultLifecycleObserver
+import androidx.lifecycle.LifecycleOwner
 import com.teampophory.pophory.R
 import com.teampophory.pophory.common.activity.hideLoading
 import com.teampophory.pophory.common.activity.showLoading
@@ -23,27 +25,31 @@ import com.teampophory.pophory.databinding.ActivityQrBinding
 class QRActivity : AppCompatActivity() {
     private val binding by viewBinding(ActivityQrBinding::inflate)
     private val viewModel: QRViewModel by viewModels()
-    private lateinit var webView: WebView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        lifecycle.addObserver(QRActivityObserver(this))
         observeUIState()
     }
 
-    override fun onResume() {
-        super.onResume()
-        if (viewModel.uiState.value is QRState.Fail) {
-            setResult(RESULT_CANCELED)
-            finish()
+    class QRActivityObserver(private val activity: QRActivity) : DefaultLifecycleObserver {
+        override fun onResume(owner: LifecycleOwner) {
+            if (activity.viewModel.uiState.value is QRState.Fail) {
+                activity.setResult(RESULT_CANCELED)
+                activity.finish()
+            }
+            activity.binding.decorateBarcodeViewQr.resume()
         }
-        binding.decorateBarcodeViewQr.resume()
-    }
 
-    override fun onPause() {
-        super.onPause()
-        binding.decorateBarcodeViewQr.pause()
+        override fun onPause(owner: LifecycleOwner) {
+            activity.binding.decorateBarcodeViewQr.pause()
+        }
+
+        override fun onDestroy(owner: LifecycleOwner) {
+            ImageDownloader().unregisterReceiver(activity)
+        }
     }
 
     private fun observeUIState() {
@@ -156,7 +162,7 @@ class QRActivity : AppCompatActivity() {
         binding.decorateBarcodeViewQr.apply {
             decodeSingle { result ->
                 viewModel.uiState.value = QRState.Loading
-                webView.loadUrl(result.text)
+                binding.webViewQr.loadUrl(result.text)
             }
             setStatusText(getString(R.string.qr_view_finder_text))
         }
@@ -165,7 +171,7 @@ class QRActivity : AppCompatActivity() {
     private fun fetchImageUrlFromWebView() {
         val jsScript = FIND_IMAGE_LOGIC
 
-        webView.evaluateJavascript(jsScript) { result ->
+        binding.webViewQr.evaluateJavascript(jsScript) { result ->
             if (result == null || "null" == result) {
                 viewModel.uiState.value = QRState.Fail(getString(R.string.qr_image_load_fail))
             } else {
@@ -199,12 +205,6 @@ class QRActivity : AppCompatActivity() {
         }
     }
 
-    override fun onDestroy() {
-        ImageDownloader().unregisterReceiver(this)
-        webView.destroy()
-        super.onDestroy()
-    }
-
     companion object {
         // 권한 요청시 어떤 권한에 대한 요청인지 구분하기 위한 코드
         const val PERMISSION_REQUEST_CODE = 1000
@@ -236,4 +236,6 @@ class QRActivity : AppCompatActivity() {
         return null;
         })();"""
     }
+
 }
+
