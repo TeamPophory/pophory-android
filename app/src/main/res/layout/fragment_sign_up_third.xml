@@ -29,8 +29,8 @@
         android:id="@+id/tab_third"
         android:layout_width="0dp"
         android:layout_height="3dp"
-        android:background="@drawable/bg_sign_up_tab_selected"
         android:layout_marginEnd="11dp"
+        android:background="@drawable/bg_sign_up_tab_selected"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/tab_second"
         app:layout_constraintTop_toTopOf="@id/tab_first" />
@@ -47,6 +47,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/tv_content_theme_change"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/sign_up_third_content_theme_change"
+        android:textColor="@color/gray_50"
+        android:textSize="17sp"
+        android:layout_marginTop="5dp"
+        app:layout_constraintStart_toStartOf="@id/tv_title"
+        app:layout_constraintTop_toBottomOf="@id/tv_title" />
+
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/iv_album_cover"
@@ -55,21 +66,21 @@
         android:layout_marginHorizontal="70dp"
         android:layout_marginTop="32dp"
         android:scaleType="centerCrop"
-        app:layout_constraintDimensionRatio="0.73"
         android:src="@drawable/ic_album_cover_friends_1"
         app:layout_constraintBottom_toTopOf="@id/layout_select_cover"
+        app:layout_constraintDimensionRatio="0.73"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_title"
-        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.Pophory.ShapeableImageView"/>
+        app:layout_constraintTop_toBottomOf="@id/tv_content_theme_change"
+        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.Pophory.ShapeableImageView" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layout_select_cover"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_margin="19dp"
         android:layout_marginHorizontal="60dp"
         android:layout_marginTop="30dp"
-        android:layout_margin="19dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
