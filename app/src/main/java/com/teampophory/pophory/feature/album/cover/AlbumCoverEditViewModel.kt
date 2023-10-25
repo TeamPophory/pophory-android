@@ -2,6 +2,7 @@ package com.teampophory.pophory.feature.album.cover
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.teampophory.pophory.BuildConfig
 import com.teampophory.pophory.R
 import com.teampophory.pophory.ad.entity.AdIdentifier
 import com.teampophory.pophory.ad.usecase.FetchAdConstantUseCase
@@ -56,6 +57,10 @@ class AlbumCoverEditViewModel @Inject constructor(
     }
 
     suspend fun fetchAdConstant(adName: String): AdIdentifier? {
-        return fetchAdConstantUseCase(adName)
+        return if (BuildConfig.DEBUG) {
+            AdIdentifier("ca-app-pub-3940256099942544/5224354917", "DEBUG")
+        } else {
+            fetchAdConstantUseCase(adName)
+        }
     }
 }

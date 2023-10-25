@@ -10,9 +10,6 @@ import androidx.core.view.isVisible
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.viewpager2.widget.ViewPager2
-import com.google.android.gms.ads.AdError
-import com.google.android.gms.ads.LoadAdError
-import com.google.android.gms.ads.rewarded.RewardItem
 import com.teampophory.pophory.R
 import com.teampophory.pophory.common.activity.hideLoading
 import com.teampophory.pophory.common.activity.showError
@@ -212,33 +209,14 @@ class AlbumCoverEditActivity : AppCompatActivity() {
         lifecycleScope.launch {
             val adConstant = viewModel.fetchAdConstant(AdName.ALBUM_EDIT_COVER_REWARD_01.adName)
             if (adConstant != null) {
-                getRewardService(adConstant.name).loadAd()
-            } else {
-                viewModel.patchAlbumCover(albumId)
+                getRewardService(adConstant.id).loadAd()
             }
+            viewModel.patchAlbumCover(albumId)
         }
     }
 
     private fun getRewardService(adName: String): AdmobRewardedAdService {
-        return admobRewardedAdFactory.create(adUnitId = adName).apply {
-            setAdmobRewardEvents(object : AdmobRewardedAdService.AdmobRewardEvents {
-                override fun onAdFailedToLoad(error: LoadAdError) {
-                    viewModel.patchAlbumCover(albumId)
-                }
-
-                override fun onAdFailedToShow(error: AdError) {
-                    viewModel.patchAlbumCover(albumId)
-                }
-
-                override fun onAdShowed() {
-                    viewModel.patchAlbumCover(albumId)
-                }
-
-                override fun onUserEarnedReward(rewardItem: RewardItem) {
-                    viewModel.patchAlbumCover(albumId)
-                }
-            })
-        }
+        return admobRewardedAdFactory.create(adUnitId = adName)
     }
 
     companion object {
