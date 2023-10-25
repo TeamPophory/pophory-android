@@ -1,6 +1,7 @@
 package com.teampophory.pophory.feature.home.mypage
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.text.Spannable
 import android.text.SpannableStringBuilder
@@ -39,10 +40,6 @@ class MyPageFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         initObserver()
         setOnClickListener()
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
     }
 
     private fun initObserver() {
@@ -86,6 +83,11 @@ class MyPageFragment : Fragment() {
             layoutMypageStory.setOnClickListener {
                 startActivity(Intent(requireContext(), StoryActivity::class.java))
             }
+            tvMypageAdmob.setOnClickListener {
+                runCatching {
+                    startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(AD_URL)))
+                }
+            }
         }
     }
 
@@ -115,6 +117,8 @@ class MyPageFragment : Fragment() {
     }
 
     companion object {
+        private const val AD_URL = "https://walla.my/pophory_event3?utm_source=android"
+
         fun newInstance() = MyPageFragment()
     }
 }

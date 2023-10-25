@@ -221,7 +221,7 @@
         android:layout_marginTop="20dp"
         android:gravity="center"
         android:scaleType="fitXY"
-        android:src="@drawable/ic_banner"
+        android:src="@drawable/img_main_banner"
         android:text="광고"
         android:textAppearance="?textAppearancePopupText1"
         app:layout_constraintTop_toBottomOf="@id/layout_mypage_story" />
