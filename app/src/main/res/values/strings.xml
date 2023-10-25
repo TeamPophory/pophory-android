@@ -63,6 +63,7 @@
     <string name="edit_album_ad_title">앨범을 수정할까요?</string>
     <string name="edit_album_ad_description">앨범 커버를 수정하려면 광고 시청 하나 부탁드려요!</string>
 
+    <!-- qr -->
     <string name="qr_toolbar_text">QR로 등록하기</string>
     <string name="qr_image_load_fail">이미지 로드에 실패 하였습니다.</string>
     <string name="qr_image_download_fail">이미지 다운로드에 실패하하였습니다.</string>
