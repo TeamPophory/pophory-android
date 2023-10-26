@@ -3,6 +3,7 @@ package com.teampophory.pophory.feature.qr
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -120,11 +121,22 @@ class QRActivity : AppCompatActivity() {
                 useWideViewPort = true
             }
             webViewClient = object : WebViewClient() {
+                override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {
+                    super.onPageStarted(view, url, favicon)
+                    if (url != null && NOT_SUPPORT_URLS.contains(url)) {
+                        viewModel.uiState.value =
+                            QRState.Fail(getString(R.string.qr_image_load_fail))
+                    }
+                }
+
                 override fun onPageFinished(view: WebView, url: String) {
                     super.onPageFinished(view, url)
-                    fetchImageUrlFromWebView()
+                    if (url != null && !NOT_SUPPORT_URLS.contains(url)) {
+                        fetchImageUrlFromWebView()
+                    }
                 }
             }
+
         }
     }
 
@@ -148,12 +160,14 @@ class QRActivity : AppCompatActivity() {
     private fun adjustStatusTextPosition() {
         val statusTextView = binding.decorateBarcodeViewQr.getStatusView()
         val barcodeView = binding.decorateBarcodeViewQr.getBarcodeView()
+        val statusDetailTextView = binding.tvViewFinderTextDetail
 
         barcodeView.addOnLayoutChangeListener { _, _, _, _, _, _, _, _, _ ->
             val framingRect = barcodeView.framingRect
             framingRect?.let {
-                val desiredYPosition = it.bottom + TEXT_MARGIN_TOP.dp
-                statusTextView.y = desiredYPosition.toFloat()
+                statusTextView.y = (it.bottom + TEXT_MARGIN_TOP_MAIN.dp).toFloat()
+                statusDetailTextView.y =
+                    statusTextView.y + statusTextView.height + TEXT_MARGIN_TOP_DETAIL.dp
             }
         }
     }
@@ -206,9 +220,16 @@ class QRActivity : AppCompatActivity() {
     }
 
     companion object {
+        // 예외 처리 사진관
+        const val POZLE_URL = "http://211.110.139.146/PhotoBooth/no_photo.php"
+
+        // 예외 처리 사진관 리스트
+        var NOT_SUPPORT_URLS = arrayOf(POZLE_URL)
+
         // 권한 요청시 어떤 권한에 대한 요청인지 구분하기 위한 코드
         const val PERMISSION_REQUEST_CODE = 1000
-        const val TEXT_MARGIN_TOP = 23
+        const val TEXT_MARGIN_TOP_MAIN = 23
+        const val TEXT_MARGIN_TOP_DETAIL = 150
 
         const val FIND_IMAGE_LOGIC = """(function() {
         var images = document.querySelectorAll('img');

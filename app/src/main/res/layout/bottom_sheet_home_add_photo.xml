@@ -4,23 +4,26 @@
     android:id="@+id/standard_bottom_sheet"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@drawable/bg_round_20dp_white"
     app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
-    <com.google.android.material.bottomsheet.BottomSheetDragHandleView
+    <View
         android:id="@+id/dragHandle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="13dp"
+        android:layout_width="40dp"
+        android:layout_height="4dp"
+        android:layout_margin="13dp"
+        android:background="@drawable/bg_round_100dp_gray30"
+        android:paddingHorizontal="22dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:tint="@color/gray_30" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tv_select_feature"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
         android:text="@string/add_photo_bottom_sheet_photo_title"
         android:textAppearance="?textAppearanceModalText1"
         app:layout_constraintStart_toStartOf="parent"
@@ -30,7 +33,9 @@
         android:layout_width="match_parent"
         android:layout_height="120dp"
         android:layout_margin="20dp"
+        android:layout_marginBottom="15dp"
         android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_select_feature">
@@ -83,4 +88,5 @@
 
         </LinearLayout>
     </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
