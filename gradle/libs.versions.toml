@@ -7,7 +7,7 @@ versionCode = "10200"
 
 # kotlin
 kotlin = "1.9.20"
-kotlinx-serialization-json = "1.6.0"
+kotlinx-serialization-json = "1.6.1"
 kotlinx-serialization-converter = "1.0.0"
 kotlinx-coroutines = "1.7.3"
 kotlinx-datetime = "0.4.1"
