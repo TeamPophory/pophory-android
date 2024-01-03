@@ -65,7 +65,7 @@ kspplugin = "1.9.21-1.0.16"
 
 # third party
 flipper = "0.243.0"
-soloader = "0.10.5"
+soloader = "0.11.0"
 okhttp = "4.12.0"
 retrofit = "2.9.0"
 timber = "5.0.1"
