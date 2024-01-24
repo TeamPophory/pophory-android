@@ -60,7 +60,7 @@ espressoIntents = "3.5.1"
 runner = "1.5.2"
 
 # gradle
-agp = "8.2.1"
+agp = "8.2.2"
 kspplugin = "1.9.22-1.0.17"
 
 # third party
