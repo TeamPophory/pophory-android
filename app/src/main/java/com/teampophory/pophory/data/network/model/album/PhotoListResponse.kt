@@ -7,7 +7,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class PhotoListResponse(
-    @SerialName("photos") val photos: List<Photo>? = null
+    @SerialName("photos") val photos: List<Photo>? = null,
 ) {
     @Serializable
     data class Photo(
@@ -24,7 +24,7 @@ data class PhotoListResponse(
         @SerialName("height")
         val height: Int? = null,
         @SerialName("shareId")
-        val shareId: String
+        val shareId: String,
     )
 
     fun mapPhotosToPhotoItems(): List<PhotoDetail> {
@@ -41,7 +41,7 @@ data class PhotoListResponse(
                     (photo.width >= photo.height) -> OrientType.HORIZONTAL
                     else -> OrientType.VERTICAL
                 },
-                shareId = photo.shareId
+                shareId = photo.shareId,
             )
         }
     }

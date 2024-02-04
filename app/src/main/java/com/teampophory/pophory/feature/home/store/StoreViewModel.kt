@@ -12,7 +12,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class StoreViewModel @Inject constructor(
-    private val storeRepository: StoreRepository
+    private val storeRepository: StoreRepository,
 ) : ViewModel() {
 
     private val _albums = MutableLiveData<StoreState>(StoreState.Uninitialized)

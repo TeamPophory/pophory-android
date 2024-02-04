@@ -15,9 +15,9 @@ data class MyPageResponse(
     @SerialName("profileImageUrl")
     val profileImageUrl: String?,
     @SerialName("photoCount")
-    val photoCount: Int
+    val photoCount: Int,
 ) {
     fun toProfile(): Profile {
-        return Profile(id,realName, nickname, profileImageUrl,photoCount)
+        return Profile(id, realName, nickname, profileImageUrl, photoCount)
     }
 }

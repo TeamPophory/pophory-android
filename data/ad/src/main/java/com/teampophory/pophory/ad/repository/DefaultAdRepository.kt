@@ -9,7 +9,7 @@ import javax.inject.Inject
 
 class DefaultAdRepository @Inject constructor(
     private val adService: AdService,
-    private val sharedPreferences: SharedPreferences
+    private val sharedPreferences: SharedPreferences,
 ) : AdRepository {
     override suspend fun getAdConstant(os: String, version: String): Result<List<AdIdentifier>> {
         return runCatching { adService.getAdConstant(os, version).map { it.toAdIdentifier() } }

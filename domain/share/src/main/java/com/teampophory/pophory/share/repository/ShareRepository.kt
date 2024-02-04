@@ -8,5 +8,5 @@ interface ShareRepository {
     suspend fun getPhotos(): Result<List<Photo>>
     suspend fun getPhotoInfo(shareId: String): Result<SharePhoto>
     suspend fun getUnsecuredPhotoInfo(shareId: String): Result<SharePhoto>
-    suspend fun acceptShare( photoId: Long): Result<AcceptedSharePhoto>
+    suspend fun acceptShare(photoId: Long): Result<AcceptedSharePhoto>
 }

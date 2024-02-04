@@ -14,7 +14,7 @@ data class PhotoDetail(
     val width: Int,
     val height: Int,
     val orientType: OrientType,
-    val shareId: String
+    val shareId: String,
 )
 
 fun List<PhotoItem>.mapPhotoItemsToPhotoDetails(): List<PhotoDetail> {
@@ -26,9 +26,8 @@ fun List<PhotoItem>.mapPhotoItemsToPhotoDetails(): List<PhotoDetail> {
     }
 }
 
-
 enum class OrientType {
     VERTICAL,
     HORIZONTAL,
-    NONE
+    NONE,
 }

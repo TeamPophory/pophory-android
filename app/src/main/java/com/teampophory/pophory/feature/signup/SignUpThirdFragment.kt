@@ -9,7 +9,6 @@ import androidx.core.text.color
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-
 import com.teampophory.pophory.R
 import com.teampophory.pophory.common.fragment.colorOf
 import com.teampophory.pophory.common.primitive.textAppearance
@@ -25,28 +24,27 @@ class SignUpThirdFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         return FragmentSignUpThirdBinding.inflate(inflater, container, false).root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //앨범 커버 이미지 초기화
+        // 앨범 커버 이미지 초기화
         initAlbumCoverImage()
-        //앨범 커버 선택
+        // 앨범 커버 선택
         selectAlbumCover()
         setSpannableString()
     }
 
     private fun initAlbumCoverImage() {
-        //기본 앨범 커버 이미지
+        // 기본 앨범 커버 이미지
         binding.ivAlbumCover.setImageResource(R.drawable.ic_album_cover_friends_1)
-
     }
 
-    private fun setAlbumSelectState(number: Int){
-        with(binding){
+    private fun setAlbumSelectState(number: Int) {
+        with(binding) {
             ivAlbumSelect1.isVisible = number == 1
             ivAlbumSelect2.isVisible = number == 3
             ivAlbumSelect3.isVisible = number == 5
@@ -63,7 +61,10 @@ class SignUpThirdFragment : Fragment() {
         val text = buildSpannedString {
             append(splittedText[0])
             color(colorOf(com.teampophory.pophory.designsystem.R.color.pophory_purple)) {
-                textAppearance(requireContext(), com.teampophory.pophory.designsystem.R.style.TextAppearance_Pophory_HeadLineBold) {
+                textAppearance(
+                    requireContext(),
+                    com.teampophory.pophory.designsystem.R.style.TextAppearance_Pophory_HeadLineBold,
+                ) {
                     append(coloredText)
                 }
             }

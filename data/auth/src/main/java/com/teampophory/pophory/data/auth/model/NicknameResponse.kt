@@ -6,10 +6,11 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class NicknameRequest(
     @SerialName("nickname")
-    val nickname: String
+    val nickname: String,
 )
+
 @Serializable
 data class NicknameResponse(
     @SerialName("isDuplicated")
-    val isDuplicated: Boolean
+    val isDuplicated: Boolean,
 )

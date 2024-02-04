@@ -21,7 +21,6 @@ object PhotoModule {
     @Singleton
     fun providePhotoNetworkService(@Secured retrofit: Retrofit): PhotoService = retrofit.create()
 
-
     @Provides
     @Singleton
     @Unsecured

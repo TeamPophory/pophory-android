@@ -24,7 +24,7 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(
     private val configureMeUseCase: ConfigureMeUseCase,
     private val getAdConstantUseCase: GetAdConstantUseCase,
-    private val setAdConstantUseCase: SetAdConstantUseCase
+    private val setAdConstantUseCase: SetAdConstantUseCase,
 ) : ViewModel() {
 
     private val _homeState = MutableStateFlow(HomeViewState())
@@ -33,7 +33,6 @@ class HomeViewModel @Inject constructor(
     private val _albumCountUpdateEvent: MutableSharedFlow<Unit> = MutableSharedFlow()
 
     val albumCountUpdateEvent: SharedFlow<Unit> = _albumCountUpdateEvent.asSharedFlow()
-
 
     init {
         viewModelScope.launch {

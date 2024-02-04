@@ -22,30 +22,30 @@ class FakePhotoRepository : PhotoRepository {
                         studio = "studio1",
                         takenAt = "2021-01-01",
                         imageUrl = fakeImageUrl,
-                        shareId = "shareId"
+                        shareId = "shareId",
                     ),
                     PhotoListResponse.Photo(
                         id = 2,
                         studio = "studio2",
                         takenAt = "2021-01-02",
                         imageUrl = fakeImageUrl,
-                        shareId = "shareId"
+                        shareId = "shareId",
                     ),
                     PhotoListResponse.Photo(
                         id = 3,
                         studio = "studio3",
                         takenAt = "2021-01-03",
                         imageUrl = fakeImageUrl,
-                        shareId = "shareId"
+                        shareId = "shareId",
                     ),
                     PhotoListResponse.Photo(
                         id = 4,
                         studio = "studio4",
                         takenAt = "2021-01-04",
                         imageUrl = fakeImageUrl,
-                        shareId = "shareId"
-                    )
-                )
+                        shareId = "shareId",
+                    ),
+                ),
             )
         }
     }
@@ -57,23 +57,23 @@ class FakePhotoRepository : PhotoRepository {
                 Studio(
                     id = 1,
                     name = "studio1",
-                    imageUrl = fakeImageUrl
+                    imageUrl = fakeImageUrl,
                 ),
                 Studio(
                     id = 2,
                     name = "studio2",
-                    imageUrl = fakeImageUrl
+                    imageUrl = fakeImageUrl,
                 ),
                 Studio(
                     id = 3,
                     name = "studio3",
-                    imageUrl = fakeImageUrl
+                    imageUrl = fakeImageUrl,
                 ),
                 Studio(
                     id = 4,
                     name = "studio4",
-                    imageUrl = fakeImageUrl
-                )
+                    imageUrl = fakeImageUrl,
+                ),
             )
         }
     }
@@ -84,7 +84,7 @@ class FakePhotoRepository : PhotoRepository {
         studioId: Long,
         fileName: String,
         width: Int,
-        height: Int
+        height: Int,
     ): Result<Unit> {
         return runCatching { }
     }
@@ -96,7 +96,7 @@ class FakePhotoRepository : PhotoRepository {
     override suspend fun postPhotoToS3(url: String, photo: RequestBody) = Unit
     override suspend fun patchAlbumCover(
         albumCoverId: Long,
-        albumCoverChangeRequest: AlbumCoverChangeRequest
+        albumCoverChangeRequest: AlbumCoverChangeRequest,
     ): Result<Unit> {
         return runCatching { }
     }

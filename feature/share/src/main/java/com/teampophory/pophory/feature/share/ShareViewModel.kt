@@ -10,17 +10,15 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-
 @HiltViewModel
 class ShareViewModel @Inject constructor(
-    private val shareRepository: ShareRepository
+    private val shareRepository: ShareRepository,
 ) : ViewModel() {
 
     private val _photos = MutableLiveData<ShareState>(ShareState.Uninitialized)
     val photos: LiveData<ShareState> get() = _photos
 
     var selectedPosition: Int? = null
-
 
     fun getPhotos() {
         viewModelScope.launch {

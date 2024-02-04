@@ -22,14 +22,14 @@ sealed interface Effect {
 }
 
 data class OnboardingUiState(
-    val isAutoLoginEnabled: Boolean = false
+    val isAutoLoginEnabled: Boolean = false,
 )
 
 @HiltViewModel
 class OnBoardingViewModel @Inject constructor(
     private val authUseCase: AuthUseCase,
     private val autoLoginConfigureUseCase: AutoLoginConfigureUseCase,
-    autoLoginConfigurationUseCase: GetAutoLoginConfigurationUseCase
+    autoLoginConfigurationUseCase: GetAutoLoginConfigurationUseCase,
 ) : ViewModel() {
     private val _event = MutableSharedFlow<Effect>()
     val event = _event.asSharedFlow()
@@ -54,7 +54,6 @@ class OnBoardingViewModel @Inject constructor(
                             _event.emit(Effect.SignUp)
                         }
                     }
-
                 }.onFailure {
                     Timber.e(it)
                     _event.emit(Effect.Snackbar("로그인에 실패했습니다."))

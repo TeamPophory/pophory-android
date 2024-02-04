@@ -4,7 +4,7 @@ import android.content.Context
 import androidx.startup.Initializer
 import com.google.firebase.crashlytics.FirebaseCrashlytics
 
-class CrashlyticsInitializer: Initializer<FirebaseCrashlytics> {
+class CrashlyticsInitializer : Initializer<FirebaseCrashlytics> {
     override fun create(context: Context): FirebaseCrashlytics {
         return FirebaseCrashlytics.getInstance()
     }

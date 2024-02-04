@@ -223,7 +223,7 @@ class AlbumCoverEditActivity : AppCompatActivity() {
         fun newIntent(
             context: Context,
             albumCoverId: Int,
-            albumId: Long
+            albumId: Long,
         ): Intent {
             return Intent(context, AlbumCoverEditActivity::class.java).apply {
                 putExtra("currentAlbumCoverId", albumCoverId)

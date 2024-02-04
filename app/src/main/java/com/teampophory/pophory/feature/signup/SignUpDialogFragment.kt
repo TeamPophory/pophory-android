@@ -1,18 +1,11 @@
 package com.teampophory.pophory.feature.signup
 
-import android.app.Dialog
-import android.content.Context
 import android.graphics.Color
-import android.graphics.Point
 import android.graphics.drawable.ColorDrawable
-import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.Window
-import android.view.WindowInsets
-import android.view.WindowManager
 import androidx.fragment.app.DialogFragment
 import com.teampophory.pophory.common.context.dialogWidthPercent
 import com.teampophory.pophory.common.view.viewBinding
@@ -24,7 +17,7 @@ class SignUpDialogFragment : DialogFragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         // 레이아웃 배경을 투명하게 해줌
 

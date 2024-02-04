@@ -6,7 +6,7 @@ import okhttp3.Response
 import javax.inject.Inject
 
 class AuthInterceptor @Inject constructor(
-    private val dataStore: PophoryDataStore
+    private val dataStore: PophoryDataStore,
 ) : Interceptor {
     private val encodedToken: String
         get() = "Bearer ${dataStore.accessToken}"

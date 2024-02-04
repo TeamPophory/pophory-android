@@ -5,6 +5,6 @@ sealed class AlbumDetailState {
     data object SuccessDeleteAlbum : AlbumDetailState()
 
     data class Error(
-        val message: String
+        val message: String,
     ) : AlbumDetailState()
 }

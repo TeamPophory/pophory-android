@@ -42,6 +42,19 @@ subprojects {
             targetExclude("${layout.buildDirectory}/**/*.kt")
             trimTrailingWhitespace()
             endWithNewline()
+            ktlint("0.49.1")
+                .editorConfigOverride(
+                    mapOf(
+                        "charset" to "utf-8",
+                        "end_of_line" to "lf",
+                        "indent_style" to "space",
+                        "indent_size" to 4,
+                        "max_line_length" to 180,
+                        "trim_trailing_whitespace" to true,
+                        "ktlint_standard_filename" to "disabled",
+                        "ktlint_standard_function_start_of_body_spacing" to "disabled",
+                    )
+                )
         }
         format("kts") {
             target("**/*.kts")

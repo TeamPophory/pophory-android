@@ -11,18 +11,18 @@ import com.teampophory.pophory.feature.home.photo.model.StudioUiModel
 
 class StudioAdapter(
     context: Context,
-    private val onUpdate: (StudioUiModel) -> Unit
+    private val onUpdate: (StudioUiModel) -> Unit,
 ) : ListAdapter<StudioUiModel, StudioAdapter.ViewHolder>(
     ItemDiffCallback(
         onContentsTheSame = { old, new -> old == new },
-        onItemsTheSame = { old, new -> old.id == new.id }
-    )
+        onItemsTheSame = { old, new -> old.id == new.id },
+    ),
 ) {
     private val inflater = LayoutInflater.from(context)
 
     class ViewHolder(
         private val binding: ItemStudioSelectBinding,
-        private val onUpdate: (StudioUiModel) -> Unit
+        private val onUpdate: (StudioUiModel) -> Unit,
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: StudioUiModel) {
             binding.txtStudio.text = item.name
@@ -36,7 +36,7 @@ class StudioAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
             ItemStudioSelectBinding.inflate(inflater, parent, false),
-            onUpdate
+            onUpdate,
         )
     }
 

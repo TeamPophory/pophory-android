@@ -7,7 +7,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class AcceptedShareResponse(
     @SerialName("albumId")
-    val albumId: Long
+    val albumId: Long,
 )
 
 fun AcceptedShareResponse.toAcceptShare() = AcceptedSharePhoto(

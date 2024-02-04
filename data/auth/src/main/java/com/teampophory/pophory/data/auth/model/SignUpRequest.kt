@@ -10,11 +10,11 @@ data class SignUpRequest(
     @SerialName("nickname")
     val nickName: String,
     @SerialName("albumCover")
-    val albumCover: Int
+    val albumCover: Int,
 )
 
 @Serializable
 data class SignUpResponse(
     @SerialName("status")
-    val status: Int
+    val status: Int,
 )

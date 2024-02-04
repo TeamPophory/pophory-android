@@ -49,7 +49,7 @@ fun Context.getDeviceSize(): IntArray {
         val windowInsets = windowMetrics.windowInsets
 
         val insets = windowInsets.getInsetsIgnoringVisibility(
-            WindowInsets.Type.navigationBars() or WindowInsets.Type.displayCutout()
+            WindowInsets.Type.navigationBars() or WindowInsets.Type.displayCutout(),
         )
         val insetsWidth = insets.right + insets.left
         val insetsHeight = insets.top + insets.bottom

@@ -12,10 +12,10 @@ data class AuthResponse(
     @SerialName("refreshToken")
     val refreshToken: String,
     @SerialName("isRegistered")
-    val isRegistered: Boolean
+    val isRegistered: Boolean,
 ) {
     fun toUserAuthentication() = UserAuthentication(
         token = Token(accessToken, refreshToken),
-        isRegistered = isRegistered
+        isRegistered = isRegistered,
     )
 }

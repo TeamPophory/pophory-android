@@ -12,12 +12,12 @@ import javax.inject.Inject
 
 enum class Event {
     LOGOUT,
-    WITHDRAWAL;
+    WITHDRAWAL,
 }
 
 @HiltViewModel
 class SettingViewModel @Inject constructor(
-    private val repository: AuthRepository
+    private val repository: AuthRepository,
 ) : ViewModel() {
     private val _message = MutableSharedFlow<String>()
     val message = _message.asSharedFlow()

@@ -8,7 +8,10 @@ class HorizontalMarginItemDecoration(horizontalMarginInDp: Int) : RecyclerView.I
     private val horizontalMarginInDP = horizontalMarginInDp
 
     override fun getItemOffsets(
-        outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State
+        outRect: Rect,
+        view: View,
+        parent: RecyclerView,
+        state: RecyclerView.State,
     ) {
         outRect.right = horizontalMarginInDP
         outRect.left = horizontalMarginInDP

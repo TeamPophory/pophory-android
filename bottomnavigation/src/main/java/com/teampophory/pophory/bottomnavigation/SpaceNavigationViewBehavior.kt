@@ -21,7 +21,7 @@ internal class SpaceNavigationViewBehavior<V : View> : CoordinatorLayout.Behavio
     override fun onDependentViewChanged(
         parent: CoordinatorLayout,
         child: V,
-        dependency: View
+        dependency: View,
     ): Boolean {
         val translationY = 0f.coerceAtMost(dependency.translationY - dependency.height)
         child.translationY = translationY
@@ -34,7 +34,7 @@ internal class SpaceNavigationViewBehavior<V : View> : CoordinatorLayout.Behavio
         directTargetChild: View,
         target: View,
         axes: Int,
-        type: Int
+        type: Int,
     ): Boolean {
         return axes == ViewCompat.SCROLL_AXIS_VERTICAL || super.onStartNestedScroll(
             coordinatorLayout,
@@ -42,7 +42,7 @@ internal class SpaceNavigationViewBehavior<V : View> : CoordinatorLayout.Behavio
             directTargetChild,
             target,
             axes,
-            type
+            type,
         )
     }
 
@@ -55,7 +55,7 @@ internal class SpaceNavigationViewBehavior<V : View> : CoordinatorLayout.Behavio
         dxUnconsumed: Int,
         dyUnconsumed: Int,
         type: Int,
-        consumed: IntArray
+        consumed: IntArray,
     ) {
         super.onNestedScroll(
             coordinatorLayout,
@@ -66,7 +66,7 @@ internal class SpaceNavigationViewBehavior<V : View> : CoordinatorLayout.Behavio
             dxUnconsumed,
             dyUnconsumed,
             type,
-            consumed
+            consumed,
         )
         if (dyConsumed > 0) {
             Utils.makeTranslationYAnimation(child, child.height.toFloat())

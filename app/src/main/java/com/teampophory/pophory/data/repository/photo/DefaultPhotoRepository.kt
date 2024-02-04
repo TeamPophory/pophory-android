@@ -14,7 +14,7 @@ import javax.inject.Inject
 
 class DefaultPhotoRepository @Inject constructor(
     private val photoService: PhotoService,
-    @Unsecured private val photoServiceNonToken: PhotoService
+    @Unsecured private val photoServiceNonToken: PhotoService,
 ) : PhotoRepository {
     override suspend fun getPhotos(id: Long): Result<PhotoListResponse> {
         return runCatching { photoService.getPhotos(id) }
@@ -36,7 +36,7 @@ class DefaultPhotoRepository @Inject constructor(
         studioId: Long,
         fileName: String,
         width: Int,
-        height: Int
+        height: Int,
     ): Result<Unit> {
         val request = PhotoRequest(
             albumId = albumId,
@@ -44,7 +44,7 @@ class DefaultPhotoRepository @Inject constructor(
             studioId = studioId,
             fileName = fileName,
             width = width,
-            height = height
+            height = height,
         )
         return runCatching {
             photoService.addPhotoToPophory(request).getResponseBodyOrThrow()
@@ -61,7 +61,7 @@ class DefaultPhotoRepository @Inject constructor(
 
     override suspend fun patchAlbumCover(
         albumCoverId: Long,
-        albumCoverChangeRequest: AlbumCoverChangeRequest
+        albumCoverChangeRequest: AlbumCoverChangeRequest,
     ): Result<Unit> {
         return runCatching {
             photoService.patchAlbumCover(albumCoverId, albumCoverChangeRequest)

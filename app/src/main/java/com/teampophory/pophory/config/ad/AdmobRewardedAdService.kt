@@ -17,7 +17,7 @@ import timber.log.Timber
 
 class AdmobRewardedAdService @AssistedInject constructor(
     @ActivityContext private val context: Context,
-    @Assisted private val adUnitId: String
+    @Assisted private val adUnitId: String,
 ) {
 
     private var admobRewardEvents: AdmobRewardEvents? = null
@@ -44,8 +44,8 @@ class AdmobRewardedAdService @AssistedInject constructor(
                     show(ad)
                     admobRewardEvents?.onAdLoaded()
                 }
-            })
-
+            },
+        )
     }
 
     private fun initAdmobRewardListener(ad: RewardedAd) {
@@ -103,4 +103,3 @@ class AdmobRewardedAdService @AssistedInject constructor(
 interface AdmobRewardedAdFactory {
     fun create(adUnitId: String): AdmobRewardedAdService
 }
-

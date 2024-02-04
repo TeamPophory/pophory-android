@@ -20,7 +20,7 @@ import javax.inject.Inject
 @HiltViewModel
 class AlbumListViewModel @Inject constructor(
     private val photoRepository: PhotoRepository,
-    private val savedStateHandle: SavedStateHandle
+    private val savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
 
     private var albumItem: AlbumItem? = null
@@ -44,9 +44,9 @@ class AlbumListViewModel @Inject constructor(
                     _albumListState.emit(
                         AlbumListState.SuccessLoadAlbums(
                             processPhotoDetails(
-                                photoItems
-                            )
-                        )
+                                photoItems,
+                            ),
+                        ),
                     )
                 }.onFailure {
                     Timber.e(it)
@@ -74,7 +74,6 @@ class AlbumListViewModel @Inject constructor(
         }
     }
 
-
     private fun processPhotoDetails(photoDetails: List<PhotoDetail>): List<PhotoItem> {
         val photoItems = mutableListOf<PhotoItem>()
         val verticalItemsBuffer = mutableListOf<PhotoDetail>()
@@ -99,7 +98,6 @@ class AlbumListViewModel @Inject constructor(
                 }
 
                 OrientType.NONE -> {
-
                 }
             }
         }
@@ -115,5 +113,4 @@ class AlbumListViewModel @Inject constructor(
     private fun createEmptyPhotoDetail(): PhotoDetail {
         return PhotoDetail(0, "", "", "", 0, 0, OrientType.NONE, "")
     }
-
 }

@@ -19,20 +19,20 @@ sealed interface ReceiveImageUiState {
         val realName: String,
         val nickName: String,
         val photoId: Long,
-        val imageUrl: String
+        val imageUrl: String,
     ) : ReceiveImageUiState {
         companion object {
             fun of(response: SharePhoto) = Photo(
                 realName = response.realName,
                 nickName = response.nickname,
                 photoId = response.photoId,
-                imageUrl = response.imageUrl
+                imageUrl = response.imageUrl,
             )
         }
     }
 
     data class AcceptedSharePhoto(
-        val albumId: Long
+        val albumId: Long,
     ) : ReceiveImageUiState {
         companion object {
             fun of(response: com.teampophory.pophory.share.entity.AcceptedSharePhoto) =
@@ -48,7 +48,7 @@ sealed interface ReceiveImageUiState {
 @HiltViewModel
 class ReceiveImageViewModel @Inject constructor(
     private val shareRepository: ShareRepository,
-    private val dataStore: PophoryDataStore
+    private val dataStore: PophoryDataStore,
 ) : ViewModel() {
     private val _uiState: MutableStateFlow<ReceiveImageUiState> =
         MutableStateFlow(ReceiveImageUiState.Init)

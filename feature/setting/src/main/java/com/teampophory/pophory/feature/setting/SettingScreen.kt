@@ -26,9 +26,9 @@ import androidx.navigation.compose.rememberNavController
 import com.teampophory.pophory.common.compose.DefaultPreview
 import com.teampophory.pophory.common.compose.bottomBorder
 import com.teampophory.pophory.designsystem.PophoryTheme
-import com.teampophory.pophory.feature.setting.component.WithdrawDialog
-import com.teampophory.pophory.feature.setting.component.SettingItem
 import com.teampophory.pophory.feature.setting.component.LogoutDialog
+import com.teampophory.pophory.feature.setting.component.SettingItem
+import com.teampophory.pophory.feature.setting.component.WithdrawDialog
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -59,25 +59,25 @@ fun SettingScreen(
                         text = "설정",
                         textAlign = TextAlign.Center,
                         modifier = Modifier.fillMaxWidth(),
-                        style = PophoryTheme.typography.headline2
+                        style = PophoryTheme.typography.headline2,
                     )
                 },
                 navigationIcon = {
                     IconButton(onClick = onNavigateHome) {
                         Icon(
                             painter = painterResource(id = com.teampophory.pophory.designsystem.R.drawable.ic_chevron_left),
-                            contentDescription = "Back To Home"
+                            contentDescription = "Back To Home",
                         )
                     }
                 },
-                modifier = Modifier.bottomBorder(Dp.Hairline, PophoryTheme.colors.onSurface30)
+                modifier = Modifier.bottomBorder(Dp.Hairline, PophoryTheme.colors.onSurface30),
             )
-        }
+        },
     ) {
         Column(
             modifier = Modifier
                 .padding(it)
-                .fillMaxSize()
+                .fillMaxSize(),
         ) {
             SettingItem(title = "공지사항", onClick = onNavigateNotice)
             SettingItem(title = "약관 및 정책", onClick = { navController.navigate("term") })
@@ -93,7 +93,7 @@ fun SettingScreen(
                 },
                 setDialogShow = { visible ->
                     isLogoutDialogVisible = visible
-                }
+                },
             )
         }
         if (isWithdrawalDialogVisible) {
@@ -104,7 +104,7 @@ fun SettingScreen(
                 },
                 setDialogShow = { visible ->
                     isWithdrawalDialogVisible = visible
-                }
+                },
             )
         }
     }

@@ -20,12 +20,13 @@ class AlbumDeleteDialogFragment : DialogFragment() {
 
     private val viewModel by activityViewModels<AlbumDetailViewModel>()
     private val binding: FragmentAlbumDeleteDialogBinding by viewBinding(
-        FragmentAlbumDeleteDialogBinding::bind
+        FragmentAlbumDeleteDialogBinding::bind,
     )
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
     ): View? {
         return inflater.inflate(R.layout.fragment_album_delete_dialog, container, false)
     }
@@ -56,6 +57,7 @@ class AlbumDeleteDialogFragment : DialogFragment() {
 
     companion object {
         val TAG: String = AlbumDeleteDialogFragment::class.java.simpleName
+
         @JvmStatic
         fun newInstance() = AlbumDeleteDialogFragment()
     }

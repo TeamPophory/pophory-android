@@ -23,7 +23,7 @@ import timber.log.Timber
 class AdmobNativeAdService @AssistedInject constructor(
     @ActivityContext private val context: Context,
     @Assisted private val adUnitId: String,
-    @Assisted private val adContainer: FrameLayout
+    @Assisted private val adContainer: FrameLayout,
 ) {
     fun getNativeAd() {
         val adLoader = AdLoader.Builder(context, adUnitId)

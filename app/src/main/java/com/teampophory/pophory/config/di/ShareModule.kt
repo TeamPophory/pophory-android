@@ -47,4 +47,3 @@ object ShareModule {
         fun bindShareNetworkDataSource(retrofitShareNetwork: RetrofitShareNetwork): ShareNetworkDataSource
     }
 }
-

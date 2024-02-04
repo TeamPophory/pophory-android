@@ -25,7 +25,7 @@ class OneButtonCommonDialog : DialogFragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         return inflater.inflate(R.layout.dialog_common_one_button, container, false)
     }
@@ -57,10 +57,12 @@ class OneButtonCommonDialog : DialogFragment() {
         with(binding) {
             tvDialogTitle.text = title
             tvDialogDescription.text = description
-            ivDialogIcon.setImageDrawable(imageResId?.let {
-                ivDialogIcon.isVisible = true
-                ContextCompat.getDrawable(requireContext(), it)
-            })
+            ivDialogIcon.setImageDrawable(
+                imageResId?.let {
+                    ivDialogIcon.isVisible = true
+                    ContextCompat.getDrawable(requireContext(), it)
+                },
+            )
             tvButton.text = buttonText
         }
     }
@@ -78,7 +80,7 @@ class OneButtonCommonDialog : DialogFragment() {
             title: String,
             description: String,
             @DrawableRes imageResId: Int,
-            buttonText: String
+            buttonText: String,
         ): OneButtonCommonDialog {
             OneButtonCommonDialog().apply {
                 arguments = Bundle().apply {

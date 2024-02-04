@@ -19,7 +19,7 @@ interface PhotoRepository {
         studioId: Long,
         fileName: String,
         width: Int,
-        height: Int
+        height: Int,
     ): Result<Unit>
 
     suspend fun getPhotoInfoFromS3(): Result<S3Image>
@@ -27,6 +27,6 @@ interface PhotoRepository {
     suspend fun postPhotoToS3(url: String, photo: RequestBody)
     suspend fun patchAlbumCover(
         albumCoverId: Long,
-        albumCoverChangeRequest: AlbumCoverChangeRequest
+        albumCoverChangeRequest: AlbumCoverChangeRequest,
     ): Result<Unit>
 }

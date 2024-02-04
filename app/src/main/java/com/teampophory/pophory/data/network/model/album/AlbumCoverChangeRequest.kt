@@ -6,5 +6,5 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class AlbumCoverChangeRequest(
     @SerialName("albumDesignId")
-    private val albumDesignId: Long
+    private val albumDesignId: Long,
 )

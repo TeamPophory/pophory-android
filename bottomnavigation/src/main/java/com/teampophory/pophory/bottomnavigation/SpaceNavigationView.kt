@@ -24,7 +24,7 @@ import com.teampophory.pophory.bottomnavigation.util.setColorFilter
 class SpaceNavigationView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
-    defStyleAttr: Int = 0
+    defStyleAttr: Int = 0,
 ) : RelativeLayout(context, attrs, defStyleAttr) {
     private val spaceNavigationHeight =
         resources.getDimension(R.dimen.space_navigation_height).toInt()
@@ -109,53 +109,53 @@ class SpaceNavigationView @JvmOverloads constructor(
             val typedArray = context.obtainStyledAttributes(attrs, R.styleable.SpaceNavigationView)
             spaceItemIconSize = typedArray.getDimensionPixelSize(
                 R.styleable.SpaceNavigationView_space_item_icon_size,
-                resources.getDimensionPixelSize(R.dimen.space_item_icon_default_size)
+                resources.getDimensionPixelSize(R.dimen.space_item_icon_default_size),
             )
             spaceItemIconOnlySize = typedArray.getDimensionPixelSize(
                 R.styleable.SpaceNavigationView_space_item_icon_only_size,
-                resources.getDimensionPixelSize(R.dimen.space_item_icon_only_size)
+                resources.getDimensionPixelSize(R.dimen.space_item_icon_only_size),
             )
             spaceItemTextSize = typedArray.getDimensionPixelSize(
                 R.styleable.SpaceNavigationView_space_item_text_size,
-                resources.getDimensionPixelSize(R.dimen.space_item_text_default_size)
+                resources.getDimensionPixelSize(R.dimen.space_item_text_default_size),
             )
             spaceItemIconOnlySize = typedArray.getDimensionPixelSize(
                 R.styleable.SpaceNavigationView_space_item_icon_only_size,
-                resources.getDimensionPixelSize(R.dimen.space_item_icon_only_size)
+                resources.getDimensionPixelSize(R.dimen.space_item_icon_only_size),
             )
             spaceBackgroundColor = typedArray.getColor(
                 R.styleable.SpaceNavigationView_space_background_color,
-                ContextCompat.getColor(context, R.color.space_default_color)
+                ContextCompat.getColor(context, R.color.space_default_color),
             )
             centreButtonColor = typedArray.getColor(
                 R.styleable.SpaceNavigationView_centre_button_color,
-                ContextCompat.getColor(context, R.color.centre_button_color)
+                ContextCompat.getColor(context, R.color.centre_button_color),
             )
             activeSpaceItemColor = typedArray.getColor(
                 R.styleable.SpaceNavigationView_active_item_color,
-                ContextCompat.getColor(context, R.color.space_white)
+                ContextCompat.getColor(context, R.color.space_white),
             )
             inActiveSpaceItemColor = typedArray.getColor(
                 R.styleable.SpaceNavigationView_inactive_item_color,
-                ContextCompat.getColor(context, R.color.default_inactive_item_color)
+                ContextCompat.getColor(context, R.color.default_inactive_item_color),
             )
             centreButtonIcon = typedArray.getResourceId(
                 R.styleable.SpaceNavigationView_centre_button_icon,
-                R.drawable.near_me
+                R.drawable.near_me,
             )
             isCentrePartLinear =
                 typedArray.getBoolean(R.styleable.SpaceNavigationView_centre_part_linear, false)
             activeCentreButtonIconColor = typedArray.getColor(
                 R.styleable.SpaceNavigationView_active_centre_button_icon_color,
-                ContextCompat.getColor(context, R.color.space_white)
+                ContextCompat.getColor(context, R.color.space_white),
             )
             inActiveCentreButtonIconColor = typedArray.getColor(
                 R.styleable.SpaceNavigationView_inactive_centre_button_icon_color,
-                ContextCompat.getColor(context, R.color.default_inactive_item_color)
+                ContextCompat.getColor(context, R.color.default_inactive_item_color),
             )
             activeCentreButtonBackgroundColor = typedArray.getColor(
                 R.styleable.SpaceNavigationView_active_centre_button_background_color,
-                ContextCompat.getColor(context, R.color.centre_button_color)
+                ContextCompat.getColor(context, R.color.centre_button_color),
             )
 
             typedArray.recycle()
@@ -168,42 +168,53 @@ class SpaceNavigationView @JvmOverloads constructor(
         /**
          * Set default colors and sizes
          */
-        if (spaceBackgroundColor == NOT_DEFINED)
+        if (spaceBackgroundColor == NOT_DEFINED) {
             spaceBackgroundColor = ContextCompat.getColor(context, R.color.space_default_color)
+        }
 
-        if (centreButtonColor == NOT_DEFINED)
+        if (centreButtonColor == NOT_DEFINED) {
             centreButtonColor = ContextCompat.getColor(context, R.color.centre_button_color)
+        }
 
-        if (centreButtonIcon == NOT_DEFINED)
+        if (centreButtonIcon == NOT_DEFINED) {
             centreButtonIcon = R.drawable.near_me
+        }
 
-        if (activeSpaceItemColor == NOT_DEFINED)
+        if (activeSpaceItemColor == NOT_DEFINED) {
             activeSpaceItemColor = ContextCompat.getColor(context, R.color.space_white)
+        }
 
-        if (inActiveSpaceItemColor == NOT_DEFINED)
+        if (inActiveSpaceItemColor == NOT_DEFINED) {
             inActiveSpaceItemColor =
                 ContextCompat.getColor(context, R.color.default_inactive_item_color)
+        }
 
-        if (spaceItemTextSize == NOT_DEFINED)
+        if (spaceItemTextSize == NOT_DEFINED) {
             spaceItemTextSize = resources.getDimension(R.dimen.space_item_text_default_size).toInt()
+        }
 
-        if (spaceItemIconSize == NOT_DEFINED)
+        if (spaceItemIconSize == NOT_DEFINED) {
             spaceItemIconSize = resources.getDimension(R.dimen.space_item_icon_default_size).toInt()
+        }
 
-        if (spaceItemIconOnlySize == NOT_DEFINED)
+        if (spaceItemIconOnlySize == NOT_DEFINED) {
             spaceItemIconOnlySize =
                 resources.getDimension(R.dimen.space_item_icon_only_size).toInt()
+        }
 
-        if (centreButtonRippleColor == NOT_DEFINED)
+        if (centreButtonRippleColor == NOT_DEFINED) {
             centreButtonRippleColor =
                 ContextCompat.getColor(context, R.color.colorBackgroundHighlightWhite)
+        }
 
-        if (activeCentreButtonIconColor == NOT_DEFINED)
+        if (activeCentreButtonIconColor == NOT_DEFINED) {
             activeCentreButtonIconColor = ContextCompat.getColor(context, R.color.space_white)
+        }
 
-        if (inActiveCentreButtonIconColor == NOT_DEFINED)
+        if (inActiveCentreButtonIconColor == NOT_DEFINED) {
             inActiveCentreButtonIconColor =
                 ContextCompat.getColor(context, R.color.default_inactive_item_color)
+        }
 
         /**
          * Set main layout size and color
@@ -230,14 +241,14 @@ class SpaceNavigationView @JvmOverloads constructor(
         if (spaceItems.size < MIN_SPACE_ITEM_SIZE && !isInEditMode) {
             throw NullPointerException(
                 "Your space item count must be greater than 1 ," +
-                        " your current items count isa : " + spaceItems.size
+                    " your current items count isa : " + spaceItems.size,
             )
         }
 
         if (spaceItems.size > MAX_SPACE_ITEM_SIZE && !isInEditMode) {
             throw IndexOutOfBoundsException(
                 "Your items count maximum can be 4," +
-                        " your current items count is : " + spaceItems.size
+                    " your current items count is : " + spaceItems.size,
             )
         }
 
@@ -268,13 +279,12 @@ class SpaceNavigationView @JvmOverloads constructor(
         restoreTranslation()
     }
 
-    //private methods
+    // private methods
 
     /**
      * Views initializations and customizing
      */
     private fun initAndAddViewsToMainView() {
-
         val mainContent = RelativeLayout(context)
         centreBackgroundView = RelativeLayout(context)
 
@@ -296,20 +306,24 @@ class SpaceNavigationView @JvmOverloads constructor(
         centerButton!!.backgroundTintList = ColorStateList.valueOf(centreButtonColor)
         centerButton!!.setImageResource(centreButtonIcon)
 
-        if (isCentreButtonIconColorFilterEnabled || isCentreButtonSelectable)
+        if (isCentreButtonIconColorFilterEnabled || isCentreButtonSelectable) {
             centerButton!!.drawable.setColorFilter(
-                inActiveCentreButtonIconColor
+                inActiveCentreButtonIconColor,
             )
+        }
 
         centerButton!!.setOnClickListener {
-            if (spaceOnClickListener != null)
+            if (spaceOnClickListener != null) {
                 spaceOnClickListener!!.onCentreButtonClick()
-            if (isCentreButtonSelectable)
+            }
+            if (isCentreButtonSelectable) {
                 updateSpaceItems(-1)
+            }
         }
         centerButton!!.setOnLongClickListener {
-            if (spaceOnLongClickListener != null)
+            if (spaceOnLongClickListener != null) {
                 spaceOnLongClickListener!!.onCentreButtonLongClick()
+            }
 
             true
         }
@@ -391,7 +405,6 @@ class SpaceNavigationView @JvmOverloads constructor(
         addView(leftContent, leftContentParams)
         addView(rightContent, rightContentParams)
 
-
         /**
          * Adding views to mainView
          */
@@ -417,7 +430,6 @@ class SpaceNavigationView @JvmOverloads constructor(
      * @param rightContent and right content
      */
     private fun addSpaceItems(leftContent: LinearLayout, rightContent: LinearLayout) {
-
         /**
          * Removing all views for not being duplicated
          */
@@ -445,7 +457,8 @@ class SpaceNavigationView @JvmOverloads constructor(
             }
 
             val textAndIconContainerParams = LayoutParams(
-                targetWidth, mainContentHeight
+                targetWidth,
+                mainContentHeight,
             )
             val textAndIconContainer =
                 inflater.inflate(R.layout.space_item_view, this, false) as RelativeLayout
@@ -463,20 +476,23 @@ class SpaceNavigationView @JvmOverloads constructor(
             /**
              * Set a custom id to the item
              */
-            if (spaceItems[i].id != -1)
+            if (spaceItems[i].id != -1) {
                 textAndIconContainer.id = spaceItems[i].id
+            }
 
             /**
              * Set custom font to space item textView
              */
-            if (isCustomFont)
+            if (isCustomFont) {
                 spaceItemText.typeface = customFont
+            }
 
             /**
              * Hide item icon and show only text
              */
-            if (isTextOnlyMode)
+            if (isTextOnlyMode) {
                 Utils.changeViewVisibilityGone(spaceItemIcon)
+            }
 
             /**
              * Hide item text and change icon size
@@ -528,8 +544,9 @@ class SpaceNavigationView @JvmOverloads constructor(
             textAndIconContainer.setOnClickListener { updateSpaceItems(i) }
 
             textAndIconContainer.setOnLongClickListener {
-                if (spaceOnLongClickListener != null)
+                if (spaceOnLongClickListener != null) {
                     spaceOnLongClickListener!!.onItemLongClick(i, spaceItems[i].itemName!!)
+                }
                 true
             }
         }
@@ -546,18 +563,18 @@ class SpaceNavigationView @JvmOverloads constructor(
      * @param selectedIndex item in index
      */
     private fun updateSpaceItems(selectedIndex: Int) {
-
         /**
          * return if item already selected
          */
         if (currentSelectedItem == selectedIndex) {
-            if (spaceOnClickListener != null && selectedIndex >= 0)
+            if (spaceOnClickListener != null && selectedIndex >= 0) {
                 spaceItems[selectedIndex].itemName?.let {
                     spaceOnClickListener!!.onItemReselected(
                         selectedIndex,
-                        it
+                        it,
                     )
                 }
+            }
 
             return
         }
@@ -569,7 +586,7 @@ class SpaceNavigationView @JvmOverloads constructor(
             if (selectedIndex == -1) {
                 if (centerButton != null) {
                     centerButton!!.drawable.setColorFilter(
-                        activeCentreButtonIconColor
+                        activeCentreButtonIconColor,
                     )
 
                     if (activeCentreButtonBackgroundColor != NOT_DEFINED) {
@@ -585,7 +602,7 @@ class SpaceNavigationView @JvmOverloads constructor(
             if (currentSelectedItem == -1) {
                 if (centerButton != null) {
                     centerButton!!.drawable.setColorFilter(
-                        inActiveCentreButtonIconColor
+                        inActiveCentreButtonIconColor,
                     )
 
                     if (activeCentreButtonBackgroundColor != NOT_DEFINED) {
@@ -624,8 +641,9 @@ class SpaceNavigationView @JvmOverloads constructor(
          *
          * @param listener a listener for monitoring changes in item selection
          */
-        if (spaceOnClickListener != null && selectedIndex >= 0)
+        if (spaceOnClickListener != null && selectedIndex >= 0) {
             spaceOnClickListener!!.onItemClick(selectedIndex, spaceItems[selectedIndex].itemName!!)
+        }
 
         /**
          * Change current selected item index
@@ -655,8 +673,9 @@ class SpaceNavigationView @JvmOverloads constructor(
     private fun restoreCurrentItem() {
         val restoredBundle = savedInstanceState
         if (restoredBundle != null) {
-            if (restoredBundle.containsKey(CURRENT_SELECTED_ITEM_BUNDLE_KEY))
+            if (restoredBundle.containsKey(CURRENT_SELECTED_ITEM_BUNDLE_KEY)) {
                 currentSelectedItem = restoredBundle.getInt(CURRENT_SELECTED_ITEM_BUNDLE_KEY, 0)
+            }
         }
     }
 
@@ -679,7 +698,7 @@ class SpaceNavigationView @JvmOverloads constructor(
                         BadgeHelper.forceShowBadge(
                             badgeList[integer],
                             (badgeSaveInstanceHashMap!![integer] as BadgeItem?)!!,
-                            shouldShowBadgeWithNinePlus
+                            shouldShowBadgeWithNinePlus,
                         )
                     }
                 }
@@ -728,7 +747,7 @@ class SpaceNavigationView @JvmOverloads constructor(
         bezierView.build(
             centreContentWight,
             spaceNavigationHeight - mainContentHeight,
-            isCentrePartLinear
+            isCentrePartLinear,
         )
         return bezierView
     }
@@ -741,7 +760,7 @@ class SpaceNavigationView @JvmOverloads constructor(
     private fun throwArrayIndexOutOfBoundsException(itemIndex: Int) {
         throw ArrayIndexOutOfBoundsException(
             "Your item index can't be 0 or greater than space item size," +
-                    " your items size is " + spaceItems.size + ", your current index is :" + itemIndex
+                " your items size is " + spaceItems.size + ", your current index is :" + itemIndex,
         )
     }
 
@@ -756,12 +775,12 @@ class SpaceNavigationView @JvmOverloads constructor(
             spaceNavigationWidth,
             centreContentWight,
             spaceNavigationHeight - mainContentHeight,
-            isCentrePartLinear
+            isCentrePartLinear,
         )
         return borderline
     }
 
-    //public methods
+    // public methods
 
     /**
      * Initialization with savedInstanceState to save current selected
@@ -785,10 +804,12 @@ class SpaceNavigationView @JvmOverloads constructor(
         outState.putBoolean(BADGE_FULL_TEXT_KEY, shouldShowBadgeWithNinePlus)
         outState.putFloat(VISIBILITY, this.translationY)
 
-        if (badgeSaveInstanceHashMap!!.size > 0)
+        if (badgeSaveInstanceHashMap!!.size > 0) {
             outState.putSerializable(BADGES_ITEM_BUNDLE_KEY, badgeSaveInstanceHashMap)
-        if (changedItemAndIconHashMap!!.size > 0)
+        }
+        if (changedItemAndIconHashMap!!.size > 0) {
             outState.putSerializable(CHANGED_ICON_AND_TEXT_BUNDLE_KEY, changedItemAndIconHashMap)
+        }
     }
 
     fun setCentreButtonId(@IdRes id: Int) {
@@ -919,10 +940,11 @@ class SpaceNavigationView @JvmOverloads constructor(
      * Change current selected item to centre button
      */
     fun setCentreButtonSelected() {
-        if (!isCentreButtonSelectable)
+        if (!isCentreButtonSelectable) {
             throw ArrayIndexOutOfBoundsException("Please be more careful, you must set the centre button selectable")
-        else
+        } else {
             updateSpaceItems(-1)
+        }
     }
 
     /**
@@ -950,9 +972,9 @@ class SpaceNavigationView @JvmOverloads constructor(
      * @param indexToChange given index
      */
     fun changeCurrentItem(indexToChange: Int) {
-        if (indexToChange < -1 || indexToChange > spaceItems.size)
+        if (indexToChange < -1 || indexToChange > spaceItems.size) {
             throw ArrayIndexOutOfBoundsException("Please be more careful, we do't have such item : $indexToChange")
-        else {
+        } else {
             updateSpaceItems(indexToChange)
         }
     }
@@ -990,7 +1012,6 @@ class SpaceNavigationView @JvmOverloads constructor(
             if (restoredBundle.containsKey(VISIBILITY)) {
                 this.translationY = restoredBundle.getFloat(VISIBILITY)
             }
-
         }
     }
 
@@ -1029,8 +1050,9 @@ class SpaceNavigationView @JvmOverloads constructor(
     @Deprecated("Use {@link #hideAllBadges()} instead.")
     fun hideAllBudges() {
         for (badge in badgeList) {
-            if (badge.visibility == View.VISIBLE)
+            if (badge.visibility == View.VISIBLE) {
                 BadgeHelper.hideBadge(badge)
+            }
         }
         badgeSaveInstanceHashMap!!.clear()
     }
@@ -1040,8 +1062,9 @@ class SpaceNavigationView @JvmOverloads constructor(
      */
     fun hideAllBadges() {
         for (badge in badgeList) {
-            if (badge.visibility == View.VISIBLE)
+            if (badge.visibility == View.VISIBLE) {
                 BadgeHelper.hideBadge(badge)
+            }
         }
         badgeSaveInstanceHashMap!!.clear()
     }
@@ -1059,7 +1082,7 @@ class SpaceNavigationView @JvmOverloads constructor(
             BadgeHelper.forceShowBadge(
                 badgeList[badgeIndex],
                 badgeItemForSave,
-                shouldShowBadgeWithNinePlus
+                shouldShowBadgeWithNinePlus,
             )
             badgeSaveInstanceHashMap!![badgeIndex] = badgeItemForSave
         }
@@ -1088,7 +1111,7 @@ class SpaceNavigationView @JvmOverloads constructor(
         if (centerButton == null) {
             Log.e(
                 TAG,
-                "You should call setCentreButtonIcon() instead, " + "changeCenterButtonIcon works if space navigation already set up"
+                "You should call setCentreButtonIcon() instead, " + "changeCenterButtonIcon works if space navigation already set up",
             )
         } else {
             centerButton!!.setImageResource(icon)
@@ -1151,7 +1174,6 @@ class SpaceNavigationView @JvmOverloads constructor(
         centreContent!!.changeBackgroundColor(color)
     }
 
-
     /**
      * If you want to show full badge text or show 9+
      *
@@ -1199,7 +1221,7 @@ class SpaceNavigationView @JvmOverloads constructor(
 
         private const val VISIBILITY = "visibilty"
 
-        private const val NOT_DEFINED = -777 //random number, not - 1 because it is Color.WHITE
+        private const val NOT_DEFINED = -777 // random number, not - 1 because it is Color.WHITE
 
         private const val MAX_SPACE_ITEM_SIZE = 4
 

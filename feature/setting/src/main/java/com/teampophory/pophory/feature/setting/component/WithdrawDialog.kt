@@ -28,10 +28,10 @@ import com.teampophory.pophory.designsystem.PophoryTheme
 @Composable
 fun WithdrawDialog(
     setDialogShow: (Boolean) -> Unit = {},
-    onWithdraw: () -> Unit = {}
+    onWithdraw: () -> Unit = {},
 ) {
     Dialog(
-        onDismissRequest = { setDialogShow(false) }
+        onDismissRequest = { setDialogShow(false) },
     ) {
         Surface(
             modifier = Modifier
@@ -46,10 +46,10 @@ fun WithdrawDialog(
                         start = 16.dp,
                         top = 36.dp,
                         end = 16.dp,
-                        bottom = 24.dp
+                        bottom = 24.dp,
                     )
                     .background(PophoryTheme.colors.white, RoundedCornerShape(20.dp)),
-                horizontalAlignment = Alignment.CenterHorizontally
+                horizontalAlignment = Alignment.CenterHorizontally,
             ) {
                 Text(
                     text = "정말 탈퇴하실 건가요?",
@@ -70,8 +70,8 @@ fun WithdrawDialog(
                         .fillMaxWidth(),
                     shape = RoundedCornerShape(30.dp),
                     colors = ButtonDefaults.buttonColors(
-                        containerColor = PophoryTheme.colors.onSurface100
-                    )
+                        containerColor = PophoryTheme.colors.onSurface100,
+                    ),
                 ) {
                     Text(
                         text = "돌아가기",

@@ -12,8 +12,9 @@ import com.teampophory.pophory.common.R
 class LoadingProgressIndicator : DialogFragment() {
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
     ): View? {
         isCancelable = false
         return inflater.inflate(R.layout.fragment_progress_dialog, container, false)
@@ -28,6 +29,7 @@ class LoadingProgressIndicator : DialogFragment() {
 
     companion object {
         const val TAG = "LoadingProgressIndicator"
+
         @JvmStatic
         fun newInstance() = LoadingProgressIndicator()
     }

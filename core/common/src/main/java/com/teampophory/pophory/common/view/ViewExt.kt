@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 
 inline fun View.setOnSingleClickListener(
     delay: Long = 500L,
-    crossinline block: (View) -> Unit
+    crossinline block: (View) -> Unit,
 ) {
     var previousClickedTime = 0L
     setOnClickListener { view ->
@@ -21,28 +21,30 @@ inline fun View.setOnSingleClickListener(
 
 class ItemDiffCallback<T : Any>(
     val onItemsTheSame: (T, T) -> Boolean,
-    val onContentsTheSame: (T, T) -> Boolean
+    val onContentsTheSame: (T, T) -> Boolean,
 ) : DiffUtil.ItemCallback<T>() {
     override fun areItemsTheSame(
-        oldItem: T, newItem: T
+        oldItem: T,
+        newItem: T,
     ): Boolean = onItemsTheSame(oldItem, newItem)
 
     override fun areContentsTheSame(
-        oldItem: T, newItem: T
+        oldItem: T,
+        newItem: T,
     ): Boolean = onContentsTheSame(oldItem, newItem)
 }
 
 class GridSpacingItemDecoration(
     private val spanCount: Int,
     private val spacing: Int,
-    private val includeEdge: Boolean
+    private val includeEdge: Boolean,
 ) : RecyclerView.ItemDecoration() {
 
     override fun getItemOffsets(
         outRect: Rect,
         view: View,
         parent: RecyclerView,
-        state: RecyclerView.State
+        state: RecyclerView.State,
     ) {
         val position = parent.getChildAdapterPosition(view) // item position
         val column = position % spanCount // item column

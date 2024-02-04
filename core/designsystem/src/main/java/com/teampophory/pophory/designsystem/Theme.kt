@@ -22,7 +22,7 @@ class PophoryColors(
     onSurface30: Color,
     onSurface20: Color,
     onSurface10: Color,
-    isLight: Boolean
+    isLight: Boolean,
 ) {
     var white by mutableStateOf(white)
         private set
@@ -55,7 +55,7 @@ class PophoryColors(
         onSurface30 = onSurface30,
         onSurface20 = onSurface20,
         onSurface10 = onSurface10,
-        isLight = isLight
+        isLight = isLight,
     )
 
     fun update(other: PophoryColors) {
@@ -80,7 +80,7 @@ fun pophoryLightColors(
     onSurface30: Color = Gray300,
     onSurface20: Color = Gray200,
     onSurface10: Color = Gray100,
-    isLight: Boolean = true
+    isLight: Boolean = true,
 ): PophoryColors {
     return PophoryColors(
         white = white,
@@ -92,7 +92,7 @@ fun pophoryLightColors(
         onSurface30 = onSurface30,
         onSurface20 = onSurface20,
         onSurface10 = onSurface10,
-        isLight = isLight
+        isLight = isLight,
     )
 }
 
@@ -112,7 +112,7 @@ object PophoryTheme {
 fun ProvidePophoryColorAndTypography(
     colors: PophoryColors,
     typography: PophoryTypography,
-    content: @Composable () -> Unit
+    content: @Composable () -> Unit,
 ) {
     val provideColors = remember { colors.copy() }
     provideColors.update(colors)
@@ -121,14 +121,14 @@ fun ProvidePophoryColorAndTypography(
     CompositionLocalProvider(
         LocalPophoryColors provides provideColors,
         LocalPophoryTypography provides provideTypography,
-        content = content
+        content = content,
     )
 }
 
 @Composable
 fun PophoryTheme(
     darkTheme: Boolean = false,
-    content: @Composable () -> Unit
+    content: @Composable () -> Unit,
 ) {
     val colors = pophoryLightColors()
     val typography = PophoryTypography()

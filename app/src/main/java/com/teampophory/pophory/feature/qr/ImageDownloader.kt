@@ -31,7 +31,7 @@ class ImageDownloader() {
             setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
             setDestinationInExternalPublicDir(
                 Environment.DIRECTORY_DOWNLOADS,
-                URLUtil.guessFileName(url, null, "image/jpeg")
+                URLUtil.guessFileName(url, null, "image/jpeg"),
             )
         }
     }
@@ -39,7 +39,7 @@ class ImageDownloader() {
     private fun setupDownloadCompletionReceiver(
         context: Context,
         downloadID: Long,
-        callback: (Uri?) -> Unit
+        callback: (Uri?) -> Unit,
     ) {
         receiver = object : BroadcastReceiver() {
             override fun onReceive(context: Context?, intent: Intent?) {

@@ -5,7 +5,7 @@ import androidx.startup.Initializer
 import com.kakao.sdk.common.KakaoSdk
 import com.teampophory.pophory.BuildConfig
 
-class KakaoSDKInitializer: Initializer<Unit> {
+class KakaoSDKInitializer : Initializer<Unit> {
     override fun create(context: Context) {
         KakaoSdk.init(context, BuildConfig.KAKAO_API_KEY)
     }

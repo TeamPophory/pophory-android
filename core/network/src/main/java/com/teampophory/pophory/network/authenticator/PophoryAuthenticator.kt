@@ -21,7 +21,7 @@ class PophoryAuthenticator @Inject constructor(
     private val dataStore: PophoryDataStore,
     private val api: RefreshApi,
     @ApplicationContext private val context: Context,
-    private val navigationProvider: NavigationProvider
+    private val navigationProvider: NavigationProvider,
 ) : Authenticator {
     override fun authenticate(route: Route?, response: Response): Request? {
         if (response.request.header("Authorization") == null) {

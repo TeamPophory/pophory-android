@@ -80,7 +80,7 @@ class OnBoardingActivity : AppCompatActivity() {
         override fun onPageScrolled(
             position: Int,
             positionOffset: Float,
-            positionOffsetPixels: Int
+            positionOffsetPixels: Int,
         ) {
             super.onPageScrolled(position, positionOffset, positionOffsetPixels)
             binding.dotIndicatorFirst.isSelected = position == 0
@@ -110,8 +110,8 @@ class OnBoardingActivity : AppCompatActivity() {
                 OnBoardingData(R.drawable.img_onboarding01),
                 OnBoardingData(R.drawable.img_onboarding02),
                 OnBoardingData(R.drawable.img_onboarding03),
-                OnBoardingData(R.drawable.img_onboarding04)
-            )
+                OnBoardingData(R.drawable.img_onboarding04),
+            ),
         )
         binding.viewpagerOnboarding.adapter = adapter
         binding.viewpagerOnboarding.registerOnPageChangeCallback(pageChangeCallback)

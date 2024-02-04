@@ -91,7 +91,7 @@ class QRActivity : AppCompatActivity() {
             ActivityCompat.requestPermissions(
                 this,
                 permissionsToRequest.toTypedArray(),
-                PERMISSION_REQUEST_CODE
+                PERMISSION_REQUEST_CODE,
             )
         }
     }
@@ -110,7 +110,7 @@ class QRActivity : AppCompatActivity() {
     private fun isPermissionNotGranted(permission: String): Boolean {
         return ContextCompat.checkSelfPermission(
             this,
-            permission
+            permission,
         ) != PackageManager.PERMISSION_GRANTED
     }
 
@@ -136,7 +136,6 @@ class QRActivity : AppCompatActivity() {
                     }
                 }
             }
-
         }
     }
 
@@ -257,6 +256,4 @@ class QRActivity : AppCompatActivity() {
         return null;
         })();"""
     }
-
 }
-

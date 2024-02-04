@@ -74,7 +74,6 @@ class SignUpActivity : AppCompatActivity() {
     }
 
     private fun observeEvent() {
-
         viewModel.signUpResult.observe(this) {
             startActivity(StartPophoryActivity.getIntent(this))
         }

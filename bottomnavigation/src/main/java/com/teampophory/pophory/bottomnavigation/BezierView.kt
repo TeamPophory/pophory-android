@@ -23,7 +23,7 @@ internal class BezierView : RelativeLayout {
     constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(
         context,
         attrs,
-        defStyleAttr
+        defStyleAttr,
     )
 
     private val paint: Paint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
@@ -45,7 +45,6 @@ internal class BezierView : RelativeLayout {
     }
 
     override fun onDraw(canvas: Canvas) {
-
         /**
          * Set paint color to fill view
          */
@@ -71,7 +70,7 @@ internal class BezierView : RelativeLayout {
                 (bezierWidth / 4).toFloat(),
                 0f,
                 (bezierWidth / 2).toFloat(),
-                0f
+                0f,
             )
             /**
              * Seth second part of bezier view
@@ -82,7 +81,7 @@ internal class BezierView : RelativeLayout {
                 (bezierWidth / 4 * 3).toFloat(),
                 bezierHeight.toFloat(),
                 bezierWidth.toFloat(),
-                bezierHeight.toFloat()
+                bezierHeight.toFloat(),
             )
         }
 
@@ -115,4 +114,3 @@ internal class BezierView : RelativeLayout {
         invalidate()
     }
 }
-

@@ -5,12 +5,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.teampophory.pophory.common.view.ItemDiffCallback
-import com.teampophory.pophory.onboarding.model.OnBoardingData
 import com.teampophory.pophory.onboarding.databinding.ItemOnboardingViewpagerBinding
+import com.teampophory.pophory.onboarding.model.OnBoardingData
 
 class OnBoardingViewPagerAdapter :
     ListAdapter<OnBoardingData, OnBoardingViewPagerAdapter.ViewHolder>(
-        DIFF_UTIL
+        DIFF_UTIL,
     ) {
     class ViewHolder(private val binding: ItemOnboardingViewpagerBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -24,8 +24,8 @@ class OnBoardingViewPagerAdapter :
             ItemOnboardingViewpagerBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
-                false
-            )
+                false,
+            ),
         )
     }
 
@@ -37,7 +37,7 @@ class OnBoardingViewPagerAdapter :
         val DIFF_UTIL =
             ItemDiffCallback<OnBoardingData>(
                 onItemsTheSame = { old, new -> old.image == new.image },
-                onContentsTheSame = { old, new -> old == new })
+                onContentsTheSame = { old, new -> old == new },
+            )
     }
-
 }

@@ -31,7 +31,7 @@ class MyPageFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         return inflater.inflate(R.layout.fragment_mypage, container, false)
     }
@@ -105,12 +105,12 @@ class MyPageFragment : Fragment() {
                 ForegroundColorSpan(
                     ContextCompat.getColor(
                         requireContext(),
-                        com.teampophory.pophory.designsystem.R.color.pophory_purple
-                    )
+                        com.teampophory.pophory.designsystem.R.color.pophory_purple,
+                    ),
                 ),
                 start,
                 end,
-                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE,
             )
         }
         return spannableStringBuilder

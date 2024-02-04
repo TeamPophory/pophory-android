@@ -112,8 +112,8 @@ class AlbumDetailActivity : AppCompatActivity() {
                             startActivity(
                                 Intent.createChooser(
                                     it,
-                                    link.shortLink.toString()
-                                )
+                                    link.shortLink.toString(),
+                                ),
                             )
                         }
                     }

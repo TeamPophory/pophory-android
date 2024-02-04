@@ -93,7 +93,7 @@ class ShareActivity : AppCompatActivity() {
             },
             onShareSheetDismissed = {
                 viewModel.selectedPosition = null
-            }
+            },
         )
 
         binding.rvShare.apply {
@@ -122,8 +122,8 @@ class ShareActivity : AppCompatActivity() {
                     shareResultLauncher.launch(
                         Intent.createChooser(
                             it,
-                            link.shortLink.toString()
-                        )
+                            link.shortLink.toString(),
+                        ),
                     )
                 }
             }

@@ -32,13 +32,13 @@ enum class AddPhotoEvent {
     DATE,
     STUDIO,
     ADD_SUCCESS,
-    REQUEST_ERROR;
+    REQUEST_ERROR,
 }
 
 @HiltViewModel
 class AddPhotoViewModel @Inject constructor(
     private val photoRepository: PhotoRepository,
-    private val savedStateHandle: SavedStateHandle
+    private val savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
     private var imageRequestBody: RequestBody? = null
     private var currentImageSize: Size? = null
@@ -108,7 +108,7 @@ class AddPhotoViewModel @Inject constructor(
         photoRepository.postPhotoToS3(
             photoInfo.preSignedUrl,
             imageRequestBody
-                ?: throw IllegalStateException("Pophory: ImageRequestBody is $imageRequestBody")
+                ?: throw IllegalStateException("Pophory: ImageRequestBody is $imageRequestBody"),
         )
         currentFileName = photoInfo.fileName
     }
@@ -120,11 +120,11 @@ class AddPhotoViewModel @Inject constructor(
             studioId = currentStudio.value.firstOrNull()?.id ?: -1L,
             takenAt = SimpleDateFormat(
                 "yyyy.MM.dd",
-                Locale.getDefault()
+                Locale.getDefault(),
             ).format(Date(createdAt.value)),
             fileName = fileName ?: "",
             width = imageSize?.width ?: 0,
-            height = imageSize?.height ?: 0
+            height = imageSize?.height ?: 0,
         ).onSuccess {
             _event.emit(AddPhotoEvent.ADD_SUCCESS)
         }.onFailure {
