@@ -1,11 +1,18 @@
 package com.teampophory.pophory.feature.home.photo
 
 import android.app.Activity
+import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.Rect
 import android.net.Uri
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Size
+import android.view.PixelCopy
+import android.widget.Toast
 import androidx.activity.addCallback
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -18,6 +25,7 @@ import com.google.android.material.datepicker.DateValidatorPointBackward
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.teampophory.pophory.BuildConfig
 import com.teampophory.pophory.R
+import com.teampophory.pophory.common.bitmap.saveToDisk
 import com.teampophory.pophory.common.context.colorOf
 import com.teampophory.pophory.common.context.snackBar
 import com.teampophory.pophory.common.context.toast
@@ -33,6 +41,7 @@ import com.teampophory.pophory.feature.home.store.model.AlbumItem
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.launch
 import kotlinx.datetime.Instant
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -95,13 +104,53 @@ class AddPhotoActivity : AppCompatActivity() {
             finish()
         }
         binding.btnShare.setOnSingleClickListener {
-            val intent = Intent("com.instagram.share.ADD_TO_STORY").apply {
-                putExtra("source_application", BuildConfig.FACEBOOK_APP_ID)
-                type = "image/png"
-                putExtra("interactive_asset_uri", imageUri)
-                putExtra("top_background_color", "#FF6724")
-                putExtra("bottom_background_color", "#FF6724")
-            }
+            val bitmap = Bitmap.createBitmap(
+                binding.layoutImage.measuredWidth,
+                binding.layoutImage.measuredHeight,
+                Bitmap.Config.ARGB_8888,
+            )
+            val location = IntArray(2)
+            binding.layoutImage.getLocationInWindow(location)
+            PixelCopy.request(
+                window,
+                Rect(
+                    location[0],
+                    location[1],
+                    location[0] + binding.layoutImage.width,
+                    location[1] + binding.layoutImage.height,
+                ),
+                bitmap,
+                {
+                    if (it == PixelCopy.SUCCESS) {
+                        lifecycleScope.launch {
+                            val shareImageUri = bitmap.saveToDisk(this@AddPhotoActivity)
+                            val intent = Intent("com.instagram.share.ADD_TO_STORY").apply {
+                                putExtra("source_application", BuildConfig.FACEBOOK_APP_ID)
+                                type = "image/png"
+                                putExtra("interactive_asset_uri", shareImageUri)
+                                putExtra("top_background_color", "#000000")
+                                putExtra("bottom_background_color", "#000000")
+                            }
+                            grantUriPermission(
+                                "com.instagram.android",
+                                shareImageUri,
+                                Intent.FLAG_GRANT_READ_URI_PERMISSION,
+                            )
+                            try {
+                                startActivity(intent)
+                            } catch (e: ActivityNotFoundException) {
+                                Toast.makeText(
+                                    this@AddPhotoActivity,
+                                    "인스타그램 앱이 존재하지 않습니다.",
+                                    Toast.LENGTH_SHORT,
+                                )
+                                    .show()
+                            }
+                        }
+                    }
+                },
+                Handler(Looper.getMainLooper()),
+            )
         }
     }
 
@@ -124,7 +173,8 @@ class AddPhotoActivity : AppCompatActivity() {
                                     .setEnd(Instant.systemNow().toEpochMilliseconds()).build(),
                             )
                             .setSelection(
-                                currentCreatedAt + TimeZone.getDefault().getOffset(currentCreatedAt),
+                                currentCreatedAt + TimeZone.getDefault()
+                                    .getOffset(currentCreatedAt),
                             )
                             .build()
                         picker.show(supportFragmentManager, "datePicker")
