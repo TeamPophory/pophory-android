@@ -1,13 +1,20 @@
 package com.teampophory.pophory.common.bitmap
 
+import android.app.Activity
 import android.content.Context
 import android.graphics.Bitmap
+import android.graphics.Rect
 import android.media.MediaScannerConnection
 import android.net.Uri
 import android.os.Environment
+import android.os.Handler
+import android.os.Looper
+import android.view.PixelCopy
+import android.view.View
 import kotlinx.coroutines.suspendCancellableCoroutine
 import java.io.File
 import kotlin.coroutines.resume
+import kotlin.coroutines.resumeWithException
 
 suspend fun Bitmap.saveToDisk(context: Context): Uri {
     val file = File(
@@ -41,4 +48,23 @@ suspend fun scanFilePath(context: Context, filePath: String): Uri? {
             }
         }
     }
+}
+
+suspend fun View.capture(activity: Activity) = suspendCancellableCoroutine { continuation ->
+    val bitmap = Bitmap.createBitmap(measuredWidth, measuredHeight, Bitmap.Config.ARGB_8888)
+    val location = IntArray(2)
+    getLocationInWindow(location)
+    PixelCopy.request(
+        activity.window,
+        Rect(location[0], location[1], location[0] + width, location[1] + height),
+        bitmap,
+        {
+            if (it == PixelCopy.SUCCESS) {
+                continuation.resume(bitmap)
+            } else {
+                continuation.resumeWithException(Exception("Unable to load bitmap from view"))
+            }
+        },
+        Handler(Looper.getMainLooper()),
+    )
 }
