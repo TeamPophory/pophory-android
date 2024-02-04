@@ -235,6 +235,7 @@ class StoreFragment : Fragment() {
                     context = requireContext(),
                     imageUri = imageUri.toString(),
                     albumItem = albumItem,
+                    type = "GALLERY"
                 ).let(albumListAddPhotoLauncher::launch)
             }
         }

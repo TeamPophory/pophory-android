@@ -11,6 +11,7 @@ import com.teampophory.pophory.domain.repository.photo.PhotoRepository
 import com.teampophory.pophory.feature.home.photo.model.StudioUiModel
 import com.teampophory.pophory.feature.home.photo.model.toUiModel
 import com.teampophory.pophory.feature.home.store.model.AlbumItem
+import com.teampophory.pophory.feature.home.model.RegisterNavigationType
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -43,6 +44,12 @@ class AddPhotoViewModel @Inject constructor(
     private var imageRequestBody: RequestBody? = null
     private var currentImageSize: Size? = null
     private var currentFileName: String? = null
+    private val _type = MutableStateFlow(
+        RegisterNavigationType.valueOf(
+            savedStateHandle.get<String>("type").orEmpty()
+        )
+    )
+    val type = _type.asStateFlow()
     private val _createdAt = MutableStateFlow(Instant.systemNow().toEpochMilliseconds())
     val createdAt = _createdAt.asStateFlow()
     private val allStudio = MutableStateFlow<List<Studio>>(emptyList())

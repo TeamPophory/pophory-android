@@ -22,7 +22,6 @@ import com.teampophory.pophory.feature.home.photo.AddPhotoActivity
 import com.teampophory.pophory.feature.qr.QRActivity
 
 class AddPhotoBottomSheet : BottomSheetDialogFragment() {
-
     private val binding by viewBinding(BottomSheetHomeAddPhotoBinding::bind)
     private val viewModel by activityViewModels<HomeViewModel>()
     private lateinit var imagePicker: ActivityResultLauncher<PickVisualMediaRequest>
@@ -44,7 +43,7 @@ class AddPhotoBottomSheet : BottomSheetDialogFragment() {
             val currentAlbumPosition = viewModel.homeState.value.currentAlbumPosition
             val albumItem = viewModel.homeState.value.currentAlbums?.getOrNull(currentAlbumPosition)
             if (uri != null && albumItem != null) {
-                val intent = AddPhotoActivity.getIntent(context, uri.toString(), albumItem)
+                val intent = AddPhotoActivity.getIntent(context, uri.toString(), albumItem, "PICKER")
                 addPhotoResultLauncher.launch(intent)
             }
         }
@@ -57,7 +56,7 @@ class AddPhotoBottomSheet : BottomSheetDialogFragment() {
                     val albumItem =
                         viewModel.homeState.value.currentAlbums?.getOrNull(currentAlbumPosition)
                     if (uriString != null && albumItem != null) {
-                        val intent = AddPhotoActivity.getIntent(context, uriString, albumItem)
+                        val intent = AddPhotoActivity.getIntent(context, uriString, albumItem, "QR")
                         addPhotoResultLauncher.launch(intent)
                     }
                 }

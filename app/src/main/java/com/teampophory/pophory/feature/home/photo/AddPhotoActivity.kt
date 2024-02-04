@@ -9,12 +9,14 @@ import android.util.Size
 import androidx.activity.addCallback
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import coil.load
 import com.google.android.material.datepicker.CalendarConstraints
 import com.google.android.material.datepicker.DateValidatorPointBackward
 import com.google.android.material.datepicker.MaterialDatePicker
+import com.teampophory.pophory.BuildConfig
 import com.teampophory.pophory.R
 import com.teampophory.pophory.common.context.colorOf
 import com.teampophory.pophory.common.context.snackBar
@@ -26,6 +28,7 @@ import com.teampophory.pophory.common.time.systemNow
 import com.teampophory.pophory.common.view.setOnSingleClickListener
 import com.teampophory.pophory.common.view.viewBinding
 import com.teampophory.pophory.databinding.ActivityAddPhotoBinding
+import com.teampophory.pophory.feature.home.model.RegisterNavigationType
 import com.teampophory.pophory.feature.home.store.model.AlbumItem
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
@@ -157,18 +160,30 @@ class AddPhotoActivity : AppCompatActivity() {
                     binding.txtStudio.setTextColor(colorOf(com.teampophory.pophory.designsystem.R.color.gray_40))
                 }
             }.launchIn(lifecycleScope)
+        viewModel.type
+            .flowWithLifecycle(lifecycle)
+            .onEach {
+                binding.btnShare.isVisible = it != RegisterNavigationType.PICKER
+            }.launchIn(lifecycleScope)
     }
 
     companion object {
         private const val IMAGE_URL_EXTRA = "imageUri"
         const val ALBUM_ITEM_EXTRA = "albumItem"
         const val IMAGE_MIME_TYPE = "image/*"
+        private const val TYPE = "type"
 
         @JvmStatic
-        fun getIntent(context: Context, imageUri: String, albumItem: AlbumItem): Intent =
+        fun getIntent(
+            context: Context,
+            imageUri: String,
+            albumItem: AlbumItem,
+            type: String
+        ): Intent =
             Intent(context, AddPhotoActivity::class.java).apply {
                 putExtra(IMAGE_URL_EXTRA, imageUri)
                 putExtra(ALBUM_ITEM_EXTRA, albumItem)
+                putExtra(TYPE, type)
             }
     }
 }
