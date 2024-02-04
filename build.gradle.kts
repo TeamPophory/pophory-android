@@ -1,3 +1,5 @@
+import com.diffplug.gradle.spotless.SpotlessExtension
+
 buildscript {
     repositories {
         google()
@@ -28,6 +30,28 @@ plugins {
     alias(libs.plugins.google.services) apply false
     alias(libs.plugins.app.distribution) apply false
     alias(libs.plugins.crashlytics) apply false
+    alias(libs.plugins.spotless) apply false
+}
+
+subprojects {
+    apply(plugin = rootProject.libs.plugins.spotless.get().pluginId)
+
+    extensions.configure<SpotlessExtension> {
+        kotlin {
+            target("**/*.kt")
+            targetExclude("${layout.buildDirectory}/**/*.kt")
+            trimTrailingWhitespace()
+            endWithNewline()
+        }
+        format("kts") {
+            target("**/*.kts")
+            targetExclude("${layout.buildDirectory}/**/*.kts")
+        }
+        format("xml") {
+            target("**/*.xml")
+            targetExclude("**/build/**/*.xml")
+        }
+    }
 }
 
 tasks.register("clean", Delete::class) {
