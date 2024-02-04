@@ -26,7 +26,7 @@ object DataStoreModule {
     @Provides
     @Singleton
     fun provideAppPreferences(
-        @ApplicationContext context: Context
+        @ApplicationContext context: Context,
     ): SharedPreferences = if (BuildConfig.DEBUG) {
         context.getSharedPreferences(DEBUG_APP_PREFERNCES_NAME, Context.MODE_PRIVATE)
     } else {
@@ -52,7 +52,7 @@ object DataStoreModule {
 
     private fun createEncryptedSharedPreferences(
         fileName: String,
-        context: Context
+        context: Context,
     ): SharedPreferences {
         return EncryptedSharedPreferences.create(
             context,
@@ -61,7 +61,7 @@ object DataStoreModule {
                 .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
                 .build(),
             EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
-            EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
+            EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM,
 
         )
     }

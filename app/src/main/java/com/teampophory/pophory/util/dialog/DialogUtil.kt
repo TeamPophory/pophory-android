@@ -9,13 +9,13 @@ object DialogUtil {
         title: String,
         description: String,
         buttonText: String,
-        @DrawableRes imageResId: Int
+        @DrawableRes imageResId: Int,
     ) {
         OneButtonCommonDialog.newInstance(
             title = title,
             description = description,
             buttonText = buttonText,
-            imageResId = imageResId
+            imageResId = imageResId,
         ).let {
             supportFragmentManager.beginTransaction().add(it, OneButtonCommonDialog.TAG)
         }.commitAllowingStateLoss()

@@ -58,7 +58,7 @@ class StoreFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         return inflater.inflate(R.layout.fragment_store, container, false)
     }
@@ -119,7 +119,7 @@ class StoreFragment : Fragment() {
         val intent = AlbumCoverEditActivity.newIntent(
             context = requireContext(),
             albumCoverId = currentAlbumCoverId,
-            albumId = albumItem?.id ?: 0
+            albumId = albumItem?.id ?: 0,
         )
         albumCoverChangeLauncher.launch(intent)
     }
@@ -148,7 +148,7 @@ class StoreFragment : Fragment() {
                     val photoLimit =
                         storeAdapter?.currentList?.getOrNull(position)?.photoLimit ?: 15
 
-                    //사진 갯수 텍스트 색상변경
+                    // 사진 갯수 텍스트 색상변경
                     setSpannableCountString(photoCount.toString(), photoLimit.toString())
                     updateSeekBar(photoCount = photoCount, photoLimit = photoLimit)
                 }
@@ -167,7 +167,7 @@ class StoreFragment : Fragment() {
             photoCount.toString(),
             binding.tvStoreAlbumPhotoCount,
             com.teampophory.pophory.designsystem.R.color.pophory_purple,
-            com.teampophory.pophory.designsystem.R.style.TextAppearance_Pophory_HeadLineMedium
+            com.teampophory.pophory.designsystem.R.style.TextAppearance_Pophory_HeadLineMedium,
         )
 
         updateSeekBar(photoCount = photoCount, photoLimit = photoLimit)
@@ -190,7 +190,7 @@ class StoreFragment : Fragment() {
             coloredText,
             binding.tvStoreWelcome,
             com.teampophory.pophory.designsystem.R.color.pophory_purple,
-            com.teampophory.pophory.designsystem.R.style.TextAppearance_Pophory_HeadLineBold
+            com.teampophory.pophory.designsystem.R.style.TextAppearance_Pophory_HeadLineBold,
         )
     }
 
@@ -201,7 +201,7 @@ class StoreFragment : Fragment() {
             photoCount,
             binding.tvStoreAlbumPhotoCount,
             com.teampophory.pophory.designsystem.R.color.pophory_purple,
-            com.teampophory.pophory.designsystem.R.style.TextAppearance_Pophory_HeadLineMedium
+            com.teampophory.pophory.designsystem.R.style.TextAppearance_Pophory_HeadLineMedium,
         )
     }
 
@@ -210,7 +210,7 @@ class StoreFragment : Fragment() {
         coloredText: String,
         textView: TextView,
         color: Int,
-        style: Int
+        style: Int,
     ) {
         buildSpannedString {
             color(colorOf(color)) {
@@ -234,7 +234,7 @@ class StoreFragment : Fragment() {
                 AddPhotoActivity.getIntent(
                     context = requireContext(),
                     imageUri = imageUri.toString(),
-                    albumItem = albumItem
+                    albumItem = albumItem,
                 ).let(albumListAddPhotoLauncher::launch)
             }
         }

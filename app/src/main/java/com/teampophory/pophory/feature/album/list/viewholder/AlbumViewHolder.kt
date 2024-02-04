@@ -11,14 +11,14 @@ import com.teampophory.pophory.feature.album.model.PhotoDetail
 import com.teampophory.pophory.feature.album.model.PhotoItem
 
 sealed class AlbumViewHolder(
-    binding: ViewBinding
+    binding: ViewBinding,
 ) : RecyclerView.ViewHolder(binding.root) {
 
     abstract fun bind(item: PhotoItem)
 
     class HorizontalViewHolder(
         private val binding: ItemHorizontalPhotoBinding,
-        private val onItemClicked: (PhotoDetail) -> Unit
+        private val onItemClicked: (PhotoDetail) -> Unit,
     ) : AlbumViewHolder(binding) {
         override fun bind(item: PhotoItem) {
             if (item is PhotoItem.HorizontalItem) {
@@ -40,7 +40,7 @@ sealed class AlbumViewHolder(
 
     class VerticalViewHolder(
         private val binding: ItemVerticalPhotoBinding,
-        private val onItemClicked: (Pair<VerticalItemType, PhotoDetail>) -> Unit
+        private val onItemClicked: (Pair<VerticalItemType, PhotoDetail>) -> Unit,
     ) : AlbumViewHolder(binding) {
         override fun bind(item: PhotoItem) {
             with(binding) {

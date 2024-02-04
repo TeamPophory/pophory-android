@@ -11,7 +11,7 @@ import javax.inject.Inject
 
 class DefaultAuthRepository @Inject constructor(
     private val dataStore: PophoryDataStore,
-    private val service: AuthService
+    private val service: AuthService,
 ) : AuthRepository {
     override fun isAutoLoginEnabled(): Boolean {
         return dataStore.autoLoginConfigured

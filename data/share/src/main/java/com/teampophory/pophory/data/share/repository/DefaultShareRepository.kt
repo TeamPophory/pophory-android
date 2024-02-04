@@ -15,7 +15,7 @@ import javax.inject.Inject
 class DefaultShareRepository @Inject constructor(
     private val shareNetworkDataSource: ShareNetworkDataSource,
     @Secured private val shareService: ShareService,
-    @Unsecured private val unsecuredShareService: ShareService
+    @Unsecured private val unsecuredShareService: ShareService,
 ) : ShareRepository {
     override suspend fun getPhotos(): Result<List<Photo>> {
         return runCatching { shareNetworkDataSource.getPhotos().toPhotos() }

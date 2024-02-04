@@ -5,7 +5,7 @@ import com.teampophory.pophory.data.network.service.MypageService
 import javax.inject.Inject
 
 class DefaultMyPageRepository @Inject constructor(
-    private val retrofitMyPageNetwork: MypageService
+    private val retrofitMyPageNetwork: MypageService,
 ) : MyPageRepository {
     override suspend fun getMyPageInfo(): Result<MyPageResponse> {
         return runCatching { retrofitMyPageNetwork.getMyPageInfo() }

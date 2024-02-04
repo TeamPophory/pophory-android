@@ -9,5 +9,5 @@ data class AlbumItem(
     val title: String,
     val albumCover: Int,
     val photoCount: Int,
-    val photoLimit: Int
+    val photoLimit: Int,
 ) : Parcelable

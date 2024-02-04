@@ -20,7 +20,7 @@ class AlbumCoverEditViewModel @Inject constructor(
     private val photoRepository: PhotoRepository,
     private val fetchAdConstantUseCase: FetchAdConstantUseCase,
 
-    ) : ViewModel() {
+) : ViewModel() {
 
     private val _albumEditState = MutableStateFlow<AlbumEditState>(AlbumEditState.Uninitialized)
     val albumEditState = _albumEditState.asStateFlow()

@@ -14,7 +14,7 @@ import kotlin.coroutines.resumeWithException
 
 class KakaoAuthService @Inject constructor(
     @ActivityContext private val context: Context,
-    private val client: UserApiClient
+    private val client: UserApiClient,
 ) : OAuthService {
     private val isKakaoTalkLoginAvailable: Boolean
         get() = client.isKakaoTalkLoginAvailable(context)
@@ -51,7 +51,6 @@ class KakaoAuthService @Inject constructor(
             }
         }
     }
-
 
     override suspend fun logout() = suspendCancellableCoroutine {
         client.logout { error ->

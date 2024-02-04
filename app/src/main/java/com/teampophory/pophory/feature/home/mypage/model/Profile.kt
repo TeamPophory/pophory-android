@@ -5,5 +5,5 @@ data class Profile(
     val realName: String,
     val nickname: String,
     val profileImageUrl: String?,
-    val photoCount: Int
+    val photoCount: Int,
 )

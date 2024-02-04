@@ -4,11 +4,10 @@ import com.teampophory.pophory.share.entity.Photo
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
-
 @Serializable
 data class ShareResponse(
     @SerialName("photos")
-    val photoDetails: List<PhotoDetail>
+    val photoDetails: List<PhotoDetail>,
 ) {
     @Serializable
     data class PhotoDetail(
@@ -17,7 +16,7 @@ data class ShareResponse(
         @SerialName("photoUrl")
         val photoUrl: String,
         @SerialName("shareId")
-        val shareId: String
+        val shareId: String,
     )
 
     fun toPhotos(): List<Photo> {
@@ -25,7 +24,7 @@ data class ShareResponse(
             Photo(
                 photoId = photo.photoId,
                 photoUrl = photo.photoUrl,
-                shareId = photo.shareId
+                shareId = photo.shareId,
             )
         }
     }

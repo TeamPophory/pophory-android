@@ -73,7 +73,6 @@ class AddPhotoActivity : AppCompatActivity() {
         }
     }
 
-
     private fun initView() {
         binding.toolbarAddPhoto.btnBack.setOnClickListener {
             finish()
@@ -108,12 +107,12 @@ class AddPhotoActivity : AppCompatActivity() {
                             .setCalendarConstraints(
                                 CalendarConstraints.Builder()
                                     .setValidator(
-                                        DateValidatorPointBackward.now()
+                                        DateValidatorPointBackward.now(),
                                     )
-                                    .setEnd(Instant.systemNow().toEpochMilliseconds()).build()
+                                    .setEnd(Instant.systemNow().toEpochMilliseconds()).build(),
                             )
                             .setSelection(
-                                currentCreatedAt + TimeZone.getDefault().getOffset(currentCreatedAt)
+                                currentCreatedAt + TimeZone.getDefault().getOffset(currentCreatedAt),
                             )
                             .build()
                         picker.show(supportFragmentManager, "datePicker")
@@ -144,7 +143,7 @@ class AddPhotoActivity : AppCompatActivity() {
                 binding.txtDate.text =
                     SimpleDateFormat(
                         "yyyy.MM.dd",
-                        Locale.getDefault()
+                        Locale.getDefault(),
                     ).format(Date(it))
             }.launchIn(lifecycleScope)
         viewModel.currentStudio

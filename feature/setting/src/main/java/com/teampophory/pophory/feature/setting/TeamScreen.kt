@@ -25,7 +25,7 @@ import com.teampophory.pophory.designsystem.PophoryTheme
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TeamScreen(
-    navController: NavController
+    navController: NavController,
 ) {
     Scaffold(
         modifier = Modifier.fillMaxSize(),
@@ -36,29 +36,29 @@ fun TeamScreen(
                         text = "포포리팀",
                         textAlign = TextAlign.Center,
                         modifier = Modifier.fillMaxWidth(),
-                        style = PophoryTheme.typography.headline2
+                        style = PophoryTheme.typography.headline2,
                     )
                 },
                 navigationIcon = {
                     IconButton(onClick = { navController.popBackStack() }) {
                         Icon(
                             painter = painterResource(id = com.teampophory.pophory.designsystem.R.drawable.ic_chevron_left),
-                            contentDescription = "Back To Home"
+                            contentDescription = "Back To Home",
                         )
                     }
                 },
-                modifier = Modifier.bottomBorder(Dp.Hairline, PophoryTheme.colors.onSurface30)
+                modifier = Modifier.bottomBorder(Dp.Hairline, PophoryTheme.colors.onSurface30),
             )
-        }
+        },
     ) {
         Column(
             modifier = Modifier
                 .padding(it)
-                .fillMaxSize()
+                .fillMaxSize(),
         ) {
             Image(
                 painter = painterResource(id = R.drawable.img_team),
-                contentDescription = "Team Image"
+                contentDescription = "Team Image",
             )
         }
     }

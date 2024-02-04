@@ -14,7 +14,7 @@ import java.io.ByteArrayOutputStream
 
 class ContentUriRequestBody(
     context: Context,
-    private val uri: Uri?
+    private val uri: Uri?,
 ) : RequestBody() {
     private val contentResolver = context.contentResolver
 
@@ -29,7 +29,7 @@ class ContentUriRequestBody(
                 arrayOf(MediaStore.Images.Media.SIZE, MediaStore.Images.Media.DISPLAY_NAME),
                 null,
                 null,
-                null
+                null,
             )?.use { cursor ->
                 if (cursor.moveToFirst()) {
                     size =
@@ -54,7 +54,7 @@ class ContentUriRequestBody(
                 originalBitmap.compress(
                     Bitmap.CompressFormat.JPEG,
                     if (imageSizeMb >= 3) compressRate else 100,
-                    it
+                    it,
                 )
             }
             compressedImage = outputStream.toByteArray()

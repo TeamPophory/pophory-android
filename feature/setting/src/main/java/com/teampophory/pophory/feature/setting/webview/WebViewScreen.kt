@@ -36,7 +36,7 @@ import com.teampophory.pophory.designsystem.PophoryTheme
 @Composable
 fun WebViewScreen(
     url: String,
-    onBack: () -> Unit = {}
+    onBack: () -> Unit = {},
 ) {
     val state = rememberWebViewState(url)
     val webViewNavigator = rememberWebViewNavigator()
@@ -51,7 +51,7 @@ fun WebViewScreen(
                         text = state.pageTitle ?: "Loading...",
                         textAlign = TextAlign.Center,
                         modifier = Modifier.fillMaxWidth(),
-                        style = PophoryTheme.typography.headline2
+                        style = PophoryTheme.typography.headline2,
                     )
                 },
                 navigationIcon = {
@@ -64,13 +64,13 @@ fun WebViewScreen(
                     }) {
                         Icon(
                             painter = painterResource(id = com.teampophory.pophory.designsystem.R.drawable.ic_chevron_left),
-                            contentDescription = "Back To Home"
+                            contentDescription = "Back To Home",
                         )
                     }
                 },
-                modifier = Modifier.bottomBorder(Dp.Hairline, PophoryTheme.colors.onSurface30)
+                modifier = Modifier.bottomBorder(Dp.Hairline, PophoryTheme.colors.onSurface30),
             )
-        }
+        },
     ) {
         if (state.pageTitle == null) {
             Box(
@@ -95,7 +95,7 @@ fun WebViewScreen(
             onCreated = { webview ->
                 webview.settings.javaScriptEnabled = true
             },
-            client = webViewClient
+            client = webViewClient,
         )
         BackHandler {
             if (webViewNavigator.canGoBack) {

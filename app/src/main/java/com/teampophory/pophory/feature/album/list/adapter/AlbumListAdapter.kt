@@ -18,12 +18,12 @@ import com.teampophory.pophory.feature.album.model.PhotoDetail
 import com.teampophory.pophory.feature.album.model.PhotoItem
 
 class AlbumListAdapter(
-    private val onItemClicked: (Intent, ActivityOptionsCompat) -> Unit
+    private val onItemClicked: (Intent, ActivityOptionsCompat) -> Unit,
 ) : ListAdapter<PhotoItem, AlbumViewHolder>(
     ItemDiffCallback<PhotoItem>(
         onItemsTheSame = { old, new -> old == new },
-        onContentsTheSame = { old, new -> old == new }
-    )
+        onContentsTheSame = { old, new -> old == new },
+    ),
 ) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AlbumViewHolder {
         return when (viewType) {
@@ -31,14 +31,14 @@ class AlbumListAdapter(
                 val binding = ItemHorizontalPhotoBinding.inflate(
                     LayoutInflater.from(parent.context),
                     parent,
-                    false
+                    false,
                 )
                 AlbumViewHolder.HorizontalViewHolder(
                     binding,
                     onItemClicked = {
                         if (it.orientType == OrientType.NONE) return@HorizontalViewHolder
                         startTransitionActivity(parent.context, binding.ivHorizontalImage, it)
-                    }
+                    },
                 )
             }
 
@@ -46,7 +46,7 @@ class AlbumListAdapter(
                 val binding = ItemVerticalPhotoBinding.inflate(
                     LayoutInflater.from(parent.context),
                     parent,
-                    false
+                    false,
                 )
                 AlbumViewHolder.VerticalViewHolder(
                     binding,
@@ -57,7 +57,7 @@ class AlbumListAdapter(
                             AlbumViewHolder.VerticalItemType.SECOND -> binding.ivSecondVerticalImage
                         }
                         startTransitionActivity(parent.context, animationImageView, pair.second)
-                    }
+                    },
                 )
             }
         }
@@ -79,7 +79,7 @@ class AlbumListAdapter(
     private fun startTransitionActivity(
         context: Context,
         imageView: ImageView,
-        photoDetail: PhotoDetail
+        photoDetail: PhotoDetail,
     ) {
         val activity = context as? Activity ?: return
         val transitionAnimation =
@@ -90,6 +90,6 @@ class AlbumListAdapter(
 
     enum class AlbumViewType {
         HORIZONTAL_TYPE,
-        VERTICAL_TYPE
+        VERTICAL_TYPE,
     }
 }

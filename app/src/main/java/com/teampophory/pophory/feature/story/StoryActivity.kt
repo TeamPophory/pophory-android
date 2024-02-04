@@ -1,6 +1,5 @@
 package com.teampophory.pophory.feature.story
 
-import android.os.Build
 import android.os.Bundle
 import android.webkit.WebSettings
 import androidx.appcompat.app.AppCompatActivity

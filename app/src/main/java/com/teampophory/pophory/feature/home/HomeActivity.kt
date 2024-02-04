@@ -52,7 +52,7 @@ class HomeActivity : AppCompatActivity() {
                         title = stringOf(R.string.dialog_title_photo_limit),
                         description = stringOf(R.string.dialog_message_photo_limit),
                         buttonText = stringOf(R.string.ok),
-                        imageResId = R.drawable.ic_customizing_done
+                        imageResId = R.drawable.ic_customizing_done,
                     )
                     return@setOnClickListener
                 }

@@ -10,11 +10,9 @@ interface RetrofitShareNetworkApi {
 }
 
 class RetrofitShareNetwork @Inject constructor(
-    private val networkApi: RetrofitShareNetworkApi
+    private val networkApi: RetrofitShareNetworkApi,
 ) : ShareNetworkDataSource {
     override suspend fun getPhotos(): ShareResponse {
         return networkApi.getPhoto()
     }
 }
-
-

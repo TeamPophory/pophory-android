@@ -52,7 +52,7 @@ object NetModule {
                 HttpLoggingInterceptor.Level.BODY
             } else {
                 HttpLoggingInterceptor.Level.NONE
-            }
+            },
         )
 
     @Singleton
@@ -66,7 +66,7 @@ object NetModule {
     fun provideOkHttpClient(
         @Log logInterceptor: Interceptor,
         @Auth authInterceptor: Interceptor,
-        authenticator: Authenticator
+        authenticator: Authenticator,
     ): OkHttpClient = OkHttpClient.Builder()
         .addInterceptor(logInterceptor)
         .addInterceptor(authInterceptor)
@@ -81,7 +81,7 @@ object NetModule {
     @Provides
     @Unsecured
     fun provideOkHttpClientNotNeededAuth(
-        @Log logInterceptor: Interceptor
+        @Log logInterceptor: Interceptor,
     ): OkHttpClient = OkHttpClient.Builder()
         .addInterceptor(logInterceptor)
         .connectTimeout(60, TimeUnit.SECONDS)
@@ -95,7 +95,7 @@ object NetModule {
     @Secured
     fun provideRetrofit(
         @Secured client: OkHttpClient,
-        converterFactory: Converter.Factory
+        converterFactory: Converter.Factory,
     ): Retrofit = Retrofit.Builder()
         .baseUrl(PophoryBaseUrl)
         .client(client)
@@ -107,7 +107,7 @@ object NetModule {
     @Unsecured
     fun provideRetrofitNotNeededAuth(
         @Unsecured client: OkHttpClient,
-        converterFactory: Converter.Factory
+        converterFactory: Converter.Factory,
     ): Retrofit = Retrofit.Builder()
         .baseUrl(PophoryBaseUrl)
         .client(client)

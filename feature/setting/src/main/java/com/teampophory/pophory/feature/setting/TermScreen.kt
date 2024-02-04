@@ -28,7 +28,7 @@ fun TermScreen(
     navController: NavController,
     onNavigatePersonalTerms: () -> Unit = {},
     onNavigateTerm: () -> Unit = {},
-    onNavigateOss: () -> Unit = {}
+    onNavigateOss: () -> Unit = {},
 ) {
     Scaffold(
         modifier = Modifier.fillMaxSize(),
@@ -39,25 +39,25 @@ fun TermScreen(
                         text = "약관 및 정책",
                         textAlign = TextAlign.Center,
                         modifier = Modifier.fillMaxWidth(),
-                        style = PophoryTheme.typography.headline2
+                        style = PophoryTheme.typography.headline2,
                     )
                 },
                 navigationIcon = {
                     IconButton(onClick = { navController.popBackStack() }) {
                         Icon(
                             painter = painterResource(id = com.teampophory.pophory.designsystem.R.drawable.ic_chevron_left),
-                            contentDescription = "Back To Home"
+                            contentDescription = "Back To Home",
                         )
                     }
                 },
-                modifier = Modifier.bottomBorder(Dp.Hairline, PophoryTheme.colors.onSurface30)
+                modifier = Modifier.bottomBorder(Dp.Hairline, PophoryTheme.colors.onSurface30),
             )
-        }
+        },
     ) {
         Column(
             modifier = Modifier
                 .padding(it)
-                .fillMaxSize()
+                .fillMaxSize(),
         ) {
             SettingItem(title = "개인정보 처리방침", onClick = onNavigatePersonalTerms)
             SettingItem(title = "이용 약관", onClick = onNavigateTerm)

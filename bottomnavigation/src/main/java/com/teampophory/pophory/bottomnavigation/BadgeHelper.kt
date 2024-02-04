@@ -5,7 +5,6 @@ import android.graphics.drawable.shapes.OvalShape
 import android.view.View
 import android.widget.RelativeLayout
 import android.widget.TextView
-
 import androidx.core.view.ViewCompat
 import androidx.core.view.ViewPropertyAnimatorListenerAdapter
 import com.teampophory.pophory.bottomnavigation.util.Utils
@@ -21,14 +20,13 @@ internal object BadgeHelper {
     fun showBadge(
         view: RelativeLayout,
         badgeItem: BadgeItem,
-        shouldShowBadgeWithNinePlus: Boolean
+        shouldShowBadgeWithNinePlus: Boolean,
     ) {
-
         Utils.changeViewVisibilityVisible(view)
         val badgeTextView = view.findViewById<View>(R.id.badge_text_view) as TextView
-        if (shouldShowBadgeWithNinePlus)
+        if (shouldShowBadgeWithNinePlus) {
             badgeTextView.text = badgeItem.badgeText
-        else
+        } else
             badgeTextView.text = badgeItem.fullBadgeText
 
         view.scaleX = 0f
@@ -73,14 +71,14 @@ internal object BadgeHelper {
     fun forceShowBadge(
         view: RelativeLayout,
         badgeItem: BadgeItem,
-        shouldShowBadgeWithNinePlus: Boolean
+        shouldShowBadgeWithNinePlus: Boolean,
     ) {
         Utils.changeViewVisibilityVisible(view)
         view.background = makeShapeDrawable(badgeItem.badgeColor)
         val badgeTextView = view.findViewById<View>(R.id.badge_text_view) as TextView
-        if (shouldShowBadgeWithNinePlus)
+        if (shouldShowBadgeWithNinePlus) {
             badgeTextView.text = badgeItem.badgeText
-        else
+        } else
             badgeTextView.text = badgeItem.fullBadgeText
     }
 

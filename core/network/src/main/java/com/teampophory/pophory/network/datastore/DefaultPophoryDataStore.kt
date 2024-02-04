@@ -7,7 +7,7 @@ import javax.inject.Singleton
 
 @Singleton
 class DefaultPophoryDataStore @Inject constructor(
-    private val preferences: SharedPreferences
+    private val preferences: SharedPreferences,
 ) : PophoryDataStore {
     override var accessToken: String
         get() = preferences.getString("access_token", "").orEmpty()

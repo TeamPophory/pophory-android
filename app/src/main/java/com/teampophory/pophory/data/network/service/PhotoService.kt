@@ -30,28 +30,28 @@ interface PhotoService {
     @POST("api/v1/photo")
     suspend fun addPhoto(
         @Part photo: MultipartBody.Part,
-        @PartMap request: HashMap<String, RequestBody>
+        @PartMap request: HashMap<String, RequestBody>,
     ): Response<Unit>
 
     @POST("api/v2/photo")
     suspend fun addPhotoToPophory(
-        @Body request: PhotoRequest
+        @Body request: PhotoRequest,
     ): Response<Unit>
 
     @PUT
     suspend fun postPhotoToS3(
         @Url url: String,
-        @Body photo: RequestBody
+        @Body photo: RequestBody,
     ): Response<Unit>
 
     @GET("api/v2/album/{albumId}/photo")
     suspend fun getPhotos(
-        @Path("albumId") albumId: Long
+        @Path("albumId") albumId: Long,
     ): PhotoListResponse
 
     @DELETE("api/v2/photo/{photoId}")
     suspend fun deletePhoto(
-        @Path("photoId") photoId: Long
+        @Path("photoId") photoId: Long,
     ): Response<Unit>
 
     @GET("api/v2/s3/photo")
@@ -60,6 +60,6 @@ interface PhotoService {
     @PATCH("/api/v2/album/{albumId}")
     suspend fun patchAlbumCover(
         @Path("albumId") albumId: Long,
-        @Body request: AlbumCoverChangeRequest
+        @Body request: AlbumCoverChangeRequest,
     ): Response<Unit>
 }

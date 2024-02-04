@@ -13,6 +13,6 @@ fun Modifier.bottomBorder(borderWidth: Dp, color: Color): Modifier = drawBehind 
         color,
         Offset(0f, y),
         Offset(size.width, y),
-        strokeWidth
+        strokeWidth,
     )
 }

@@ -42,7 +42,7 @@ fun Uri.getAllocatedBytes(context: Context) = context.contentResolver.query(
     arrayOf(MediaStore.Images.Media.SIZE, MediaStore.Images.Media.DISPLAY_NAME),
     null,
     null,
-    null
+    null,
 )?.use { cursor ->
     if (cursor.moveToFirst()) {
         return@use cursor.getLong(cursor.getColumnIndexOrThrow(MediaStore.Images.Media.SIZE))
@@ -57,14 +57,15 @@ fun Uri.getAdjustedSize(context: Context): Size {
 
     val rotation = exifInterface?.getAttributeInt(
         ExifInterface.TAG_ORIENTATION,
-        ExifInterface.ORIENTATION_NORMAL
+        ExifInterface.ORIENTATION_NORMAL,
     ) ?: ExifInterface.ORIENTATION_NORMAL
 
     val imageSize = getImageSize(context)
 
     return when (rotation) {
         ExifInterface.ORIENTATION_ROTATE_90,
-        ExifInterface.ORIENTATION_ROTATE_270 -> {
+        ExifInterface.ORIENTATION_ROTATE_270,
+        -> {
             Size(imageSize.height, imageSize.width)
         }
 

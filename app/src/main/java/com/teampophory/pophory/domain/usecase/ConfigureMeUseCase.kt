@@ -7,7 +7,7 @@ import javax.inject.Inject
 
 class ConfigureMeUseCase @Inject constructor(
     private val repository: MyPageRepository,
-    private val dataStore: PophoryDataStore
+    private val dataStore: PophoryDataStore,
 ) {
     suspend operator fun invoke(): MyPageResponse? {
         return repository.getMyPageInfo()

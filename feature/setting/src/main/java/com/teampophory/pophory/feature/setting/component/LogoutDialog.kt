@@ -24,26 +24,26 @@ import com.teampophory.pophory.designsystem.PophoryTheme
 @Composable
 fun LogoutDialog(
     setDialogShow: (Boolean) -> Unit = {},
-    onLogout: () -> Unit = {}
+    onLogout: () -> Unit = {},
 ) {
     Dialog(
-        onDismissRequest = { setDialogShow(false) }
+        onDismissRequest = { setDialogShow(false) },
     ) {
         Surface(
             modifier = Modifier
                 .width(280.dp)
                 .wrapContentHeight(),
             shape = RoundedCornerShape(20.dp),
-            color = PophoryTheme.colors.white
+            color = PophoryTheme.colors.white,
         ) {
             Column(
                 modifier = Modifier.padding(
                     start = 16.dp,
                     top = 36.dp,
                     end = 16.dp,
-                    bottom = 24.dp
+                    bottom = 24.dp,
                 ),
-                horizontalAlignment = Alignment.CenterHorizontally
+                horizontalAlignment = Alignment.CenterHorizontally,
             ) {
                 Text(
                     text = "로그아웃 하실 건가요?",
@@ -55,7 +55,7 @@ fun LogoutDialog(
                     text = "다음에 꼭 다시 보길 바라요",
                     style = PophoryTheme.typography.popupText,
                     color = PophoryTheme.colors.onSurface50,
-                    textAlign = TextAlign.Center
+                    textAlign = TextAlign.Center,
                 )
                 Spacer(modifier = Modifier.height(24.dp))
                 Button(
@@ -65,8 +65,8 @@ fun LogoutDialog(
                         .height(48.dp),
                     shape = RoundedCornerShape(30.dp),
                     colors = ButtonDefaults.buttonColors(
-                        containerColor = PophoryTheme.colors.onSurface100
-                    )
+                        containerColor = PophoryTheme.colors.onSurface100,
+                    ),
                 ) {
                     Text(
                         text = "돌아가기",
@@ -82,8 +82,8 @@ fun LogoutDialog(
                         .height(48.dp),
                     shape = RoundedCornerShape(30.dp),
                     colors = ButtonDefaults.buttonColors(
-                        containerColor = PophoryTheme.colors.onSurface20
-                    )
+                        containerColor = PophoryTheme.colors.onSurface20,
+                    ),
                 ) {
                     Text(
                         text = "로그아웃하기",

@@ -29,7 +29,7 @@ class SignUpFirstFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         return FragmentSignUpFirstBinding.inflate(inflater, container, false).root
     }
@@ -53,7 +53,7 @@ class SignUpFirstFragment : Fragment() {
     }
 
     private fun setEditText() {
-        //텍스트창 활성화
+        // 텍스트창 활성화
         binding.editTvName.apply {
             setOnFocusChangeListener { _, hasFocus ->
                 // 포커스가 주어졌을 때
@@ -63,9 +63,8 @@ class SignUpFirstFragment : Fragment() {
                     setBackgroundResource(R.drawable.bg_sign_up_edit_text_default)
                 }
             }
-            //edittext text 변화 감지
+            // edittext text 변화 감지
             doAfterTextChanged {
-
                 signUpViewModel.setRealName(it.toString())
                 binding.btnDeleteEditText.isGone = it?.isEmpty() == true
                 // 글자 수 계산
@@ -77,20 +76,20 @@ class SignUpFirstFragment : Fragment() {
                     setEditTextState(
                         R.drawable.bg_sign_up_edit_text_error,
                         errorMessageState = true,
-                        buttonState = false
+                        buttonState = false,
                     )
                 } else if (it.toString().length < 2 || it.toString().length > 6) {
                     binding.tvErrorMessage.text = "2-6글자 이내로 작성해주세요."
                     setEditTextState(
                         R.drawable.bg_sign_up_edit_text_error,
                         errorMessageState = true,
-                        buttonState = false
+                        buttonState = false,
                     )
                 } else {
                     setEditTextState(
                         R.drawable.bg_sign_up_edit_text_selected,
                         errorMessageState = false,
-                        buttonState = true
+                        buttonState = true,
                     )
                 }
             }
@@ -100,7 +99,7 @@ class SignUpFirstFragment : Fragment() {
     private fun setEditTextState(
         @DrawableRes background: Int,
         errorMessageState: Boolean,
-        buttonState: Boolean
+        buttonState: Boolean,
     ) {
         binding.editTvName.setBackgroundResource(background)
         binding.tvErrorMessage.isVisible = errorMessageState

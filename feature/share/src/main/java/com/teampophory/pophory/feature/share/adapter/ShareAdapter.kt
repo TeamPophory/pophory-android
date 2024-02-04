@@ -12,12 +12,12 @@ import com.teampophory.pophory.feature.share.model.PhotoItem
 
 class ShareAdapter(
     private val onItemClicked: (PhotoItem, Int) -> Unit,
-    private val onShareSheetDismissed: () -> Unit
+    private val onShareSheetDismissed: () -> Unit,
 ) : ListAdapter<PhotoItem, ShareAdapter.ShareViewHolder>(
     ItemDiffCallback<PhotoItem>(
         onItemsTheSame = { old, new -> old.hashCode() == new.hashCode() },
-        onContentsTheSame = { old, new -> old == new }
-    )
+        onContentsTheSame = { old, new -> old == new },
+    ),
 ) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ShareViewHolder {
         val binding =

@@ -10,7 +10,8 @@ import com.teampophory.pophory.feature.album.cover.model.AlbumCoverItem
 class AlbumCoverEditAdapter : ListAdapter<AlbumCoverItem, AlbumCoverEditViewHolder>(
     ItemDiffCallback<AlbumCoverItem>(
         onItemsTheSame = { old, new -> old == new },
-        onContentsTheSame = { old, new -> old == new })
+        onContentsTheSame = { old, new -> old == new },
+    ),
 ) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AlbumCoverEditViewHolder {
@@ -18,13 +19,12 @@ class AlbumCoverEditAdapter : ListAdapter<AlbumCoverItem, AlbumCoverEditViewHold
             ItemStorePagerBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
-                false
-            )
+                false,
+            ),
         )
     }
 
     override fun onBindViewHolder(holder: AlbumCoverEditViewHolder, position: Int) {
         holder.bind(getItem(position))
     }
-
 }

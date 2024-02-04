@@ -12,7 +12,7 @@ interface AuthService {
     @POST("api/v1/auth")
     suspend fun login(
         @Header("Authorization") authorization: String,
-        @Body socialType: SocialType
+        @Body socialType: SocialType,
     ): AuthResponse
 
     @DELETE("api/v1/auth")

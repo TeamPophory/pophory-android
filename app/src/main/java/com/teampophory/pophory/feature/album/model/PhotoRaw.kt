@@ -5,5 +5,5 @@ data class PhotoRaw(
     val studio: String,
     val takenAt: String,
     val imageUrl: String,
-    val shareId: String
+    val shareId: String,
 )

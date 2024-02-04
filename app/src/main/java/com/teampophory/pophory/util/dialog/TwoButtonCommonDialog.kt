@@ -25,7 +25,7 @@ class TwoButtonCommonDialog : DialogFragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         return DialogCommonTwoButtonBinding.inflate(inflater, container, false).root
     }
@@ -62,10 +62,12 @@ class TwoButtonCommonDialog : DialogFragment() {
         with(binding) {
             tvDialogTitle.text = title
             tvDialogDescription.text = description
-            ivDialogIcon.setImageDrawable(imageResId?.let {
-                ivDialogIcon.isVisible = true
-                ContextCompat.getDrawable(requireContext(), it)
-            })
+            ivDialogIcon.setImageDrawable(
+                imageResId?.let {
+                    ivDialogIcon.isVisible = true
+                    ContextCompat.getDrawable(requireContext(), it)
+                },
+            )
             tvConfirmButton.text = confirmButtonText
             tvDismissButton.text = dismissButtonText
         }
@@ -91,14 +93,13 @@ class TwoButtonCommonDialog : DialogFragment() {
         const val CONFIRM_BUTTON_TEXT = "confirmButtonText"
         const val DISMISS_BUTTON_TEXT = "dismissButtonText"
 
-
         fun newInstance(
             title: String,
             description: String,
             @DrawableRes
             imageResId: Int,
             confirmButtonText: String,
-            dismissButtonText: String
+            dismissButtonText: String,
         ): TwoButtonCommonDialog {
             return TwoButtonCommonDialog().apply {
                 arguments = Bundle().apply {

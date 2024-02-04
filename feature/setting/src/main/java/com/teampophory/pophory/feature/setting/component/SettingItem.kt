@@ -34,7 +34,7 @@ fun SettingItem(
                 .clickable(onClick = onClick)
                 .then(modifier),
             horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically
+            verticalAlignment = Alignment.CenterVertically,
         ) {
             Text(
                 text = title,
@@ -43,7 +43,7 @@ fun SettingItem(
             )
             Image(
                 painter = painterResource(id = right),
-                contentDescription = "Right Arrow"
+                contentDescription = "Right Arrow",
             )
         }
         Divider(

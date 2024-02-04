@@ -26,8 +26,9 @@ internal object Utils {
      * @param view target view
      */
     fun changeViewVisibilityGone(view: View?) {
-        if (view != null && view.visibility == View.VISIBLE)
+        if (view != null && view.visibility == View.VISIBLE) {
             view.visibility = View.GONE
+        }
     }
 
     /**
@@ -36,8 +37,9 @@ internal object Utils {
      * @param view target view
      */
     fun changeViewVisibilityVisible(view: View?) {
-        if (view != null && view.visibility == View.GONE)
+        if (view != null && view.visibility == View.GONE) {
             view.visibility = View.VISIBLE
+        }
     }
 
     /**
@@ -65,7 +67,7 @@ internal object Utils {
         return RippleDrawable(
             getPressedColorSelector(normalColor, pressedColor),
             ColorDrawable(normalColor),
-            null
+            null,
         )
     }
 
@@ -75,9 +77,9 @@ internal object Utils {
                 intArrayOf(android.R.attr.state_pressed),
                 intArrayOf(android.R.attr.state_focused),
                 intArrayOf(android.R.attr.state_activated),
-                intArrayOf()
+                intArrayOf(),
             ),
-            intArrayOf(pressedColor, pressedColor, pressedColor, normalColor)
+            intArrayOf(pressedColor, pressedColor, pressedColor, normalColor),
         )
     }
 }

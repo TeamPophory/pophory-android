@@ -8,9 +8,8 @@ import android.graphics.Path
 import android.widget.RelativeLayout
 import androidx.core.content.ContextCompat
 
-
 class NavigationShadow(
-    private val context: Context
+    private val context: Context,
 ) : RelativeLayout(context) {
     private val paint: Paint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
         strokeWidth = 8f
@@ -83,7 +82,7 @@ class NavigationShadow(
                 bezierWidth / 4 * 3 + (navigationWidth - bezierWidth) / 2,
                 offsetBeizerHeight,
                 bezierWidth + (navigationWidth - bezierWidth) / 2,
-                offsetBeizerHeight
+                offsetBeizerHeight,
             )
         }
         /**

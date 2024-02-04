@@ -26,7 +26,7 @@ class StudioSelectFragment : BottomSheetDialogFragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ) = FragmentStudioSelectBinding.inflate(inflater, container, false).root
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -37,7 +37,7 @@ class StudioSelectFragment : BottomSheetDialogFragment() {
         }
         binding.listStudio.adapter = adapter
         binding.listStudio.addItemDecoration(
-            GridSpacingItemDecoration(3, 12.dp, false)
+            GridSpacingItemDecoration(3, 12.dp, false),
         )
 
         viewModel.studio

@@ -26,12 +26,12 @@ class AdmobSampleActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val rewardedAdService = admobRewardedAdFactory.create(
-            adUnitId = "ca-app-pub-3940256099942544/5224354917"
+            adUnitId = "ca-app-pub-3940256099942544/5224354917",
         )
         rewardedAdService.loadAd()
         val service = admobNativeAdFactory.create(
             adUnitId = "ca-app-pub-3940256099942544/2247696110",
-            adContainer = binding.adContainer
+            adContainer = binding.adContainer,
         )
 
         binding.root.setOnClickListener {

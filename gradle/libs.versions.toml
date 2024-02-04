@@ -80,6 +80,7 @@ dot-indicator = "5.0"
 kakao = "2.19.0"
 splash-screen = "1.0.1"
 javax-inject = "1"
+spotless = "6.25.0"
 
 
 [libraries]
@@ -212,6 +213,7 @@ sentry = { id = "io.sentry.android.gradle", version.ref = "sentry" }
 junit5 = { id = "de.mannodermaus.android-junit5", version.ref = "junit5-plugin" }
 app-distribution = { id = "com.google.firebase.appdistribution", version.ref = "app-distribution" }
 oss = { id = "com.google.android.gms.oss-licenses-plugin", version.ref = "oss-plugin" }
+spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }
 
 [bundles]
 firebase = ["firebase-analytics", "firebase-crashlytics", "firebase-dynamiclink"]

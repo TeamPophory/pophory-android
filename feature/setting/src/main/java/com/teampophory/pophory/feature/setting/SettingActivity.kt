@@ -52,12 +52,12 @@ class SettingActivity : AppCompatActivity() {
                                 startActivity(
                                     WebViewActivity.newIntent(
                                         this@SettingActivity,
-                                        "https://pophoryofficial.wixsite.com/pophory/notice"
-                                    )
+                                        "https://pophoryofficial.wixsite.com/pophory/notice",
+                                    ),
                                 )
                             },
                             onLogout = ::logout,
-                            onWithdrawal = ::withdrawal
+                            onWithdrawal = ::withdrawal,
                         )
                     }
                     composable("term") {
@@ -67,21 +67,21 @@ class SettingActivity : AppCompatActivity() {
                                 startActivity(
                                     WebViewActivity.newIntent(
                                         this@SettingActivity,
-                                        "https://pophoryofficial.wixsite.com/pophory/%EC%A0%95%EC%B1%85#policy2"
-                                    )
+                                        "https://pophoryofficial.wixsite.com/pophory/%EC%A0%95%EC%B1%85#policy2",
+                                    ),
                                 )
                             },
                             onNavigateTerm = {
                                 startActivity(
                                     WebViewActivity.newIntent(
                                         this@SettingActivity,
-                                        "https://pophoryofficial.wixsite.com/pophory/%EC%A0%95%EC%B1%85#policy1"
-                                    )
+                                        "https://pophoryofficial.wixsite.com/pophory/%EC%A0%95%EC%B1%85#policy1",
+                                    ),
                                 )
                             },
                             onNavigateOss = {
                                 startActivity(navigationProvider.toLicense())
-                            }
+                            },
                         )
                     }
                     composable("team") {

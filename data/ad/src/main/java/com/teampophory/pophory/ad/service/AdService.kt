@@ -8,7 +8,6 @@ interface AdService {
     @GET("/api/v2/ad")
     suspend fun getAdConstant(
         @Query("os") os: String,
-        @Query("version") version: String
+        @Query("version") version: String,
     ): List<AdConstantResponse>
-
 }

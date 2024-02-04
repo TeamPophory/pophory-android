@@ -19,7 +19,7 @@ import javax.inject.Inject
 @HiltViewModel
 class SignUpViewModel @Inject constructor(
     private val signUpService: SignUpService,
-    private val autoLoginConfigureUseCase: AutoLoginConfigureUseCase
+    private val autoLoginConfigureUseCase: AutoLoginConfigureUseCase,
 ) : ViewModel() {
 
     private val _signUpResult: MutableLiveData<SignUpResponse> = MutableLiveData()
@@ -61,12 +61,12 @@ class SignUpViewModel @Inject constructor(
             SignUpRequest(
                 realName.value.orEmpty(),
                 nickName.value.orEmpty(),
-                albumCover.value ?: 1
-            )
+                albumCover.value ?: 1,
+            ),
         ).enqueue(object : Callback<SignUpResponse> {
             override fun onResponse(
                 call: Call<SignUpResponse>,
-                response: Response<SignUpResponse>
+                response: Response<SignUpResponse>,
             ) {
                 if (response.isSuccessful) {
                     autoLoginConfigureUseCase(true)
@@ -85,12 +85,12 @@ class SignUpViewModel @Inject constructor(
     fun nicknameCheck() {
         signUpService.nicknameCheck(
             NicknameRequest(
-                nickName.value.orEmpty()
-            )
+                nickName.value.orEmpty(),
+            ),
         ).enqueue(object : Callback<NicknameResponse> {
             override fun onResponse(
                 call: Call<NicknameResponse>,
-                response: Response<NicknameResponse>
+                response: Response<NicknameResponse>,
             ) {
                 if (response.isSuccessful) {
                     _nicknameCheckResult.value = response.body()
@@ -104,5 +104,4 @@ class SignUpViewModel @Inject constructor(
             }
         })
     }
-
 }

@@ -2,10 +2,8 @@ package com.teampophory.pophory.data.auth.di
 
 import com.teampophory.pophory.auth.repository.AuthRepository
 import com.teampophory.pophory.common.qualifier.Secured
-import com.teampophory.pophory.common.qualifier.Unsecured
 import com.teampophory.pophory.data.auth.repository.DefaultAuthRepository
 import com.teampophory.pophory.data.auth.service.AuthService
-import com.teampophory.pophory.network.api.RefreshApi
 import com.teampophory.pophory.data.auth.service.SignUpService
 import dagger.Binds
 import dagger.Module
@@ -15,7 +13,6 @@ import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
 import retrofit2.create
 import javax.inject.Singleton
-
 
 @Module
 @InstallIn(SingletonComponent::class)

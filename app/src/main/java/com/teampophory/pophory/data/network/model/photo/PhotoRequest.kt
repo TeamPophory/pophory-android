@@ -16,5 +16,5 @@ data class PhotoRequest(
     @SerialName("width")
     val width: Int,
     @SerialName("height")
-    val height: Int
+    val height: Int,
 )
