@@ -8,10 +8,10 @@ import com.teampophory.pophory.common.time.systemNow
 import com.teampophory.pophory.data.model.photo.Studio
 import com.teampophory.pophory.domain.model.S3Image
 import com.teampophory.pophory.domain.repository.photo.PhotoRepository
+import com.teampophory.pophory.feature.home.model.RegisterNavigationType
 import com.teampophory.pophory.feature.home.photo.model.StudioUiModel
 import com.teampophory.pophory.feature.home.photo.model.toUiModel
 import com.teampophory.pophory.feature.home.store.model.AlbumItem
-import com.teampophory.pophory.feature.home.model.RegisterNavigationType
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -46,8 +46,8 @@ class AddPhotoViewModel @Inject constructor(
     private var currentFileName: String? = null
     private val _type = MutableStateFlow(
         RegisterNavigationType.valueOf(
-            savedStateHandle.get<String>("type").orEmpty()
-        )
+            savedStateHandle.get<String>("type").orEmpty(),
+        ),
     )
     val type = _type.asStateFlow()
     private val _createdAt = MutableStateFlow(Instant.systemNow().toEpochMilliseconds())

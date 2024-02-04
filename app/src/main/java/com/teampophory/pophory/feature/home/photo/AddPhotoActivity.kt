@@ -187,7 +187,7 @@ class AddPhotoActivity : AppCompatActivity() {
             context: Context,
             imageUri: String,
             albumItem: AlbumItem,
-            type: String
+            type: String,
         ): Intent =
             Intent(context, AddPhotoActivity::class.java).apply {
                 putExtra(IMAGE_URL_EXTRA, imageUri)
