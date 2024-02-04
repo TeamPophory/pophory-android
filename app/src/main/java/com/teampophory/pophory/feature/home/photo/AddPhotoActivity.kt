@@ -66,9 +66,9 @@ class AddPhotoActivity : AppCompatActivity() {
 
     private fun loadImageWithAdjustedSize(realImageUri: Uri, adjustedSize: Size) {
         val (backgroundResource, imageView) = if (adjustedSize.width >= adjustedSize.height) {
-            Pair(R.drawable.img_background_width, binding.imgHorizontal)
+            R.drawable.img_background_width to binding.imgHorizontal
         } else {
-            Pair(R.drawable.img_background_height, binding.imgVertical)
+            R.drawable.img_background_height to binding.imgVertical
         }
         binding.imgBackground.setImageResource(backgroundResource)
         imageView.load(realImageUri) {
@@ -77,10 +77,10 @@ class AddPhotoActivity : AppCompatActivity() {
     }
 
     private fun initView() {
-        binding.toolbarAddPhoto.btnBack.setOnClickListener {
+        binding.btnBack.setOnClickListener {
             finish()
         }
-        binding.toolbarAddPhoto.txtToolbarTitle.text = "사진 추가"
+        binding.txtToolbarTitle.text = "사진 추가"
         binding.layoutDate.setOnClickListener {
             viewModel.onCreatedAtPressed()
         }
@@ -93,6 +93,15 @@ class AddPhotoActivity : AppCompatActivity() {
         onBackPressedDispatcher.addCallback(this) {
             setResult(Activity.RESULT_CANCELED)
             finish()
+        }
+        binding.btnShare.setOnSingleClickListener {
+            val intent = Intent("com.instagram.share.ADD_TO_STORY").apply {
+                putExtra("source_application", BuildConfig.FACEBOOK_APP_ID)
+                type = "image/png"
+                putExtra("interactive_asset_uri", imageUri)
+                putExtra("top_background_color", "#FF6724")
+                putExtra("bottom_background_color", "#FF6724")
+            }
         }
     }
 
