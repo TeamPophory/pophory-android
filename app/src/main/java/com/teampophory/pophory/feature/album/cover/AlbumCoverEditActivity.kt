@@ -27,7 +27,7 @@ import com.teampophory.pophory.databinding.ActivityAlbumCoverEditBinding
 import com.teampophory.pophory.feature.album.cover.adapter.AlbumCoverEditAdapter
 import com.teampophory.pophory.feature.album.cover.model.AlbumCoverItem
 import com.teampophory.pophory.util.HorizontalMarginItemDecoration
-import com.teampophory.pophory.util.dialog.TwoButtonCommonDialog
+import com.teampophory.pophory.designsystem.dialog.TwoButtonCommonDialog
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach

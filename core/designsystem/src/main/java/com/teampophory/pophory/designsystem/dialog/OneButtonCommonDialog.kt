@@ -1,4 +1,4 @@
-package com.teampophory.pophory.util.dialog
+package com.teampophory.pophory.designsystem.dialog
 
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -10,11 +10,11 @@ import androidx.annotation.DrawableRes
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.DialogFragment
-import com.teampophory.pophory.R
 import com.teampophory.pophory.common.context.dialogWidthPercent
 import com.teampophory.pophory.common.view.setOnSingleClickListener
 import com.teampophory.pophory.common.view.viewBinding
-import com.teampophory.pophory.databinding.DialogCommonOneButtonBinding
+import com.teampophory.pophory.designsystem.R
+import com.teampophory.pophory.designsystem.databinding.DialogCommonOneButtonBinding
 
 class OneButtonCommonDialog : DialogFragment() {
 

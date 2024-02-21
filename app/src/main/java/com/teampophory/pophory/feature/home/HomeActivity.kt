@@ -14,7 +14,7 @@ import com.teampophory.pophory.databinding.ActivityHomeBinding
 import com.teampophory.pophory.feature.home.add.AddPhotoBottomSheet
 import com.teampophory.pophory.feature.home.mypage.MyPageFragment
 import com.teampophory.pophory.feature.home.store.StoreFragment
-import com.teampophory.pophory.util.dialog.DialogUtil
+import com.teampophory.pophory.designsystem.dialog.DialogUtil
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

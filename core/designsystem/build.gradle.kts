@@ -9,4 +9,5 @@ android {
 
 dependencies {
     implementation(libs.splash.screen)
+    implementation(projects.core.common)
 }

@@ -1,4 +1,4 @@
-package com.teampophory.pophory.util.dialog
+package com.teampophory.pophory.designsystem.dialog
 
 import androidx.annotation.DrawableRes
 import androidx.fragment.app.FragmentManager
