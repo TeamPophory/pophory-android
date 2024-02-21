@@ -17,6 +17,7 @@ import com.teampophory.pophory.common.fragment.colorOf
 import com.teampophory.pophory.common.primitive.textAppearance
 import com.teampophory.pophory.common.view.viewBinding
 import com.teampophory.pophory.databinding.FragmentSignUpFirstBinding
+import com.teampophory.pophory.feature.auth.signup.SignUpViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.regex.Pattern
 

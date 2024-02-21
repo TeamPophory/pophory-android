@@ -9,6 +9,7 @@ import androidx.navigation.fragment.findNavController
 import com.teampophory.pophory.R
 import com.teampophory.pophory.common.view.viewBinding
 import com.teampophory.pophory.databinding.ActivitySignUpBinding
+import com.teampophory.pophory.feature.auth.signup.SignUpViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
