@@ -1,4 +1,4 @@
-package com.teampophory.pophory
+package com.teampophory.pophory.feature.auth
 
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.closeSoftKeyboard

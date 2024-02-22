@@ -1,5 +1,6 @@
 plugins {
     pophory("feature")
+    pophory("test")
 }
 
 android {
