@@ -9,7 +9,6 @@ android {
 dependencies {
     implementation(projects.domain.auth)
     implementation(projects.core.common)
-    implementation(projects.data.auth)
     implementation(projects.core.designsystem)
 
     implementation(libs.kakao.login)
