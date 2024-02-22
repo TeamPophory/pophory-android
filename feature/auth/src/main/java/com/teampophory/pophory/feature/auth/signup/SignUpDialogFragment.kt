@@ -1,4 +1,4 @@
-package com.teampophory.pophory.feature.signup
+package com.teampophory.pophory.feature.auth.signup
 
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- onboarding -->
+    <string name="signup_with_sns">SNS로 간편 가입하기!</string>
+    <string name="start_with_kakao">Kakao로 시작하기</string>
+    <string name="sign_up">회원가입</string>
+    <string name="sign_up_first_title">포포리에서 사용할\n너의 이름을 알려줘!</string>
+    <string name="sign_up_first_sub_title">한글 2-6자리 이내로 작성해주세요\n이름은 이후에 수정이 어려워요</string>
+    <string name="sign_up_first_name_hint">이름</string>
+    <string name="sign_up_second_title">너만의 재치있는\n포포리 아이디를 만들어줘!</string>
+    <string name="sign_up_second_sub_title">영문, 숫자, 특수문자 조합 4-12자리 이내로\n작성해주세요 (특수문자는 . _ 만 가능해요)</string>
+    <string name="sign_up_second_id_hint">아이디</string>
+    <string name="sign_up_second_count">(0/12)</string>
+    <string name="sign_up_first_count">(0/6)</string>
+    <string name="sign_up_third_title">마음에 쏙 드는\n앨범 테마를 선택해줘!</string>
+    <string name="sign_up_third_content_theme_change">테마는 언제든지 변경이 가능해요</string>
+    <string name="start_pophory_text">포릿만을 위한\n앨범이 준비됐어!</string>
+    <string name="start_pophory">포포리 시작하기</string>
+    <string name="sign_up_id_popup_content">이미 있는 아이디에요\n다른 아이디를 입력해주세요!</string>
+    <string name="sign_up_popup_button">돌아가기</string>
+    <string name="sign_up_next_button">다음으로 넘어가기</string>
+</resources>

@@ -1,4 +1,4 @@
-package com.teampophory.pophory.feature.signup
+package com.teampophory.pophory.feature.auth.signup
 
 import android.os.Bundle
 import androidx.activity.viewModels
@@ -6,10 +6,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.commit
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
-import com.teampophory.pophory.R
 import com.teampophory.pophory.common.view.viewBinding
-import com.teampophory.pophory.databinding.ActivitySignUpBinding
-import com.teampophory.pophory.feature.auth.signup.SignUpViewModel
+import com.teampophory.pophory.feature.auth.R
+import com.teampophory.pophory.feature.auth.databinding.ActivitySignUpBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

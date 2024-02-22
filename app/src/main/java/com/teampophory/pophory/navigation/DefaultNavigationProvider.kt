@@ -6,7 +6,7 @@ import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
 import com.teampophory.pophory.common.navigation.NavigationProvider
 import com.teampophory.pophory.feature.album.list.AlbumListActivity
 import com.teampophory.pophory.feature.home.HomeActivity
-import com.teampophory.pophory.feature.signup.SignUpActivity
+import com.teampophory.pophory.feature.auth.signup.SignUpActivity
 import com.teampophory.pophory.onboarding.OnBoardingActivity
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
