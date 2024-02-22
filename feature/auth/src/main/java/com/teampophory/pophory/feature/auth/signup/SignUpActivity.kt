@@ -79,7 +79,7 @@ class SignUpActivity : AppCompatActivity() {
         }
 
         viewModel.nicknameCheckResult.observe(this) {
-            if (!it.isDuplicated) {
+            if (!it) {
                 navigateToFragment(2)
             } else {
                 supportFragmentManager.commit(allowStateLoss = true) {

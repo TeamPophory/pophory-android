@@ -3,30 +3,25 @@ package com.teampophory.pophory.feature.auth.signup
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.teampophory.pophory.auth.repository.AuthRepository
 import com.teampophory.pophory.auth.usecase.AutoLoginConfigureUseCase
-import com.teampophory.pophory.data.auth.model.NicknameRequest
-import com.teampophory.pophory.data.auth.model.NicknameResponse
-import com.teampophory.pophory.data.auth.model.SignUpRequest
-import com.teampophory.pophory.data.auth.model.SignUpResponse
-import com.teampophory.pophory.data.auth.service.SignUpService
 import dagger.hilt.android.lifecycle.HiltViewModel
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
 class SignUpViewModel @Inject constructor(
-    private val signUpService: SignUpService,
+    private val repository: AuthRepository,
     private val autoLoginConfigureUseCase: AutoLoginConfigureUseCase,
 ) : ViewModel() {
 
-    private val _signUpResult: MutableLiveData<SignUpResponse> = MutableLiveData()
-    val signUpResult: LiveData<SignUpResponse> = _signUpResult
+    private val _signUpResult: MutableLiveData<Int> = MutableLiveData()
+    val signUpResult: LiveData<Int> = _signUpResult
 
-    private val _nicknameCheckResult: MutableLiveData<NicknameResponse> = MutableLiveData()
-    val nicknameCheckResult: LiveData<NicknameResponse> = _nicknameCheckResult
+    private val _nicknameCheckResult: MutableLiveData<Boolean> = MutableLiveData()
+    val nicknameCheckResult: LiveData<Boolean> = _nicknameCheckResult
 
     private val _buttonState: MutableLiveData<Boolean> = MutableLiveData()
     val buttonState: LiveData<Boolean> = _buttonState
@@ -57,51 +52,31 @@ class SignUpViewModel @Inject constructor(
     }
 
     fun signUp() {
-        signUpService.signUp(
-            SignUpRequest(
-                realName.value.orEmpty(),
-                nickName.value.orEmpty(),
-                albumCover.value ?: 1,
-            ),
-        ).enqueue(object : Callback<SignUpResponse> {
-            override fun onResponse(
-                call: Call<SignUpResponse>,
-                response: Response<SignUpResponse>,
-            ) {
-                if (response.isSuccessful) {
-                    autoLoginConfigureUseCase(true)
-                    _signUpResult.value = response.body()
-                } else {
-                    Timber.e(response.errorBody()?.string())
-                }
+        viewModelScope.launch {
+            runCatching {
+                repository.signUp(
+                    realName.value.orEmpty(),
+                    nickName.value.orEmpty(),
+                    albumCover.value ?: 1,
+                )
+            }.onSuccess {
+                autoLoginConfigureUseCase(true)
+                _signUpResult.value = it
+            }.onFailure {
+                Timber.e(it)
             }
-
-            override fun onFailure(call: Call<SignUpResponse>, t: Throwable) {
-                Timber.e(t)
-            }
-        })
+        }
     }
 
     fun nicknameCheck() {
-        signUpService.nicknameCheck(
-            NicknameRequest(
-                nickName.value.orEmpty(),
-            ),
-        ).enqueue(object : Callback<NicknameResponse> {
-            override fun onResponse(
-                call: Call<NicknameResponse>,
-                response: Response<NicknameResponse>,
-            ) {
-                if (response.isSuccessful) {
-                    _nicknameCheckResult.value = response.body()
-                } else {
-                    Timber.e(response.errorBody()?.string())
-                }
+        viewModelScope.launch {
+            runCatching {
+                repository.validateNickname(nickName.value.orEmpty())
+            }.onSuccess {
+                _nicknameCheckResult.value = it
+            }.onFailure {
+                Timber.e(it)
             }
-
-            override fun onFailure(call: Call<NicknameResponse>, t: Throwable) {
-                Timber.e(t)
-            }
-        })
+        }
     }
 }

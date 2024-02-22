@@ -3,6 +3,8 @@ package com.teampophory.pophory.data.auth.repository
 import com.teampophory.pophory.auth.entity.Token
 import com.teampophory.pophory.auth.entity.UserAuthentication
 import com.teampophory.pophory.auth.repository.AuthRepository
+import com.teampophory.pophory.data.auth.model.NicknameRequest
+import com.teampophory.pophory.data.auth.model.SignUpRequest
 import com.teampophory.pophory.data.auth.model.SocialType
 import com.teampophory.pophory.data.auth.service.AuthService
 import com.teampophory.pophory.network.datastore.PophoryDataStore
@@ -20,6 +22,14 @@ class DefaultAuthRepository @Inject constructor(
     override suspend fun login(socialToken: String): UserAuthentication {
         val authorization = "Bearer $socialToken"
         return service.login(authorization, SocialType("KAKAO")).toUserAuthentication()
+    }
+
+    override suspend fun signUp(realName: String, nickName: String, albumCover: Int): Int {
+        return service.signUp(SignUpRequest(realName, nickName, albumCover)).status
+    }
+
+    override suspend fun validateNickname(nickname: String): Boolean {
+        return service.nicknameCheck(NicknameRequest(nickname)).isDuplicated
     }
 
     override fun save(token: Token) {
