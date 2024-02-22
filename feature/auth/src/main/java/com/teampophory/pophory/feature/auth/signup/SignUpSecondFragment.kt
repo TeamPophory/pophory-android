@@ -11,11 +11,11 @@ import androidx.core.view.isVisible
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import com.teampophory.pophory.R
 import com.teampophory.pophory.common.fragment.colorOf
 import com.teampophory.pophory.common.primitive.textAppearance
 import com.teampophory.pophory.common.view.viewBinding
-import com.teampophory.pophory.databinding.FragmentSignUpSecondBinding
+import com.teampophory.pophory.feature.auth.R
+import com.teampophory.pophory.feature.auth.databinding.FragmentSignUpSecondBinding
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.regex.Pattern
 
@@ -112,7 +112,10 @@ class SignUpSecondFragment : Fragment() {
         val text = buildSpannedString {
             append(splittedText.getOrNull(0))
             color(colorOf(com.teampophory.pophory.designsystem.R.color.pophory_purple)) {
-                textAppearance(requireContext(), com.teampophory.pophory.designsystem.R.style.TextAppearance_Pophory_HeadLineBold) {
+                textAppearance(
+                    requireContext(),
+                    com.teampophory.pophory.designsystem.R.style.TextAppearance_Pophory_HeadLineBold
+                ) {
                     append(coloredText)
                 }
             }
