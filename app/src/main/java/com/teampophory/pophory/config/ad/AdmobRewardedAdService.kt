@@ -81,8 +81,9 @@ class AdmobRewardedAdService @AssistedInject constructor(
         val activity = context as? Activity ?: return
         ad.show(activity) { rewardItem ->
             admobRewardEvents?.onUserEarnedReward(rewardItem)
-            val rewardAmount = rewardItem.amount
-            val rewardType = rewardItem.type
+            // TODO by euijin: 광고 로직 활용 기능 추가 시 사용
+            // val rewardAmount = rewardItem.amount
+            // val rewardType = rewardItem.type
             Timber.d("User earned the reward.")
         }
     }
