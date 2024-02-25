@@ -66,10 +66,6 @@
                 android:name="com.teampophory.pophory.config.initializer.TimberInitializer"
                 android:value="androidx.startup" />
         </provider>
-
-        <activity
-            android:name=".feature.sample.AdmobSampleActivity"
-            android:exported="false" />
         <activity
             android:name=".feature.home.HomeActivity"
             android:exported="true">

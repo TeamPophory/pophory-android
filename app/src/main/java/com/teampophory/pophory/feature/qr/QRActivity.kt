@@ -6,7 +6,6 @@ import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.activity.viewModels
@@ -22,6 +21,7 @@ import com.teampophory.pophory.common.context.stringOf
 import com.teampophory.pophory.common.view.dp
 import com.teampophory.pophory.common.view.viewBinding
 import com.teampophory.pophory.databinding.ActivityQrBinding
+import timber.log.Timber
 
 class QRActivity : AppCompatActivity() {
     private val binding by viewBinding(ActivityQrBinding::inflate)
@@ -131,7 +131,7 @@ class QRActivity : AppCompatActivity() {
 
                 override fun onPageFinished(view: WebView, url: String) {
                     super.onPageFinished(view, url)
-                    if (url != null && !NOT_SUPPORT_URLS.contains(url)) {
+                    if (!NOT_SUPPORT_URLS.contains(url)) {
                         fetchImageUrlFromWebView()
                     }
                 }
@@ -146,19 +146,19 @@ class QRActivity : AppCompatActivity() {
     }
 
     private fun configureViewFinder() {
-        val viewFinder = binding.decorateBarcodeViewQr.getViewFinder()
+        val viewFinder = binding.decorateBarcodeViewQr.viewFinder
         viewFinder.setLaserVisibility(false)
     }
 
     private fun configureStatusText() {
-        val statusTextView = binding.decorateBarcodeViewQr.getStatusView()
+        val statusTextView = binding.decorateBarcodeViewQr.statusView
         statusTextView.setTextAppearance(com.teampophory.pophory.designsystem.R.style.TextAppearance_Pophory_HeadLine03)
         adjustStatusTextPosition()
     }
 
     private fun adjustStatusTextPosition() {
-        val statusTextView = binding.decorateBarcodeViewQr.getStatusView()
-        val barcodeView = binding.decorateBarcodeViewQr.getBarcodeView()
+        val statusTextView = binding.decorateBarcodeViewQr.statusView
+        val barcodeView = binding.decorateBarcodeViewQr.barcodeView
         val statusDetailTextView = binding.tvViewFinderTextDetail
 
         barcodeView.addOnLayoutChangeListener { _, _, _, _, _, _, _, _, _ ->
@@ -214,13 +214,13 @@ class QRActivity : AppCompatActivity() {
             val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(binding.webViewQr.url))
             startActivity(browserIntent)
         }.onFailure { e ->
-            Log.e("QRActivity", "Failed to open browser with the given URL", e)
+            Timber.e("Failed to open browser with the given URL", e)
         }
     }
 
     companion object {
         // 예외 처리 사진관
-        const val POZLE_URL = "http://211.110.139.146/PhotoBooth/no_photo.php"
+        private const val POZLE_URL = "http://211.110.139.146/PhotoBooth/no_photo.php"
 
         // 예외 처리 사진관 리스트
         var NOT_SUPPORT_URLS = arrayOf(POZLE_URL)
