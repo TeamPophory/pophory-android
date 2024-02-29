@@ -61,7 +61,7 @@ runner = "1.5.2"
 
 # gradle
 agp = "8.2.2"
-kspplugin = "1.9.22-1.0.17"
+kspplugin = "1.9.22-1.0.18"
 
 # third party
 flipper = "0.247.0"
