@@ -13,5 +13,4 @@ android {
 
 dependencies {
     implementation(libs.fragment.ktx)
-    implementation(libs.retrofit)
 }

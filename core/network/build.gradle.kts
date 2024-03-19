@@ -10,7 +10,6 @@ android {
 dependencies {
     implementation(projects.core.common)
     implementation(libs.security)
-    implementation(libs.bundles.retrofit)
     implementation(platform(libs.okhttp.bom))
     implementation(libs.okhttp.logging.interceptor)
     implementation(libs.kakao.login)

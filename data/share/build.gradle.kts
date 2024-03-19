@@ -10,5 +10,4 @@ dependencies {
     implementation(projects.domain.share)
     implementation(projects.core.common)
     implementation(projects.core.network)
-    implementation(libs.bundles.retrofit)
 }

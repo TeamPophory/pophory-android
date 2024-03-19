@@ -28,5 +28,4 @@ dependencies {
 
     // Third Party
     implementation(libs.coil.core)
-    implementation(libs.retrofit)
 }
