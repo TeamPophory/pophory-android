@@ -48,5 +48,9 @@ gradlePlugin {
             id = "com.teampophory.pophory.compose"
             implementationClass = "com.teampophory.pophory.plugin.ComposePlugin"
         }
+        create("retrofit") {
+            id = "com.teampophory.pophory.retrofit"
+            implementationClass = "com.teampophory.pophory.plugin.RetrofitPlugin"
+        }
     }
 }

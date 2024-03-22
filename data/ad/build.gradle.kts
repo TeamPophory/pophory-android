@@ -12,6 +12,5 @@ dependencies {
     implementation(projects.core.common)
     implementation(projects.core.network)
     implementation(libs.security)
-    implementation(libs.bundles.retrofit)
     implementation(libs.sentry)
 }
