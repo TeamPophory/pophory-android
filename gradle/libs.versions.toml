@@ -6,7 +6,7 @@ appVersion = "1.2.0"
 versionCode = "10200"
 
 # kotlin
-kotlin = "1.9.22"
+kotlin = "1.9.23"
 kotlinx-serialization-json = "1.6.3"
 kotlinx-serialization-converter = "1.0.0"
 kotlinx-coroutines = "1.8.0"
@@ -20,8 +20,8 @@ lifecycle = "2.7.0"
 navigation = "2.7.7"
 startup = "1.1.1"
 security = "1.1.0-alpha06"
-compose-compiler = "1.5.8"
-compose-bom = "2024.02.02"
+compose-compiler = "1.5.11"
+compose-bom = "2024.03.00"
 desugarJdk = "2.0.4"
 dagger-hilt = "2.51"
 dagger-hilt-navigation-compose = "1.0.0"
@@ -61,7 +61,7 @@ runner = "1.5.2"
 
 # gradle
 agp = "8.3.1"
-kspplugin = "1.9.22-1.0.18"
+kspplugin = "1.9.23-1.0.19"
 
 # third party
 flipper = "0.250.0"
