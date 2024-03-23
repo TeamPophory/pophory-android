@@ -1,23 +1,27 @@
-package com.teampophory.pophory.feature.signup
+package com.teampophory.pophory.feature.auth.signup
 
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
+import com.teampophory.pophory.common.navigation.NavigationProvider
 import com.teampophory.pophory.common.view.viewBinding
-import com.teampophory.pophory.databinding.ActivityStartPophoryBinding
-import com.teampophory.pophory.feature.home.HomeActivity
+import com.teampophory.pophory.feature.auth.databinding.ActivityStartPophoryBinding
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class StartPophoryActivity : AppCompatActivity() {
-
     private val binding by viewBinding(ActivityStartPophoryBinding::inflate)
+
+    @Inject
+    lateinit var navigator: NavigationProvider
 
     private val callback = object : OnBackPressedCallback(true) {
         override fun handleOnBackPressed() {
             // 뒤로 버튼 이벤트 처리
-            val intent = Intent(this@StartPophoryActivity, HomeActivity::class.java)
-            startActivity(intent)
+            startActivity(navigator.toHome())
         }
     }
 
@@ -26,7 +30,7 @@ class StartPophoryActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.btnStartPophory.setOnClickListener {
-            startActivity(HomeActivity.getIntent(this))
+            startActivity(navigator.toHome())
         }
 
         this.onBackPressedDispatcher.addCallback(this, callback)

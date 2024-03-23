@@ -26,6 +26,7 @@ import com.teampophory.pophory.common.time.systemNow
 import com.teampophory.pophory.common.view.setOnSingleClickListener
 import com.teampophory.pophory.common.view.viewBinding
 import com.teampophory.pophory.databinding.ActivityAddPhotoBinding
+import com.teampophory.pophory.designsystem.type.DesignSystemResources
 import com.teampophory.pophory.feature.home.store.model.AlbumItem
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
@@ -63,9 +64,9 @@ class AddPhotoActivity : AppCompatActivity() {
 
     private fun loadImageWithAdjustedSize(realImageUri: Uri, adjustedSize: Size) {
         val (backgroundResource, imageView) = if (adjustedSize.width >= adjustedSize.height) {
-            Pair(R.drawable.img_background_width, binding.imgHorizontal)
+            Pair(DesignSystemResources.img_background_width, binding.imgHorizontal)
         } else {
-            Pair(R.drawable.img_background_height, binding.imgVertical)
+            Pair(DesignSystemResources.img_background_height, binding.imgVertical)
         }
         binding.imgBackground.setImageResource(backgroundResource)
         imageView.load(realImageUri) {
@@ -112,7 +113,8 @@ class AddPhotoActivity : AppCompatActivity() {
                                     .setEnd(Instant.systemNow().toEpochMilliseconds()).build(),
                             )
                             .setSelection(
-                                currentCreatedAt + TimeZone.getDefault().getOffset(currentCreatedAt),
+                                currentCreatedAt + TimeZone.getDefault()
+                                    .getOffset(currentCreatedAt),
                             )
                             .build()
                         picker.show(supportFragmentManager, "datePicker")

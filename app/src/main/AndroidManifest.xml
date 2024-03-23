@@ -25,7 +25,7 @@
             android:name=".feature.share.ShareActivity"
             android:exported="false" />
         <activity
-            android:name=".feature.signup.StartPophoryActivity"
+            android:name=".feature.auth.signup.StartPophoryActivity"
             android:exported="false"
             android:theme="@style/Theme.App.StartPophory" />
 
@@ -83,7 +83,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".feature.signup.SignUpActivity"
+            android:name=".feature.auth.signup.SignUpActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
         <activity
