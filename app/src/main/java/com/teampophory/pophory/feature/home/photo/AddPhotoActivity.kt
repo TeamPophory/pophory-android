@@ -1,21 +1,27 @@
 package com.teampophory.pophory.feature.home.photo
 
 import android.app.Activity
+import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.Size
+import android.widget.Toast
 import androidx.activity.addCallback
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import coil.load
 import com.google.android.material.datepicker.CalendarConstraints
 import com.google.android.material.datepicker.DateValidatorPointBackward
 import com.google.android.material.datepicker.MaterialDatePicker
+import com.teampophory.pophory.BuildConfig
 import com.teampophory.pophory.R
+import com.teampophory.pophory.common.bitmap.capture
+import com.teampophory.pophory.common.bitmap.saveToDisk
 import com.teampophory.pophory.common.context.colorOf
 import com.teampophory.pophory.common.context.snackBar
 import com.teampophory.pophory.common.context.toast
@@ -26,10 +32,12 @@ import com.teampophory.pophory.common.time.systemNow
 import com.teampophory.pophory.common.view.setOnSingleClickListener
 import com.teampophory.pophory.common.view.viewBinding
 import com.teampophory.pophory.databinding.ActivityAddPhotoBinding
+import com.teampophory.pophory.feature.home.model.RegisterNavigationType
 import com.teampophory.pophory.feature.home.store.model.AlbumItem
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.launch
 import kotlinx.datetime.Instant
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -63,9 +71,9 @@ class AddPhotoActivity : AppCompatActivity() {
 
     private fun loadImageWithAdjustedSize(realImageUri: Uri, adjustedSize: Size) {
         val (backgroundResource, imageView) = if (adjustedSize.width >= adjustedSize.height) {
-            Pair(R.drawable.img_background_width, binding.imgHorizontal)
+            R.drawable.img_background_width to binding.imgHorizontal
         } else {
-            Pair(R.drawable.img_background_height, binding.imgVertical)
+            R.drawable.img_background_height to binding.imgVertical
         }
         binding.imgBackground.setImageResource(backgroundResource)
         imageView.load(realImageUri) {
@@ -74,10 +82,10 @@ class AddPhotoActivity : AppCompatActivity() {
     }
 
     private fun initView() {
-        binding.toolbarAddPhoto.btnBack.setOnClickListener {
+        binding.btnBack.setOnClickListener {
             finish()
         }
-        binding.toolbarAddPhoto.txtToolbarTitle.text = "사진 추가"
+        binding.txtToolbarTitle.text = "사진 추가"
         binding.layoutDate.setOnClickListener {
             viewModel.onCreatedAtPressed()
         }
@@ -90,6 +98,33 @@ class AddPhotoActivity : AppCompatActivity() {
         onBackPressedDispatcher.addCallback(this) {
             setResult(Activity.RESULT_CANCELED)
             finish()
+        }
+        binding.btnShare.setOnSingleClickListener {
+            lifecycleScope.launch {
+                val bitmap = binding.layoutImage.capture(this@AddPhotoActivity)
+                val shareImageUri = bitmap.saveToDisk(this@AddPhotoActivity)
+                val intent = Intent("com.instagram.share.ADD_TO_STORY").apply {
+                    putExtra("source_application", BuildConfig.FACEBOOK_APP_ID)
+                    type = "image/png"
+                    putExtra("interactive_asset_uri", shareImageUri)
+                    putExtra("top_background_color", "#000000")
+                    putExtra("bottom_background_color", "#000000")
+                }
+                grantUriPermission(
+                    "com.instagram.android",
+                    shareImageUri,
+                    Intent.FLAG_GRANT_READ_URI_PERMISSION,
+                )
+                try {
+                    startActivity(intent)
+                } catch (e: ActivityNotFoundException) {
+                    Toast.makeText(
+                        this@AddPhotoActivity,
+                        "인스타그램 앱이 존재하지 않습니다.",
+                        Toast.LENGTH_SHORT,
+                    ).show()
+                }
+            }
         }
     }
 
@@ -112,7 +147,8 @@ class AddPhotoActivity : AppCompatActivity() {
                                     .setEnd(Instant.systemNow().toEpochMilliseconds()).build(),
                             )
                             .setSelection(
-                                currentCreatedAt + TimeZone.getDefault().getOffset(currentCreatedAt),
+                                currentCreatedAt + TimeZone.getDefault()
+                                    .getOffset(currentCreatedAt),
                             )
                             .build()
                         picker.show(supportFragmentManager, "datePicker")
@@ -157,18 +193,30 @@ class AddPhotoActivity : AppCompatActivity() {
                     binding.txtStudio.setTextColor(colorOf(com.teampophory.pophory.designsystem.R.color.gray_40))
                 }
             }.launchIn(lifecycleScope)
+        viewModel.type
+            .flowWithLifecycle(lifecycle)
+            .onEach {
+                binding.btnShare.isVisible = it != RegisterNavigationType.PICKER
+            }.launchIn(lifecycleScope)
     }
 
     companion object {
         private const val IMAGE_URL_EXTRA = "imageUri"
         const val ALBUM_ITEM_EXTRA = "albumItem"
         const val IMAGE_MIME_TYPE = "image/*"
+        private const val TYPE = "type"
 
         @JvmStatic
-        fun getIntent(context: Context, imageUri: String, albumItem: AlbumItem): Intent =
+        fun getIntent(
+            context: Context,
+            imageUri: String,
+            albumItem: AlbumItem,
+            type: String,
+        ): Intent =
             Intent(context, AddPhotoActivity::class.java).apply {
                 putExtra(IMAGE_URL_EXTRA, imageUri)
                 putExtra(ALBUM_ITEM_EXTRA, albumItem)
+                putExtra(TYPE, type)
             }
     }
 }

@@ -49,7 +49,7 @@ class AlbumListActivity : AppCompatActivity() {
     private val imagePicker =
         registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
             if (uri != null) {
-                val intent = albumItem?.let { AddPhotoActivity.getIntent(this, uri.toString(), it) }
+                val intent = albumItem?.let { AddPhotoActivity.getIntent(this, uri.toString(), it, "PICKER") }
                 photoCountRefreshLauncher.launch(intent)
             }
         }

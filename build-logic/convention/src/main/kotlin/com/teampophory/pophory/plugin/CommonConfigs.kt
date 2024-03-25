@@ -25,14 +25,17 @@ internal fun Project.configureAndroidCommonPlugin() {
         defaultConfig {
             val kakaoApiKey = properties["kakaoApiKey"] as? String ?: ""
             val pophoryBaseUrl = properties["pophoryBaseUrl"] as? String ?: ""
+            val facebookAppId = properties["facebookAppId"] as? String ?: ""
 
             manifestPlaceholders["sentryDsn"] = properties["sentryDsn"] as String
             manifestPlaceholders["kakaoApiKey"] = properties["kakaoApiKey"] as String
             manifestPlaceholders["pophoryBaseUrl"] = properties["pophoryBaseUrl"] as String
             manifestPlaceholders["admobAppId"] = properties["admobAppId"] as String
+            manifestPlaceholders["facebookAppId"] = properties["facebookAppId"] as String
 
             buildConfigField("String", "KAKAO_API_KEY", "\"${kakaoApiKey}\"")
             buildConfigField("String", "POPHORY_BASE_URL", "\"${pophoryBaseUrl}\"")
+            buildConfigField("String", "FACEBOOK_APP_ID", "\"${facebookAppId}\"")
         }
         buildFeatures.apply {
             viewBinding = true
