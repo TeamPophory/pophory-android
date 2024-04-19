@@ -1,4 +1,4 @@
-package com.teampophory.pophory.feature.signup
+package com.teampophory.pophory.feature.auth.signup
 
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import com.teampophory.pophory.common.context.dialogWidthPercent
 import com.teampophory.pophory.common.view.viewBinding
-import com.teampophory.pophory.databinding.FragmentSignUpDialogBinding
+import com.teampophory.pophory.feature.auth.databinding.FragmentSignUpDialogBinding
 
 class SignUpDialogFragment : DialogFragment() {
     private val binding by viewBinding(FragmentSignUpDialogBinding::bind)

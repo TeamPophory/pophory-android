@@ -3,10 +3,10 @@ package com.teampophory.pophory.feature.album.cover
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.teampophory.pophory.BuildConfig
-import com.teampophory.pophory.R
 import com.teampophory.pophory.ad.entity.AdIdentifier
 import com.teampophory.pophory.ad.usecase.FetchAdConstantUseCase
 import com.teampophory.pophory.data.network.model.album.AlbumCoverChangeRequest
+import com.teampophory.pophory.designsystem.type.DesignSystemResources
 import com.teampophory.pophory.domain.repository.photo.PhotoRepository
 import com.teampophory.pophory.feature.album.cover.model.AlbumCoverItem
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -19,7 +19,6 @@ import javax.inject.Inject
 class AlbumCoverEditViewModel @Inject constructor(
     private val photoRepository: PhotoRepository,
     private val fetchAdConstantUseCase: FetchAdConstantUseCase,
-
 ) : ViewModel() {
 
     private val _albumEditState = MutableStateFlow<AlbumEditState>(AlbumEditState.Uninitialized)
@@ -29,14 +28,38 @@ class AlbumCoverEditViewModel @Inject constructor(
 
     fun getAlbumItemList(): List<AlbumCoverItem> {
         return listOf(
-            AlbumCoverItem(AlbumCoverItem.AlbumTheme.FRIEND, R.drawable.ic_album_cover_friends_1),
-            AlbumCoverItem(AlbumCoverItem.AlbumTheme.FRIEND, R.drawable.ic_album_cover_friends_2),
-            AlbumCoverItem(AlbumCoverItem.AlbumTheme.LOVE, R.drawable.ic_album_cover_love_1),
-            AlbumCoverItem(AlbumCoverItem.AlbumTheme.LOVE, R.drawable.ic_album_cover_love_2),
-            AlbumCoverItem(AlbumCoverItem.AlbumTheme.MY_ALBUM, R.drawable.ic_album_cover_me_1),
-            AlbumCoverItem(AlbumCoverItem.AlbumTheme.MY_ALBUM, R.drawable.ic_album_cover_me_2),
-            AlbumCoverItem(AlbumCoverItem.AlbumTheme.FAMILY, R.drawable.ic_album_cover_family_1),
-            AlbumCoverItem(AlbumCoverItem.AlbumTheme.FAMILY, R.drawable.ic_album_cover_family_2),
+            AlbumCoverItem(
+                AlbumCoverItem.AlbumTheme.FRIEND,
+                DesignSystemResources.ic_album_cover_friends_1
+            ),
+            AlbumCoverItem(
+                AlbumCoverItem.AlbumTheme.FRIEND,
+                DesignSystemResources.ic_album_cover_friends_2
+            ),
+            AlbumCoverItem(
+                AlbumCoverItem.AlbumTheme.LOVE,
+                DesignSystemResources.ic_album_cover_love_1
+            ),
+            AlbumCoverItem(
+                AlbumCoverItem.AlbumTheme.LOVE,
+                DesignSystemResources.ic_album_cover_love_2
+            ),
+            AlbumCoverItem(
+                AlbumCoverItem.AlbumTheme.MY_ALBUM,
+                DesignSystemResources.ic_album_cover_me_1
+            ),
+            AlbumCoverItem(
+                AlbumCoverItem.AlbumTheme.MY_ALBUM,
+                DesignSystemResources.ic_album_cover_me_2
+            ),
+            AlbumCoverItem(
+                AlbumCoverItem.AlbumTheme.FAMILY,
+                DesignSystemResources.ic_album_cover_family_1
+            ),
+            AlbumCoverItem(
+                AlbumCoverItem.AlbumTheme.FAMILY,
+                DesignSystemResources.ic_album_cover_family_2
+            ),
         )
     }
 

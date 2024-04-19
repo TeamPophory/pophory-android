@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/signUpFirstFragment"
-        android:name="com.teampophory.pophory.feature.signup.SignUpFirstFragment"
+        android:name="com.teampophory.pophory.feature.auth.signup.SignUpFirstFragment"
         android:label="SignUpFirstFragment" >
         <action
             android:id="@+id/action_signUpFirstFragment_to_signUpSecondFragment"
@@ -14,7 +14,7 @@
     </fragment>
     <fragment
         android:id="@+id/signUpSecondFragment"
-        android:name="com.teampophory.pophory.feature.signup.SignUpSecondFragment"
+        android:name="com.teampophory.pophory.feature.auth.signup.SignUpSecondFragment"
         android:label="SignUpSecondFragment" >
         <action
             android:id="@+id/action_signUpSecondFragment_to_signUpThirdFragment"
@@ -25,7 +25,7 @@
     </fragment>
     <fragment
         android:id="@+id/signUpThirdFragment"
-        android:name="com.teampophory.pophory.feature.signup.SignUpThirdFragment"
+        android:name="com.teampophory.pophory.feature.auth.signup.SignUpThirdFragment"
         android:label="SignUpThirdFragment" >
         <action
             android:id="@+id/action_signUpThirdFragment_to_signUpSecondFragment"

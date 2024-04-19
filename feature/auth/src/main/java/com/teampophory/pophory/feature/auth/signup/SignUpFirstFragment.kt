@@ -1,9 +1,10 @@
-package com.teampophory.pophory.feature.signup
+package com.teampophory.pophory.feature.auth.signup
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.DrawableRes
 import androidx.core.text.buildSpannedString
 import androidx.core.text.color
 import androidx.core.view.isGone
@@ -11,17 +12,18 @@ import androidx.core.view.isVisible
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import com.teampophory.pophory.R
 import com.teampophory.pophory.common.fragment.colorOf
 import com.teampophory.pophory.common.primitive.textAppearance
 import com.teampophory.pophory.common.view.viewBinding
-import com.teampophory.pophory.databinding.FragmentSignUpSecondBinding
+import com.teampophory.pophory.feature.auth.R
+import com.teampophory.pophory.feature.auth.databinding.FragmentSignUpFirstBinding
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.regex.Pattern
 
 @AndroidEntryPoint
-class SignUpSecondFragment : Fragment() {
-    private val binding by viewBinding(FragmentSignUpSecondBinding::bind)
+class SignUpFirstFragment : Fragment() {
+
+    private val binding by viewBinding(FragmentSignUpFirstBinding::bind)
     private val signUpViewModel by activityViewModels<SignUpViewModel>()
 
     override fun onCreateView(
@@ -29,30 +31,30 @@ class SignUpSecondFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
-        return FragmentSignUpSecondBinding.inflate(inflater, container, false).root
+        return FragmentSignUpFirstBinding.inflate(inflater, container, false).root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.tvErrorMessage.isVisible = false
         binding.btnDeleteEditText.isGone = true
+        setSpannableString()
+        // edittext 상태
         setEditText()
         // edittext 삭제 버튼
         deleteAllEditText()
-        setSpannableString()
-
         signUpViewModel.setButtonState(false)
     }
 
     private fun deleteAllEditText() {
         binding.btnDeleteEditText.setOnClickListener {
-            binding.editTvId.text.clear()
+            binding.editTvName.text.clear()
         }
     }
 
     private fun setEditText() {
         // 텍스트창 활성화
-        binding.editTvId.apply {
+        binding.editTvName.apply {
             setOnFocusChangeListener { _, hasFocus ->
                 // 포커스가 주어졌을 때
                 if (hasFocus) {
@@ -61,23 +63,23 @@ class SignUpSecondFragment : Fragment() {
                     setBackgroundResource(R.drawable.bg_sign_up_edit_text_default)
                 }
             }
+            // edittext text 변화 감지
             doAfterTextChanged {
-                signUpViewModel.setNickName(it.toString())
-                // X버튼 생성 여부
+                signUpViewModel.setRealName(it.toString())
                 binding.btnDeleteEditText.isGone = it?.isEmpty() == true
                 // 글자 수 계산
-                binding.tvTextCount.text = "(${it.toString().length}/12)"
+                binding.tvTextCount.text = "(${it.toString().length}/6)"
 
-                val textMatcher = HANGUL_REGEX.matcher(binding.editTvId.text)
-                if (!textMatcher.find()) {
-                    binding.tvErrorMessage.text = "*올바른 형식의 아이디가 아닙니다"
+                val matcher = HANGUL_REGEX.matcher(binding.editTvName.text)
+                if (!matcher.find()) {
+                    binding.tvErrorMessage.text = "현재 한국어만 지원하고 있어요."
                     setEditTextState(
                         R.drawable.bg_sign_up_edit_text_error,
                         errorMessageState = true,
                         buttonState = false,
                     )
-                } else if (it.toString().length < 4 || it.toString().length > 12) {
-                    binding.tvErrorMessage.text = "4-12글자 이내로 작성해주세요."
+                } else if (it.toString().length < 2 || it.toString().length > 6) {
+                    binding.tvErrorMessage.text = "2-6글자 이내로 작성해주세요."
                     setEditTextState(
                         R.drawable.bg_sign_up_edit_text_error,
                         errorMessageState = true,
@@ -95,24 +97,27 @@ class SignUpSecondFragment : Fragment() {
     }
 
     private fun setEditTextState(
-        background: Int,
+        @DrawableRes background: Int,
         errorMessageState: Boolean,
         buttonState: Boolean,
     ) {
-        binding.editTvId.setBackgroundResource(background)
+        binding.editTvName.setBackgroundResource(background)
         binding.tvErrorMessage.isVisible = errorMessageState
         signUpViewModel.setButtonState(buttonState)
     }
 
     private fun setSpannableString() {
-        val fullText = getString(R.string.sign_up_second_title)
-        val coloredText = "포포리 아이디" // 색상을 변경하려는 특정 단어
+        val fullText = getString(R.string.sign_up_first_title)
+        val coloredText = "너의 이름" // 색상을 변경하려는 특정 단어
         val splittedText = fullText.split(coloredText)
 
         val text = buildSpannedString {
             append(splittedText.getOrNull(0))
             color(colorOf(com.teampophory.pophory.designsystem.R.color.pophory_purple)) {
-                textAppearance(requireContext(), com.teampophory.pophory.designsystem.R.style.TextAppearance_Pophory_HeadLineBold) {
+                textAppearance(
+                    requireContext(),
+                    com.teampophory.pophory.designsystem.R.style.TextAppearance_Pophory_HeadLineBold
+                ) {
                     append(coloredText)
                 }
             }
@@ -122,7 +127,7 @@ class SignUpSecondFragment : Fragment() {
     }
 
     companion object {
-        private const val HANGUL_PATTERN = "^[a-zA-Z0-9._]*\$"
+        private const val HANGUL_PATTERN = "^[가-힣]*\$"
         val HANGUL_REGEX: Pattern = Pattern.compile(HANGUL_PATTERN)
     }
 }
