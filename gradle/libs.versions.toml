@@ -42,7 +42,7 @@ firebase = "33.0.0"
 app-distribution = "5.0.0"
 admob = "23.1.0"
 oss-plugin = "0.10.6"
-oss = "17.0.1"
+oss = "17.1.0"
 
 # test
 junit = "4.13.2"
