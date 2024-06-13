@@ -31,6 +31,7 @@ plugins {
     alias(libs.plugins.app.distribution) apply false
     alias(libs.plugins.crashlytics) apply false
     alias(libs.plugins.spotless) apply false
+    alias(libs.plugins.compose.compiler) apply false
 }
 
 subprojects {
