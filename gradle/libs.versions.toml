@@ -6,8 +6,8 @@ appVersion = "1.2.0"
 versionCode = "10200"
 
 # kotlin
-kotlin = "1.9.23"
-kotlinx-serialization-json = "1.6.3"
+kotlin = "2.0.0"
+kotlinx-serialization-json = "1.7.0"
 kotlinx-coroutines = "1.8.1"
 kotlinx-datetime = "0.6.0"
 
@@ -19,7 +19,6 @@ lifecycle = "2.8.2"
 navigation = "2.7.7"
 startup = "1.1.1"
 security = "1.1.0-alpha06"
-compose-compiler = "1.5.11"
 compose-bom = "2024.06.00"
 desugarJdk = "2.0.4"
 dagger-hilt = "2.51.1"
@@ -60,7 +59,7 @@ runner = "1.5.2"
 
 # gradle
 agp = "8.4.2"
-kspplugin = "1.9.23-1.0.20"
+kspplugin = "2.0.0-1.0.22"
 
 # third party
 flipper = "0.250.0"
@@ -91,6 +90,8 @@ kotlin-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-s
 kotlin-coroutines-google-play = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-play-services", version.ref = "kotlinx-coroutines" }
 kotlin-coroutines = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "kotlinx-coroutines" }
 kotlin-datetime = { group = "org.jetbrains.kotlinx", name = "kotlinx-datetime", version.ref = "kotlinx-datetime" }
+# For accesss of ComposeCompilerGradlePluginExtension
+compose-compiler-gradle-plugin = { module = "org.jetbrains.kotlin:compose-compiler-gradle-plugin", version.ref = "kotlin" }
 
 # android
 core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "corektx" }
@@ -202,7 +203,6 @@ zxing-android-embedded = { module = "com.journeyapps:zxing-android-embedded", ve
 android-application = { id = "com.android.application", version.ref = "agp" }
 android-library = { id = "com.android.library", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
-kotlin-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
 dagger-hilt = { id = "com.google.dagger.hilt.android", version.ref = "dagger-hilt" }
 google-services = { id = "com.google.gms.google-services", version.ref = "google-services" }
 crashlytics = { id = "com.google.firebase.crashlytics", version.ref = "crashlytics" }
@@ -215,6 +215,7 @@ junit5 = { id = "de.mannodermaus.android-junit5", version.ref = "junit5-plugin" 
 app-distribution = { id = "com.google.firebase.appdistribution", version.ref = "app-distribution" }
 oss = { id = "com.google.android.gms.oss-licenses-plugin", version.ref = "oss-plugin" }
 spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }
+compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 
 [bundles]
 firebase = ["firebase-analytics", "firebase-crashlytics", "firebase-dynamiclink"]
