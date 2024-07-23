@@ -8,8 +8,6 @@ import com.teampophory.pophory.ad.usecase.SetAdConstantUseCase
 import com.teampophory.pophory.domain.usecase.ConfigureMeUseCase
 import com.teampophory.pophory.feature.home.store.model.AlbumItem
 import dagger.hilt.android.lifecycle.HiltViewModel
-import io.sentry.Sentry
-import io.sentry.protocol.User
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
@@ -36,13 +34,7 @@ class HomeViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            configureMeUseCase()?.let {
-                val user = User().apply {
-                    username = it.nickname
-                    name = it.realName
-                }
-                Sentry.setUser(user)
-            }
+            configureMeUseCase()
             getAdConstantUseCase("android", BuildConfig.VERSION_NAME).onSuccess {
                 it.forEach { adConstant ->
                     Timber.d("adConstant: $adConstant")

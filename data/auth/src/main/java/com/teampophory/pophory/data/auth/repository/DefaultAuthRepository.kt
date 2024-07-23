@@ -8,7 +8,6 @@ import com.teampophory.pophory.data.auth.model.SignUpRequest
 import com.teampophory.pophory.data.auth.model.SocialType
 import com.teampophory.pophory.data.auth.service.AuthService
 import com.teampophory.pophory.network.datastore.PophoryDataStore
-import io.sentry.Sentry
 import javax.inject.Inject
 
 class DefaultAuthRepository @Inject constructor(
@@ -45,15 +44,10 @@ class DefaultAuthRepository @Inject constructor(
     override suspend fun withdraw() {
         service.withdraw("Bearer ${dataStore.accessToken}")
         dataStore.clear()
-        expireSentry()
     }
 
     override suspend fun logout() {
         dataStore.clear()
-        expireSentry()
     }
 
-    private fun expireSentry() {
-        Sentry.configureScope { scope -> scope.user = null }
-    }
 }
