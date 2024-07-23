@@ -1,6 +1,5 @@
 plugins {
     pophory("feature")
-    alias(libs.plugins.sentry)
 }
 
 android {

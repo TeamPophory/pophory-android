@@ -4,7 +4,6 @@ plugins {
     pophory("application")
     pophory("compose")
     pophory("test")
-    alias(libs.plugins.sentry)
     alias(libs.plugins.google.services)
     alias(libs.plugins.app.distribution)
     alias(libs.plugins.crashlytics)

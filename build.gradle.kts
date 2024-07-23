@@ -24,7 +24,6 @@ plugins {
     alias(libs.plugins.ktlint) apply false
     alias(libs.plugins.ksp) apply false
     alias(libs.plugins.kotlinx.serialization) apply false
-    alias(libs.plugins.sentry) apply false
     alias(libs.plugins.junit5) apply false
     alias(libs.plugins.google.services) apply false
     alias(libs.plugins.app.distribution) apply false

@@ -1,6 +1,5 @@
 plugins {
     pophory("feature")
-    alias(libs.plugins.sentry)
 }
 
 android {
@@ -12,5 +11,4 @@ dependencies {
     implementation(projects.core.common)
     implementation(projects.core.network)
     implementation(libs.security)
-    implementation(libs.sentry)
 }
