@@ -13,6 +13,7 @@ import com.teampophory.pophory.common.context.snackBar
 import com.teampophory.pophory.common.navigation.NavigationProvider
 import com.teampophory.pophory.common.qualifier.Kakao
 import com.teampophory.pophory.common.view.viewBinding
+import com.teampophory.pophory.designsystem.dialog.DialogUtil
 import com.teampophory.pophory.feature.auth.social.OAuthService
 import com.teampophory.pophory.onboarding.adapter.OnBoardingViewPagerAdapter
 import com.teampophory.pophory.onboarding.databinding.ActivityOnBoardingBinding
@@ -39,11 +40,34 @@ class OnBoardingActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen()
         super.onCreate(savedInstanceState)
-        collectState()
         setContentView(binding.root)
-        setViewPager()
-        setOnLoginPressed()
-        collectEvent()
+
+        lifecycleScope.launch {
+            viewModel.state
+                .flowWithLifecycle(lifecycle)
+                .onEach { state ->
+                    if (state.isUpdateRequired) {
+                        showUpdateDialog()
+                    } else {
+                        collectState()
+                        setViewPager()
+                        setOnLoginPressed()
+                        collectEvent()
+                    }
+                }
+                .launchIn(lifecycleScope)
+        }
+    }
+
+    private fun showUpdateDialog() {
+        DialogUtil.showForceUpdateDialog(
+            context = this,
+            supportFragmentManager = supportFragmentManager,
+            title = "업데이트 필요",
+            description = "새로운 버전이 필요합니다. 업데이트 해주세요.",
+            buttonText = "업데이트",
+            imageResId = R.drawable.ic_customizing_done
+        )
     }
 
     private fun collectState() {
@@ -124,3 +148,4 @@ class OnBoardingActivity : AppCompatActivity() {
         }
     }
 }
+

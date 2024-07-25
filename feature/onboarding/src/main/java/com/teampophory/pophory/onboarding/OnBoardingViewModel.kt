@@ -1,12 +1,15 @@
 package com.teampophory.pophory.onboarding
 
+import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.teampophory.pophory.auth.entity.UserAccountState
 import com.teampophory.pophory.auth.usecase.AuthUseCase
 import com.teampophory.pophory.auth.usecase.AutoLoginConfigureUseCase
 import com.teampophory.pophory.auth.usecase.GetAutoLoginConfigurationUseCase
+import com.teampophory.pophory.domain.config.usecase.CheckAppVersionUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asSharedFlow
@@ -23,13 +26,16 @@ sealed interface Effect {
 
 data class OnboardingUiState(
     val isAutoLoginEnabled: Boolean = false,
+    val isUpdateRequired: Boolean = false
 )
 
 @HiltViewModel
 class OnBoardingViewModel @Inject constructor(
+    @ApplicationContext private val context: Context,
     private val authUseCase: AuthUseCase,
     private val autoLoginConfigureUseCase: AutoLoginConfigureUseCase,
-    autoLoginConfigurationUseCase: GetAutoLoginConfigurationUseCase,
+    private val autoLoginConfigurationUseCase: GetAutoLoginConfigurationUseCase,
+    private val checkAppVersionUseCase: CheckAppVersionUseCase
 ) : ViewModel() {
     private val _event = MutableSharedFlow<Effect>()
     val event = _event.asSharedFlow()
@@ -37,7 +43,27 @@ class OnBoardingViewModel @Inject constructor(
     val state = _state.asStateFlow()
 
     init {
-        _state.value = OnboardingUiState(autoLoginConfigurationUseCase())
+        checkAppVersion()
+    }
+
+    private fun getCurrentVersionName(): String {
+        return try {
+            val packageInfo = context.packageManager.getPackageInfo(context.packageName, 0)
+            packageInfo.versionName
+        } catch (e: Exception) {
+            "1.4.0"
+        }
+    }
+
+    private fun checkAppVersion() {
+        val currentVersion = getCurrentVersionName()
+        viewModelScope.launch {
+            val isUpdateRequired = checkAppVersionUseCase(currentVersion)
+            _state.value = OnboardingUiState(
+                isUpdateRequired = isUpdateRequired,
+                isAutoLoginEnabled = !isUpdateRequired && autoLoginConfigurationUseCase()
+            )
+        }
     }
 
     fun onLogin(token: String) {
@@ -61,3 +87,4 @@ class OnBoardingViewModel @Inject constructor(
         }
     }
 }
+
