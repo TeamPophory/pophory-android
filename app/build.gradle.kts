@@ -65,11 +65,13 @@ dependencies {
     implementation(projects.domain.auth)
     implementation(projects.domain.share)
     implementation(projects.domain.ad)
+    implementation(projects.domain.config)
 
     // data
     implementation(projects.data.auth)
     implementation(projects.data.share)
     implementation(projects.data.ad)
+    implementation(projects.data.config)
 
     // core
     implementation(projects.core.common)

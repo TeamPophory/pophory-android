@@ -8,6 +8,7 @@ android {
 
 dependencies {
     implementation(projects.domain.auth)
+    implementation(projects.domain.config)
     implementation(projects.feature.auth)
     implementation(projects.core.common)
     implementation(projects.core.network)
