@@ -15,6 +15,4 @@ dependencies {
     implementation(platform(libs.firebase))
     implementation(libs.bundles.firebase)
     implementation(libs.firebase.config.ktx)
-    
-    implementation(libs.timber)
 }
