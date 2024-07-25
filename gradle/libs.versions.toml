@@ -79,6 +79,7 @@ kakao = "2.20.4"
 splash-screen = "1.0.1"
 javax-inject = "1"
 spotless = "6.25.0"
+firebaseConfigKtx = "22.0.0"
 
 
 [libraries]
@@ -138,6 +139,7 @@ google-services = { module = "com.google.gms:google-services", version.ref = "go
 crashlytics-plugin = { module = "com.google.firebase:firebase-crashlytics-gradle", version.ref = "crashlytics" }
 firebase = { module = "com.google.firebase:firebase-bom", version.ref = "firebase" }
 firebase-analytics = { module = "com.google.firebase:firebase-analytics" }
+firebase-config = { module = "com.google.firebase:firebase-config" }
 firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics" }
 firebase-messaging = { module = "com.google.firebase:firebase-messaging" }
 firebase-dynamiclink = { module = "com.google.firebase:firebase-dynamic-links" }
@@ -198,6 +200,7 @@ sentry = { module = "io.sentry:sentry", version.ref = "sentry-android" }
 
 zxing-core = { module = "com.google.zxing:core", version = "zxing-core" }
 zxing-android-embedded = { module = "com.journeyapps:zxing-android-embedded", version.ref = "zxing-android-embedded" }
+firebase-config-ktx = { group = "com.google.firebase", name = "firebase-config-ktx", version.ref = "firebaseConfigKtx" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
