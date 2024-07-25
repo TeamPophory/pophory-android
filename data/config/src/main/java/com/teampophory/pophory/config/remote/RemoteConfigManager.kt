@@ -11,7 +11,7 @@ class RemoteConfigManager @Inject constructor() {
 
     init {
         val configSettings = remoteConfigSettings {
-            minimumFetchIntervalInSeconds = 10
+            minimumFetchIntervalInSeconds = 3600 * 24
         }
         remoteConfig.setConfigSettingsAsync(configSettings)
         remoteConfig.setDefaultsAsync(
