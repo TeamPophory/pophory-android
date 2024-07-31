@@ -17,7 +17,7 @@ import com.teampophory.pophory.common.view.viewBinding
 import com.teampophory.pophory.designsystem.R
 import com.teampophory.pophory.designsystem.databinding.DialogCommonOneButtonBinding
 
-class ForceUpdateDialog : DialogFragment() {
+class ForceUpdateDialogFragment : DialogFragment() {
 
     private val binding by viewBinding(DialogCommonOneButtonBinding::bind)
 
@@ -81,8 +81,8 @@ class ForceUpdateDialog : DialogFragment() {
     companion object {
         const val TAG = "ForceUpdateDialog"
 
-        fun newInstance(): ForceUpdateDialog {
-            return ForceUpdateDialog()
+        fun newInstance(): ForceUpdateDialogFragment {
+            return ForceUpdateDialogFragment()
         }
     }
 }

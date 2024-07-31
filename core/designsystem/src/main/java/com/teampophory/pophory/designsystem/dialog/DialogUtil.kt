@@ -29,8 +29,8 @@ object DialogUtil {
     fun showForceUpdateDialog(
         supportFragmentManager: FragmentManager
     ) {
-        val dialog = ForceUpdateDialog.newInstance()
-        dialog.show(supportFragmentManager, ForceUpdateDialog.TAG)
+        val dialog = ForceUpdateDialogFragment.newInstance()
+        dialog.show(supportFragmentManager, ForceUpdateDialogFragment.TAG)
     }
 
     fun hideOneButtonDialog(supportFragmentManager: FragmentManager) {
