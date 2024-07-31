@@ -14,5 +14,4 @@ dependencies {
     // Firebase
     implementation(platform(libs.firebase))
     implementation(libs.bundles.firebase)
-    implementation(libs.firebase.config.ktx)
 }
