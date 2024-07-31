@@ -11,7 +11,4 @@ dependencies {
     implementation(projects.core.common)
     implementation(projects.core.network)
 
-    // Firebase
-    implementation(platform(libs.firebase))
-    implementation(libs.bundles.firebase)
 }
