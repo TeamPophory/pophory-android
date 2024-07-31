@@ -8,7 +8,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.DrawableRes
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.DialogFragment
@@ -46,20 +45,18 @@ class ForceUpdateDialog : DialogFragment() {
     }
 
     private fun initViews() {
-        val title = arguments?.getString("title", "")
-        val description = arguments?.getString("description", "")
-        val imageResId = arguments?.getInt("imageResId")
-        val buttonText = arguments?.getString("buttonText", "")
+        val title = "업데이트가 필요해요"
+        val description = "원활한 이용을 위해\n최신버전으로 업데이트 해주세요."
+        val imageResId = R.drawable.ic_customizing_done
+        val buttonText = "확인"
 
         with(binding) {
             tvDialogTitle.text = title
             tvDialogDescription.text = description
             ivDialogIcon.setImageDrawable(
-                imageResId?.let {
-                    ivDialogIcon.isVisible = true
-                    ContextCompat.getDrawable(requireContext(), it)
-                },
+                ContextCompat.getDrawable(requireContext(), imageResId)
             )
+            ivDialogIcon.isVisible = true
             tvButton.text = buttonText
         }
     }
@@ -83,22 +80,9 @@ class ForceUpdateDialog : DialogFragment() {
 
     companion object {
         const val TAG = "ForceUpdateDialog"
-        fun newInstance(
-            title: String,
-            description: String,
-            @DrawableRes imageResId: Int,
-            buttonText: String,
-        ): ForceUpdateDialog {
-            ForceUpdateDialog().apply {
-                arguments = Bundle().apply {
-                    putString("title", title)
-                    putString("description", description)
-                    putInt("imageResId", imageResId)
-                    putString("buttonText", buttonText)
-                }
-            }.also {
-                return it
-            }
+
+        fun newInstance(): ForceUpdateDialog {
+            return ForceUpdateDialog()
         }
     }
 }
