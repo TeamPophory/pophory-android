@@ -10,15 +10,27 @@ object DialogUtil {
         description: String,
         buttonText: String,
         @DrawableRes imageResId: Int,
+        buttonClickListener: (() -> Unit)? = null
     ) {
-        OneButtonCommonDialog.newInstance(
+        val dialog = OneButtonCommonDialog.newInstance(
             title = title,
             description = description,
             buttonText = buttonText,
-            imageResId = imageResId,
-        ).let {
-            supportFragmentManager.beginTransaction().add(it, OneButtonCommonDialog.TAG)
-        }.commitAllowingStateLoss()
+            imageResId = imageResId
+        )
+
+        buttonClickListener?.let { listener ->
+            dialog.setButtonClickListener(listener)
+        }
+
+        dialog.show(supportFragmentManager, OneButtonCommonDialog.TAG)
+    }
+
+    fun showForceUpdateDialog(
+        supportFragmentManager: FragmentManager
+    ) {
+        val dialog = ForceUpdateDialogFragment.newInstance()
+        dialog.show(supportFragmentManager, ForceUpdateDialogFragment.TAG)
     }
 
     fun hideOneButtonDialog(supportFragmentManager: FragmentManager) {
