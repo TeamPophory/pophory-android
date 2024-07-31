@@ -58,11 +58,18 @@ class OnBoardingViewModel @Inject constructor(
     private fun checkAppVersion() {
         val currentVersion = getCurrentVersionName()
         viewModelScope.launch {
-            val isUpdateRequired = checkAppVersionUseCase(currentVersion)
-            _state.value = OnboardingUiState(
-                isUpdateRequired = isUpdateRequired,
-                isAutoLoginEnabled = !isUpdateRequired && autoLoginConfigurationUseCase()
-            )
+            try {
+                val isUpdateRequired = checkAppVersionUseCase(currentVersion)
+                _state.value = OnboardingUiState(
+                    isUpdateRequired = isUpdateRequired,
+                    isAutoLoginEnabled = !isUpdateRequired && autoLoginConfigurationUseCase()
+                )
+            } catch (e: Exception) {
+                _state.value = OnboardingUiState(
+                    isUpdateRequired = false,
+                    isAutoLoginEnabled = autoLoginConfigurationUseCase()
+                )
+            }
         }
     }
 

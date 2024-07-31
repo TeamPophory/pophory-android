@@ -9,6 +9,7 @@ class DefaultRemoteConfigRepository @Inject constructor(
 
     override suspend fun getMinRequiredVersion(): String {
         val response = service.getVersions()
-        return response.versions.find { it.os == "AOS" }?.version ?: "1.4.1"
+        return response.versions.find { it.os == "AOS" }?.version
+            ?: throw IllegalStateException("AOS version not found")
     }
 }

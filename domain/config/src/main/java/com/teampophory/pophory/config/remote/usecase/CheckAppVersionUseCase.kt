@@ -8,6 +8,6 @@ class CheckAppVersionUseCase @Inject constructor(
 ) {
     suspend operator fun invoke(currentVersion: String): Boolean {
         val latestVersion = remoteConfigRepository.getMinRequiredVersion()
-        return currentVersion < latestVersion
+        return latestVersion != null && currentVersion < latestVersion
     }
 }
