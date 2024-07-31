@@ -1,19 +1,14 @@
-package com.teampophory.pophory.data.config.repository
+package com.teampophory.pophory.config.remote.repository
 
-import com.teampophory.pophory.config.remote.datasource.RemoteConfigDataSource
-import com.teampophory.pophory.config.remote.repository.RemoteConfigRepository
+import com.teampophory.pophory.config.remote.model.MinimumVersionService
 import javax.inject.Inject
 
 class DefaultRemoteConfigRepository @Inject constructor(
-    private val remoteConfigDataSource: RemoteConfigDataSource
+    private val service: MinimumVersionService
 ) : RemoteConfigRepository {
 
     override suspend fun getMinRequiredVersion(): String {
-        val minVersion = remoteConfigDataSource.getString(KEY_MIN_VERSION, "1.4.0")
-        return minVersion
-    }
-
-    companion object {
-        const val KEY_MIN_VERSION = "minimum_update_version_android"
+        val response = service.getVersions()
+        return response.versions.find { it.os == "AOS" }?.version ?: "1.4.1"
     }
 }
