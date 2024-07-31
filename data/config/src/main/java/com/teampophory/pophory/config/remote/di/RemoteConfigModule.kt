@@ -10,6 +10,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
+import retrofit2.create
 import javax.inject.Singleton
 
 @Module
@@ -19,7 +20,7 @@ object RemoteConfigModule {
     @Provides
     @Singleton
     fun provideMinimumVersionService(@Secured retrofit: Retrofit): MinimumVersionService =
-        retrofit.create(MinimumVersionService::class.java)
+        retrofit.create()
 
     @Module
     @InstallIn(SingletonComponent::class)
