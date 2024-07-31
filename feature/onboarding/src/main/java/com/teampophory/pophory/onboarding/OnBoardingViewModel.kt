@@ -7,7 +7,7 @@ import com.teampophory.pophory.auth.entity.UserAccountState
 import com.teampophory.pophory.auth.usecase.AuthUseCase
 import com.teampophory.pophory.auth.usecase.AutoLoginConfigureUseCase
 import com.teampophory.pophory.auth.usecase.GetAutoLoginConfigurationUseCase
-import com.teampophory.pophory.domain.config.usecase.CheckAppVersionUseCase
+import com.teampophory.pophory.config.remote.usecase.CheckAppVersionUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -51,7 +51,7 @@ class OnBoardingViewModel @Inject constructor(
             val packageInfo = context.packageManager.getPackageInfo(context.packageName, 0)
             packageInfo.versionName
         } catch (e: Exception) {
-            "1.4.0"
+            "1.4.1"
         }
     }
 
@@ -87,4 +87,3 @@ class OnBoardingViewModel @Inject constructor(
         }
     }
 }
-

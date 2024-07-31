@@ -61,12 +61,7 @@ class OnBoardingActivity : AppCompatActivity() {
 
     private fun showUpdateDialog() {
         DialogUtil.showForceUpdateDialog(
-            context = this,
-            supportFragmentManager = supportFragmentManager,
-            title = "업데이트 필요",
-            description = "새로운 버전이 필요합니다. 업데이트 해주세요.",
-            buttonText = "업데이트",
-            imageResId = R.drawable.ic_customizing_done
+            supportFragmentManager = supportFragmentManager
         )
     }
 
@@ -148,4 +143,3 @@ class OnBoardingActivity : AppCompatActivity() {
         }
     }
 }
-
