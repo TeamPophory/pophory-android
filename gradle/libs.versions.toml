@@ -79,7 +79,6 @@ kakao = "2.20.4"
 splash-screen = "1.0.1"
 javax-inject = "1"
 spotless = "6.25.0"
-firebaseConfigKtx = "22.0.0"
 
 
 [libraries]
