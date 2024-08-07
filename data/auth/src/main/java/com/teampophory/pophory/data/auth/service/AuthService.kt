@@ -14,18 +14,18 @@ import retrofit2.http.PATCH
 import retrofit2.http.POST
 
 interface AuthService {
-    @POST("api/v1/auth")
+    @POST("api/v2/auth")
     suspend fun login(
         @Header("Authorization") authorization: String,
         @Body socialType: SocialType,
     ): AuthResponse
 
-    @DELETE("api/v1/auth")
+    @DELETE("api/v2/auth")
     suspend fun withdraw(@Header("Authorization") authorization: String): Response<Unit>
 
-    @PATCH("api/v1/member")
+    @PATCH("api/v2/member")
     suspend fun signUp(@Body request: SignUpRequest): SignUpResponse
 
-    @POST("api/v1/member")
+    @POST("api/v2/member")
     suspend fun nicknameCheck(@Body request: NicknameRequest): NicknameResponse
 }

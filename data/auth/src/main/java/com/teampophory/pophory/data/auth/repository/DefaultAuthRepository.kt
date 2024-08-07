@@ -24,7 +24,7 @@ class DefaultAuthRepository @Inject constructor(
     }
 
     override suspend fun signUp(realName: String, nickName: String, albumCover: Int): Int {
-        return service.signUp(SignUpRequest(realName, nickName, albumCover)).status
+        return service.signUp(SignUpRequest(realName, nickName, albumCover)).albumId
     }
 
     override suspend fun validateNickname(nickname: String): Boolean {

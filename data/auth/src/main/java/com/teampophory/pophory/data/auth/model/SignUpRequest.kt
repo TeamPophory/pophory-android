@@ -11,10 +11,14 @@ data class SignUpRequest(
     val nickName: String,
     @SerialName("albumCover")
     val albumCover: Int,
+    @SerialName("fcmToken")
+    val fcmToken: String? = null,
+    @SerialName("fcmOS")
+    val profileImage: String? = null
 )
 
 @Serializable
 data class SignUpResponse(
-    @SerialName("status")
-    val status: Int,
+    @SerialName("albumId")
+    val albumId: Int,
 )
