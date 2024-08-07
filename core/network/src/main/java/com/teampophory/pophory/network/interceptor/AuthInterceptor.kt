@@ -23,7 +23,7 @@ class AuthInterceptor @Inject constructor(
     }
 
     private fun shouldRequestAuthenticatedHeaders(encodedPath: String) = when (encodedPath) {
-        "/api/v1/auth" -> false
+        "/api/v2/auth" -> false
         else -> true
     }
 }
