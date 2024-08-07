@@ -10,12 +10,12 @@ import retrofit2.http.PATCH
 import retrofit2.http.POST
 
 interface SignUpService {
-    @PATCH("api/v1/member")
+    @PATCH("api/v2/member")
     fun signUp(
         @Body request: SignUpRequest,
     ): Call<SignUpResponse>
 
-    @POST("api/v1/member")
+    @POST("api/v2/member")
     fun nicknameCheck(
         @Body request: NicknameRequest,
     ): Call<NicknameResponse>
