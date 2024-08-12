@@ -39,7 +39,7 @@ google-services = "4.4.2"
 crashlytics = "3.0.2"
 firebase = "33.1.2"
 app-distribution = "5.0.0"
-admob = "23.2.0"
+admob = "23.3.0"
 oss-plugin = "0.10.6"
 oss = "17.1.0"
 
