@@ -49,7 +49,7 @@ class OnBoardingViewModel @Inject constructor(
     private fun getCurrentVersionName(): String {
         return try {
             val packageInfo = context.packageManager.getPackageInfo(context.packageName, 0)
-            packageInfo.versionName
+            packageInfo?.versionName ?: "1.4.1"
         } catch (e: Exception) {
             "1.4.1"
         }
