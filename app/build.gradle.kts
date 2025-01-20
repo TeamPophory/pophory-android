@@ -31,10 +31,10 @@ android {
             storePassword = "android"
         }
         create("release") {
-            keyAlias = properties.getProperty("keyAlias")
-            keyPassword = properties.getProperty("keyPassword")
+            keyAlias = properties["keyAlias"].toString()
+            keyPassword = properties["keyPassword"].toString()
             storeFile = File("${project.rootDir.absolutePath}/keystore/key.jks")
-            storePassword = properties.getProperty("storePassword")
+            storePassword = properties["storePassword"].toString()
         }
     }
 
