@@ -9,7 +9,7 @@ versionCode = "10402"
 kotlin = "2.1.10"
 kotlinx-serialization-json = "1.8.0"
 kotlinx-coroutines = "1.10.1"
-kotlinx-datetime = "0.6.1"
+kotlinx-datetime = "0.6.2"
 
 # android
 corektx = "1.15.0"
