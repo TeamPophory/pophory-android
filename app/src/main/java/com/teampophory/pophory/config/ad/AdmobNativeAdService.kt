@@ -21,7 +21,7 @@ import dagger.hilt.android.qualifiers.ActivityContext
 import timber.log.Timber
 
 class AdmobNativeAdService @AssistedInject constructor(
-    @ActivityContext private val context: Context,
+    @param:ActivityContext private val context: Context,
     @Assisted private val adUnitId: String,
     @Assisted private val adContainer: FrameLayout,
 ) {

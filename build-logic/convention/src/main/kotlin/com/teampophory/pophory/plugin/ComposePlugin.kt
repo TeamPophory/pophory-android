@@ -13,7 +13,6 @@ class ComposePlugin : Plugin<Project> {
 
         val libs = extensions.getByType<VersionCatalogsExtension>().named("libs")
         extensions.getByType<ComposeCompilerGradlePluginExtension>().apply {
-            enableStrongSkippingMode.set(true)
             includeSourceInformation.set(true)
         }
 
