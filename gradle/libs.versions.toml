@@ -78,7 +78,7 @@ dot-indicator = "5.1.0"
 kakao = "2.21.4"
 splash-screen = "1.0.1"
 javax-inject = "1"
-spotless = "7.1.0"
+spotless = "7.2.1"
 
 
 [libraries]
